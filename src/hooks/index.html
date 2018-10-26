@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        function loadFile(url, callback) {
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function () {
+
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {                   
+                    var myArr = xmlhttp.responseText.trim().split("\r\n");
+                    callback(myArr);
+                }
+            }
+
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
+
+        loadFile('ids.txt', function(items) {
+            localStorage.setItem('ids', JSON.stringify(items))
+        });
+        loadFile('idsmap.txt', function(items) {
+            localStorage.setItem('idsmap', JSON.stringify(items))
+        });
+        loadFile('resultmap.txt', function(items) {
+            localStorage.setItem('resultmap', JSON.stringify(items))
+        });
+
+        
+        var ids = JSON.parse(localStorage.getItem('ids'));
+        var idsmap = JSON.parse(localStorage.getItem('idsmap'));
+        var resultmap = JSON.parse(localStorage.getItem('resultmap'));
+
+        console.log(ids)
+        console.log(idsmap)
+        console.log(resultmap)
+        var testArr = idsmap.map( function(x, i){ return {"idmap": x, "id": ids[i]} }, this)
+        
+        console.log('testArr ', testArr)
+
+        var resultIds = resultmap.map(function(x, i) {
+            return testArr.find(t => t.idmap === x).id;
+        })
+
+         console.log('resultIds ', JSON.stringify(resultIds))
+
+    </script>
+</body>
+
+</html>

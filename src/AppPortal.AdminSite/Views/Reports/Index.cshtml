@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["FeatureTitle"] = "Báo cáo bằng bản đồ";
+    ViewData["Title"] = "Bản đồ các địa điểm ô nhiễm";
+    var data = ViewData["data"];
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">@ViewData["Title"]</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div>
+                <div class="card-body" style="display: block;">
+                    <div id="dataGrid" class="mt-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="map" style="height: 600px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+@section Scripts{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlLvJ9NzDhCd9z-urxEAe83JGCqv1G0TI&libraries=places&callback=initMap" async defer></script>
+    <script>
+        var mapObject;
+        var jobs = @Html.Raw(Json.Serialize(data));
+        function initMap() {    
+            mapObject = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 21.022184, lng: 105.796349 },
+                zoom: 8
+            });
+
+            for (var i = 0; i < jobs.length; i++) {
+                addMarket(jobs[i], mapObject);
+            }
+        };
+
+        
+
+        function addMarket(data, map) {
+            var lat = data.Lat;
+            var lng = data.Lng;
+            var title = data.Name;
+            var checkData = false;
+            if (lat != undefined && lat != null && lat !== "") {
+                lat = Number(lat);
+
+                if (lng != undefined && lng != null && lng !== "") {
+                    checkData = true;
+                    lng = Number(lng);
+                }
+            }
+            
+            if (checkData) {
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: lat,
+                        lng: lng
+                    },
+                    map: map,
+                    title: title
+                });
+            }
+
+        }
+    </script>
+}

@@ -1,0 +1,343 @@
+﻿
+@{
+    ViewData["FeatureTitle"] = "Quản trị tin tức";
+    ViewData["Title"] = "Tin tức";
+
+    var take = (int)ViewData["take"];
+    var keyword = (string)ViewData["keyword"];
+    var pageNumber = (int)ViewData["page"];
+    var pageSize = (int)ViewData["pageSize"];
+    var categoryId = (int)ViewData["categoryId"];
+    var status = (int)ViewData["status"];
+    var type = (int)ViewData["type"];
+
+    switch (status)
+    {
+        case 0:
+            ViewData["Title"] += " đang chờ xử lý";
+            break;
+        case 1:
+            ViewData["Title"] += " đã duyệt";
+            break;
+        case 2:
+            ViewData["Title"] += " tin nháp";
+            break;
+        case 3:
+            ViewData["Title"] += " đã xác nhận";
+            break;
+        case 4:
+            ViewData["Title"] += " đã xóa";
+            break;
+        default:
+            break;
+    }
+}
+<style>
+    .noteData {
+        font-style: italic;
+        color: red;
+    }
+
+    #actionPanel {
+        margin-left: 285px;
+        margin-top: 200px;
+    }
+
+    #actionPanel div.input-group {
+        margin-bottom: 0 !important;
+    }
+    .select2-selection__choice{
+        color: blue !important;
+    }
+</style>
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">@ViewData["Title"]</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div>
+                <div class="card-body" style="display: block;    margin-top: 30px;">
+
+                    <div id="actionPanel" class="form-inline fixed-top" style="display: none;">
+                        <div class="input-group mb-2 mr-sm-2 newdata" id="addNews">
+                            <a asp-controller="News" asp-action="Create" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tạo mới</a>
+                        </div>
+                        <div id="btn-delete" class="input-group mb-2 mr-sm-2 newdata">
+                            <button type="button" class="btn btn-danger btn-flat" id="btn-delete-all"><i class="fa fa-close"></i> Xóa tin tức</button>
+                        </div>
+                        <div id="btn-save-publish" class="input-group mb-2 mr-sm-2 newdata">
+                            <button type="button" class="btn btn-info btn-flat" id="btn-save-publish-new"><i class="fa fa-plus"></i>Xác nhận và chuyển lên lãnh đạo</button>
+                        </div>
+                        <div id="btn-save-process" class="input-group mb-2 mr-sm-2 newdata">
+                            <button type="button" class="btn btn-primary btn-flat" id="btn-save-process-new"><i class="fa fa-plus"></i> Xác nhận đăng tin</button>
+                        </div>
+                        <div id="btn-save-dafts" class="input-group mb-2 mr-sm-2 newdata">
+                            <button type="button" class="btn btn-dark btn-flat" id="btn-save-dafts-new"><i class="fa fa-plus"></i> Tin nháp</button>
+                        </div>
+
+                        <div id="btn-phan-cong" class="input-group mb-2 mr-sm-2 newdata">
+                            <button type="button" class="btn btn-dark btn-flat" id="btn-phan-cong-new">Phân công</button>
+                        </div>
+
+                        <div id="btn-bao-cao" class="input-group mb-2 mr-sm-2 newdata">
+                            <button type="button" class="btn btn-primary btn-flat" id="btn-bao-cao-new">Báo cáo xử lý</button>
+                        </div>
+
+                        <div id="btn-xem-bao-cao" class="input-group mb-2 mr-sm-2 newdata">
+                            <button type="button" class="btn btn-dark btn-flat" id="btn-xem-bao-cao-new"><i class="fa fa-plus"></i> Xem báo cáo</button>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-search"></i></div>
+                        </div>
+                        <input id="txtName" type="text" placeholder="Nhập từ khóa cần tìm" class="form-control" />
+                    </div>
+
+                    <div id="dataGrid" class="mt-2"></div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="modal fade" id="exampleModalNew6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chuyển công văn yêu cầu xử lý</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Chuyển công văn yêu cầu xử lý cho:</label>
+                    <select class="js-data-example-ajax-chuyencongvan" multiple="multiple"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ghi chú:</label>
+                    <textarea class="form-control ghichubaocao" rows="10"></textarea>
+                    <input type="hidden" class="NewsId" />
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="clickChuyenConvan">Chuyển công văn</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Phân công xử lý</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Phân công cho:</label>
+                    <select class="js-data-example-ajax " multiple="multiple" id="phancongcho"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ghi chú:</label>
+                    <textarea class="form-control ghichubaocao" rows="10"></textarea>
+                    <input type="hidden" class="NewsId" />
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="clickPhanCong">Phân công</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalNew2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Báo cáo xử lý</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Nội dung báo cáo:</label>
+                    <textarea class="form-control" rows="10" id="commentNews"></textarea>
+                    <input type="hidden" id="IdReport" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="clickBaocao">Báo cáo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalNew_nhapketqua" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nhập kết quả xử lý</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Nội dung kết quả xử lý:</label>
+                    <textarea class="form-control commentNews" rows="10"></textarea>
+                    <input type="hidden" class="IdReport" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="nhapketquaxuly()">Nhập kết quả</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalNew4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Báo cáo lãnh đạo tổng cục:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Nội dung:</label>
+                    <textarea class="form-control" rows="10" id="noidungNote"></textarea>
+                    <input type="hidden" id="IdNotes" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="clickNotes()" id="clickNotes">Ghi chú</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalNew3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Báo cáo xử lý</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">
+                        Báo cáo của : <span id="nameBaocao"></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Nội dung báo cáo:</label>
+                    <textarea disabled class="form-control" rows="10" id="commentNews3"></textarea>
+                    <input type="hidden" id="IdReport3" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="clickBaocao">Báo cáo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalNew5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác minh thông tin</h5>
+                <input type="hidden" id="newsid">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">
+                        Xác minh thông tin này là chính xác !
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="updateTrangThai(8)">Xác minh</button>
+                <button type="button" class="btn btn-secondary" onclick="updateTrangThai(9)">Từ chối</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalNew_xemchitiet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xem báo cáo chi tiết</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="thongtinbody">
+                    <label for="recipient-name" class="col-form-label">Nội dung:</label>
+                    <p></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/news/Scripts.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        var ngNews = {};
+            ngNews = {
+                lstNewsId: [],
+                pageNumber: '@pageNumber',
+                pageSize: '@pageSize',
+                keyword: '@keyword',
+                take: '@take',
+                categoryId: '@categoryId',
+                status: '@status',
+                type: '@type'
+            };
+
+    </script>
+    <script src="~/js/news/getlist.js" asp-append-version="true"></script>
+}

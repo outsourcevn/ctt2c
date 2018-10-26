@@ -1,0 +1,194 @@
+﻿@model AccountViewModel
+
+@{
+
+    ViewData["FeatureTitle"] = "Quản lý tài khoản";
+    var formView = "frm_create_or_update_user";
+    if (Model != null)
+    {
+        ViewData["Title"] = string.IsNullOrEmpty(Model.AccountId) ? "Tạo tài khoản" : "Cập nhật tài khoản";
+    }
+}
+
+<div class="row">
+    <div class="col col-md-6 col-sm-12">
+        <div id="result_message"></div>
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">@ViewData["Title"]</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <form id="@formView" class="needs-validation" method="post">
+                <input type="hidden" asp-for="AccountId" />
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="FullName"></label>
+                        <input asp-for="FullName" class="form-control" placeholder="Họ và tên" required />
+                        <span asp-validation-for="FullName" class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Email" required />
+                        <span asp-validation-for="Email" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UserName"></label>
+                        <input asp-for="UserName" class="form-control" placeholder="Tên đăng nhập" required />
+                        <span asp-validation-for="UserName" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber"></label>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Số điện thoại" />
+                        <span asp-validation-for="PhoneNumber" class="invalid-feedback"></span>
+                    </div>
+                    @if (string.IsNullOrEmpty(Model.AccountId))
+                    {
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" placeholder="Mật khẩu" required />
+                            <span asp-validation-for="Password" class="invalid-feedback"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu mới" required />
+                            <span asp-validation-for="ConfirmPassword" class="invalid-feedback"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" placeholder="Mật khẩu" />
+                            <span asp-validation-for="Password" class="invalid-feedback"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu mới" />
+                            <span asp-validation-for="ConfirmPassword" class="invalid-feedback"></span>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <label asp-for="GroupName"></label>
+                        <select id="GroupUser" class="form-control" asp-for="GroupId" asp-items="Model.GroupIds"></select>
+                    </div>
+
+
+                    <div class="form-group" style="display: none;">
+                        <label asp-for="TypeAccount"></label>
+                        <select class="form-control" asp-for="TypeAccount" asp-items="Model.TypeAccounts"></select>
+                    </div>
+
+                    <div id="roles" class="form-group" style="display: none;">
+                        <input type="checkbox" checked value="SYS_ADMINISTRATOR" />
+                    </div>
+
+                    <div class="form-group">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Cập nhật mật khẩu</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/users/Scripts.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var form = document.getElementById('@formView');
+                var $form = $('form#@formView');
+                var jwtToken = getCookie("ACCESS-TOKEN");
+                form.addEventListener('submit', function (event) {
+                    if ($form.valid() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                    event.preventDefault();
+                    $form.children('.card-body').children('.form-group').children('.validation-summary-errors').children('ul').remove();
+                    if ($form.valid()) {
+                        var csrfToken = $("input[name='__RequestVerificationToken']").val();
+                        var dict = new Object();
+                        $("#roles").each(
+                            function (index, item) {
+                                var checkbox = $(this).find("input:checkbox")[0];
+                                dict[$(checkbox).prop('value')] = $(checkbox).prop('checked');
+                            }
+                        );
+                        var dataJson = {
+                            Id: $("input[name='AccountId']").val(),
+                            FullName: $("input[name='FullName']").val(),
+                            UserName: $("input[name='UserName']").val(),
+                            Email: $("input[name='Email']").val(),
+                            PhoneNumber: $("input[name='PhoneNumber']").val(),
+                            TypeAccount: $("select[name='TypeAccount'] option:selected").val(),
+                            Password: $("input[name='Password']").val(),
+                            ConfirmPassword: $("input[name='ConfirmPassword']").val(),
+                            Roles: dict,
+                            GroupName: $("#GroupUser option:selected").text(),
+                            GroupId: $("#GroupUser").val(),
+                        };
+                        //console.log(dataJson);
+                        callAjax(
+                            `${appConfig.apiHostUrl}/${USER_API.CREATE}`,
+                            dataJson,
+                            AjaxConst.PostRequest,
+                            function (xhr) {
+                                xhr.setRequestHeader('__RequestVerificationToken', csrfToken);
+                                xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                                $form.children('.card-footer').children('.form-group').find('button').addClass('disabled').attr('disabled', true);
+                            },
+                            function (success) {
+                                if (!success.did_error) {
+                                    messagerSuccess('Thông báo', success.model);
+                                    var html = '<div class="alert alert-info alert-dismissible">' +
+                                        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                                        '<h5><i class="icon icon fa fa-info"></i> Thông báo!</h5>' +
+                                        success.model +
+                                        '</div>';
+                                    $('#result_message').append(html);
+                                }
+                            },
+                            function (xhr, status, error) {
+                                if (xhr.status === 400) {
+                                    var err = eval("(" + xhr.responseText + ")");
+                                    err.forEach(function (item) {
+                                        messagerError(item.Code, item.Description);
+                                    });
+                                } else {
+                                    messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                                }
+                            },
+                            function (complete) {
+                                $form.children('.card-footer').children('.form-group').find('button').removeClass('disabled').removeAttr('disabled');
+                                if (dataJson.Id === "")
+                                    $form.clearFormData();
+                            }
+                        )
+                    }
+                }, false);
+            }, false);
+        })();
+
+    </script>
+}

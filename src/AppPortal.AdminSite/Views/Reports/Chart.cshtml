@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewData["Title"] = "Chart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["FeatureTitle"] = "Báo cáo bằng biểu đồ";
+    var data = ViewData["data"];
+    var dataYear = ViewData["dataYear"];
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">@ViewData["Title"]</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div>
+                <div class="card-body" style="display: block;">
+                    <div id="dataGrid" class="mt-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="chart_business_areas" style="height: 400px; width: 100%;"></div>
+                                <div id="chart_2y" style="height: 400px; width: 100%;"></div>
+                                <div id="chart_3" style="height: 400px; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        window.onload = function () {
+            google.charts.load("current", { packages: ["corechart"] });
+            google.charts.setOnLoadCallback(drawChart1);
+            google.charts.setOnLoadCallback(drawChart2);
+            google.charts.setOnLoadCallback(chart_full);
+        }
+
+        var chart_1 = @Html.Raw(Json.Serialize(data));
+        var chart2 = [
+            ["Category" , "Số lượng"]
+        ];
+        for (var i = 0; i < chart_1.length; i++) {
+            var data2 = chart_1[i];
+            var obj = [data2.category, data2.count];
+            chart2.push(obj);
+        }
+
+        function drawChart1() {
+            
+            var data = google.visualization.arrayToDataTable(chart2);
+
+            var options = {
+                title: "Các tin phản ảnh theo chủ đề",
+                pieHole: 0.4,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('chart_business_areas'));
+            chart.draw(data, options);
+        }
+
+        //chart 2 dataYear
+        var chart_2 = @Html.Raw(Json.Serialize(dataYear));
+        var chart2y = [
+            ["Year" , "Số lượng"]
+        ];
+        for (var i = 0; i < chart_2.length; i++) {
+            var data2i = chart_2[i];
+            var obj = [data2i.year, data2i.count];
+            chart2y.push(obj);
+        }
+
+        function drawChart2() {
+            
+            var data = google.visualization.arrayToDataTable(chart2y);
+
+            var options = {
+                title: "Các tin phản ảnh theo năm (Tính theo %)",
+                pieHole: 0.4,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('chart_2y'));
+            chart.draw(data, options);
+        }
+
+        //chart 3 dataYear
+        
+        function chart_full() {
+            var data = google.visualization.arrayToDataTable(chart2y);
+
+            var options = {
+                title: "Biểu đồ số lượng phản ánh theo năm",
+                legend: { position: 'bottom' },
+                curveType: 'function',
+                hAxis: {
+                    format: '0000'
+                }
+            };
+            var chart = new google.visualization.LineChart(document.getElementById('chart_3'));
+            chart.draw(data, options);
+        }
+    </script>
+}
+

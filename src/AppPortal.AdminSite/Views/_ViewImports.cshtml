@@ -1,0 +1,9 @@
+@using AppPortal.AdminSite
+@using AppPortal.AdminSite.ViewModels
+@using AppPortal.AdminSite.TagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using AppPortal.Infrastructure.Identity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@addTagHelper *, AppPortal.AdminSite

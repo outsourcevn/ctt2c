@@ -1,0 +1,94 @@
+﻿@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Cổng thông tin Bộ TN&MT";
+    Layout = "_LayoutLogin";
+}
+
+@section Styles {
+    <style>
+        form.needs-validation label {
+            font-weight: 400 !important;
+        }
+    </style>
+}
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="/">@ViewData["Title"]</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="login-box-msg text-center">Đăng nhập</h3>
+        </div>
+        <div class="card-body login-card-body">
+            <form class="needs-validation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                        <input asp-for="UserName" class="form-control" placeholder="Tên đăng nhập" aria-describedby="inputGroupPrepend" required />
+                        <span class="invalid-feedback" asp-validation-for="UserName">
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Password" class="form-control" placeholder="Mật khẩu" aria-describedby="inputGroupPrepend" required />
+                        <span class="invalid-feedback" asp-validation-for="Password">
+                        </span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-8">
+                        <input asp-for="RememberMe" type="checkbox" />
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <div class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+            </form>
+            <p class="mb-1">
+                <a asp-action="ForgotPassword" asp-controller="Account" asp-route-returnUrl="/">Quên mật khẩu?</a>
+            </p>
+        </div>
+    </div>
+    <!-- /.login-box -->
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

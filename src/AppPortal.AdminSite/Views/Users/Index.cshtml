@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["FeatureTitle"] = "Quản trị tài khoản";
+    ViewData["Title"] = "Quản lý tài khoản người dùng";
+
+    var take = (int)ViewData["take"];
+    var keyword = (string)ViewData["keyword"];
+    var pageNumber = (int)ViewData["page"];
+    var pageSize = (int)ViewData["pageSize"];
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">@ViewData["Title"]</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div>
+                <div class="card-body" style="display: block;">
+                    <div class="form-inline">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <a asp-controller="Users" asp-action="CreateOrUpdate" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tạo mới</a>
+                        </div>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <button type="button" class="btn btn-danger btn-flat" id="btn-xoa"><i class="fa fa-close"></i> Xóa tài khoản</button>
+                        </div>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-search"></i></div>
+                            </div>
+                            <input id="txtName" type="text" placeholder="Nhập từ khóa cần tìm" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div id="dataGrid" class="mt-2"></div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+@section Scripts{
+    <script src="~/js/users/Scripts.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        var ngNews = {};
+            ngNews = {
+                lstUsersId: [],
+                pageNumber: '@pageNumber',
+                pageSize: '@pageSize',
+                keyword: '@keyword',
+            };
+    </script>
+    <script src="~/js/users/getlist.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,120 @@
+﻿@model UserProfileViewModel
+@{
+    ViewData["FeatureTitle"] = "Quản lý Người dùng";
+    ViewData["Title"] = "Thông tin tài khoản";
+    ViewData["Images"] = "/adminLte3";
+    ViewData["FormId"] = "frm_update_profile_settings";
+    var formId = ViewData["FormId"].ToString();
+    var userId = "";
+    if (Model != null) { userId = Model.Id; }
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <!-- Profile Image -->
+        @await Html.PartialAsync("_ProfileImage", Model)
+        <!-- /.card -->
+        <!-- About Me Box -->
+        @await Html.PartialAsync("_ProfileAboutMe", Model)
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Cấu hình</a></li>
+                </ul>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+                <div class="tab-content">
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="timeline">
+                        @await Html.PartialAsync("_ProfileTimeline")
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="active tab-pane" id="settings">
+                        @await Html.PartialAsync("_ProfileSettings", Model, ViewData)
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+            </div><!-- /.card-body -->
+        </div>
+        <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+</div>
+
+@section Scripts {
+    <script src="~/js/users/Scripts.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var form = document.getElementById('@formId');
+                var $form = $('form#@formId');
+                var jwtToken = getCookie("ACCESS-TOKEN");
+                form.addEventListener('submit', function (event) {
+                    if ($form.valid() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                    event.preventDefault();
+                    if ($form.valid()) {
+                        var csrfToken = $("input[name='__RequestVerificationToken']").val();
+                        var dataJson = {
+                            Id: '@userId',
+                            FullName: $("input[name='FullName']").val(),
+                            UserName: $("input[name='UserName']").val(),
+                            Email: $("input[name='Email']").val(),
+                            PhoneNumber: $("input[name='PhoneNumber']").val()
+                        };
+
+                        callAjax(
+                            `${appConfig.apiHostUrl}/${USER_API.UPDATE_PROFILE}`,
+                            dataJson,
+                            AjaxConst.PostRequest,
+                            function (xhr) {
+                                xhr.setRequestHeader('__RequestVerificationToken', csrfToken);
+                                xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                                $form.children('.form-group').children('div').find('button').addClass('disabled').attr('disabled', true);
+                            },
+                            function (success) {
+                                //console.log('success ', success)
+                                if (!success.did_error) {
+                                    messagerSuccess('Cập nhật tài khoản', success.model);
+                                    var html = '<div class="alert alert-info alert-dismissible">' +
+                                        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                                        '<h5><i class="icon icon fa fa-info"></i> Thông báo!</h5>' +
+                                        success.model +
+                                        '</div>';
+                                    $form.prepend(html);
+                                    // call update profile
+                                    setTimeout(window.location.reload(), 5000)
+                                }
+                            },
+                            function (xhr, status, error) {
+                                if (xhr.status === 400) {
+                                    var err = eval("(" + xhr.responseText + ")");
+                                    err.forEach(function (item) {
+                                        messagerError(item.Code, item.Description);
+                                    });
+                                } else {
+                                    messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                                }
+                            },
+                            function (complete) {
+                                $form.children('.form-group').children('div').find('button').removeClass('disabled').removeAttr('disabled');
+                                //$form.clearFormData();                               
+                            }
+                        )
+                    }
+                }, false);
+            }, false);
+        })();
+
+    </script>
+}

@@ -1,0 +1,14 @@
+﻿#block_main_menu li:hover ul.second-level-menu { display: inline-block; }
+#block_main_menu li ul.second-level-menu { width: 250px; }
+    #block_main_menu li ul.second-level-menu > li { width: 100%; }
+        #block_main_menu li ul.second-level-menu > li > a { padding: 10px 5px; margin-bottom: -1px; }
+
+#header {
+    background-image: url(../images/thumbnail.jpg);
+    height: 150px;
+    background-repeat: round;
+}
+
+#block_main_menu ul li:hover {
+    background: url(../images/bg_main_menu_li.png) no-repeat 0 -56px;
+}

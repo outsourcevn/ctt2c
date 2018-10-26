@@ -1,0 +1,41 @@
+﻿@model UserProfileViewModel
+@{
+    var phoneNumber = "";
+    var roles = "";
+    var email = "";
+    if (Model != null)
+    {
+        phoneNumber = Model?.PhoneNumber;
+        var lstRoles = Model?.Roles.Select(t => t.Value);
+        roles = string.Join(", ", lstRoles.ToArray());
+        email = Model.Email;
+    }
+}
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Thông tin liên hệ</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <strong><i class="fa fa-phone mr-1"></i> Số điện thoại</strong>
+        <p class="text-muted">
+            @phoneNumber
+        </p>
+        <hr>
+        <strong><i class="fa fa-envelope mr-1"></i> Email</strong>
+        <p class="text-muted">
+            @email
+        </p>
+        <hr>
+        <strong><i class="fa fa-users mr-1"></i> Quyền truy cập</strong>
+        <p class="text-muted">
+            <span class="tag tag-danger">
+                @roles
+            </span>
+        </p>
+        <hr>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->

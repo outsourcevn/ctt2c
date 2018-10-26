@@ -1,0 +1,142 @@
+﻿@model CategoryViewModel
+@{
+    ViewData["FeatureTitle"] = "Quản trị danh mục";
+    ViewData["Title"] = "Tạo mới danh mục";
+    var formView = "frm_create_cats";
+
+    var StatusMessage = (string)TempData["StatusMessage"];
+}
+
+@section Styles {
+    <style>
+        form#@formView label { font-weight: 700 !important; }
+    </style>
+}
+
+<div class="row">
+    <div class="col col-sm-12">
+        @await Html.PartialAsync("_StatusMessage", StatusMessage)
+        <div id="result_message"></div>
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">@ViewData["Title"]</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <form id="@formView" class="needs-validation" method="post">
+                <div class="card-body">
+                    <input type="hidden" readonly id="cat_id" asp-for="Id" />
+                    <div class="row">
+                        <div class="col-sm-9">
+
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Sename" class="control-label"></label>
+                                <input asp-for="Sename" class="form-control" />
+                                <span asp-validation-for="Sename" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TargetUrl" class="control-label"></label>
+                                <select asp-for="TargetUrl" class="form-control">
+                                    <option value="_blank">Opens the linked document in a new window or tab</option>
+                                    <option value="_self">Opens the linked document in the same frame as it was clicked (this is default)</option>
+                                    <option value="_parent">Opens the linked document in the parent frame</option>
+                                    <option value="_top">Opens the linked document in the full body of the window</option>
+                                </select>
+                                <span asp-validation-for="TargetUrl" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="OrderSort" class="control-label"></label>
+                                <input asp-for="OrderSort" class="form-control" />
+                                <span asp-validation-for="OrderSort" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ShowType"></label>
+                                <select asp-for="ShowType" class="form-control">
+                                    <option value="0" selected>Danh mục</option>
+                                    <option value="1">Chỉ hiện thị bài nổi bật</option>
+                                    <option value="2">Là Module riêng</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input asp-for="IsShow" /> @Html.DisplayNameFor(model => model.IsShow)
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3" style="border-left: 1px solid #dfdfdf">
+
+                            <div class="form-group">
+                                <label asp-for="ParentId" class="control-label"></label>
+                                <input asp-for="ParentId" style="width: 0; border: 0; visibility: hidden;" class="form-control " />
+                                <span asp-validation-for="ParentId" class="invalid-feedback"></span>
+
+                                <div class="demo-section k-content" style="height: 200px; overflow: auto;">
+                                    <div id="cat_treeview"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="MetaTitle" class="control-label"></label>
+                                <input asp-for="MetaTitle" class="form-control" />
+                                <span asp-validation-for="MetaTitle" class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MetaKeywords" class="control-label"></label>
+                                <input asp-for="MetaKeywords" class="form-control" />
+                                <span asp-validation-for="MetaKeywords" class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MetaDescription" class="control-label"></label>
+                                <textarea rows="5" asp-for="MetaDescription" class="form-control" mav></textarea>
+                                <span asp-validation-for="MetaDescription" class="invalid-feedback"></span>
+                            </div>                            
+                           
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div asp-validation-summary="ModelOnly" class="invalid-feedback"></div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-default btn-flat"><i class="fa fa-fast-backward"></i> Quay lại danh sách</a>
+                        <button type="submit" class="btn btn-primary btn-flat">Tạo danh mục</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/cats/scripts.js" asp-append-version="true"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript">
+        var ngNews = {
+            formName: '@formView'
+        };
+    </script>
+    <script src="~/js/cats/create.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,18 @@
+*.dll
+*.pdb
+*.lock.json
+*.suo
+*.cache
+*.ide
+*.suo
+
+**/lib
+**/.vs 
+**/bin
+**/obj
+
+**/bower_components
+**/wwwroot/adminLte3/plugins
+# file gitignore
+appsettings.Development.json
+PublishProfiles

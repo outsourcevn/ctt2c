@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Map";
+}
+<style>
+    h1 {
+        font-size: 24px;
+        padding: 10px 10px 10px 0px;
+    }
+    #right_sidebar {
+        display: none !important;
+    }
+
+    .embed-container {
+        position: relative;
+        padding-bottom: 80%;
+        height: 0;
+        max-width: 100%;
+    }
+
+        .embed-container iframe, .embed-container object, .embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    small {
+        position: absolute;
+        z-index: 40;
+        bottom: 0;
+        margin-bottom: -15px;
+    }
+</style>
+    <h1 > Bản đồ môi trường tổng hợp</h1 >
+<div class="embed-container"><small><a href="//arcgisportal.ceid.gov.vn/portal/apps/Embed/index.html?webmap=218f16cfe6ac4438b6f887cde946e046&extent=105.5493,20.6487,107.0133,21.3896&home=true&zoom=true&scale=true&search=true&searchextent=true&details=true&legend=true&active_panel=details&basemap_gallery=true&disable_scroll=true&theme=light" style="color:#0000FF;text-align:left" target="_blank">View larger map</a></small><br><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Bản đồ môi trường 2018_" src="//arcgisportal.ceid.gov.vn/portal/apps/Embed/index.html?webmap=218f16cfe6ac4438b6f887cde946e046&extent=105.5493,20.6487,107.0133,21.3896&home=true&zoom=true&previewImage=false&scale=true&search=true&searchextent=true&details=true&legend=true&active_panel=details&basemap_gallery=true&disable_scroll=true&theme=light"></iframe></div>
+
+
+
