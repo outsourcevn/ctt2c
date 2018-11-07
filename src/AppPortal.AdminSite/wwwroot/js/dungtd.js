@@ -426,7 +426,7 @@ function nhapketquaxuly() {
         var idReport = $("#exampleModalNew_nhapketqua .IdReport").val();
         var data = {
             Id: parseInt(idReport),
-            Data: $("#exampleModalNew_nhapketqua .commentNews").val()
+            Data: editor2.getData()
         }
 
         kendo.confirm("Xác nhận báo cáo ?")
@@ -482,6 +482,7 @@ function nhapketqua(news_id) {
         function (success) {
             try {
                 $("#exampleModalNew_nhapketqua .commentNews").val(success[0].Data);
+                editor2.setData(success[0].Data);
                 $("#exampleModalNew_nhapketqua .IdReport").val(success[0].Id);
             } catch (e) {
                 $("#IdReport").val("0");
