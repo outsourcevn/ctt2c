@@ -79,10 +79,6 @@ var grid = $("#dataGrid").data("kendoGrid");
                     title: "Tiêu đề"
                 },
                 {
-                    field: "abstract", title: "Nội dung",
-                    template: "#=templateContent(abstract)#"
-                },
-                {
                     field: "is_status", title: "Trạng thái", width: "150px",
                     template: "#=templateSpecial(is_status, id)#"
                 },

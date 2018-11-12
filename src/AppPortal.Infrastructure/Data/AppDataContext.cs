@@ -23,6 +23,7 @@ namespace AppPortal.Infrastructure.App
             modelBuilder.Entity<ReportNews>(ConfigureReportNews);
             modelBuilder.Entity<Notifications>(ConfigureNotifications);
             modelBuilder.Entity<NewsLog>(ConfigureNewsLog);
+            modelBuilder.Entity<Files>(ConfigureFiles);
         }
 
         #region Mapping
@@ -138,7 +139,10 @@ namespace AppPortal.Infrastructure.App
             b.Property(c => c.Data).HasColumnType("ntext");
         }
 
-        
+        private void ConfigureFiles(EntityTypeBuilder<Files> b)
+        {
+            b.ToTable("Files", "AppPortal");
+        }
 
         #endregion
     }

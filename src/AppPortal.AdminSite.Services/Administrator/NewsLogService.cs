@@ -21,6 +21,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         private readonly IRepository<ReportNews, int> _rptNews;
         private readonly IRepository<Notifications, int> _notifi;
         private readonly IRepository<NewsLog, int> _newslog;
+        private readonly IRepository<Files, int> _files;
         public NewsLogService(
             IRepository<News, int> news,
             IAsyncRepository<News, int> newsAsync,
@@ -30,6 +31,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             IRepository<Category, int> category,
             IRepository<Notifications, int> notifi,
             IRepository<NewsLog, int> newslog,
+            IRepository<Files, int> files,
             IAppLogger<NewsService> appLogger)
         {
             _news = news;
@@ -41,8 +43,8 @@ namespace AppPortal.AdminSite.Services.Administrator
             _rptNews = ReportNews;
             _notifi = notifi;
             _newslog = newslog;
+            _files = files;
         }
-
 
         public void AddOrUpdate(NewsLog model)
         {
@@ -118,6 +120,62 @@ namespace AppPortal.AdminSite.Services.Administrator
                 }
             }
             return item;
+        }
+
+        public int AddtoFileTable(FileUpload fileUpload , string id)
+        {
+            var file = new Files();
+            file.isDelete = 0;
+            file.name = fileUpload.name;
+            file.NewsLogId = Int32.Parse(id);
+            file.size = fileUpload.size;
+            file.thumbnailUrl = fileUpload.thumbnailUrl;
+            file.type = fileUpload.type;
+            file.url = fileUpload.url;
+            file.OnCreated = DateTime.Now;
+            _files.Add(file);
+            return file.Id;
+        }
+
+        public string DeleteFile(int id)
+        {
+            try
+            {
+                var file = _files.Table.Where(e => e.Id == id).FirstOrDefault();
+                if(file != null)
+                {
+                    file.isDelete = 1;
+                    _files.Update(file);
+                    return file.name;
+                }
+                return String.Empty;
+            }catch(Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public List<FileUpload> GetFile(int id , string urlWeb)
+        {
+            var data = new List<FileUpload>();
+            var fileUpLoad = _files.Table.Where(e => e.NewsLogId == id && e.isDelete == 0).ToList();
+            if (fileUpLoad != null)
+            {
+                foreach (var item in fileUpLoad)
+                {
+                    var obj = new FileUpload();
+                    obj.deleteType = "DELETE";
+                    obj.name = item.name;
+                    obj.size = item.size;
+                    obj.thumbnailUrl = item.url;
+                    obj.type = item.type;
+                    obj.url = item.url;
+                    obj.deleteUrl = urlWeb + "/api/NewsLog/delete/" + item.Id.ToString();
+                    data.Add(obj);
+                }
+            }
+           
+            return data;
         }
     }
 }

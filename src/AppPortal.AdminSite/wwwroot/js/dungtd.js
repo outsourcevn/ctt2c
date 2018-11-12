@@ -9,19 +9,19 @@ var nameAlias = {
 }
 $(document).ready(function () {
     var jwtToken = getCookie("ACCESS-TOKEN");
-    if (GroupId != 'sysadmin' && GroupId != 'huynv') {
+    if (GroupId !== 'sysadmin' && GroupId !== 'huynv') {
         $(".sysadmin").hide();
     } else {
         $(".sysadmin").show();
     }
 
-    if (GroupId == 'vptc') {
+    if (GroupId === 'vptc') {
         $("#btn-phan-cong").hide();
         $("#btn-bao-cao").hide();
         $(".tonghopbaocao").show();
     }
 
-    if (GroupId != 'cbtddn') {
+    if (GroupId !== 'cbtddn') {
         $("#addNews").hide();
         $(".createnews").hide();
     } else {
@@ -29,14 +29,14 @@ $(document).ready(function () {
         $(".createnews").show();
     }
 
-    if (GroupId == 'ldtcmt') {
+    if (GroupId === 'ldtcmt') {
         $(".newdata").hide();
         $("#btn-phan-cong").show();
         $("#btn-xem-bao-cao").show();
         $(".tonghopbaocao").show();
     }
 
-    if (GroupId == 'btnmt' || GroupId == 'bnk') {
+    if (GroupId === 'btnmt' || GroupId === 'bnk') {
         $(".newdata").hide();
         $("#btn-bao-cao").show();
     }
@@ -57,8 +57,8 @@ $(document).ready(function () {
             for (var i = 0; i < currentData.length; i++) {
                 for (var j = 0; j < ngNews.lstNewsId.length; j++) {
                     var id = ngNews.lstNewsId[j];
-                    if (id == currentData[i].id) {
-                        if (currentData[i].is_status != 1) {
+                    if (id === currentData[i].id) {
+                        if (currentData[i].is_status !== 1) {
                             messagerWarn('Thông báo', 'Vui lòng chọn tin đã duyệt.');
                             return;
                         }
@@ -152,7 +152,7 @@ $(document).ready(function () {
 
     $('#clickPhanCong').on('click', function (e) {
         var grid = $('#dataGrid').data('kendoGrid');
-        if ($("#phancongcho").val().join(",") != "") {
+        if ($("#phancongcho").val().join(",") !== "") {
             var data = {
                 username: $("#phancongcho").val().join(","),
                 ids: $("#exampleModalNew .NewsId").val(),
@@ -201,7 +201,7 @@ $(document).ready(function () {
 
     $('#clickChuyenConvan').on('click', function (e) {
         var grid = $('#dataGrid').data('kendoGrid');
-        if ($(".js-data-example-ajax-chuyencongvan").val().join(",") != "") {
+        if ($(".js-data-example-ajax-chuyencongvan").val().join(",") !== "") {
             var data = {
                 username: $(".js-data-example-ajax-chuyencongvan").val().join(","),
                 ids: $("#exampleModalNew6 .NewsId").val(),
@@ -422,7 +422,7 @@ function chuyencongvan(news_id) {
 
 function nhapketquaxuly() {
     var grid = $('#dataGrid').data('kendoGrid');
-    if ($("#exampleModalNew_nhapketqua .IdReport").val() != "") {
+    if ($("#exampleModalNew_nhapketqua .IdReport").val() !== "") {
         var idReport = $("#exampleModalNew_nhapketqua .IdReport").val();
         var data = {
             Id: parseInt(idReport),
@@ -488,6 +488,24 @@ function nhapketqua(news_id) {
                 $("#IdReport").val("0");
             }
             $("#exampleModalNew_nhapketqua").modal('show');
+            $('#fileupload').addClass('fileupload-processing');
+            $("#filebaocao tbody").empty();
+            $.ajax({
+                // Uncomment the following to send cross-domain cookies:
+                //xhrFields: {withCredentials: true},
+                url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload/' + $("#exampleModalNew_nhapketqua .IdReport").val(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie("ACCESS-TOKEN"));
+                    xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew_nhapketqua .IdReport").val()));
+                },
+                dataType: 'json',
+                context: $('#fileupload')[0]
+            }).always(function () {
+                $(this).removeClass('fileupload-processing');
+            }).done(function (result) {
+                $(this).fileupload('option', 'done')
+                    .call(this, $.Event('done'), { result: result });
+            });
         },
         function (xhr, status, error) {
 

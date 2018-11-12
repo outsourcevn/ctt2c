@@ -29,4 +29,15 @@ namespace AppPortal.Core.Entities
         is_phancong,
         is_chuyencongvan
     }
+
+    public class FileUpload
+    {
+        public string deleteType { get; set; }
+        public string deleteUrl { get; set; }
+        public string name { get; set; }
+        public long size { get; set; }
+        public string thumbnailUrl { get; set; }
+        public string type { get; set; }
+        public string url { get; set; }
+    }
 }

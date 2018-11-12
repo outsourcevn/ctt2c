@@ -79,28 +79,62 @@ namespace AppPortal.ApiHost.Controllers
             return _newLog.GetReport(NewsId);
         }
 
+        [HttpDelete("delete/{id}")]
+        public string deletefile(int id)
+        {
+            return _newLog.DeleteFile(id);
+        }
+
+        [HttpGet("upload/{id}")]
+        public async Task<IActionResult> Getfile(int id)
+        {
+            var urlWeb = apiSettings.BaseUrl;
+            var fileUpload = _newLog.GetFile(id, urlWeb);
+            return Ok(new { files = fileUpload });
+        }
+
         [HttpPost("upload")]
-        public virtual async Task<IActionResult> Upload(IList<IFormFile> files2)
+        public virtual async Task<IActionResult> Upload(string __RequestVerificationToken, IList<IFormFile> files)
         {
             try
             {
+                var urlWeb = apiSettings.BaseUrl;
                 var id = Request.Headers.Where(x => x.Key == "IdReprot").FirstOrDefault();
-                var files = Request.Form.Files;
+                var idReport = id.Value;
                 long size = files.Sum(f => f.Length);
                 var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
 
+                var dataReturn = new List<FileUpload>();
                 foreach (var formFile in files)
                 {
                     var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(formFile.FileName);
                     if (formFile.Length > 0)
                     {
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
                         {
                             await formFile.CopyToAsync(stream);
                         }
                     }
+                    var obj = new FileUpload();
+                    obj.deleteType = "DELETE";  
+                    obj.name = formFile.FileName;
+                    obj.size = formFile.Length;
+                    obj.thumbnailUrl = urlWeb + "/uploads/" + fileName;
+                    obj.type = formFile.ContentType;
+                    obj.url = urlWeb + "/uploads/" + fileName;
+                    int fileid = _newLog.AddtoFileTable(obj, idReport);
+                    if(fileid > 0)
+                    {
+                        obj.deleteUrl = urlWeb + "/api/NewsLog/delete/" + fileid.ToString();
+                        dataReturn.Add(obj);
+                    }
                 }
-                return Ok(new { count = files.Count, size, filePath });
+                
+                return Ok(new { files = dataReturn});
             }
             catch (Exception e) {
                 return BadRequest(new { err = e.Message });

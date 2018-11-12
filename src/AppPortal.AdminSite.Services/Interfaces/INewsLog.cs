@@ -15,5 +15,8 @@ namespace AppPortal.AdminSite.Services.Interfaces
         IList<NewsLog> GetNewsLogByNewsIdNameFrom(int NewsId, string UserName);
         NewsLog AddOrUpdateReport(int id , string data);
         IList<NewsLog> GetReport(int NewsId);
+        int AddtoFileTable(FileUpload fileUpload, string id);
+        string DeleteFile(int id);
+        List<FileUpload> GetFile(int id, string urlWeb);
     }
 }
