@@ -93,9 +93,21 @@ namespace AppPortal.AdminSite.Services.Administrator
                 .ToList();
         }
 
-        public IList<NewsLog> GetReport(int NewsId)
+        public IList<NewLogUpLoad> GetReport(int NewsId)
         {
-            return _newslog.Table.Where(x => x.NewsId == NewsId).ToList();
+            var dataReturn = new List<NewLogUpLoad>();
+            var data = _newslog.Table.Where(x => x.NewsId == NewsId).ToList();
+            foreach(var item in data)
+            {
+                var obj = new NewLogUpLoad();
+                obj.Data = item.Data;
+                obj.FullUserName = item.FullUserName;
+                var file = _files.Table.Where(e => e.NewsLogId == item.Id).ToList();
+                obj.files = file;
+                dataReturn.Add(obj);
+            }
+
+            return dataReturn;
         }
 
         public IList<NewsLog> GetNewsLogByNewsIdNameFrom(int NewsId, string UserName)

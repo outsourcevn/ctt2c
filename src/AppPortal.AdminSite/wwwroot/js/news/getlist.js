@@ -83,17 +83,25 @@ var grid = $("#dataGrid").data("kendoGrid");
                     template: "#=templateSpecial(is_status, id)#"
                 },
                 {
+                    field: "file_upload", title: "Tài liệu", width: "50px",
+                    template: "#=templatefileupload(file_upload)#"
+                },
+                //{
+                //    field: "is_type", title: "Phân loại", width: "100px",
+                //    template: "#=templatePhanloai(is_type , id)#"
+                //},
+                {
                     field: "note", title: "Ghi chú", width: "150px",
                     template: "#=templateNote(note)#"
                 },
                 {
-                    field: "on_created", title: "Ngày tạo", template: "#=templateDate(on_created)#", width: "90px"
+                    field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDate(on_created)#", width: "90px"
                 },
                 //{
                 //    field: "on_published", title: "Ngày Duyệt", template: "#=templateDate(on_published)#", width: "90px"
                 //},
                 {
-                    field: "id", title: "Action", width: "100px",
+                    field: "id", title: "Hành động", width: "100px",
                     template: "#=templateAction(is_status , id)#"
                    // template: "<a class='k-button' href='/News/Edit?id=#=id#'><i class='fa fa-edit'></i>&nbsp;Sửa</a>"
                 }
@@ -438,6 +446,37 @@ function onChange(arg) {
 function onPaging(arg) {
 }
 
+function templatePhanloai(istype, id) {
+    var html = '<div class="form-group">';
+    html += '<select class="form-control" style="font-size: 11px; color: blue;height: 15px;width: 120px;" id="sel1">';
+    if (istype != "6" && istype != "7" && istype != "8" ) {
+        html += '<option disabled selected>Chưa phân loại</option>';
+    } else {
+        html += '<option disabled>Chưa phân loại</option>';
+    }
+
+    if (istype == "6") {
+        html += '<option value="6" selected>Ô nhiễm môi trường</option>';
+    } else {
+        html += '<option value="6">Ô nhiễm môi trường</option>';
+    }
+
+    if (istype == "7") {
+        html += '      <option value="7" selected>Cơ chế, chính sách, thủ tục hành chính</option>';
+    } else {
+        html += '      <option value="7">Cơ chế, chính sách, thủ tục hành chính</option>';
+    }
+
+    if (istype == "8") {
+        html += '      <option value="8" selected>Giải pháp, sáng kiến bảo vệ môi trường</option>';
+    } else {
+        html += '      <option value="8">Giải pháp, sáng kiến bảo vệ môi trường</option>';
+    }
+  
+    html += '    </select>';
+    return html;
+}
+
 function templateContent(content) {
     if (content) {
         return content;
@@ -454,6 +493,19 @@ function templateDate(date) {
         return "";
     }
     
+}
+
+function templatefileupload(fileupload) {
+    if (fileupload) {
+        var split = fileupload.split(",");
+        var string = "";
+        for (var i = 0; i < split.length; i++) {
+            string += "<a class='atailieu' href='" + split[i] +"' target='_blank'>" + split[i] + "</a><br>";
+        }
+        return string;
+    } else {
+        return "";
+    }
 }
 
 function templateNote(note) {

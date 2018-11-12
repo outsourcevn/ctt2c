@@ -40,4 +40,11 @@ namespace AppPortal.Core.Entities
         public string type { get; set; }
         public string url { get; set; }
     }
+
+    public class NewLogUpLoad
+    {
+        public string FullUserName { get; set; }
+        public string Data { get; set; }
+        public IList<Files> files { get; set; }
+    }
 }

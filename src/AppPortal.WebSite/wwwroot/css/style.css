@@ -35,7 +35,7 @@ body.fixed #wrapper { margin: 0 auto; width: 990px; background: #ffffff; }
 /* Left Sidebar */
 #left_sidebar { float: left; padding-right: 19px; width: 147px; }
 /* Right Sidebar */
-#right_sidebar { float: left; padding-left: 26px; width: 306px; }
+#right_sidebar { float: left; padding-left: 16px; width: 312px; }
     #right_sidebar .block { width: 100%; margin-bottom: 20px; }
 /* footer */
 footer { background-color: #ebebeb; border-top: 1px solid #c6c6c6; color: #828181; font-size: 12px; padding: 29px 0 12px; }
@@ -382,7 +382,7 @@ h4.title span.photos { color: #828181; font-size: 12px; font-weight: normal; }
 /* Block Weather */
 #right_sidebar #block_weather { margin-bottom: 6px; }
 #block_weather .content { background: #ebebeb; margin-top: 1px; padding: 14px 10px 12px; overflow: hidden; }
-#block_weather h3.block_title_black { margin-bottom: 0; }
+#block_weather h3.block_title_black { margin-bottom: 0;height: 38px; }
 #block_weather form { overflow: hidden; margin-bottom: 14px; }
 #block_weather .form-type-textfield { background: url(../images/bg_search_weather.png) no-repeat 0 -60px; float: left; padding-left: 15px; }
     #block_weather .form-type-textfield input { background: url(../images/bg_search_weather.png) repeat-x 0 0; border: 0 none; color: #828181; height: 30px; line-height: 30px; width: 244px; padding: 0; outline: none; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }

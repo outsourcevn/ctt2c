@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AppPortal.AdminSite.Services.Interfaces;
@@ -15,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace AppPortal.ApiHost.Controllers
 {
@@ -280,6 +283,45 @@ namespace AppPortal.ApiHost.Controllers
                 }));
             }
             return ResponseInterceptor(message);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("city")]
+        public IActionResult GetCity()
+        {
+            using (StreamReader r = new StreamReader("local.json"))
+            {
+                string json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<List<city>>(json);
+                return Ok(items);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("quan/{id}")]
+        public IActionResult GetQuan(string id)
+        {
+            using (StreamReader r = new StreamReader("local.json"))
+            {
+                string json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<List<city>>(json);
+                var data = items.Where(e => e.id == id).ToList();
+                return Ok(data);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("phuong/{id}/{cityid}")]
+        public IActionResult GetPhuong(string id , string cityid)
+        {
+            using (StreamReader r = new StreamReader("local.json"))
+            {
+                string json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<List<city>>(json);
+                var data = items.Where(e => e.id == cityid).FirstOrDefault();
+                var data2 = data.districts.Where(x => x.id == id).FirstOrDefault();
+                return Ok(data2);
+            }
         }
 
         [AllowAnonymous]

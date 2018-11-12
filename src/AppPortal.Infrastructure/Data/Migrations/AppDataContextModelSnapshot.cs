@@ -238,6 +238,14 @@ namespace AppPortal.Infrastructure.Data.Migrations
 
                     b.Property<string>("UserPhone");
 
+                    b.Property<string>("fileUpload");
+
+                    b.Property<string>("phuongxa");
+
+                    b.Property<string>("quanhuyen");
+
+                    b.Property<string>("tinhthanhpho");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");

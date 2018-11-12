@@ -25,6 +25,12 @@ $(function () {
         }
     });
 
+    $('#fileupload').on('fileuploaddestroy', function (e, data) {
+        var val = $('input[name="_csrfToken"]').val();
+        //data.formData = {_csrfToken: val};
+        data.headers = { 'Authorization': 'Bearer ' + getCookie("ACCESS-TOKEN") };
+    });
+
     // Enable iframe cross-domain access via redirect option:
     $('#fileupload').fileupload(
         'option',

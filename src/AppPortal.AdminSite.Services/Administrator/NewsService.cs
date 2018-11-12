@@ -454,7 +454,9 @@ namespace AppPortal.AdminSite.Services.Administrator
                 OnUpdated = x.OnUpdated,
                 OnPublished = x.OnPublished,
                 status = x.IsStatus,
-                Note = x.Note
+                Note = x.Note,
+                fileUpload = x.fileUpload,
+                IsType = x.IsType
             }).ToList();
             var dataNews = new List<ListItemNewsModel>();
             foreach(var itemdata in dataRetun)

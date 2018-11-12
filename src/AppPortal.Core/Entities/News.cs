@@ -47,6 +47,10 @@ namespace AppPortal.Core.Entities
         public string AddressString { get; set; }
         public string Lat { get; set; }
         public string Lng { get; set; }
+        public string tinhthanhpho { get; set; }
+        public string quanhuyen { get; set; }
+        public string phuongxa { get; set; }
+        public string fileUpload { get; set; }
 
         //ISeoEntity implement
         public string MetaTitle { get; set; }
@@ -97,7 +101,10 @@ namespace AppPortal.Core.Entities
         translation,
         general,
         editors,
-        topic
+        topic,
+        onhiemmoitruong,
+        cochehanhchinh,
+        giaiphapsangkien
     }
 
     public enum IsPosition : int

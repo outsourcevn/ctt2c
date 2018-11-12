@@ -99,6 +99,10 @@ namespace AppPortal.AdminSite.Services.Extensions
             item.IsPosition = model.IsPosition != null ? (IsPosition)model.IsPosition : IsPosition.isNormal;
             item.IsType = model.IsType != null ? (IsType)model.IsType : IsType.noType;
             item.IsView = model.IsView != null ? (IsView)model.IsView : IsView.normal;
+            item.tinhthanhpho = model.tinhthanhpho;
+            item.phuongxa = model.phuongxa;
+            item.quanhuyen = model.quanhuyen;
+            item.fileUpload = model.fileUpload;
             return item;
         }
 

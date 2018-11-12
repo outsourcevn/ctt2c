@@ -63,6 +63,15 @@
         background-color: #f9f9f9 !important;
         opacity: 1 !important;
     }
+
+    .k-state-selected {
+        background-color: darkgrey !important;
+    }
+
+    .atailieu {
+        width: 200px;
+        display: block;
+     }
 </style>
 <link rel="stylesheet" href="~/css/style.css">
 <!-- blueimp Gallery styles -->
@@ -253,10 +262,10 @@
                                     <i class="glyphicon glyphicon-upload"></i>
                                     <span>Bắt đầu upload</span>
                                 </button>
-                                <button type="reset" class="btn btn-warning cancel">
+                                @*<button type="reset" class="btn btn-warning cancel">
                                     <i class="glyphicon glyphicon-ban-circle"></i>
                                     <span>Cancel upload</span>
-                                </button>
+                                </button>*@
                                 @*<button type="button" class="btn btn-danger delete">
                                     <i class="glyphicon glyphicon-trash"></i>
                                     <span>Xóa</span>
@@ -407,13 +416,13 @@
             {% if (!i && !o.options.autoUpload) { %}
             <button class="btn btn-primary start" disabled>
                 <i class="glyphicon glyphicon-upload"></i>
-                <span>Start</span>
+                <span>Tải lên</span>
             </button>
             {% } %}
             {% if (!i) { %}
             <button class="btn btn-warning cancel">
                 <i class="glyphicon glyphicon-ban-circle"></i>
-                <span>Cancel</span>
+                <span>Loại bỏ</span>
             </button>
             {% } %}
         </td>
@@ -427,14 +436,14 @@
         <td>
             <span class="preview">
                 {% if (file.thumbnailUrl) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img style="width: 200px" src="{%=file.thumbnailUrl%}"></a>
                 {% } %}
             </span>
         </td>
         <td>
             <p class="name">
                 {% if (file.url) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                <a href="{%=file.url%}" target="_blank" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
                 {% } else { %}
                 <span>{%=file.name%}</span>
                 {% } %}

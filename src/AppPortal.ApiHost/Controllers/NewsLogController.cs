@@ -74,7 +74,7 @@ namespace AppPortal.ApiHost.Controllers
         // list Report 
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("GetReport")]
-        public IList<NewsLog> GetReport(int NewsId)
+        public IList<NewLogUpLoad> GetReport(int NewsId)
         {
             return _newLog.GetReport(NewsId);
         }
@@ -102,7 +102,7 @@ namespace AppPortal.ApiHost.Controllers
                 var id = Request.Headers.Where(x => x.Key == "IdReprot").FirstOrDefault();
                 var idReport = id.Value;
                 long size = files.Sum(f => f.Length);
-                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/");
                 if (!Directory.Exists(filePath))
                 {
                     Directory.CreateDirectory(filePath);
@@ -114,7 +114,7 @@ namespace AppPortal.ApiHost.Controllers
                     var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(formFile.FileName);
                     if (formFile.Length > 0)
                     {
-                        using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
+                        using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
                         {
                             await formFile.CopyToAsync(stream);
                         }
@@ -139,6 +139,64 @@ namespace AppPortal.ApiHost.Controllers
             catch (Exception e) {
                 return BadRequest(new { err = e.Message });
             }      
+        }
+
+        [AllowAnonymous]
+        [HttpDelete("deleteAno/{filename}")]
+        public string deleteAno(string filename)
+        {
+            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploadsAno/");
+            System.IO.File.Delete(Path.Combine(filePath, filename));
+            return filename;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("uploadAno")]
+        public virtual async Task<IActionResult> UploadAno(string __RequestVerificationToken, IList<IFormFile> files)
+        {
+            try
+            {
+                if(string.IsNullOrEmpty(__RequestVerificationToken) == false)
+                {
+                    var urlWeb = apiSettings.BaseUrl;
+                    long size = files.Sum(f => f.Length);
+                    var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploadsAno/");
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+
+                    var dataReturn = new List<FileUpload>();
+                    foreach (var formFile in files)
+                    {
+                        var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(formFile.FileName);
+                        if (formFile.Length > 0)
+                        {
+                            using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+                            {
+                                await formFile.CopyToAsync(stream);
+                            }
+                        }
+                        var obj = new FileUpload();
+                        obj.deleteType = "DELETE";
+                        obj.name = formFile.FileName;
+                        obj.size = formFile.Length;
+                        obj.thumbnailUrl = urlWeb + "/uploadsAno/" + fileName;
+                        obj.type = formFile.ContentType;
+                        obj.url = urlWeb + "/uploadsAno/" + fileName;
+                        obj.deleteUrl = urlWeb + "/api/NewsLog/deleteAno/" + fileName;
+                        dataReturn.Add(obj);
+                        
+                    }
+
+                    return Ok(new { files = dataReturn });
+                }
+                return BadRequest(new { err = "error" });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { err = e.Message });
+            }
         }
     }
 }

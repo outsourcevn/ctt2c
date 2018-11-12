@@ -217,15 +217,17 @@ jQuery.extend(jQuery.validator.messages, {
     min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
 });
 $("#frm_contact").submit(function (event) {
-    console.log('validation completed.');
-    if ($form.valid() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.preventDefault();
-    } else {
-        event.preventDefault(); //prevent form submit before captcha is completed
-        grecaptcha.execute();
-    }
+    captcha.validateUnsafe(function (isCaptchaCodeCorrect) {
+
+        if (isCaptchaCodeCorrect) {
+            // Captcha code is correct
+        } else {
+            // Captcha code is incorrect
+        }
+
+    });
+
+    event.preventDefault();
 });
 
 function submitForm() {
@@ -234,6 +236,14 @@ function submitForm() {
 
 function onCompleted() {
     var csrfToken = $("input[name='__RequestVerificationToken']").val();
+
+    var fileuploads = $("#filebaocao tr");
+    var fileupload = "";
+    for (var i = 0; i < fileuploads.length; i++) {
+        var file = fileuploads[i];
+        fileupload += $(file).find("td:first a").attr("href") + ",";
+    }
+
     var dataJson = {
         Id: 0,
         CategoryId: 12,
@@ -249,6 +259,10 @@ function onCompleted() {
         Lng: $("#lng").val(),
         UserPhone: $("input[id='UserPhone']").val(),
         UserAddress: $("input[id='UserAddress']").val(),
+        tinhthanhpho: $("#thanhpho option:selected").text(),
+        quanhuyen: $("#quantp option:selected").text(),
+        phuongxa: $("#huyen option:selected").text(),
+        fileUpload: fileupload,
     };
     //console.log(dataJson);
     callAjax(
@@ -264,6 +278,7 @@ function onCompleted() {
                 alert(success.model);
                 $form.clearFormData();
                 $("#Content").data("kendoEditor").value('');
+                $("#filebaocao tbody").html("");
             }
         },
         function (xhr, status, error) {

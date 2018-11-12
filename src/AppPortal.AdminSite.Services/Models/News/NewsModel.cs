@@ -43,6 +43,10 @@ namespace AppPortal.AdminSite.Services.Models.News
         public string Lng { get; set; }
         public string UserAddress { get; set; }
         public string UserPhone { get; set; }
+        public string tinhthanhpho { get; set; }
+        public string quanhuyen { get; set; }
+        public string phuongxa { get; set; }
+        public string fileUpload { get; set; }
     }
 
     public class NewsCategoryModel
