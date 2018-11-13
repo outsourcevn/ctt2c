@@ -4,7 +4,7 @@ img { max-width: 100%; }
 /* wrappers */
 #wrapper { }
 body.fixed #wrapper { margin: 0 auto; width: 990px; background: #ffffff; }
-.wrapper, #above_header .region, #under_header .inner, #content_top .region, footer .region { margin: 0 auto; padding: 0 10px; width: 970px; overflow: hidden; }
+.wrapper, #above_header .region, #under_header .inner, #content_top .region, footer .region { margin: 0 auto; padding: 0 10px;  width: 1060px; overflow: hidden; }
 /* above header */
 #above_header { background-image: url(../images/bg_above_header_line.png); background-position: 0 100%; background-repeat: repeat-x; font-size: 11px; color: #d7cdcd; padding-bottom: 2px; }
     #above_header .inner { padding: 11px 0 0; overflow: hidden; background: url(../images/bg_above_header.png); }
@@ -103,7 +103,7 @@ footer { background-color: #ebebeb; border-top: 1px solid #c6c6c6; color: #82818
     #under_header #block_main_menu .responsive-menu-items .active .bg { width: 452px; position: relative; }
         #under_header #block_main_menu .responsive-menu-items .active .bg i { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #858585; position: absolute; top: 12px; right: 0; opacity: 0.6; }
             #under_header #block_main_menu .responsive-menu-items .active .bg i.active { opacity: 1; }
-    #under_header #block_main_menu .responsive-menu-items .resp-menu-hidden { position: absolute; z-index: 1000; overflow: hidden; width: 969px; display: none; margin: 0px !important }
+    #under_header #block_main_menu .responsive-menu-items .resp-menu-hidden { position: absolute; z-index: 1000; overflow: hidden; width: 1060px; display: none; margin: 0px !important }
         #under_header #block_main_menu .responsive-menu-items .resp-menu-hidden li { float: none; margin: 0; }
             #under_header #block_main_menu .responsive-menu-items .resp-menu-hidden li a { border-top: 1px solid #ffffff; border-bottom: 1px solid #c8c8c8; background-color: #e2e2e2; }
             #under_header #block_main_menu .responsive-menu-items .resp-menu-hidden li:first-child a { border-radius: 10px 10px 0px 0px; border-top: none; }

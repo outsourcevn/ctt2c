@@ -2,6 +2,7 @@
 const NEWS_API = {
     GET_LIST_NEWS: 'api/News/getNews',
     CREATE_OR_UPDATE: 'api/News/CreateOrUpdate',
+    CREATE_OR_UPDATE_NEWS: 'api/News/HomeNewsCreateOrUpdate',
     DELETE: 'api/News/Delete',
     SET_URL_NEW: 'api/News/set-url-new',
     DELETE_ALL_NEW: 'api/News/delete-all-new',

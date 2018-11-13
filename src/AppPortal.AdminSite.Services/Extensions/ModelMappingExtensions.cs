@@ -106,6 +106,51 @@ namespace AppPortal.AdminSite.Services.Extensions
             return item;
         }
 
+        public static HomeNews ModelToEntityHome(this NewsModel model, HomeNews item = null)
+        {
+            if (item == null) item = new HomeNews();
+
+            item.CategoryId = model.CategoryId ?? null;
+            item.Name = model.Name ?? null;
+            item.Content = model.Content ?? null;
+            item.Image = model.Image ?? null;
+            item.IsShow = model.IsShow;
+            item.Link = model.Link ?? null;
+            item.Abstract = model.Abstract ?? null;
+            item.Sename = string.IsNullOrEmpty(item.Sename) ? $"/{ CommonHelper.UltilityHelper.FillterChar(item.Name)}" : model.Sename;
+            item.MetaTitle = string.IsNullOrEmpty(model.MetaTitle) ? model.Name : model.MetaTitle;
+            item.MetaKeywords = string.IsNullOrEmpty(model.MetaKeywords) ? model.Name : model.MetaKeywords;
+            item.MetaDescription = string.IsNullOrEmpty(model.MetaDescription) ? model.Name : model.MetaDescription;
+            item.AddressId = model.AddressId ?? null;
+            item.UserName = model.UserName ?? null;
+            item.UserId = model.UserId ?? null;
+            item.UserFullName = model.UserFullName ?? null;
+            item.UserEmail = model.UserEmail ?? null;
+            item.CountLike = model.CountLike ?? null;
+            item.CountView = model.CountView ?? null;
+            item.AddressString = model.AddressString ?? null;
+            item.UserAddress = model.UserAddress ?? null;
+            item.UserPhone = model.UserPhone ?? null;
+            item.Lat = model.Lat ?? null;
+            item.Lng = model.Lng ?? null;
+            item.SourceNews = model.SourceNews ?? null;
+            item.Note = model.Note ?? null;
+            item.OnCreated = model.OnCreated ?? null;
+            item.OnDeleted = model.OnDeleted ?? null;
+            item.OnPublished = model.OnPublished ?? null;
+            item.OnUpdated = model.OnUpdated ?? null;
+            item.IsStatus = model.IsStatus != null ? (IsStatus)model.IsStatus : IsStatus.pending;
+            item.IsNew = model.IsNew != null ? (IsNew)model.IsNew : IsNew.isComment;
+            item.IsPosition = model.IsPosition != null ? (IsPosition)model.IsPosition : IsPosition.isNormal;
+            item.IsType = model.IsType != null ? (IsType)model.IsType : IsType.noType;
+            item.IsView = model.IsView != null ? (IsView)model.IsView : IsView.normal;
+            item.tinhthanhpho = model.tinhthanhpho;
+            item.phuongxa = model.phuongxa;
+            item.quanhuyen = model.quanhuyen;
+            item.fileUpload = model.fileUpload;
+            return item;
+        }
+
         public static NewsModel EntityToModel(this News item)
         {
             if (item == null) return null;

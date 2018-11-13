@@ -57,6 +57,23 @@ namespace AppPortal.ApiHost.Controllers
             });
         }
 
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpGet("getHomeNews")]
+        public IActionResult ListHomeNewsAsync(int? skip = 0, int? page = 1, int? take = 15, string keyword = "",
+            int? categoryId = -1, int? status = -1, int? type = -1, string username = "", string GroupId = "")
+        {
+            var query = _newsService.GetLstHomeNewsPaging(out int rows, skip, take, keyword, categoryId, status, type, username, GroupId);
+            var vm = query.Select(n => Mapper.Map<ListItemNewsModel, ListItemNewsViewModel>(n));
+            return ResponseInterceptor(vm, rows, new Paging()
+            {
+                PageNumber = page.Value,
+                PageSize = take.Value,
+                Take = take.Value,
+                Skip = skip.Value,
+                Query = keyword,
+            });
+        }
+
         // get notifi
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("GetNotifi")]
@@ -103,6 +120,37 @@ namespace AppPortal.ApiHost.Controllers
             return ResponseInterceptor(message);
         }
 
+        
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpPost("HomeNewsCreateOrUpdate")]
+        public IActionResult HomeNewsCreateOrUpdate(int? Id, [FromBody] NewsViewModel model)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return ToHttpBadRequest(AddErrors(ModelState));
+            //}
+            string message = "Thêm tin tức thành công";
+            try
+            {
+                var entityModel = Mapper.Map<NewsViewModel, NewsModel>(model);
+                if (Id.HasValue && Id > 0)
+                {
+                    entityModel.Id = Id.Value;
+                    message = "Cập nhật tin tức thành công";
+                }
+                _newsService.AddOrUpdateHome(entityModel);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
 
         // create or update
         [Authorize(PolicyRole.EDIT_ONLY)]

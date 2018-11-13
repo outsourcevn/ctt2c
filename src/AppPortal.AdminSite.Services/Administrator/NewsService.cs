@@ -21,6 +21,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         private readonly IRepository<ReportNews , int> _rptNews;
         private readonly IRepository<Notifications , int> _notifi;
         private readonly IRepository<NewsLog , int> _newLog;
+        private readonly IRepository<HomeNews , int> _homeNews;
 
         public NewsService(
             IRepository<News, int> news,
@@ -31,6 +32,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             IRepository<Category, int> category,
             IRepository<Notifications, int> notifi,
             IRepository<NewsLog, int> newLog,
+            IRepository<HomeNews, int> homeNews,
             IAppLogger<NewsService> appLogger)
         {
             _news = news;
@@ -42,6 +44,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             _rptNews = ReportNews;
             _notifi = notifi;
             _newLog = newLog;
+            _homeNews = homeNews;
         }
 
         //Quy trình mới
@@ -236,6 +239,28 @@ namespace AppPortal.AdminSite.Services.Administrator
             return entity;
         }
 
+        public void AddOrUpdateHome(NewsModel model)
+        {
+            HomeNews entity = null;
+            if (model.Id > 0) entity = _homeNews.GetById(model.Id);
+            entity = model.ModelToEntityHome(entity);
+            if (model.Id > 0)
+            {
+
+                entity.IsStatus = model.IsStatus != null ? (IsStatus)model.IsStatus : IsStatus.tiepnhan;
+                entity.OnUpdated = DateTime.Now;
+                _homeNews.Update(entity);
+            }
+            else
+            {
+                var itemCat = _category.GetById(model.CategoryId.Value) ?? null;
+                entity.IsStatus = model.IsStatus != null ? (IsStatus)model.IsStatus : IsStatus.tiepnhan;
+                entity.OnCreated = DateTime.Now;
+                entity.CategoryId = model.CategoryId;
+                var modelAdd = _homeNews.Add(entity);
+            }
+        }
+
         public void AddOrUpdate(NewsModel model)
         {
             News entity = null;
@@ -361,6 +386,11 @@ namespace AppPortal.AdminSite.Services.Administrator
             return GetTables().SingleOrDefault(x => x.Id == id).EntityToModel();
         }
 
+        public HomeNews GetHomeNewsById(int id)
+        {
+            return _homeNews.Table.SingleOrDefault(x => x.Id == id);
+        }
+
         public void UpdateStatus(string id, IsStatus status)
         {
             var data = _news.GetById(Int32.Parse(id));
@@ -391,7 +421,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             else query = query.Skip(skip.Value).Take(take.Value);
             return query.Select(x => x.EntityToModel()).ToList();
         }
-
+        
         public IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "",
             int? categoryId = -1, int? status = -1, int? type = -1 , string username = "", string GroupId = "")
         {
@@ -476,6 +506,58 @@ namespace AppPortal.AdminSite.Services.Administrator
                 dataNews.Add(itemdata);
             }
             return dataNews;
+        }
+
+        public IList<ListItemNewsModel> GetLstHomeNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "",
+            int? categoryId = -1, int? status = -1, int? type = -1, string username = "", string GroupId = "")
+        {
+            //var query = GetTables().Where(x => x.IsType == IsType.noType && x.IsType != IsType.topic);
+            var query = _homeNews.Table;
+            if (status == -1)
+            {
+                //query = query.Where(x => !x.OnDeleted.HasValue && !x.IsShow);
+            }
+
+            if (query == null)
+            {
+                rows = 0;
+                return new List<ListItemNewsModel>() { };
+            }
+            if (!string.IsNullOrEmpty(keyword) && keyword != "")
+                query = query.Where(x => x.Name.Contains(keyword) || x.Sename.Contains(keyword));
+
+            if (categoryId > 0) query = query.Where(x => x.CategoryId == categoryId);
+            if (status >= 0) query = query.Where(x => x.IsStatus == (IsStatus)status);
+            if (type > 0) query = query.Where(x => x.IsType == (IsType)type);
+            rows = query.Count();
+
+            if (skip > rows)
+            {
+                take = rows % take.Value;
+                skip = 0;
+                query = query.OrderByDescending(x => x.Id).Skip(rows - take.Value).Take(take.Value);
+            }
+            else query = query.OrderByDescending(x => x.Id).Skip(skip.Value).Take(take.Value);
+
+            var dataRetun = query.Select(x => new ListItemNewsModel
+            {
+                Id = x.Id,
+                Name = x.Name ?? null,
+                Image = x.Image ?? null,
+                Sename = x.Sename ?? null,
+                Abstract = x.Abstract ?? null,
+                Content = x.Content ?? null,
+                IsShow = x.IsShow,
+                OnCreated = x.OnCreated,
+                OnDeleted = x.OnDeleted,
+                OnUpdated = x.OnUpdated,
+                OnPublished = x.OnPublished,
+                status = x.IsStatus,
+                Note = x.Note,
+                fileUpload = x.fileUpload,
+                IsType = x.IsType
+            }).ToList();
+            return dataRetun;
         }
 
         public IList<ListItemNewsMap> ReportNews()

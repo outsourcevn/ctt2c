@@ -18,7 +18,7 @@
         @if (User.Identity.IsAuthenticated)
         {
             <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-5 mb-3 d-flex" style="height: 150px;">
+            <div class="user-panel mt-3 pb-5 mb-3 d-flex" style="height: 220px;">
                 <div class="image">
                     <img src="@ViewData["Images"]/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
@@ -43,35 +43,35 @@
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                     <li class="nav-header">Chức năng hệ thống</li>
                     @*<secure-content asp-controller="Roles">
-                        <li class="nav-item has-treeview sysadmin">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-angle-double-right"></i>
-                                <p>
-                                    Quản trị hệ thống
-                                    <i class="fa fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-controller="Roles" asp-action="Create" class="nav-link">
-                                        <i class="nav-icon fa fa-plus"></i>
-                                        <p>
-                                            Tạo mới quyền
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-controller="Roles" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fa fa-users"></i>
-                                        <p>
-                                            Quản lý phân quyền
-                                            <span class="badge badge-info right">2</span>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </secure-content>*@
+            <li class="nav-item has-treeview sysadmin">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-angle-double-right"></i>
+                    <p>
+                        Quản trị hệ thống
+                        <i class="fa fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-controller="Roles" asp-action="Create" class="nav-link">
+                            <i class="nav-icon fa fa-plus"></i>
+                            <p>
+                                Tạo mới quyền
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Roles" asp-action="Index" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Quản lý phân quyền
+                                <span class="badge badge-info right">2</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </secure-content>*@
 
                     <li class="nav-item has-treeview sysadmin">
                         <a href="#" class="nav-link">
@@ -214,6 +214,35 @@
                             </ul>
                         </li>
                     </secure-content>
+
+                    <secure-content asp-controller="HomeNews">
+                        <li id="News" class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-angle-double-right"></i>
+                                <p>
+                                    Quản trị đăng tin
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item createnews">
+                                    <a href="/homenews/create" class="nav-link">
+                                        <i class="fa fa-list-ul nav-icon"></i>
+                                        <p>Tạo mới tin tức</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/homenews" class="nav-link">
+                                        <i class="fa fa-list-ul nav-icon"></i>
+                                        <p>Quản lý tin tức</p>
+                                        <span class="badge badge-info right">20</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </secure-content>
+
+
                     <secure-content asp-controller="Topics">
                         <li id="Topics" class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -241,31 +270,31 @@
                         </li>
                     </secure-content>
                     @*<secure-content asp-controller="ProcessWorks">
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-angle-double-right"></i>
-                                <p>
-                                    Tiếp nhận &amp; Xử lý
-                                    <i class="fa fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-controller="ProcessWorks" asp-action="Index" class="nav-link">
-                                        <i class="nav-icon fa fa-file"></i>
-                                        <p>Tiếp nhận ý kiến</p>
-                                    </a>
-                                </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-angle-double-right"></i>
+                    <p>
+                        Tiếp nhận &amp; Xử lý
+                        <i class="fa fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-controller="ProcessWorks" asp-action="Index" class="nav-link">
+                            <i class="nav-icon fa fa-file"></i>
+                            <p>Tiếp nhận ý kiến</p>
+                        </a>
+                    </li>
 
-                                <li class="nav-item">
-                                    <a asp-controller="ProcessWorks" asp-action="Step" class="nav-link">
-                                        <i class="nav-icon fa fa-long-arrow-right"></i>
-                                        <p>Xử lý hồ sơ</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </secure-content>*@
+                    <li class="nav-item">
+                        <a asp-controller="ProcessWorks" asp-action="Step" class="nav-link">
+                            <i class="nav-icon fa fa-long-arrow-right"></i>
+                            <p>Xử lý hồ sơ</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </secure-content>*@
                     <secure-content asp-controller="Reports">
                         <li class="nav-header sysadmin tonghopbaocao">Tổng hợp báo cáo</li>
                         <li class="nav-item sysadmin tonghopbaocao">

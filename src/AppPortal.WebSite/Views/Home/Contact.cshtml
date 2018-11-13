@@ -291,7 +291,7 @@
         });
                 $.ajax({
                     type: "GET",
-                    url: "http://localhost:50642/api/ProcessWorks/city",
+                    url: appConfig.apiHostUrl + "/api/ProcessWorks/city",
                     success: function (response) {
                         for (var i = 0; i < response.length; i++) {
                             $("#thanhpho").append("<option value='" + response[i].id + "'>" + response[i].name+"</option>")
@@ -309,7 +309,7 @@
 
                     $.ajax({
                         type: "GET",
-                        url: "http://localhost:50642/api/ProcessWorks/quan/" + $(this).val(),
+                        url: appConfig.apiHostUrl + "/api/ProcessWorks/quan/" + $(this).val(),
                         success: function (response) {
                             var districts = response[0].districts;
                             for (var i = 0; i < districts.length; i++) {
@@ -327,7 +327,7 @@
 
                     $.ajax({
                         type: "GET",
-                        url: "http://localhost:50642/api/ProcessWorks/phuong/" + $(this).val() + "/" + $("#thanhpho").val(),
+                        url: appConfig.apiHostUrl +"/api/ProcessWorks/phuong/" + $(this).val() + "/" + $("#thanhpho").val(),
                         success: function (response) {
                             var wards = response.wards;
                             for (var i = 0; i < wards.length; i++) {

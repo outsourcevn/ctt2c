@@ -37,3 +37,7 @@
 body.body__login {
     background: #fff;
 }
+
+.user-panel{
+    height: 180px !important;
+}
