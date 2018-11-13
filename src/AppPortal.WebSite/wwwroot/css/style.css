@@ -114,8 +114,6 @@ footer { background-color: #ebebeb; border-top: 1px solid #c6c6c6; color: #82818
                         #under_header #block_main_menu .responsive-menu-items .resp-menu-hidden li ul li a:hover { color: #1f4f82; }
 #block_main_menu nav li.active, #block_main_menu .resp-menu li.active { box-shadow: 0 0 11px rgba(33,33,33,.2) }
 #block_main_menu li a { display: block; }
-#block_main_menu nav li.active a, #block_main_menu .resp-menu li.active a { background: url(../images/bg_main_menu_li.png) no-repeat 100% -28px; display: block; height: 28px; }
-#block_main_menu nav li.active .bg, #block_main_menu .resp-menu li.active .bg { background: url(../images/bg_main_menu_li.png) repeat-x 0 0; }
 #under_header .inner { overflow: visible; height: 30px; }
 #block_secondary_menu .inner { height: 17px; }
 #under_header #block_main_menu li { position: relative; display: block; }
