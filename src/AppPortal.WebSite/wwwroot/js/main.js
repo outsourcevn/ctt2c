@@ -44,7 +44,7 @@ $(function () {
             }
         },
         change: function (e, data) {
-            debugger
+            
         }
     });
 

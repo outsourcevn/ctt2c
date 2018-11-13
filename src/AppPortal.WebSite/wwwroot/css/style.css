@@ -27,7 +27,7 @@ body.fixed #wrapper { margin: 0 auto; width: 990px; background: #ffffff; }
     #breadcrumb a { color: #282828; text-decoration: none; }
 /* content top blocks */
 #content_top { padding-top: 24px; }
-    #content_top .block { float: left; font-size: 13px; color: #1f4f82; padding-bottom: 21px; margin-bottom: 20px; background: url(../images/bg_separator.png) 0 100% repeat-x; }
+    #content_top .block { float: left; font-size: 13px; color: #1f4f82;}
 /* Content Bottom */
 #content_bottom { width: 100%; float: left; clear: both; margin-top: 3px; padding-top: 5px; background: url(../images/bg_separator.png) 0 0 repeat-x; }
     #content_bottom .block { float: left; margin-bottom: 20px; }
@@ -97,7 +97,7 @@ footer { background-color: #ebebeb; border-top: 1px solid #c6c6c6; color: #82818
 /* main menu */
 #under_header #block_main_menu { background: #d9d9d9 url(../images/bg_main_menu.png) repeat-x 0 0; border-bottom: 1px solid #c6c6c6; padding: 10px 0 8px; }
     #under_header #block_main_menu li { float: left; border: 0 none; padding: 0; margin-right: 6px; height: auto; }
-#block_main_menu li span.bg { padding: 7px 0; margin: 0 14px; height: 14px; line-height: 16px; display: block; }
+#block_main_menu li span.bg { padding: 7px 0; margin: 0 5px; height: 14px !important; line-height: 16px; display: block; }
 #under_header #block_main_menu .responsive-menu-items { display: none; }
     #under_header #block_main_menu .responsive-menu-items .resp-menu { clear: both; height: 30px; width: 100%; }
     #under_header #block_main_menu .responsive-menu-items .active .bg { width: 452px; position: relative; }
@@ -112,7 +112,7 @@ footer { background-color: #ebebeb; border-top: 1px solid #c6c6c6; color: #82818
                 #under_header #block_main_menu .responsive-menu-items .resp-menu-hidden li ul li { background: url("../images/bg_separator.png") repeat-x scroll 0 100% transparent; background-color: #ebebeb; display: block; }
                     #under_header #block_main_menu .responsive-menu-items .resp-menu-hidden li ul li a { background: none; border-top: none; border-bottom: none; font-size: 12px; color: #282828; padding: 10px 25px }
                         #under_header #block_main_menu .responsive-menu-items .resp-menu-hidden li ul li a:hover { color: #1f4f82; }
-#block_main_menu nav li.active, #block_main_menu .resp-menu li.active { background: url(../images/bg_main_menu_li.png) no-repeat 0 -56px; }
+#block_main_menu nav li.active, #block_main_menu .resp-menu li.active { box-shadow: 0 0 11px rgba(33,33,33,.2) }
 #block_main_menu li a { display: block; }
 #block_main_menu nav li.active a, #block_main_menu .resp-menu li.active a { background: url(../images/bg_main_menu_li.png) no-repeat 100% -28px; display: block; height: 28px; }
 #block_main_menu nav li.active .bg, #block_main_menu .resp-menu li.active .bg { background: url(../images/bg_main_menu_li.png) repeat-x 0 0; }

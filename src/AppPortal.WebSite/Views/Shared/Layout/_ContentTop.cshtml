@@ -1,122 +1,275 @@
-﻿<div id="content_top">
-    <div class="region">
-        <aside id="block_breaking_news" class="block">
-            <h3 class="block_title">Tiêu điểm:</h3>
-            <div class="flexslider slider">
-                <ul class="slides">
-                    <li>
-                        <a href="#">Thủ tướng: Không cấp mới giấy phép nhập phế liệu vào Việt Nam.</a>
-                    </li>
-                    <li>
-                        <a href="#">Tổng cục Môi trường thắp nến tri ân các anh hùng Liệt sỹ (26/07/2018).</a>
-                    </li>
-                    <li>
-                        <a href="#">Rà soát, sửa đổi danh mục phế liệu nhập khẩu làm nguyên liệu sản xuất.</a>
-                    </li>
-                </ul>
+﻿@model NewsViewModel2
+@{
+    ViewData["Title"] = "THÔNG TIN TRAO ĐỔI (GÓP Ý, PHẢN ÁNH, HỎI ĐÁP)";
+    var formView = "frm_contact";
+    var data = ViewData["data"];
+}
+
+<!-- Core CSS  -->
+<link href="~/lib/kendo-ui/styles/kendo.common.min.css" rel="stylesheet" asp-append-version="true" />
+<link href="~/lib/kendo-ui/styles/kendo.default.min.css" rel="stylesheet" asp-append-version="true" />
+<!-- blueimp Gallery styles -->
+<link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css" crossorigin="anonymous">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="~/css/jquery.fileupload.css">
+<link rel="stylesheet" href="~/css/jquery.fileupload-ui.css">
+
+<style>
+
+    .k-editor .k-i-insert-video:before {
+        font-family: FontAwesome;
+        content: "\f167";
+        font-size: 16px;
+    }
+
+    .form-group select {
+        height: 30px;
+    }
+
+    .row {
+        margin: 0 !important;
+    }
+
+    #header {
+        height: 204px !important;
+    }
+
+    #block_main_menu li span {
+        height: 30px !important;
+    }
+
+    #block_main_menu .inner ul {
+        margin-bottom: 0 !important;
+    }
+
+    #block-search-form .form-text {
+        margin-top: 0 !important;
+    }
+</style>
+<!-- Modal -->
+<div id="myModal" class="modal fade content" role="dialog">
+    <div class="modal-dialog" style="width: 750px; max-width: 1000px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-        </aside>
+            <div class="modal-body">
+                <div id="contact_form" class="row box-KN">
+                    <form id="frm_contact" class="needs-validation" method="post">
+                        <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
+                        <div class="row" style="margin-bottom: 10px !important">
+
+                            <div style="width: 50%; float: left;" class="col-sm-6">
+                                <div class="form-item">
+                                    <label for="UserFullName" class="control-label">Họ tên:</label>
+                                    <input class="form-text" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên" />
+                                </div>
+                                <div class="form-item">
+                                    <label for="UserAddress" class="control-label">Địa chỉ:</label>
+                                    <input class="form-text" asp-for="UserAddress" required placeholder="Địa chỉ" />
+                                </div>
+                                <div class="form-item">
+                                    <label for="UserEmail" class="control-label">Điện thoại:</label>
+                                    <input class="form-text" asp-for="UserPhone" required placeholder="Điện thoại" />
+                                </div>
+                                <div class="form-item">
+                                    <label for="UserEmail" class="control-label">Địa chỉ E-mail:</label>
+                                    <input class="form-text" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6" id="mapframe" style="width: 49%; float: right;">
+                                <div style="width: 100%">
+                                    <iframe height="280"
+                                            src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=ha%20noi&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                                        <a href="https://www.maps.ie/create-google-map/">Add map to website</a>
+                                    </iframe>
+                                </div><br />
+                            </div>
+                        </div>
+                        <p style="font-weight: 600">NỘI DUNG TRAO ĐỔI</p>
+                        <div class="row">
+
+                            <div class="form-item" style="width: 98%;">
+                                <label asp-for="Name" class="control-label">Tiêu đề:</label>
+                                <input asp-for="Name" class="form-text" placeholder="Tiêu đề phản ánh" required />
+                                <span asp-validation-for="Name" class="form-required"></span>
+                            </div>
+                            <div id="map"></div>
+                            <div class="form-item">
+                                <label asp-for="Link" class="control-label">Địa điểm:</label>
+                                <input asp-for="Link" class="form-text" id="address_map" placeholder="Địa điểm diễn ra" />
+                                <div class="form-group" style="padding: 10px;display: inline-block;">
+                                    <select id="thanhpho" required>
+                                        <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
+                                    </select>
+                                    <select id="quantp" required>
+                                        <option selected disabled>--- Lựa chọn quận/huyện ---</option>
+                                    </select>
+                                    <select id="huyen" required>
+                                        <option selected disabled>--- Lựa chọn phường xã ---</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="lat" name="lat" />
+                                <input type="hidden" id="lng" name="lng" />
+                                <span asp-validation-for="Link" class="form-required"></span>
+                            </div>
+                            <div class="form-item" style="display: none;">
+                                <label asp-for="Abstract" class="control-label">Tóm tắt:</label>
+                                <textarea style="width:100%; height:150px" rows="10" asp-for="Abstract" class="form-text"></textarea>
+                            </div>
+                            <div class="form-item">
+                                <label asp-for="Content" class="control-label">Nội dung trao đổi:</label>
+                                <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text" required></textarea>
+                                <span asp-validation-for="Content" class="form-required"></span>
+                            </div>
+                            <div id="botdetect-captcha" data-stylename="exampleCaptcha"></div>
+                        </div>
+                        <div class="form-item">
+                            <div asp-validation-summary="All" class="form-required"></div>
+                        </div>
+                    </form>
+                    <div class="form-group" style="width: 100%;">
+                        <label style="padding: 10px;" for="recipient-name" class="col-form-label">Tài liệu đình kèm:</label>
+                        <form id="fileupload" method="POST" enctype="multipart/form-data">
+                            <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                            <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                            <div class="row fileupload-buttonbar">
+                                <div class="col-lg-12">
+                                    <!-- The fileinput-button span is used to style the file input field as button -->
+                                    <span class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Thêm tệp tin...</span>
+                                        <input type="file" name="files" multiple>
+                                    </span>
+                                    <!-- The global file processing state -->
+                                    <span class="fileupload-process"></span>
+                                </div>
+                                <!-- The global progress state -->
+                                <div class="col-lg-5 fileupload-progress fade">
+                                    <!-- The global progress bar -->
+                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                    </div>
+                                    <!-- The extended global progress state -->
+                                    <div class="progress-extended">&nbsp;</div>
+                                </div>
+                            </div>
+                            <!-- The table listing the files available for upload/download -->
+                            <table id="filebaocao" role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                        </form>
+                    </div>
+                    <div class="form-item">
+                        <button type="submit" onclick="onCompleted()">
+                            <span class="view_all_medium"><span><span>Gửi phản ánh kiến nghị</span></span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="content_top" style="padding-bottom: 25px">
+    <div class="region content">
         <aside id="block_front_slider" class="block slider">
-            <div class="flexslider slider" id="block_front_slides">
-                <ul class="slides">
-                    <li>
-                        <img src="/images/homes/TT 1.jpg" height="340" />
-                        <p class="flex-caption">
-                            Không được quên những cống hiến, hy sinh của các thế hệ cha anh làm nguyên liệu sản xuất...
-                        </p>
-                    </li>
-                    <li>
-                        <img src="/images/homes/BT_1.jpg" height="340" />
-                        <p class="flex-caption">
-                            Bộ TN&MT: Trao Quyết định bổ nhiệm ông Phạm Tân Tuyến giữ chức Vụ trưởng Vụ Tổ chức cán bộ...
-                        </p>
-                    </li>
-                    <li>
-                        <img src="/images/homes/BT_4.jpg" height="340" />
-                        <p class="flex-caption">
-                            Thứ trưởng Nguyễn Thị Phương Hoa tiếp công dân định kỳ tháng 7/2018 làm nguyên liệu sản xuất...
-                        </p>
-                    </li>
-                    <li>
-                        <img src="/images/homes/IMG_5597 resize.JPG" height="340"/>
-                        <p class="flex-caption">
-                            Tập trung nguồn lực hoàn thiện quy hoạch tài nguyên nước các lưu vực sông làm nguyên liệu sản xuất...
-                        </p>
-                    </li>
-                    <li>
-                        <img src="/images/homes/IMG_5597 resize.JPG" height="340"/>
-                        <p class="flex-caption">
-                            Tập trung nguồn lực hoàn thiện quy hoạch tài nguyên nước các lưu vực sông làm nguyên liệu sản xuất...
-                        </p>
-                    </li>
-                    <li>
-                        <img src="/images/homes/IMG_5597 resize.JPG" height="340"/>
-                        <p class="flex-caption">
-                            Tập trung nguồn lực hoàn thiện quy hoạch tài nguyên nước các lưu vực sông làm nguyên liệu sản xuất...
-                        </p>
-                    </li>
-                </ul>
-            </div>
-            <div class="flexslider carousel" id="block_front_carousel">
-                <ul class="slides">
-                    <li>
-                        <img src="/images/homes/TT 1.jpg" />
-                    </li>
-                    <li>
-                        <img src="/images/homes/BT_1.jpg" />
-                    </li>
-                    <li>
-                        <img src="/images/homes/BT_4.jpg" />
-                    </li>
-                    <li>
-                        <img src="/images/homes/IMG_5597 resize.JPG" />
-                    </li>
-                    <li>
-                        <img src="/images/homes/IMG_5597 resize.JPG" />
-                    </li>
-                    <li>
-                        <img src="/images/homes/IMG_5597 resize.JPG" />
-                    </li>
-                </ul>
-            </div>
-        </aside>
-        <aside id="block_latest_headlines" class="block">
-            <h3 class="block_title">Tiêu đề mới nhất</h3>
-            <div class="content">
-                <ul>
-                    <li class="first">
-                        <a href="#">
-                            Thanh Hóa: Hơn 500 đoàn viên thanh niên ra quân dọn vệ sinh.
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">Bảo vệ môi trường phải bắt đầu từ ý thức người dân.</a>
-                    </li>
-                    <li>
-                        <a href="#">Kêu gọi cộng đồng chung tay bảo vệ môi trường biển qua.</a>
-                    </li>
-                    <li>
-                        <a href="#">Tiền Giang: Cả tỉnh ra quân trục vớt lục bình.</a>
-                    </li>
-                   
-                    <li class="last">
-                        <a href="#">Hà Nội nỗ lực phủ xanh phố phường .</a>
-                    </li>
-                </ul>
-                <p>
-                    <a href="#" class="view_all"><span><span>Xem tất cả</span></span></a>
-                </p>
+            <div id="contact_form2" class="row box-KN">
+                
+                <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
+                <div class="row" style="margin-bottom: 10px !important">
+
+                    <div style="width: 50%; float: left;" class="col-sm-6">
+                        <div class="form-item">
+                            <label for="UserFullName" class="control-label">Họ tên:</label>
+                            <input class="form-text" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên" />
+                        </div>
+                        <div class="form-item">
+                            <label for="UserAddress" class="control-label">Địa chỉ:</label>
+                            <input class="form-text" asp-for="UserAddress" required placeholder="Địa chỉ" />
+                        </div>
+                        <div class="form-item">
+                            <label for="UserEmail" class="control-label">Điện thoại:</label>
+                            <input class="form-text" asp-for="UserPhone" required placeholder="Điện thoại" />
+                        </div>
+                        <div class="form-item">
+                            <label for="UserEmail" class="control-label">Địa chỉ E-mail:</label>
+                            <input class="form-text" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6" id="mapframe" style="width: 49%; float: right;">
+                        <div style="width: 100%">
+                            <iframe height="280"
+                                    src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=ha%20noi&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                                <a href="https://www.maps.ie/create-google-map/">Add map to website</a>
+                            </iframe>
+                        </div><br />
+                    </div>
+                </div>
+                <p style="font-weight: 600">NỘI DUNG TRAO ĐỔI</p>
+                <div class="row">
+
+                        
+                </div>
             </div>
         </aside>
 
-        <div id="block_content_top_tabs" class="block">
-           
-            <aside id="block_weather" class="block">
+        <section class="block block_business_news">
+            <h3 class="block_title_black">TIN MỚI NHẤT<a href="#" class="view_all" style="opacity: 0.5;"><span><span>Tất cả tin</span></span></a></h3>
+            <div class="content">
+                <div class="left">
+                    <article class="border-dot">
+                        <hgroup>
+                            <h4 class="title"><a href="#">Xử lý các cơ sở gây ô nhiễm nghiêm trọng chậm do thiếu vốn.</a></h4>
+                        </hgroup>
+                        <p class="date">
+                            <time>
+                                011/11/2018 10:19:43 PM
+                            </time>
+                            <span class="comments_count"><a href="#">5</a></span>
+                        </p>
+                        <p style="line-height: 15px;">
+                            Thủ tướng Chính phủ đã phê duyệt Chương trình mục tiêu xử lý triệt để các cơ sở gây ô nhiễm môi trường nghiêm trọng thuộc đối tượng công ích giai đoạn 2016 – 2020....
+                        </p>
+                    </article>
+
+                    <article class="border-dot">
+                        <hgroup>
+                            <h4 class="title"><a href="#">Xử lý các cơ sở gây ô nhiễm nghiêm trọng chậm do thiếu vốn.</a></h4>
+                        </hgroup>
+                        <p class="date">
+                            <time>
+                                011/11/2018 10:19:43 PM
+                            </time>
+                            <span class="comments_count"><a href="#">5</a></span>
+                        </p>
+                        <p style="line-height: 15px;">
+                            Thủ tướng Chính phủ đã phê duyệt Chương trình mục tiêu xử lý triệt để các cơ sở gây ô nhiễm môi trường nghiêm trọng thuộc đối tượng công ích giai đoạn 2016 – 2020....
+                        </p>
+                    </article>
+
+                    @*<article class="border-dot">
+                        <hgroup>
+                            <h4 class="title"><a href="#">Tổng cục Môi trường nói về việc cập nhật và công bố danh sách các tổ chức, cá nhân được cấp GCN nhập khẩu phế liệu.</a></h4>
+                        </hgroup>
+                        <p class="date">
+                            <time>
+                                011/11/2018 10:19:43 PM
+                            </time>
+                            <span class="comments_count"><a href="#">5</a></span>
+                        </p>
+                        <p style="line-height: 15px;">
+                            Theo quy định tại Thông tư số 08/2018/TT-BTNMT và Thông tư số 09/2018/TT-BTNMT ngày 14/9/2018 của Bộ trưởng Bộ Tài nguyên và Môi trường về việc ban hành quy chuẩn kỹ thuật quốc gia về môi trường, thì các loại phế liệu...
+                        </p>
+                    </article>*@
+                </div>
+            </div>
+        </section>
+        @*<aside id="block_weather" class="block">
                 <h3 class="block_title_black">Số liệu quan trắc<a href="#" class="view_all"><span></span></a></h3>
                 <div class="content">
 
                 </div>
-            </aside>
-        </div>
+            </aside>*@
     </div>
 </div>

@@ -1,25 +1,4 @@
 ﻿<header>
-    <div id="above_header">
-        <div class="inner">
-            <div class="region">
-                <div id="block_header_time" class="block">
-
-                </div>
-                <div id="block_header_login" class="block">
-                    <div id="block-search-form" class="block" style="float: right">
-                        <form method="post" action="#">
-                            <div class="form-type-textfield">
-                                <input type="text" class="form-text" maxlength="128" size="15" value="Search" onblur="if(this.value=='') this.value='Search'" onfocus="if(this.value =='Search' ) this.value=''" />
-                            </div>
-                            <div class="form-actions">
-                                <input type="submit" class="form-submit" value="" />
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div id="header">
         <div class="wrapper">
             <div class="region">
@@ -47,15 +26,24 @@
                             <li class="@ViewData["activeTTQT"]">
                                 <a href="/home/ttquantrac"><span class="bg">THÔNG TIN QUAN TRẮC</span></a>
                             </li>
-                            <li class="@ViewData["activeTT"]">
-                                <a href="javascript:void(0)"><span class="bg">VĂN BẢN</span></a>
-                            </li>
                             <li class="@ViewData["activeMap"]">
                                 <a href="/home/map"><span class="bg">BẢN ĐỒ</span></a>
                             </li>
 
                             <li class="@ViewData["activeVBPL"]">
                                 <a href="javascript:void(0)"><span class="bg">HƯỚNG DẪN</span></a>
+                            </li>
+                            <li>
+                                <div id="block-search-form" style="float: right">
+                                    <form method="post" action="#">
+                                        <div class="form-type-textfield">
+                                            <input type="text" class="form-text" maxlength="128" size="15" value="Search" onblur="if(this.value=='') this.value='Search'" onfocus="if(this.value =='Search' ) this.value=''" />
+                                        </div>
+                                        <div class="form-actions">
+                                            <input type="submit" class="form-submit" value="" />
+                                        </div>
+                                    </form>
+                                </div>
                             </li>
                         </ul>
 
@@ -67,95 +55,4 @@
 
         </div>
     </div>
-
-    <aside id="block_login_register" class="block">
-        <div class="region">
-            <div class="inner">
-                <div class="wrapper">
-                    <div id="user_register" class="one_third">
-                        <h3 class="block_title">Đăng ký ngay</h3>
-                        <div class="content">
-                            <form action="#" method="post">
-                                <span class="form-required">Tất cả các trường đều phải nhập</span>
-                                <div class="form-item">
-                                    <label for="edit_register_email">Địa chỉ E-Mail:</label>
-                                    <div class="form-text_l">
-                                        <div class="form-text_r">
-                                            <input type="email" class="form-text" id="edit_register_email" name="edit_register_email" required />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-item">
-                                    <label for="edit_password">Mật khẩu:</label>
-                                    <div class="form-text_l">
-                                        <div class="form-text_r">
-                                            <input type="password" class="form-text" id="edit_password" name="edit_password" required />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-item">
-                                    <label for="edit_password2">Nhập lại mật khẩu:</label>
-                                    <div class="form-text_l">
-                                        <div class="form-text_r">
-                                            <input type="password" class="form-text" id="edit_password2" name="edit_password2" required />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="edit-actions">
-                                    <button type="submit">
-                                        <span class="view_all active"><span><span>Đăng ký</span></span></span>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="one_third">
-                        <h3 class="block_title">Trợ giúp?</h3>
-                        <div class="content">
-                            <p>
-                                Hệ thống cổng thông tin giao tiếp giữa người dân với bộ Tài nguyên &amp; Môi trường
-                                <br />
-                            </p>
-                        </div>
-                    </div>
-                    <div id="user_login" class="one_third last">
-                        <h3 class="block_title">Thành viên đăng nhập</h3>
-                        <div class="content">
-                            <form action="#" method="post">
-                                <div class="form-item">
-                                    <label for="edit_login">Tên đăng nhập:</label>
-                                    <div class="form-text_l">
-                                        <div class="form-text_r">
-                                            <input type="text" class="form-text" id="edit_login" name="edit_login" required />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-item">
-                                    <label for="edit_login_password">Mật khẩu:</label>
-                                    <div class="form-text_l">
-                                        <div class="form-text_r">
-                                            <input type="password" class="form-text" id="edit_login_password" name="edit_login_password" required />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="edit_login_remember_wrapper" class="form-item">
-                                    <input type="checkbox" id="edit_login_remember" name="edit_login_remember" class="checkbox_replace" />
-                                    <label for="edit_login_remember">Ghi nhớ đăng nhập</label>
-                                    <a href="#">Quên mật khẩu?</a>
-                                </div>
-                                <div id="edit-actions">
-                                    <button type="submit">
-                                        <span class="view_all active"><span><span>Đăng nhập</span></span></span>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="wrapper close">
-            <a href="#">Đóng</a>
-        </div>
-    </aside>
 </header>
