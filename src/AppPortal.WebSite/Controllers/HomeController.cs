@@ -32,6 +32,11 @@ namespace AppPortal.WebSite.Controllers
             return View(nameof(Index));
         }
 
+        public IActionResult News()
+        {
+            return View(nameof(News));
+        }
+
         public IActionResult About()
         {
             return View();

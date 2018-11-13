@@ -1,0 +1,76 @@
+﻿// Open Task List
+function CreatePage_OpenModalDialog() {
+
+    ExecuteOrDelayUntilScriptLoaded(CreatePage_OpenModalDialogAction, "sp.js");
+}
+function CreatePage_OpenModalDialogAction() {
+    var options = SP.UI.$create_DialogOptions();
+    options.url = '/_layouts/Mitc.SPFeatures/AppPages/CreatePageByChannel.aspx';
+    options.dialogReturnValueCallback = Function.createDelegate(null, CloseModalDialogCallback);
+
+    SP.UI.ModalDialog.showModalDialog(options);
+}
+
+function CopyTin_OpenModalDialog() {
+
+    ExecuteOrDelayUntilScriptLoaded(CopyTin_OpenModalDialogAction, "sp.js");
+}
+function CopyTin_OpenModalDialogAction() {
+    var itemUrls = window.location.href;
+
+    var options = SP.UI.$create_DialogOptions();
+    options.url = '/_layouts/Mitc.SPFeatures/AppPages/CopyTin.aspx?pageName=' + itemUrls;
+    options.dialogReturnValueCallback = Function.createDelegate(null, CloseTaskListCallback);
+
+    SP.UI.ModalDialog.showModalDialog(options);
+}
+
+
+function MoveTin_OpenModalDialog() {
+
+    ExecuteOrDelayUntilScriptLoaded(MoveTin_OpenModalDialogAction, "sp.js");
+}
+function MoveTin_OpenModalDialogAction() {
+    var itemUrls = window.location.href;
+
+    var options = SP.UI.$create_DialogOptions();
+    options.url = '/_layouts/Mitc.SPFeatures/AppPages/MoveTin.aspx?pageName=' + itemUrls;
+    options.dialogReturnValueCallback = Function.createDelegate(null, CloseTaskListCallback);
+
+    SP.UI.ModalDialog.showModalDialog(options);
+}
+
+
+
+
+function CloseModalDialogCallback(result, value) {
+    if (result == '1')
+        window.location = '/_layouts/Mitc.SPFeatures/AppPages/CreatePageByChannel.aspx?webUrl=' + value;
+}
+function Refresh() {
+    window.location.reload();
+}
+
+// Open Task List
+function OpenTaskList() {
+
+    ExecuteOrDelayUntilScriptLoaded(OpenTaskListAction, "sp.js");
+}
+function OpenTaskListAction() {
+    var options = SP.UI.$create_DialogOptions();
+    options.url = '/_layouts/Mitc.SPFeatures/AppPages/TaskList.aspx';
+    options.dialogReturnValueCallback = Function.createDelegate(null, CloseTaskListCallback);
+
+    SP.UI.ModalDialog.showModalDialog(options);
+}
+function CloseTaskListCallback(result, value) {
+    SP.UI.ModalDialog.RefreshPage(SP.UI.DialogResult.OK);
+}
+// Create Page on current Channel
+function CreatePageInSite() {
+
+    var itemUrls = window.location.href.split("Pages");
+    if (itemUrls.length < 2)
+        return;
+    window.location = '/_layouts/Mitc.SPFeatures/AppPages/CreatePageByChannel.aspx?webUrl=' + itemUrls[0];
+}
