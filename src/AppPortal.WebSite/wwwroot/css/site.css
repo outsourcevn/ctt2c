@@ -12,3 +12,17 @@
 #block_main_menu ul li:hover {
     background: url(../images/bg_main_menu_li.png) no-repeat 0 -56px;
 }
+
+.block_world_news {
+    float: left;
+    width: 68%;
+    margin-right: 10px;
+}
+
+.block_business_news .left, .block_business_news .right {
+    width: 100% !important;
+}
+
+.block_world_news .left {
+    width: 100% !important;
+}
