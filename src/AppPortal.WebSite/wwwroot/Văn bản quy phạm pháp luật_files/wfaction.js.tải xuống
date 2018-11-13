@@ -1,0 +1,157 @@
+﻿/// <reference path="C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\TEMPLATE\LAYOUTS\MicrosoftAjax.js" />
+/// <reference path="C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\TEMPLATE\LAYOUTS\SP.debug.js" />
+
+var clientContext;
+var currentUser;
+
+
+// Workflow
+
+// Start WorkFlow
+function StartSPWorkFlow() {
+
+    ExecuteOrDelayUntilScriptLoaded(StartSPWorkFlowAction, "sp.js");    
+}
+
+function StartSPWorkFlowAction() {
+
+    var itemUrls = window.location.href.split("Pages");
+    if (itemUrls.length < 2)
+        return;
+
+    OpenDialog(itemUrls[0], itemUrls[1]);
+}
+
+
+function OpenDialog(webSiteUrl, itemUrl) {
+    var options = SP.UI.$create_DialogOptions();
+    options.url = "/_layouts/Mitc.SPFeatures/AppPages/StartWF.aspx?webUrl=" + webSiteUrl + "&itemUrl=" + itemUrl;
+
+    options.dialogReturnValueCallback = Function.createDelegate(null, CloseCallback);
+    SP.UI.ModalDialog.showModalDialog(options);    
+}
+
+function CloseCallback(result, value) {
+    //alert("Result:" + result + "Value:" + value);
+    if (result == value) {
+        SP.UI.Notify.addNotification("Khởi động quy trình thành công !");
+    }
+    else if (result == '1') {
+        SP.UI.Notify.addNotification("Xử lý thành công !");
+    }
+    
+    SP.UI.ModalDialog.RefreshPage(SP.UI.DialogResult.OK);
+}
+
+// Start Unpublish WorkFlow
+function StartUnpublishWF() {
+
+    ExecuteOrDelayUntilScriptLoaded(StartUnpublishWFAction, "sp.js");
+}
+
+function StartUnpublishWFAction() {
+
+    var itemUrls = window.location.href.split("Pages");
+    if (itemUrls.length < 2)
+        return;
+
+    OpenUnpublishDialog(itemUrls[0], itemUrls[1]);
+}
+
+
+function OpenUnpublishDialog(webSiteUrl, itemUrl) {
+    var options = SP.UI.$create_DialogOptions();
+    options.url = "/_layouts/Mitc.SPFeatures/AppPages/StartUnPublishWF.aspx?webUrl=" + webSiteUrl + "&itemUrl=" + itemUrl;
+
+    options.dialogReturnValueCallback = Function.createDelegate(null, CloseCallback);
+    SP.UI.ModalDialog.showModalDialog(options);
+}
+
+function CloseUnpublishCallback(result, value) {    
+    if (result == '1') {
+        SP.UI.Notify.addNotification("Xử lý thành công !");
+    }    
+    SP.UI.ModalDialog.RefreshPage(SP.UI.DialogResult.OK);
+}
+
+// View Workflow History
+function ViewWFStatus() {
+
+    ExecuteOrDelayUntilScriptLoaded(ViewWFStatusAction, "sp.js");    
+}
+
+function ViewWFStatusAction() {
+
+    var itemUrls = window.location.href.split("Pages");
+    if (itemUrls.length < 2)
+        return;
+
+    OpenWFStatusDialog(itemUrls[0], itemUrls[1], "viewwfstatus");
+}
+
+function OpenWFStatusDialog(webSiteUrl, itemUrl, task) {
+    var options = SP.UI.$create_DialogOptions();
+    options.url = "/_layouts/Mitc.SPFeatures/AppPages/StartWF.aspx?webUrl=" + webSiteUrl + "&itemUrl=" + itemUrl + "&task=" + task;
+
+    SP.UI.ModalDialog.showModalDialog(options);
+    
+}
+
+
+// View My Tasks
+function ShowMyTask() {
+    ExecuteOrDelayUntilScriptLoaded(ShowMyTaskAction, "sp.js"); 
+}
+
+function ShowMyTaskAction() {
+
+    var options = SP.UI.$create_DialogOptions();
+    options.url = "/_layouts/Mitc.SPFeatures/AppPages/TaskList.aspx";
+    
+    options.dialogReturnValueCallback = Function.createDelegate(null, CloseTaskListCallback);
+    SP.UI.ModalDialog.showModalDialog(options);
+}
+function CloseTaskListCallback(result, value) {    
+   
+    SP.UI.ModalDialog.RefreshPage(SP.UI.DialogResult.OK);
+}
+
+//  Permission
+
+function IsItemContributer() {
+
+    var itemUrls = window.location.href.split("Pages");
+    if (itemUrls.length < 2)
+        return;
+            
+    var result = true;
+    jQ.ajax({
+        url: '/_layouts/Mitc.SPFeatures/AppPages/CheckUserPermission.aspx',
+        async: false,
+        data: 'webUrl=' + itemUrls[0] + '&itemUrl=' + itemUrls[1] + '&permissionMask=XuLyQuyTrinh',
+        success: function (data) {
+            result = data == '1';
+        }
+    });
+    return result;
+
+}
+
+function IsPublisher() {
+
+    var itemUrls = window.location.href.split("Pages");
+    if (itemUrls.length < 2)
+        return;
+
+    var result = true;
+    jQ.ajax({
+        url: '/_layouts/Mitc.SPFeatures/AppPages/CheckUserPermission.aspx',
+        async: false,
+        data: 'webUrl=' + itemUrls[0] + '&itemUrl=' + itemUrls[1] + '&permissionMask=HuyXuatBan',
+        success: function (data) {
+            result = data == '1';
+        }
+    });
+    return result;
+
+}

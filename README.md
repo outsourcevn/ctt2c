@@ -22,7 +22,7 @@ dotnet ef migrations add InitAppPortalModel --context AppDataContext -p ..\AppPo
 
 
 ### Depoy
-- Sql: 2008R2 or latest
+- Sql: 2008R2 or N
 - [ASP.NET Core Runtime](https://download.microsoft.com/download/A/7/8/A78F1D25-8D5C-4411-B544-C7D527296D5E/dotnet-hosting-2.1.4-win.exe)
 ### demo
 - http://demo.eportal.today
