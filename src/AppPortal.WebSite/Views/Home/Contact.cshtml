@@ -47,16 +47,14 @@
 
 }
 
-<div id="page">
+<div id="page" style="width: 100%">
     <!-- content -->
-    <div id="content">
+    <div id="content" style="width: 100%">
         <div class="region">
             <article class="node">
                 <h2 style="margin-bottom: 5px;" class="title">@ViewData["Title"]</h2>
-
                 <div class="content">
-
-                    <div id="contact_form" class="row box-KN">
+                    <div id="contact_form" class="box-KN">
                         <form id="@formView" class="needs-validation" method="post">
                             <div class="row">
                                 <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
@@ -68,6 +66,17 @@
                                     <div class="form-item">
                                         <label for="UserAddress" class="control-label">Địa chỉ:</label>
                                         <input class="form-text" asp-for="UserAddress" required placeholder="Địa chỉ" />
+                                    </div>
+                                    <div class="form-group">
+                                        <select id="thanhpho">
+                                            <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
+                                        </select>
+                                        <select id="quantp">
+                                            <option selected disabled>--- Lựa chọn quận/huyện ---</option>
+                                        </select>
+                                        <select id="huyen">
+                                            <option selected disabled>--- Lựa chọn phường xã ---</option>
+                                        </select>
                                     </div>
                                     <div class="form-item">
                                         <label for="UserEmail" class="control-label">Điện thoại:</label>
@@ -99,19 +108,7 @@
                                 <div class="form-item">
                                     <label asp-for="Link" class="control-label">Địa điểm:</label>
                                     <input asp-for="Link" class="form-text" id="address_map" placeholder="Địa điểm diễn ra" />
-                                    <div class="form-group" style="padding: 10px;">
-                                        <select id="thanhpho">
-                                            <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
-                                        </select>
-
-                                        <select id="quantp">
-                                            <option selected disabled>--- Lựa chọn quận/huyện ---</option>
-                                        </select>
-
-                                        <select id="huyen">
-                                            <option selected disabled>--- Lựa chọn phường xã ---</option>
-                                        </select>
-                                    </div>
+                                    
                                     <input type="hidden" id="lat" name="lat" />
                                     <input type="hidden" id="lng" name="lng" />
                                     <span asp-validation-for="Link" class="form-required"></span>

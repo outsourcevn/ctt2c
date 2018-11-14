@@ -2,82 +2,110 @@
     ViewData["Title"] = "Cổng thông tin bộ tài nguyên và môi trường";
     Layout = "_HomeLayout";
 }
-<div id="page" style="width: 100%;">
     <!-- left sidebar -->
     <!-- end left sidebar -->
     <!-- content -->
-    <div id="content" style="width: 100%">
-        <div class="region">
-            <section class="block_world_news block">
-                <h3 class="block_title_black">Bản đồ môi trường</h3>
-                <div class="content">
-                    <iframe style="width: 100%; height: 500px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Bản đồ môi trường tổng hợp 3" src="//arcgisportal.ceid.gov.vn/portal/apps/Embed/index.html?webmap=218f16cfe6ac4438b6f887cde946e046&extent=105.5493,20.6487,107.0133,21.3896&home=true&zoom=true&scale=true&search=true&searchextent=true&details=true&legend=true&active_panel=details&basemap_gallery=true&disable_scroll=true&theme=light"></iframe>
-                </div>
-            </section>
-            <section class="block block_business_news">
-                <h3 class="block_title_black">TIN TRUYỀN THÔNG<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div class="left">
-                        <article class="border-dot">
-                            <p>
-                                <img src="http://vea.gov.vn/vn/truyenthong/truyenthong/PublishingImages/20181109TTTT1.jpg" alt="World News" />
-                            </p>
-                            <hgroup>
-                                <h4 class="title"><a href="#">Hồi sinh những vùng đất chết.</a></h4>
-                            </hgroup>
-                            <p class="date">
-                                <time datetime="2013-01-24">
-                                    27/7/2018 10:24:28 PM
-                                </time>
-                                <span class="comments_count"><a href="#">7</a></span>
-                            </p>
-                            <p>
-                                Triển lãm với mong muốn kêu cộng đồng xã hội, bạn bè quốc tế chung tay xoa dịu nỗi đau da cam, bảo vệ môi trường sinh thái, hồi sinh những vùng đất chết, góp phần ổn định cuộc sống, phát triển kinh tế - xã hội...
-                            </p>
-                        </article>
-                    </div>
-                    <div class="right">
-                        <ul>
-                            <li class="first">
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Nêu gương sáng giữ gìn môi trường</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-21">
-                                            27/7/2018 10:20:35 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">10</a></span>
-                                    </p>
-                                    <p>
-                                        ​Thực hiện cuộc vận động “Toàn dân đoàn kết xây dựng nông thôn mới, đô thị văn minh”, cùng với các cấp, các ngành, bằng uy tín và trách nhiệm của mình, người cao tuổi Thủ đô đã tích cực nêu gương, góp công sức trong việc giữ gìn môi trường xanh - sạch - đẹp...
-                                    </p>
-                                </article>
-                            </li>
-                            <li>
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Sinh viên sáng chế thiết bị kiểm soát ô nhiễm không khí.</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-17">
-                                            18/7/2018 5:13:30 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">1</a></span>
-                                    </p>
-                                    <p>
-                                        Xuất phát từ thực tế đáng báo động hiện nay là môi trường không khí ở Việt Nam đang phải chịu tác động ô nhiễm do quá trình đô thị hóa, nhóm SV trường Đại học Bách khoa Đà Nẵng đã sáng chế thành công hệ thống kiểm soát ô nhiễm không khí thông minh...
-                                    </p>
-                                </article>
-                            </li>
+    <div id="content" class="container">
+        <div class="region row">
+            <div class="col-md-8">
+                <section class="block_business_news block">
+                    <h3 class="block_title_black">Bản đồ môi trường</h3>
+                    <div class="content">
+                        <style>
+                            .embed-container {
+                                position: relative;
+                                padding-bottom: 80%;
+                                height: 0;
+                                max-width: 100%;
+                            }
 
-                        </ul>
+                                .embed-container iframe, .embed-container object, .embed-container iframe {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+
+                            small {
+                                position: absolute;
+                                z-index: 40;
+                                bottom: 0;
+                                margin-bottom: -15px;
+                            }
+                        </style><div class="embed-container"><small><a href="//arcgisportal.ceid.gov.vn/portal/apps/Embed/index.html?webmap=fc034f6a1d8e4648b627c12a4cd779ff&extent=106.2405,20.6341,107.0494,21.0282&home=true&zoom=true&scale=true&search=true&searchextent=true&details=true&legend=true&active_panel=details&basemap_gallery=true&disable_scroll=true&theme=light" style="color:#0000FF;text-align:left" target="_blank">View larger map</a></small><br><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Bản đồ môi trường tổng hợp" src="//arcgisportal.ceid.gov.vn/portal/apps/Embed/index.html?webmap=fc034f6a1d8e4648b627c12a4cd779ff&extent=106.2405,20.6341,107.0494,21.0282&home=true&zoom=true&previewImage=false&scale=true&search=true&searchextent=true&details=true&legend=true&active_panel=details&basemap_gallery=true&disable_scroll=true&theme=light"></iframe></div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section class="block block_business_news">
+                    <h3 class="block_title_black">TIN TRUYỀN THÔNG<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                    <div class="content">
+                        <div class="left">
+                            <article class="border-dot">
+                                <p>
+                                    <img src="http://vea.gov.vn/vn/truyenthong/truyenthong/PublishingImages/20181109TTTT1.jpg" alt="World News" />
+                                </p>
+                                <hgroup>
+                                    <h4 class="title"><a href="#">Hồi sinh những vùng đất chết.</a></h4>
+                                </hgroup>
+                                <p class="date">
+                                    <time datetime="2013-01-24">
+                                        27/7/2018 10:24:28 PM
+                                    </time>
+                                    <span class="comments_count"><a href="#">7</a></span>
+                                </p>
+                                <p>
+                                    Triển lãm với mong muốn kêu cộng đồng xã hội, bạn bè quốc tế chung tay xoa dịu nỗi đau da cam, bảo vệ môi trường sinh thái, hồi sinh những vùng đất chết, góp phần ổn định cuộc sống, phát triển kinh tế - xã hội...
+                                </p>
+                            </article>
+                        </div>
+                        <div class="right">
+                            <ul>
+                                <li class="first">
+                                    <article>
+                                        <hgroup>
+                                            <h4 class="title"><a href="#">Nêu gương sáng giữ gìn môi trường</a></h4>
+                                        </hgroup>
+                                        <p class="date">
+                                            <time datetime="2013-01-21">
+                                                27/7/2018 10:20:35 PM
+                                            </time>
+                                            <span class="comments_count"><a href="#">10</a></span>
+                                        </p>
+                                        <p>
+                                            ​Thực hiện cuộc vận động “Toàn dân đoàn kết xây dựng nông thôn mới, đô thị văn minh”, cùng với các cấp, các ngành, bằng uy tín và trách nhiệm của mình, người cao tuổi Thủ đô đã tích cực nêu gương, góp công sức trong việc giữ gìn môi trường xanh - sạch - đẹp...
+                                        </p>
+                                    </article>
+                                </li>
+                                <li>
+                                    <article>
+                                        <hgroup>
+                                            <h4 class="title"><a href="#">Sinh viên sáng chế thiết bị kiểm soát ô nhiễm không khí.</a></h4>
+                                        </hgroup>
+                                        <p class="date">
+                                            <time datetime="2013-01-17">
+                                                18/7/2018 5:13:30 PM
+                                            </time>
+                                            <span class="comments_count"><a href="#">1</a></span>
+                                        </p>
+                                        <p>
+                                            Xuất phát từ thực tế đáng báo động hiện nay là môi trường không khí ở Việt Nam đang phải chịu tác động ô nhiễm do quá trình đô thị hóa, nhóm SV trường Đại học Bách khoa Đà Nẵng đã sáng chế thành công hệ thống kiểm soát ô nhiễm không khí thông minh...
+                                        </p>
+                                    </article>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            
         </div>
-        <div class="region">
-            <section class="block_world_news block">
+        <div class="region row">
+            <div class="col-md-8">
+            <section class="block_business_news block">
                 <h3 class="block_title_black">THÔNG TIN QUAN TRẮC<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="content">
                     <div class="left">
@@ -90,50 +118,154 @@
                     </div>
                 </div>
             </section>
-            <section class="block block_business_news">
-                <h3 class="block_title_black">VĂN BẢN CHÍNH SÁCH<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div class="left">
-                        <article class="border-dot">
-                            <p>
-                                <img src="http://www.xaluan.com/images/news/Image/2018/11/04/15bdea11f4d72b.img.jpg" alt="World News" />
-                            </p>
-                            <hgroup>
-                                <h4 class="title"><a href="#">Quy trình mới về kiểm tra phế liệu nhập khẩu: Doanh nghiệp lo thêm nhiều thủ tục.</a></h4>
-                            </hgroup>
-                            <p class="date">
-                                <time datetime="2013-01-24">
-                                    27/7/2018 10:24:28 PM
-                                </time>
-                                <span class="comments_count"><a href="#">7</a></span>
-                            </p>
-                            <p>
-                                ​Một số doanh nghiệp cho rằng, việc tổ chức thực hiện kiểm tra nhà nước về chất lượng phế liệu nhập khẩu làm nguyên liệu sản xuất theo Thông tư 08/2018/TT-BTNMT và Thông tư 09/2018/TT-BTNMT của Bộ Tài nguyên và Môi trường còn nhiều vấn đề chưa phù hợp với thực tế....
-                            </p>
-                        </article>
-                    </div>
-                    <div class="right">
-                        <ul>
-                            <li class="first">
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Công tác bảo vệ môi trường trên địa bàn thành phố Hà Nội đến năm 2020 và những năm tiếp theo.</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-21">
-                                            27/7/2018 10:20:35 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">10</a></span>
-                                    </p>
-                                    <p>
-                                        ​Với mục tiêu tạo chuyển biến tích cực trong công tác bảo vệ môi trường trong những năm tới, Thành ủy Hà Nội đã thông qua Nghị quyết số 11-NQ/TU ngày 31/5/2017 về tăng cường công tác bảo vệ môi trường trên địa bàn thành phố Hà Nội đến năm 2020 và những năm tiếp theo.
-                                    </p>
-                                </article>
-                            </li>
-                            @*<li>
+            </div>
+            <div class="col-md-4">
+                <section class="block block_business_news">
+                    <h3 class="block_title_black">VĂN BẢN CHÍNH SÁCH<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                    <div class="content">
+                        <div class="left">
+                            <article class="border-dot">
+                                <p>
+                                    <img src="http://www.xaluan.com/images/news/Image/2018/11/04/15bdea11f4d72b.img.jpg" alt="World News" />
+                                </p>
+                                <hgroup>
+                                    <h4 class="title"><a href="#">Quy trình mới về kiểm tra phế liệu nhập khẩu: Doanh nghiệp lo thêm nhiều thủ tục.</a></h4>
+                                </hgroup>
+                                <p class="date">
+                                    <time datetime="2013-01-24">
+                                        27/7/2018 10:24:28 PM
+                                    </time>
+                                    <span class="comments_count"><a href="#">7</a></span>
+                                </p>
+                                <p>
+                                    ​Một số doanh nghiệp cho rằng, việc tổ chức thực hiện kiểm tra nhà nước về chất lượng phế liệu nhập khẩu làm nguyên liệu sản xuất theo Thông tư 08/2018/TT-BTNMT và Thông tư 09/2018/TT-BTNMT của Bộ Tài nguyên và Môi trường còn nhiều vấn đề chưa phù hợp với thực tế....
+                                </p>
+                            </article>
+                        </div>
+                        <div class="right">
+                            <ul>
+                                <li class="first">
                                     <article>
                                         <hgroup>
-                                            <h4 class="title"><a href="#">TP. Hồ Chí Minh: Tăng cường công tác bảo vệ môi trường trên địa bàn.</a></h4>
+                                            <h4 class="title"><a href="#">Công tác bảo vệ môi trường trên địa bàn thành phố Hà Nội đến năm 2020 và những năm tiếp theo.</a></h4>
+                                        </hgroup>
+                                        <p class="date">
+                                            <time datetime="2013-01-21">
+                                                27/7/2018 10:20:35 PM
+                                            </time>
+                                            <span class="comments_count"><a href="#">10</a></span>
+                                        </p>
+                                        <p>
+                                            ​Với mục tiêu tạo chuyển biến tích cực trong công tác bảo vệ môi trường trong những năm tới, Thành ủy Hà Nội đã thông qua Nghị quyết số 11-NQ/TU ngày 31/5/2017 về tăng cường công tác bảo vệ môi trường trên địa bàn thành phố Hà Nội đến năm 2020 và những năm tiếp theo.
+                                        </p>
+                                    </article>
+                                </li>
+                                @*<li>
+                            <article>
+                                <hgroup>
+                                    <h4 class="title"><a href="#">TP. Hồ Chí Minh: Tăng cường công tác bảo vệ môi trường trên địa bàn.</a></h4>
+                                </hgroup>
+                                <p class="date">
+                                    <time datetime="2013-01-17">
+                                        18/7/2018 5:13:30 PM
+                                    </time>
+                                    <span class="comments_count"><a href="#">1</a></span>
+                                </p>
+                                <p>
+                                    Nhằm nâng cao năng lực quản lý nhà nước, ngăn ngừa, hạn chế, khắc phục cơ bản những vấn đề ô nhiễm môi trường, ngày 10/4/2017, tại Quyết định số 1621/QĐ-UBND, Chủ tịch UBND TP. Hồ Chí Minh đã ban hành Kế hoạch thực hiện Chỉ thị số 25/CT-TTg ngày 31 tháng 8 năm 2016 nhằm cụ thể hóa chỉ đạo của Thủ tướng Chính phủ.
+                                </p>
+                            </article>
+                        </li>*@
+
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            
+        </div>
+        <div class="region row" id="home_video">
+            <div class="col-md-8">
+                <section class="block_business_news block">
+                    <h3 class="block_title_black">VIDEO<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                    <div class="content">
+                        <aside id="block_front_slider" class="block slider" style="height: 520px;padding-right: 28px;">
+                            <div class="flexslider slider video_home" id="block_front_slides_2" style="height: 450px;">
+                                <ul class="slides">
+                                    <li>
+                                        <video style="width: 100%" height="430" controls>
+                                            <source src="http://demo.eportal.today/video/v1.mp4">
+                                        </video>
+                                        <p class="flex-caption" style="width:620px">
+                                            Lào Cai: Vỡ đập bãi thải nhà máy DAP 2 gây hậu quả nghiêm trọng
+                                        </p>
+                                    </li>
+
+                                    <li>
+                                        <video style="width: 100%" height="430" controls>
+                                            <source src="http://demo.eportal.today/video/v2.mp4">
+                                        </video>
+                                        <p class="flex-caption" style="width:620px">
+                                            Nam Định Công ty Nhôm đúc Hoàng Anh hoạt động trái phép bất chấp lệnh cấm của chủ tịch UBND huyện
+                                           
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <video style="width: 100%" height="430" controls>
+                                            <source src="http://demo.eportal.today/video/v3.mp4">
+                                        </video>
+                                        <p class="flex-caption" style="width:620px">
+                                            Cuộc sống ác mộng của hàng trăm hộ dân gần bãi rác lộ thiên lớn nhất Trà Vinh
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="flexslider carousel" id="block_front_carousel_2">
+                                <ul class="slides">
+                                    <li>
+                                        <img src="http://vea.gov.vn/vn/tintuc/multimedia/PublishingImages/_t/20180919LaoCai_png.jpg" />
+                                    </li>
+                                    <li>
+                                        <img src="http://vea.gov.vn/vn/tintuc/multimedia/PublishingImages/_t/20180814congtynhom_png.jpg" />
+                                    </li>
+                                    <li>
+                                        <img src="http://vea.gov.vn/vn/tintuc/multimedia/PublishingImages/_t/20180810bairac_png.jpg" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-4">
+                <section class="block block_business_news">
+                    <h3 class="block_title_black">PHẢN ÁNH MÔI TRƯỜNG<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                    <div class="content">
+
+                        <div class="right">
+                            <ul>
+                                <li class="first">
+                                    <article>
+                                        <hgroup>
+                                            <h4 class="title"><a href="#">Điện Biên: Sông Nậm Rốm tiếp tục bị ô nhiễm do sơ chế dong riềng.</a></h4>
+                                        </hgroup>
+                                        <p class="date">
+                                            <time datetime="2013-01-21">
+                                                27/7/2018 10:20:35 PM
+                                            </time>
+                                            <span class="comments_count"><a href="#">10</a></span>
+                                        </p>
+                                        <p>
+                                            ​Giải quyết tình trạng ô nhiễm môi trường do sơ chế dong riềng là vấn đề nóng được chính quyền và các chủ cơ sở sản xuất tại xã Nà Tấu, Nà Nhạn, huyện Điện Biên, tỉnh Điện Biên nhiều năm tìm hướng khắc phục...
+                                        </p>
+                                    </article>
+                                </li>
+                                <li>
+                                    <article>
+                                        <hgroup>
+                                            <h4 class="title"><a href="#">Nam Định: Gây ô nhiễm môi trường, bãi rác bị người dân 'phong tỏa'.</a></h4>
                                         </hgroup>
                                         <p class="date">
                                             <time datetime="2013-01-17">
@@ -142,401 +274,359 @@
                                             <span class="comments_count"><a href="#">1</a></span>
                                         </p>
                                         <p>
-                                            Nhằm nâng cao năng lực quản lý nhà nước, ngăn ngừa, hạn chế, khắc phục cơ bản những vấn đề ô nhiễm môi trường, ngày 10/4/2017, tại Quyết định số 1621/QĐ-UBND, Chủ tịch UBND TP. Hồ Chí Minh đã ban hành Kế hoạch thực hiện Chỉ thị số 25/CT-TTg ngày 31 tháng 8 năm 2016 nhằm cụ thể hóa chỉ đạo của Thủ tướng Chính phủ.
+                                            Bức xúc trước việc bãi rác gây ô nhiễm môi trường nghiêm trọng, nhiều người dân đã tiến hành chặn đường, không cho xe vận chuyển rác thải chở rác vào điểm tập kết ...
                                         </p>
                                     </article>
-                                </li>*@
-
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </div>
-         <div class="region">
-            <section class="block_world_news block">
-                <h3 class="block_title_black">VIDEO<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    
-                </div>
-            </section>
-            <section class="block block_business_news">
-                <h3 class="block_title_black">PHẢN ÁNH MÔI TRƯỜNG<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-       
-                    <div class="right">
-                        <ul>
-                            <li class="first">
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Điện Biên: Sông Nậm Rốm tiếp tục bị ô nhiễm do sơ chế dong riềng.</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-21">
-                                            27/7/2018 10:20:35 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">10</a></span>
-                                    </p>
-                                    <p>
-                                        ​Giải quyết tình trạng ô nhiễm môi trường do sơ chế dong riềng là vấn đề nóng được chính quyền và các chủ cơ sở sản xuất tại xã Nà Tấu, Nà Nhạn, huyện Điện Biên, tỉnh Điện Biên nhiều năm tìm hướng khắc phục...
-                                    </p>
-                                </article>
-                            </li>
-                            <li>
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Nam Định: Gây ô nhiễm môi trường, bãi rác bị người dân 'phong tỏa'.</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-17">
-                                            18/7/2018 5:13:30 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">1</a></span>
-                                    </p>
-                                    <p>
-                                        Bức xúc trước việc bãi rác gây ô nhiễm môi trường nghiêm trọng, nhiều người dân đã tiến hành chặn đường, không cho xe vận chuyển rác thải chở rác vào điểm tập kết ...
-                                    </p>
-                                </article>
-                            </li>
-                            <li>
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Nước biển không ô nhiễm, cá chết hàng loạt dạt bờ biển Đà Nẵng.</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-17">
-                                            18/7/2018 5:13:30 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">1</a></span>
-                                    </p>
-                                    <p>
-                                        Ngày 11-11, Sở Tài nguyên & Môi trường (TN& MT) TP Đà Nẵng đã có báo cáo về việc xử lý tình trạng cá chết trôi dạt vào khu vực bãi biển Liên Chiểu chiều 10-11 khẳng định không có hiện tượng nước xả thải ra biển gây ô nhiễm vùng biển nêu trên...
-                                    </p>
-                                </article>
-                            </li>
-                            <li class="last">
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Doanh nghiệp dùng phân bón cây, dân kêu trời vì ô nhiễm.</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-14">
-                                            27/7/2018 10:19:43 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">5</a></span>
-                                    </p>
-                                    <p>
-                                        Người dân cho rằng việc Công ty TNHH chăn nuôi Hòa Phát sử dụng phân bò không qua xử lý để trồng cây là nguyên nhân khiến số lượng ruồi tăng đột biến đã làm đảo lộn cuộc sống hàng ngày...
-                                    </p>
-                                </article>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="region">
-            <section class="block_world_news block">
-                <h3 class="block_title_black">HÌNH ẢNH<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div id="content_top2" style="padding-top: 14px;">
-                        <div class="region">
-                            <aside id="block_front_slider" class="block slider" style="height: 520px;width: 620px;padding-right: 28px;">
-                                <div class="flexslider slider" id="block_front_slides" style="height: 450px;width: 620px;">
-                                    <ul class="slides">
-                                        <li>
-                                            <img src="~/images/homes/1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Làng nghề kim khí Đại Tự Nơm nớp nỗi lo ô nhiễm nguồn nước ngầm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/1.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Làng nghề kim khí Đại Tự Nơm nớp nỗi lo ô nhiễm nguồn nước ngầm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/2.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Nước biển không ô nhiễm, cá chết hàng loạt dạt bờ biển Đà Nẵng...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/3.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Doanh nghiệp dùng phân bón cây, dân kêu trời vì ô nhiễm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/4.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Nam Định: Gây ô nhiễm môi trường, bãi rác bị người dân 'phong tỏa'...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/5.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Điện Biên: Sông Nậm Rốm tiếp tục bị ô nhiễm do sơ chế dong riềng...
-                                            </p>
-                                        </li>
-
-                                        <li>
-                                            <img src="~/images/homes/5.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Điện Biên: Sông Nậm Rốm tiếp tục bị ô nhiễm do sơ chế dong riềng...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/6.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Sài Gòn 'nhức óc' bắt quả tang... tiếng ồn...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/6.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Sài Gòn 'nhức óc' bắt quả tang... tiếng ồn...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/7.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Trạm trộn bê tông trái phép thách thức chính quyền...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/8.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Báo động môi trường vì chôn lấp rác...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/9.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Ô nhiễm làng nghề - 'căn bệnh nan y' ở Phan Bôi...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/10.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Cảng Sa Kỳ ngập rác...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/11.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Ô nhiễm môi trường nghiêm trọng từ các vườn cây Thanh long...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/12.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Nhà vườn xã Lương Hòa Lạc, huyện Chợ Gạo tự ý để những bao phân gia súc, gia cầm tươi ngay cạnh đường giao thông...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/13.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Đại công trường than trái phép núp bóng dự án nghĩa trang ở Quảng Ninh...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/14.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Đất rừng phòng hộ hồ Yên Lập bị đào bới trái phép...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/15.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                30 ha đất bị đào xới với danh nghĩa phục vụ dự án nghĩa trang...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Hàng trăm tấn cá bè ở Tiền Giang chết là do thiếu ôxy?...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Hàng trăm tấn cá bè ở Tiền Giang chết là do thiếu ôxy?...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.2.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Hàng trăm tấn cá bè ở Tiền Giang chết là do thiếu ôxy?...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Khánh Hòa: Nước thải đen ngòm, thối nực trời, dân ngán ngẩm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Khánh Hòa: Nước thải đen ngòm, thối nực trời, dân ngán ngẩm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.2.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Khánh Hòa: Nước thải đen ngòm, thối nực trời, dân ngán ngẩm...
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="flexslider carousel" id="block_front_carousel">
-                                    <ul class="slides">
-                                        <li>
-                                            <img src="~/images/homes/1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/1.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/2.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/3.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/4.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/5.jpg" />
-                                        </li>
-
-                                        <li>
-                                            <img src="~/images/homes/5.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/6.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/6.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/7.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/8.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/9.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/10.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/11.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/12.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/13.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/14.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/15.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.2.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.2.jpg" />
-                                        </li>
-                                    </ul>
-                                </div>
-                            </aside>
-                            
-
+                                </li>
+                                <li>
+                                    <article>
+                                        <hgroup>
+                                            <h4 class="title"><a href="#">Nước biển không ô nhiễm, cá chết hàng loạt dạt bờ biển Đà Nẵng.</a></h4>
+                                        </hgroup>
+                                        <p class="date">
+                                            <time datetime="2013-01-17">
+                                                18/7/2018 5:13:30 PM
+                                            </time>
+                                            <span class="comments_count"><a href="#">1</a></span>
+                                        </p>
+                                        <p>
+                                            Ngày 11-11, Sở Tài nguyên & Môi trường (TN& MT) TP Đà Nẵng đã có báo cáo về việc xử lý tình trạng cá chết trôi dạt vào khu vực bãi biển Liên Chiểu chiều 10-11 khẳng định không có hiện tượng nước xả thải ra biển gây ô nhiễm vùng biển nêu trên...
+                                        </p>
+                                    </article>
+                                </li>
+                                <li class="last">
+                                    <article>
+                                        <hgroup>
+                                            <h4 class="title"><a href="#">Doanh nghiệp dùng phân bón cây, dân kêu trời vì ô nhiễm.</a></h4>
+                                        </hgroup>
+                                        <p class="date">
+                                            <time datetime="2013-01-14">
+                                                27/7/2018 10:19:43 PM
+                                            </time>
+                                            <span class="comments_count"><a href="#">5</a></span>
+                                        </p>
+                                        <p>
+                                            Người dân cho rằng việc Công ty TNHH chăn nuôi Hòa Phát sử dụng phân bò không qua xử lý để trồng cây là nguyên nhân khiến số lượng ruồi tăng đột biến đã làm đảo lộn cuộc sống hàng ngày...
+                                        </p>
+                                    </article>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </section>
-            <section class="block block_business_news">
-                <h3 class="block_title_black">GIẢI PHÁP SÁNG KIẾN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div class="right">
-                        <ul>
-                            <li class="first">
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Cần quan trắc để đánh giá chính xác được nguồn thải ra sông Cầu.</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-21">
-                                            27/7/2018 10:20:35 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">10</a></span>
-                                    </p>
-                                    <p>
-                                        Đặt câu hỏi với Bộ trưởng, đại biểu Leo Thị Lịch (Đoàn ĐBQH tỉnh Bắc Giang) nêu vấn đề: Những năm gần đây, dòng sông Cầu đang dần bị ô nhiễm do phát triển kinh tế bất chấp...
-                                    </p>
-                                </article>
-                            </li>
-                            <li>
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Xử lý các cơ sở gây ô nhiễm nghiêm trọng chậm do thiếu vốn.</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-17">
-                                            18/7/2018 5:13:30 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">1</a></span>
-                                    </p>
-                                    <p>
-                                        Bộ trưởng Trần Hồng Hà cho biết, xử lý các cơ sở gây ô nhiễm môi trường nghiêm trọng là vấn đề lớn, nhiều năm nay, Chính phủ đã quyết tâm ...
-                                    </p>
-                                </article>
-                            </li>
-                            <li class="last">
-                                <article>
-                                    <hgroup>
-                                        <h4 class="title"><a href="#">Ban hành tiêu chí xác định sản phẩm sản xuất từ hoạt động tái chế.</a></h4>
-                                    </hgroup>
-                                    <p class="date">
-                                        <time datetime="2013-01-14">
-                                            27/7/2018 10:19:43 PM
-                                        </time>
-                                        <span class="comments_count"><a href="#">5</a></span>
-                                    </p>
-                                    <p>
-                                        Phó Thủ tướng Chính phủ Vương Đình Huệ vừa có ý kiến chỉ đạo về việc thuế xuất khẩu đối với sản phẩm sản xuất từ hoạt động tái chế, xử lý chất thải....
-                                    </p>
-                                </article>
-                            </li>
-                        </ul>
+                </section>
+            </div>
+           
+          
+        </div>
+        <div class="region row">
+            <div class="col-md-8">
+                <section class="block_business_news block">
+                    <h3 class="block_title_black">HÌNH ẢNH<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                    <div class="content">
+                        <div id="content_top2" style="padding-top: 14px;">
+                            <div class="region">
+                                <aside id="block_front_slider" class="block slider video_home" style="height: 520px;width: 620px;padding-right: 28px;">
+                                    <div class="flexslider slider" id="block_front_slides" style="height: 450px;width: 620px;">
+                                        <ul class="slides">
+                                            <li>
+                                                <img src="~/images/homes/1.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Làng nghề kim khí Đại Tự Nơm nớp nỗi lo ô nhiễm nguồn nước ngầm...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/1.1.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Làng nghề kim khí Đại Tự Nơm nớp nỗi lo ô nhiễm nguồn nước ngầm...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/2.1.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Nước biển không ô nhiễm, cá chết hàng loạt dạt bờ biển Đà Nẵng...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/3.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Doanh nghiệp dùng phân bón cây, dân kêu trời vì ô nhiễm...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/4.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Nam Định: Gây ô nhiễm môi trường, bãi rác bị người dân 'phong tỏa'...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/5.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Điện Biên: Sông Nậm Rốm tiếp tục bị ô nhiễm do sơ chế dong riềng...
+                                                </p>
+                                            </li>
+
+                                            <li>
+                                                <img src="~/images/homes/5.1.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Điện Biên: Sông Nậm Rốm tiếp tục bị ô nhiễm do sơ chế dong riềng...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/6.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Sài Gòn 'nhức óc' bắt quả tang... tiếng ồn...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/6.1.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Sài Gòn 'nhức óc' bắt quả tang... tiếng ồn...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/7.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Trạm trộn bê tông trái phép thách thức chính quyền...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/8.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Báo động môi trường vì chôn lấp rác...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/9.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Ô nhiễm làng nghề - 'căn bệnh nan y' ở Phan Bôi...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/10.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Cảng Sa Kỳ ngập rác...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/11.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Ô nhiễm môi trường nghiêm trọng từ các vườn cây Thanh long...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/12.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Nhà vườn xã Lương Hòa Lạc, huyện Chợ Gạo tự ý để những bao phân gia súc, gia cầm tươi ngay cạnh đường giao thông...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/13.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Đại công trường than trái phép núp bóng dự án nghĩa trang ở Quảng Ninh...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/14.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Đất rừng phòng hộ hồ Yên Lập bị đào bới trái phép...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/15.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    30 ha đất bị đào xới với danh nghĩa phục vụ dự án nghĩa trang...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/16.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Hàng trăm tấn cá bè ở Tiền Giang chết là do thiếu ôxy?...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/16.1.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Hàng trăm tấn cá bè ở Tiền Giang chết là do thiếu ôxy?...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/16.2.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Hàng trăm tấn cá bè ở Tiền Giang chết là do thiếu ôxy?...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/17.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Khánh Hòa: Nước thải đen ngòm, thối nực trời, dân ngán ngẩm...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/17.1.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Khánh Hòa: Nước thải đen ngòm, thối nực trời, dân ngán ngẩm...
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/17.2.jpg" height="430" />
+                                                <p class="flex-caption" style="width:620px">
+                                                    Khánh Hòa: Nước thải đen ngòm, thối nực trời, dân ngán ngẩm...
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="flexslider carousel" id="block_front_carousel">
+                                        <ul class="slides">
+                                            <li>
+                                                <img src="~/images/homes/1.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/1.1.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/2.1.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/3.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/4.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/5.jpg" />
+                                            </li>
+
+                                            <li>
+                                                <img src="~/images/homes/5.1.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/6.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/6.1.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/7.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/8.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/9.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/10.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/11.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/12.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/13.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/14.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/15.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/16.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/16.1.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/16.2.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/17.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/17.1.jpg" />
+                                            </li>
+                                            <li>
+                                                <img src="~/images/homes/17.2.jpg" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </aside>
+
+
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section class="block block_business_news">
+                    <h3 class="block_title_black">GIẢI PHÁP SÁNG KIẾN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                    <div class="content">
+                        <div class="right">
+                            <ul>
+                                <li class="first">
+                                    <article>
+                                        <hgroup>
+                                            <h4 class="title"><a href="#">Cần quan trắc để đánh giá chính xác được nguồn thải ra sông Cầu.</a></h4>
+                                        </hgroup>
+                                        <p class="date">
+                                            <time datetime="2013-01-21">
+                                                27/7/2018 10:20:35 PM
+                                            </time>
+                                            <span class="comments_count"><a href="#">10</a></span>
+                                        </p>
+                                        <p>
+                                            Đặt câu hỏi với Bộ trưởng, đại biểu Leo Thị Lịch (Đoàn ĐBQH tỉnh Bắc Giang) nêu vấn đề: Những năm gần đây, dòng sông Cầu đang dần bị ô nhiễm do phát triển kinh tế bất chấp...
+                                        </p>
+                                    </article>
+                                </li>
+                                <li>
+                                    <article>
+                                        <hgroup>
+                                            <h4 class="title"><a href="#">Xử lý các cơ sở gây ô nhiễm nghiêm trọng chậm do thiếu vốn.</a></h4>
+                                        </hgroup>
+                                        <p class="date">
+                                            <time datetime="2013-01-17">
+                                                18/7/2018 5:13:30 PM
+                                            </time>
+                                            <span class="comments_count"><a href="#">1</a></span>
+                                        </p>
+                                        <p>
+                                            Bộ trưởng Trần Hồng Hà cho biết, xử lý các cơ sở gây ô nhiễm môi trường nghiêm trọng là vấn đề lớn, nhiều năm nay, Chính phủ đã quyết tâm ...
+                                        </p>
+                                    </article>
+                                </li>
+                                <li class="last">
+                                    <article>
+                                        <hgroup>
+                                            <h4 class="title"><a href="#">Ban hành tiêu chí xác định sản phẩm sản xuất từ hoạt động tái chế.</a></h4>
+                                        </hgroup>
+                                        <p class="date">
+                                            <time datetime="2013-01-14">
+                                                27/7/2018 10:19:43 PM
+                                            </time>
+                                            <span class="comments_count"><a href="#">5</a></span>
+                                        </p>
+                                        <p>
+                                            Phó Thủ tướng Chính phủ Vương Đình Huệ vừa có ý kiến chỉ đạo về việc thuế xuất khẩu đối với sản phẩm sản xuất từ hoạt động tái chế, xử lý chất thải....
+                                        </p>
+                                    </article>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+           
+            
         </div>
     </div>
     <!-- end content -->
     <!-- content bottom -->
     <!-- end content bottom -->
-</div>
+
 <!-- right sidebar -->
 @section Scripts {
     <script src="~/js/home/contact.js" asp-append-version="true"></script>

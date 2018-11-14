@@ -11,7 +11,7 @@
         <link href="~/css/common.css" rel="stylesheet" media="all" />
         <link href="~/css/flexslider.css" rel="stylesheet" media="all" />
         <link href="~/css/style.css" rel="stylesheet" media="all" />
-        <link href="~/css/responsive.css" rel="stylesheet" media="all" />
+        @*<link href="~/css/responsive.css" rel="stylesheet" media="all" />*@
         <link href="~/css/skin.css" rel="stylesheet" media="all" />
         <link href="~/css/site.css" rel="stylesheet" />
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -22,7 +22,7 @@
         <link href="~/css/common.css" rel="stylesheet" media="all" />
         <link href="~/css/flexslider.css" rel="stylesheet" media="all" />
         <link href="~/css/style.css" rel="stylesheet" media="all" />
-        <link href="~/css/responsive.css" rel="stylesheet" media="all" />
+        @*<link href="~/css/responsive.css" rel="stylesheet" media="all" />*@
         <link href="~/css/skin.css" rel="stylesheet" media="all" />
         <link href="~/css/site.css" rel="stylesheet" />
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -44,11 +44,16 @@
         <!-- content top -->
         <div id="container">
             <div class="wrapper">
-                @RenderSection("Breadcrumb", required: false)
-
-                @RenderBody()
-
-                @Html.Partial("Layout/_Pages.cshtml")
+                <div class="container">
+                    <div class="col-md-8">
+                        @RenderSection("Breadcrumb", required: false)
+                        @RenderBody()
+                    </div>
+                    <div class="col-md-4">
+                        @Html.Partial("Layout/_Pages.cshtml")
+                    </div>
+                </div>
+              
 
                 <!-- right sidebar -->
                 <!-- end right sidebar -->

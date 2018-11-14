@@ -22,8 +22,8 @@ namespace AppPortal.WebSite.Controllers
 
         public IActionResult Index()
         {
-            ViewData["data"] = _newsService.GetNewsList();
-            @ViewData["activeHome"] = "active";
+            //ViewData["data"] = _newsService.GetNewsList();
+           // @ViewData["activeHome"] = "active";
             return View();
         }
 
@@ -44,8 +44,8 @@ namespace AppPortal.WebSite.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["data"] = _newsService.GetNewsList();
-            @ViewData["activeContact"] = "active";
+           // ViewData["data"] = _newsService.GetNewsList();
+          //  @ViewData["activeContact"] = "active";
             return View();
         }
 
@@ -56,13 +56,13 @@ namespace AppPortal.WebSite.Controllers
 
         public IActionResult Map()
         {
-            ViewData["activeMap"] = "active";
+            //ViewData["activeMap"] = "active";
             return View();
         }
 
         public IActionResult TTQuantrac()
         {
-            ViewData["activeTTQT"] = "active";
+           // ViewData["activeTTQT"] = "active";
             return View();
         }
     }

@@ -20,7 +20,7 @@
 	// Gallery Front Page
 	$('#block_front_slider .content').adGallery({
 		loader_image : 'images/preloader.gif',
-		width : 472,
+		width : 620,
 		height : 332,
 		scroll_jump : 1,
 		display_next_and_prev : false,
@@ -241,7 +241,27 @@
 		slideshow : false,
 		animationDuration : 1000,
 		sync : "#block_front_carousel"
-	});
+    });
+
+    $('#block_front_slides_2').flexslider({
+        animation: "slide",
+        controlNav: false,
+        directionNav: false,
+        animationLoop: false,
+        slideshow: false,
+        animationDuration: 1000,
+        sync: "#block_front_carousel_2"
+    });
+
+    $('#block_front_carousel_2').flexslider({
+        animation: "slide",
+        controlNav: false,
+        directionNav: true,
+        itemWidth: 75,
+        itemMargin: 15,
+        animationDuration: 1000,
+        asNavFor: '#block_front_slides_2'
+    });
 
 	$('#block_front_carousel').flexslider({
 		animation : "slide",

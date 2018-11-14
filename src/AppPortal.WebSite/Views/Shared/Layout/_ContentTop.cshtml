@@ -45,6 +45,9 @@
     #block-search-form .form-text {
         margin-top: 0 !important;
     }
+    .col-md-8 .block {
+        width: 100% !important;
+    }
 </style>
 <!-- Modal -->
 <div id="myModal" class="modal fade content" role="dialog">
@@ -69,6 +72,19 @@
                                     <label for="UserAddress" class="control-label">Địa chỉ:</label>
                                     <input class="form-text" asp-for="UserAddress" required placeholder="Địa chỉ" />
                                 </div>
+
+                                <div class="form-group" style="display: inline-block;">
+                                    <select id="thanhpho" required>
+                                        <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
+                                    </select>
+                                    <select id="quantp" required>
+                                        <option selected disabled>--- Lựa chọn quận/huyện ---</option>
+                                    </select>
+                                    <select id="huyen" required>
+                                        <option selected disabled>--- Lựa chọn phường xã ---</option>
+                                    </select>
+                                </div>
+
                                 <div class="form-item">
                                     <label for="UserEmail" class="control-label">Điện thoại:</label>
                                     <input class="form-text" asp-for="UserPhone" required placeholder="Điện thoại" />
@@ -99,17 +115,7 @@
                             <div class="form-item">
                                 <label asp-for="Link" class="control-label">Địa điểm:</label>
                                 <input asp-for="Link" class="form-text" id="address_map" placeholder="Địa điểm diễn ra" />
-                                <div class="form-group" style="padding: 10px;display: inline-block;">
-                                    <select id="thanhpho" required>
-                                        <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
-                                    </select>
-                                    <select id="quantp" required>
-                                        <option selected disabled>--- Lựa chọn quận/huyện ---</option>
-                                    </select>
-                                    <select id="huyen" required>
-                                        <option selected disabled>--- Lựa chọn phường xã ---</option>
-                                    </select>
-                                </div>
+                                
                                 <input type="hidden" id="lat" name="lat" />
                                 <input type="hidden" id="lng" name="lng" />
                                 <span asp-validation-for="Link" class="form-required"></span>
@@ -171,86 +177,58 @@
     </div>
 </div>
 
-<div id="content_top" class="block" style="padding-bottom: 25px">
-    <div class="region content">
-        <aside id="block_front_slider2" class="block">
-            <h3 class="block_title_black">GÓP Y, PHẢN ÁNH</h3>
-            <div id="contact_form2" class="row box-KN">
-                <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
-                <div class="row" style="margin-bottom: 10px !important">
+<div id="content_top" class="block container" style="padding-bottom: 25px">
+    <div class="region content row">
+        <div class="col-md-8">
+            <aside id="block_front_slider2" class="block">
+                <h3 class="block_title_black">GÓP Y, PHẢN ÁNH</h3>
+                <div id="contact_form2" class="row box-KN">
+                    <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
+                    <div class="row" style="margin-bottom: 10px !important">
 
-                    <div style="width: 50%; float: left;" class="col-sm-6">
-                        <div class="form-item">
-                            <label for="UserFullName" class="control-label">Họ tên:</label>
-                            <input class="form-text" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên" />
+                        <div style="width: 50%; float: left;" class="col-sm-6">
+                            <div class="form-item">
+                                <label for="UserFullName" class="control-label">Họ tên:</label>
+                                <input class="form-text" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên" />
+                            </div>
+                            <div class="form-item">
+                                <label for="UserAddress" class="control-label">Địa chỉ:</label>
+                                <input class="form-text" asp-for="UserAddress" required placeholder="Địa chỉ" />
+                            </div>
+                            <div class="form-item">
+                                <label for="UserEmail" class="control-label">Điện thoại:</label>
+                                <input class="form-text" asp-for="UserPhone" required placeholder="Điện thoại" />
+                            </div>
+                            <div class="form-item">
+                                <label for="UserEmail" class="control-label">Địa chỉ E-mail:</label>
+                                <input class="form-text" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc" />
+                            </div>
                         </div>
-                        <div class="form-item">
-                            <label for="UserAddress" class="control-label">Địa chỉ:</label>
-                            <input class="form-text" asp-for="UserAddress" required placeholder="Địa chỉ" />
-                        </div>
-                        <div class="form-item">
-                            <label for="UserEmail" class="control-label">Điện thoại:</label>
-                            <input class="form-text" asp-for="UserPhone" required placeholder="Điện thoại" />
-                        </div>
-                        <div class="form-item">
-                            <label for="UserEmail" class="control-label">Địa chỉ E-mail:</label>
-                            <input class="form-text" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc" />
+                        <div class="col-sm-6" id="mapframe" style="width: 49%; float: right;">
+                            <div style="width: 100%">
+                                <iframe height="280"
+                                        src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=ha%20noi&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                                    <a href="https://www.maps.ie/create-google-map/">Add map to website</a>
+                                </iframe>
+                            </div><br />
                         </div>
                     </div>
-                    <div class="col-sm-6" id="mapframe" style="width: 49%; float: right;">
-                        <div style="width: 100%">
-                            <iframe height="280"
-                                    src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=ha%20noi&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
-                                <a href="https://www.maps.ie/create-google-map/">Add map to website</a>
-                            </iframe>
-                        </div><br />
+                    <p style="font-weight: 600">NỘI DUNG TRAO ĐỔI</p>
+                    <div class="row">
+
+
                     </div>
                 </div>
-                <p style="font-weight: 600">NỘI DUNG TRAO ĐỔI</p>
-                <div class="row">
-
-
-                </div>
-            </div>
-        </aside>
-
-        <section class="block block_business_news">
-            <h3 class="block_title_black">TIN MỚI NHẤT<a href="#" class="view_all" style="opacity: 0.5;"><span><span>Tất cả tin</span></span></a></h3>
-            <div class="content">
-                <div class="left">
-                    <article class="border-dot">
-                        <hgroup>
-                            <h4 class="title"><a href="#">Xử lý các cơ sở gây ô nhiễm nghiêm trọng chậm do thiếu vốn.</a></h4>
-                        </hgroup>
-                        <p class="date">
-                            <time>
-                                011/11/2018 10:19:43 PM
-                            </time>
-                            <span class="comments_count"><a href="#">5</a></span>
-                        </p>
-                        <p style="line-height: 15px;">
-                            Thủ tướng Chính phủ đã phê duyệt Chương trình mục tiêu xử lý triệt để các cơ sở gây ô nhiễm môi trường nghiêm trọng thuộc đối tượng công ích giai đoạn 2016 – 2020....
-                        </p>
-                    </article>
-
-                    <article class="border-dot">
-                        <hgroup>
-                            <h4 class="title"><a href="#">Xử lý các cơ sở gây ô nhiễm nghiêm trọng chậm do thiếu vốn.</a></h4>
-                        </hgroup>
-                        <p class="date">
-                            <time>
-                                011/11/2018 10:19:43 PM
-                            </time>
-                            <span class="comments_count"><a href="#">5</a></span>
-                        </p>
-                        <p style="line-height: 15px;">
-                            Thủ tướng Chính phủ đã phê duyệt Chương trình mục tiêu xử lý triệt để các cơ sở gây ô nhiễm môi trường nghiêm trọng thuộc đối tượng công ích giai đoạn 2016 – 2020....
-                        </p>
-                    </article>
-
-                    @*<article class="border-dot">
+            </aside>
+        </div>
+        <div class="col-md-4">
+            <section class="block block_business_news">
+                <h3 class="block_title_black">TIN MỚI NHẤT<a href="#" class="view_all" style="opacity: 0.5;"><span><span>Tất cả tin</span></span></a></h3>
+                <div class="content">
+                    <div class="left">
+                        <article class="border-dot">
                             <hgroup>
-                                <h4 class="title"><a href="#">Tổng cục Môi trường nói về việc cập nhật và công bố danh sách các tổ chức, cá nhân được cấp GCN nhập khẩu phế liệu.</a></h4>
+                                <h4 class="title"><a href="#">Xử lý các cơ sở gây ô nhiễm nghiêm trọng chậm do thiếu vốn.</a></h4>
                             </hgroup>
                             <p class="date">
                                 <time>
@@ -259,11 +237,42 @@
                                 <span class="comments_count"><a href="#">5</a></span>
                             </p>
                             <p style="line-height: 15px;">
-                                Theo quy định tại Thông tư số 08/2018/TT-BTNMT và Thông tư số 09/2018/TT-BTNMT ngày 14/9/2018 của Bộ trưởng Bộ Tài nguyên và Môi trường về việc ban hành quy chuẩn kỹ thuật quốc gia về môi trường, thì các loại phế liệu...
+                                Thủ tướng Chính phủ đã phê duyệt Chương trình mục tiêu xử lý triệt để các cơ sở gây ô nhiễm môi trường nghiêm trọng thuộc đối tượng công ích giai đoạn 2016 – 2020....
                             </p>
-                        </article>*@
+                        </article>
+
+                        <article class="border-dot">
+                            <hgroup>
+                                <h4 class="title"><a href="#">Xử lý các cơ sở gây ô nhiễm nghiêm trọng chậm do thiếu vốn.</a></h4>
+                            </hgroup>
+                            <p class="date">
+                                <time>
+                                    011/11/2018 10:19:43 PM
+                                </time>
+                                <span class="comments_count"><a href="#">5</a></span>
+                            </p>
+                            <p style="line-height: 15px;">
+                                Thủ tướng Chính phủ đã phê duyệt Chương trình mục tiêu xử lý triệt để các cơ sở gây ô nhiễm môi trường nghiêm trọng thuộc đối tượng công ích giai đoạn 2016 – 2020....
+                            </p>
+                        </article>
+
+                        @*<article class="border-dot">
+                        <hgroup>
+                            <h4 class="title"><a href="#">Tổng cục Môi trường nói về việc cập nhật và công bố danh sách các tổ chức, cá nhân được cấp GCN nhập khẩu phế liệu.</a></h4>
+                        </hgroup>
+                        <p class="date">
+                            <time>
+                                011/11/2018 10:19:43 PM
+                            </time>
+                            <span class="comments_count"><a href="#">5</a></span>
+                        </p>
+                        <p style="line-height: 15px;">
+                            Theo quy định tại Thông tư số 08/2018/TT-BTNMT và Thông tư số 09/2018/TT-BTNMT ngày 14/9/2018 của Bộ trưởng Bộ Tài nguyên và Môi trường về việc ban hành quy chuẩn kỹ thuật quốc gia về môi trường, thì các loại phế liệu...
+                        </p>
+                    </article>*@
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
 </div>

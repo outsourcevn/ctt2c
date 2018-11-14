@@ -14,7 +14,7 @@
         <link href="~/css/common.css" rel="stylesheet" media="all" />
         <link href="~/css/flexslider.css" rel="stylesheet" media="all" />
         <link href="~/css/style.css" rel="stylesheet" media="all" />
-        <link href="~/css/responsive.css" rel="stylesheet" media="all" />
+        @*<link href="~/css/responsive.css" rel="stylesheet" media="all" />*@
         <link href="~/css/skin.css" rel="stylesheet" media="all" />
         <link href="~/css/site.css" rel="stylesheet" />
         <link href="~/lib/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
@@ -27,7 +27,7 @@
         <link href="~/css/common.css" rel="stylesheet" media="all" />
         <link href="~/css/flexslider.css" rel="stylesheet" media="all" />
         <link href="~/css/style.css" rel="stylesheet" media="all" />
-        <link href="~/css/responsive.css" rel="stylesheet" media="all" />
+        @*<link href="~/css/responsive.css" rel="stylesheet" media="all" />*@
         <link href="~/css/skin.css" rel="stylesheet" media="all" />
         <link href="~/css/site.css" rel="stylesheet" />
         <link href="~/lib/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
@@ -53,11 +53,7 @@
         @Html.Partial("Layout/_ContentTop.cshtml")
         <!-- end content top -->
 
-        <div id="container">
-            <div class="wrapper">
-                @RenderBody()
-            </div>
-        </div>
+         @RenderBody()
 
         <div id="scroll_to_top_wrapper">
             <div class="wrapper">
@@ -70,10 +66,10 @@
     </div>
     <script>
         const appConfig = {};
-        appConfig.apiCdnUrl = "http://localhost:54145";
-        appConfig.apiHostUrl = "http://localhost:50642";
-        //appConfig.apiCdnUrl = "http://cdn.eportal.today";
-        //appConfig.apiHostUrl = "http://apinode.eportal.today";
+        //appConfig.apiCdnUrl = "http://localhost:54145";
+        //appConfig.apiHostUrl = "http://localhost:50642";
+        appConfig.apiCdnUrl = "http://cdn.eportal.today";
+        appConfig.apiHostUrl = "http://apinode.eportal.today";
     </script>
 
 

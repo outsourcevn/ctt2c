@@ -20,7 +20,7 @@
 
 .block_world_news {
     float: left;
-    width: 68%;
+    /*width: 68%;*/
     margin-right: 10px;
 }
 
@@ -44,7 +44,7 @@
 
 @media only screen and (min-width: 600px) {
     #content_top .block_business_news {
-        width: 30%;
+        /*width: 30%;*/
     }
 
     #content_top .content {
@@ -52,7 +52,13 @@
     }
 
     #block_front_slider {
-        width: 68%;
+        /*width: 68%;*/
+        margin-right: 10px;
+        padding-right: 0px;
+    }
+
+    #block_front_slider2 {
+        /*width: 68%;*/
         margin-right: 10px;
         padding-right: 0px;
     }
@@ -71,3 +77,16 @@ h3.block_title_black{
     opacity: 1 !important;
 }
 
+.form-group select {
+    height: 30px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.video_home li {
+    width: 620px !important;
+}
+
+#block_front_slides_2 {
+    width: 620px !important;
+}

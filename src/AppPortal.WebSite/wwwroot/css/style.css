@@ -4,7 +4,7 @@ img { max-width: 100%; }
 /* wrappers */
 #wrapper { }
 body.fixed #wrapper { margin: 0 auto; width: 990px; background: #ffffff; }
-.wrapper, #above_header .region, #under_header .inner, #content_top .region, footer .region { margin: 0 auto; padding: 0 10px;  width: 1060px; overflow: hidden; }
+.wrapper, #above_header .region, #under_header .inner, #content_top .region, footer .region { margin: 0 auto; padding: 0 10px;  width: 100%; overflow: hidden; }
 /* above header */
 #above_header { background-image: url(../images/bg_above_header_line.png); background-position: 0 100%; background-repeat: repeat-x; font-size: 11px; color: #d7cdcd; padding-bottom: 2px; }
     #above_header .inner { padding: 11px 0 0; overflow: hidden; background: url(../images/bg_above_header.png); }
@@ -19,9 +19,8 @@ body.fixed #wrapper { margin: 0 auto; width: 990px; background: #ffffff; }
 /* Main content, layouts */
 #container, #scroll_to_top_wrapper, #content_top { background-color: #ffffff; }
     #container .wrapper { position: relative; }
-#content, #page { float: left; width: 100%; }
 .two_sidebars #page, .right_sidebar #page, .right_sidebar #content { width: 638px; }
-.two_sidebars #content { width: 472px; }
+
 .left_sidebar #content { width: 804px; }
 #breadcrumb { color: #828181; clear: both; float: left; width: 100%; text-transform: uppercase; font-size: 11px; margin: 28px 0 22px; }
     #breadcrumb a { color: #282828; text-decoration: none; }
@@ -35,7 +34,7 @@ body.fixed #wrapper { margin: 0 auto; width: 990px; background: #ffffff; }
 /* Left Sidebar */
 #left_sidebar { float: left; padding-right: 19px; width: 147px; }
 /* Right Sidebar */
-#right_sidebar { float: left; padding-left: 16px; width: 312px; }
+#right_sidebar { float: left; padding-left: 16px; }
     #right_sidebar .block { width: 100%; margin-bottom: 20px; }
 /* footer */
 footer { background-color: #ebebeb; border-top: 1px solid #c6c6c6; color: #828181; font-size: 12px; padding: 29px 0 12px; }
@@ -73,7 +72,7 @@ footer { background-color: #ebebeb; border-top: 1px solid #c6c6c6; color: #82818
 .four_sixth { width: 65.3332%; }
 .five_sixth { width: 82.6665%; }
 .last { margin-right: 0 !important; clear: right; }
-.row { clear: both; float: left; overflow: hidden; width: 100%; background: url(../images/bg_separator.png) 0 100% repeat-x; margin-bottom: 10px; }
+.row { clear: both; float: left; overflow: hidden; width: 100%; margin-bottom: 10px; }
 .row_last { background: none !important; margin-bottom: 0 !important; }
 .archive:nth-child(2n) { margin-right: 0 !important; }
 /* Form styles */
