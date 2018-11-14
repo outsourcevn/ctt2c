@@ -264,8 +264,8 @@ ul.pager { padding: 10px 0; }
         #block_main_carousel .flex-direction-nav .flex-next { right: 0; background: url("../images/bg_arrows.png") no-repeat scroll -15px 0px transparent; }
 
 /* Front Slider Block*/
-#block_front_slider { height: 382px; width: 472px; padding-right: 28px; }
-    #block_front_slider .slider { height: 332px; width: 472px; margin-bottom: 8px; }
+#block_front_slider { height: 550px; width: 600px; padding-right: 28px; }
+    #block_front_slider .slider { height: 470px; width: 600px; margin-bottom: 8px; }
 
     #block_front_slider .carousel li { margin-right: 8px; }
     #block_front_slider .carousel { }
@@ -273,9 +273,10 @@ ul.pager { padding: 10px 0; }
 
     #block_front_slider .ad-controls { display: none; }
     #block_front_slider .ad-description-title { font-size: 18px; margin-bottom: 6px; }
-    #block_front_slider .ad-thumbs li { display: block; height: 42px; width: 72px; float: left; padding-right: 8px; }
+    #block_front_slider .ad-thumbs li { display: block; height: 57px; width: 100px; float: left; padding-right: 8px; }
 
 /* Latest Headlines Block*/
+
 #block_latest_headlines { height: 382px; width: 140px; padding-right: 28px; }
     #block_latest_headlines h3.block_title { margin-top: 14px; margin-bottom: 16px; }
     #block_latest_headlines li, #content_bottom li, #left_sidebar li, #content .block li, #block_follow li, #block_web_services li, #block_popular li, #block_comments li, #block_opinions li, #block_popular_galleries li { font-size: 13px; line-height: 18px; padding-bottom: 9px; margin-bottom: 8px; background: url(../images/bg_separator.png) 0 100% repeat-x; }

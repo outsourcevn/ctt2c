@@ -1,0 +1,387 @@
+﻿/* MAIN NAVIGATION
+--------------------------------------------------------- */
+#ja-mainnavwrap
+{
+}
+#ja-mainnav
+{
+    border-bottom: 1px solid #FFFFFF;
+}
+#ja-mainnav
+{
+    margin: 0 auto;
+}
+.topNavItem
+{
+    font-size: 11px;
+}
+.topNavItem a
+{
+    display: block;
+    height: 26px;
+    padding: 9px 6px 0;
+    background: url('../images/nganmenu_10.gif') no-repeat 100% 30%;
+    color: #FFFFFF !important;
+}
+.topNavItem a:hover
+{
+    background: url('../images/mainmenuselect.png') repeat-x 0px -2px;
+    text-decoration: none;
+}
+
+.topNavFlyOutsItem a
+{
+    display: block;
+    padding: 4px 5px;
+    text-decoration: none;
+    color: white !important;
+}
+.topNavFlyOutsItem a:hover
+{
+    background-color: #1D7802;
+}
+.topNavFlyOutsItem
+{
+    font-size: 11px;
+    min-width: 150px;
+    text-align: left;
+    background: url('../images/borderflynav.gif') bottom repeat-x;
+    color: white !important;
+    text-transform: none;
+}
+.topNavFlyOuts
+{
+    border-color: #CBD1E0;
+    background: url('../images/flymenu_bg.png') #94d542 repeat-x;
+    border-width: 1px;
+    margin-top: 3px;
+}
+#ja-subnav a
+{
+    outline: none;
+}
+
+#ja-mainnav a
+{
+    margin-left:-1px;
+    outline: none;
+}
+
+#ja-subnavwrap
+{
+    display: block;
+    border-bottom: 1px solid #CCCCCC;
+    background: #F7F7F7;
+}
+
+#ja-subnav
+{
+}
+
+#ja-subnav ul
+{
+    margin: 0;
+    padding: 0;
+}
+
+#ja-subnav li
+{
+    background: none;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+#ja-subnav li a
+{
+    display: block;
+    float: left;
+    padding: 5px 10px 3px;
+    background: url(../images/vline.gif) no-repeat left center;
+    color: #333333;
+}
+
+#ja-subnav li.active a:focus
+{
+    font-weight: bold;
+    color: #006699;
+}
+
+#ja-subnav li.active a:active
+{
+    font-weight: bold;
+    color: #006699;
+}
+
+#ja-subnav li.active a:hover
+{
+    font-weight: bold;
+    color: #006699;
+}
+
+#ja-subnav li.active a
+{
+    font-weight: bold;
+    color: #006699;
+}
+
+#ja-subnav li a.first-item
+{
+    background: none;
+}
+
+/* breadcrumbs */
+#ja-pathway
+{
+    padding: 0 2px;
+}
+
+#ja-pathway strong
+{
+    margin-right: 5px;
+}
+
+#ja-pathway a
+{
+}
+
+#ja-pathway img
+{
+    margin: 1px 5px;
+}
+
+/* Default Joomla! Menu */
+ul.menu
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.menu li
+{
+    background: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.menu li a
+{
+    display: block;
+    outline: none;
+    padding: 4px 0 6px;
+    background: url(../images/dot.gif) repeat-x bottom;
+}
+
+ul.menu li a:focus
+{
+}
+
+ul.menu li a:active
+{
+}
+
+ul.menu li a:hover
+{
+}
+
+ul.menu li.active a
+{
+    color: #333333;
+    font-weight: bold;
+}
+
+ul.menu li ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.menu li li a
+{
+    background: url(../images/arrow.png) no-repeat 7px 9px !important;
+    border: none;
+    font-weight: normal !important;
+    padding: 2px 0 2px 15px !important;
+}
+
+ul.menu li li a:focus
+{
+    color: #333333;
+}
+
+ul.menu li li a:active
+{
+    color: #333333;
+}
+
+ul.menu li li a:hover
+{
+    color: #333333;
+}
+
+.upnav
+{
+    background: url(../images/upnav-bg.gif) repeat-x center bottom;
+    _background: url(../images/upnav-bg.gif) repeat-x 0px 6px;
+    padding-left: 50px;
+    font-size: 100%;
+}
+.upnav ul
+{
+    list-style: none;
+    padding: 0px;
+    margin: none;
+}
+.upnav a span
+{
+    display: block;
+    float: left;
+}
+.upnav a center
+{
+    display: block;
+    float: left;
+}
+.upnav a
+{
+    display: block;
+    float: left;
+}
+.upnav ul li
+{
+    padding-top: 7px;
+    margin-right: 3px;
+    float: left;
+    display: block;
+    background: none;
+}
+
+.upnav ul li a
+{
+    float: left;
+    display: block;
+    text-decoration: none;
+    background: url(../images/upnav-left-unselected.gif) top left no-repeat;
+    cursor: pointer;
+}
+
+.upnav li a center
+{
+    color: white;
+    background: url(../images/upnav-right-unselected.gif) top right no-repeat;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.upnav li.upnav-rss a center
+{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.upnav li a center span
+{
+    background: url(../images/upnav-center-unselected.gif) repeat-x;
+    padding: 3px;
+    padding-bottom: 0px;
+    padding-top: 2px;
+    min-width: 60px;
+    height: 21px;
+}
+.upnav a:hover center span
+{
+    padding: 3px;
+    padding-bottom: 0px;
+    padding-top: 2px;
+}
+
+.upnav ul li.upnav-selected a
+{
+    float: left;
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+    background: url(../images/upnav-left-selected.gif) top left no-repeat;
+}
+
+
+.upnav ul li.upnav-selected a center
+{
+    color: white;
+    background: url(../images/upnav-right-selected.gif) top right no-repeat;
+    font-weight: bold;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.upnav ul li.upnav-selected a center span
+{
+    background: url(../images/upnav-center-selected.gif) repeat-x;
+}
+.upnav ul li.upnav-rss a
+{
+    background: url(../images/upnav-left-rss-unselected.gif) top left no-repeat;
+    cursor: pointer;
+}
+
+.upnav ul li.upnav-rss a:hover
+{
+    background: url(../images/upnav-left-rss-selected.gif) top left no-repeat;
+}
+
+.upnav ul li.upnav-rss a:hover center
+{
+    background: url(../images/upnav-right-selected.gif) top right no-repeat;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.upnav ul li.upnav-rss a:hover center span
+{
+    background: url(../images/upnav-center-selected.gif) repeat-x;
+}
+.upnav ul li a:hover
+{
+    background: url(../images/upnav-left-selected.gif) top left no-repeat;
+}
+.upnav a:hover center
+{
+    background: url(../images/upnav-right-selected.gif) top right no-repeat;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.upnav a:hover center span
+{
+    background: url(../images/upnav-center-selected.gif) repeat-x;
+}
+.bgmainnav
+{
+    background: url(../images/mainnav-bg.gif) repeat-x;
+    height: 34px;
+   float:left;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.language-flagEN
+{
+    float: right;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top:-20px;
+}
+.topNavItemEN
+{
+    font-size: 11px;
+    margin: -9px 7px 0 5px;
+    color:white !important;
+}
+.language-flagEN img
+{
+  
+    margin-right: 1px;
+    width: 22px;
+}
+.language-flagEN a, .language-flagEN a:visited
+{
+    color:white !important;
+    margin-right:5px;
+}

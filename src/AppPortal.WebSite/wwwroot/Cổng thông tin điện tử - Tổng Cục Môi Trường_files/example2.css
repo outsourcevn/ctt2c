@@ -1,0 +1,104 @@
+﻿
+p
+{
+    color: #fff;
+    text-align: center;
+}
+
+div.jMyCarousel .prev
+{
+    background: url('/images/Internet_V2/tinanh_prev.png') 0px 35px no-repeat;
+    width: 40px;
+    height: 100px;
+    border: 0px;
+    margin: -10px 0 0 1px;
+}
+
+div.jMyCarousel .next
+{
+    background: url('/images/Internet_V2/tinanh_next.png') 0px 35px no-repeat;
+    width: 40px;
+    height: 100px;
+    border: 0px;
+    margin: -10px -30px 0 0;
+}
+
+div.jMyCarousel .up
+{
+    background: url('/_layouts/1033/VEA.Portal.Intranet/jMyCarousel/image/up.png') center center no-repeat;
+    width: 61px;
+    height: 40px;
+    border: 0px;
+}
+
+div.jMyCarousel .down
+{
+    background: url('/_layouts/1033/VEA.Portal.Intranet/jMyCarousel/image/down.png') center center no-repeat;
+    width: 47px;
+    height: 61px;
+    border: 0px;
+}
+
+
+/** Carousel 2 **/
+div.jMyCarousel
+{
+    margin: auto;
+    padding-top: 10px;
+    width: 470px !important;
+    height: 135px !important;
+}
+
+div.jMyCarousel ul
+{
+}
+
+div.jMyCarousel ul li
+{
+    margin: 7px;
+    line-height: 0px;
+    padding: 3px;
+    width: 134px;
+    height: 135px;
+}
+
+div.jMyCarousel ul li a
+{
+    /* in case of link */
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    text-align:left;
+    padding-left:4px;
+}
+
+div.jMyCarousel ul li a img
+{
+   
+    border: 0px;
+    margin-left: 8px;
+    padding-bottom: 0px;
+    width: 125px;
+    height: 70px;
+}
+.imagetilte
+{
+    line-height: normal;
+    margin-top: 5px;
+    text-align: center;
+}
+.imageicon
+{
+    float: left;
+    padding-left:8px;
+}
+.imagetitleicon
+{
+    float: left;
+    margin:-16px 0 0 25px;
+}
+.imagetitleicon img
+{
+    width:30px !important;
+    height:16px !important;
+}

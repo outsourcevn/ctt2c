@@ -1,0 +1,47 @@
+﻿.slideshow1{
+	width:100%;
+	height:430px !important;
+}
+#txtnoidung
+{
+height:90px !important;
+}
+.commentPostBg
+{
+	background:url(../images/commentBg.jpg)top repeat-x white !important;
+
+}
+
+.CategorySummaryContentWraper a 
+{
+	font-weight:bold;
+	font-size:13px;
+}
+.CategorySummaryContentWraper span
+{
+	font-size:13px;
+	 /* GTD remove color */
+}
+.CategorySummaryContentWraper
+{
+	text-align:justify;
+}
+.news-content
+{
+	text-align:justify;
+}
+.detail-new-content
+{
+	text-align:justify;
+}
+.detail-new-desc
+{
+	text-align:justify;
+}
+.content
+{
+	text-align:justify;
+}
+#footer{	
+	background: url(../images/footer-bg.png) repeat-x !important;
+}
