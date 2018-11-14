@@ -90,3 +90,13 @@ h3.block_title_black{
 #block_front_slides_2 {
     width: 620px !important;
 }
+
+#myNavbar li span {
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    color: black;
+}
+
+#myNavbar li a:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08);
+}

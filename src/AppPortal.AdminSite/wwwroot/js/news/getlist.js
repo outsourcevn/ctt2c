@@ -398,12 +398,13 @@ function updateTrangThai(isStatus) {
 }
 
 function templateAction(is_status, news_id) {
-    var name = '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Xác minh</button>';
+    //var name = '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Xác minh</button>';
+    var name = '';
     var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
     // label-success label-danger label-info label-warning
     if (GroupId == "vptc") {
         switch (is_status) {
-            case 8: name += '<button type="button" class="btn btn-primary btn-xs" onclick="baocaolanhdao(' + news_id + ')">Báo cáo lãnh đạo</button>'; break;
+            case 7: name += '<button type="button" class="btn btn-primary btn-xs" onclick="baocaolanhdao(' + news_id + ')">Báo cáo lãnh đạo</button>'; break;
             case 6: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công khai</button>'; break;
             default: name += ''; break;
         }
