@@ -1,6 +1,4 @@
-﻿'use strict';
-
-Date.prototype.yyyymmdd = function () {
+﻿Date.prototype.yyyymmdd = function () {
     var mm = this.getMonth() + 1; // getMonth() is zero-based
     var dd = this.getDate();
 
@@ -9,147 +7,6 @@ Date.prototype.yyyymmdd = function () {
     (dd > 9 ? '' : '0') + dd
     ].join('-');
 };
-
-$(document).ready(function () {
-    $.ajax({
-        headers: {
-            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmY4ZWU5NDJmZTAwMTE1M2JmYmQiLCJpYXQiOjE1MzYyMjk4MTl9.-uwH6C3Fe3Q7A2xyX0-SK_YREZiZPM5Osh0CBqH-Z0Y",
-        },
-        type: "GET",
-        url: "http://171.244.21.99:5000/aqi/AIR_QUALITY/hour",
-        success: function (response) {
-            var data = response.data;
-            var html = '';
-            data.forEach(function (item) {
-                var dateData = new Date(item.aqi.time);
-                var CO = (item.aqi.measure.CO) ? item.aqi.measure.CO : '';
-                var SO2 = (item.aqi.measure.SO2) ? item.aqi.measure.SO2 : '';
-                var O3 = (item.aqi.measure.SO2) ? item.aqi.measure.O3 : '';
-                var NO2 = (item.aqi.measure.NO2) ? item.aqi.measure.NO2 : '';
-                var AQI = (item.aqi.value);
-                html += '<div style="float:left;width: 100%;">';
-                html += '   <div style = "margin-bottom: 5px;">';
-                html += '        <b style="margin-bottom: 5px;color:red">' + item.name +'</b></div>';
-                html += '        <table id="myTable" cellpadding="3px" cellspacing="0" border="1" style="width: 100%;"><tbody>';
-                html += '        <tr style="font-weight:bold;height:30px;"><td style=" text-align:center">Thời gian</td><td style=" text-align:center">Chỉ số AQI</td></tr>';
-                html += '        <tr style="height:30px;"><td style="text-align:center">' + dateData.yyyymmdd() + '</td>';
-                html += '<td style="text-align:center;">' + AQI +'</td></tr>';
-                html += '        </tbody> </table> </div >';
-
-            });
-
-            $("#block_weather .content").html(html);
-        }, error: function (er) {
-            
-        }
-    });
-    const toolMinis = ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "insertImage", "insertFile",
-        { name: "insertVideo", tooltip: "Chèn video từ Youtube", exec: insertVideo }];
-
-    $("textarea#Abstract").kendoEditor({
-        tools: toolMinis,
-        imageBrowser: {
-            messages: {
-                dropFilesHere: "Drop files here"
-            },
-            transport: {
-                read: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
-                create: {
-                    url: `${appConfig.apiCdnUrl}/ImageBrowser/Create`,
-                    type: 'POST'
-                },
-                thumbnailUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Thumbnail`,
-                uploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`,
-                imageUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Image?path={0}`
-            }
-        }
-    });
-
-    $("textarea#Content").kendoEditor({
-        tools: toolMinis,
-        imageBrowser: {
-            messages: {
-                dropFilesHere: "Drop files here"
-            },
-            transport: {
-                read: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
-                create: {
-                    url: `${appConfig.apiCdnUrl}/ImageBrowser/Create`,
-                    type: 'POST'
-                },
-                thumbnailUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Thumbnail`,
-                uploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`,
-                imageUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Image?path={0}`
-            }
-        }
-    });
-
-    const treeViewDataSource = new kendo.data.HierarchicalDataSource({
-        schema: {
-            data: function (result) {
-                return result.model || result;
-            },
-            model: { id: "id", name: 'name', children: 'items' },
-        },
-        transport: {
-            read: {
-                url: `${appConfig.apiHostUrl}/${TOPICS_API.GET_TREES}`,
-                dataType: "json",
-                type: 'GET'
-            }
-        }
-    });
-
-    $("#cat_treeview").kendoTreeView({
-        dataSource: treeViewDataSource,
-        dataTextField: 'name',
-        checkboxes: true,
-        check: onCheck,
-    });
-
-    jQuery.extend(jQuery.validator.messages, {
-        required: "Yêu cầu bắt buộc phải điền",
-        remote: "Please fix this field.",
-        email: "Please enter a valid email address.",
-        url: "Please enter a valid URL.",
-        date: "Please enter a valid date.",
-        dateISO: "Please enter a valid date (ISO).",
-        number: "Please enter a valid number.",
-        digits: "Please enter only digits.",
-        creditcard: "Please enter a valid credit card number.",
-        equalTo: "Please enter the same value again.",
-        accept: "Please enter a value with a valid extension.",
-        maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
-        minlength: jQuery.validator.format("Please enter at least {0} characters."),
-        rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
-        range: jQuery.validator.format("Please enter a value between {0} and {1}."),
-        max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
-        min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
-    });
-    $("#frm_contact").submit(function (event) {
-        captcha.validateUnsafe(function (isCaptchaCodeCorrect) {
-
-            if (isCaptchaCodeCorrect) {
-                // Captcha code is correct
-            } else {
-                // Captcha code is incorrect
-            }
-
-        });
-
-        event.preventDefault();
-    });
-
-    $("#contact_form2 input").focus(function (e) {
-        e.preventDefault();
-        $("#myModal").modal("show");
-    });
-
-    $("#contact_form2").click(function (e) {
-        e.preventDefault();
-        $("#myModal").modal("show");
-    })
-});
 
 function traverse(nodes, callback) {
     for (var i = 0; i < nodes.length; i++) {
@@ -379,10 +236,144 @@ function submit() {
     }, false);
 }
 
-(function () {
-    'use strict';
-    window.addEventListener('load', function () {
-        
-    }, false);
-})();
+$(function () {
+    $.ajax({
+        headers: {
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmY4ZWU5NDJmZTAwMTE1M2JmYmQiLCJpYXQiOjE1MzYyMjk4MTl9.-uwH6C3Fe3Q7A2xyX0-SK_YREZiZPM5Osh0CBqH-Z0Y",
+        },
+        type: "GET",
+        url: "http://171.244.21.99:5000/aqi/AIR_QUALITY/hour",
+        success: function (response) {
+            var data = response.data;
+            var html = '';
+            data.forEach(function (item) {
+                var dateData = new Date(item.aqi.time);
+                var CO = (item.aqi.measure.CO) ? item.aqi.measure.CO : '';
+                var SO2 = (item.aqi.measure.SO2) ? item.aqi.measure.SO2 : '';
+                var O3 = (item.aqi.measure.SO2) ? item.aqi.measure.O3 : '';
+                var NO2 = (item.aqi.measure.NO2) ? item.aqi.measure.NO2 : '';
+                var AQI = (item.aqi.value);
+                html += '<div style="float:left;width: 100%;">';
+                html += '   <div style = "margin-bottom: 5px;">';
+                html += '        <b style="margin-bottom: 5px;color:red">' + item.name + '</b></div>';
+                html += '        <table id="myTable" cellpadding="3px" cellspacing="0" border="1" style="width: 100%;"><tbody>';
+                html += '        <tr style="font-weight:bold;height:30px;"><td style=" text-align:center">Thời gian</td><td style=" text-align:center">Chỉ số AQI</td></tr>';
+                html += '        <tr style="height:30px;"><td style="text-align:center">' + dateData.yyyymmdd() + '</td>';
+                html += '<td style="text-align:center;">' + AQI + '</td></tr>';
+                html += '        </tbody> </table> </div >';
+
+            });
+
+            $("#block_weather .content").html(html);
+        }, error: function (er) {
+
+        }
+    });
+    const toolMinis = ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "insertImage", "insertFile",
+        { name: "insertVideo", tooltip: "Chèn video từ Youtube", exec: insertVideo }];
+
+    $("textarea#Abstract").kendoEditor({
+        tools: toolMinis,
+        imageBrowser: {
+            messages: {
+                dropFilesHere: "Drop files here"
+            },
+            transport: {
+                read: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
+                create: {
+                    url: `${appConfig.apiCdnUrl}/ImageBrowser/Create`,
+                    type: 'POST'
+                },
+                thumbnailUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Thumbnail`,
+                uploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`,
+                imageUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Image?path={0}`
+            }
+        }
+    });
+
+    $("textarea#Content").kendoEditor({
+        tools: toolMinis,
+        imageBrowser: {
+            messages: {
+                dropFilesHere: "Drop files here"
+            },
+            transport: {
+                read: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
+                create: {
+                    url: `${appConfig.apiCdnUrl}/ImageBrowser/Create`,
+                    type: 'POST'
+                },
+                thumbnailUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Thumbnail`,
+                uploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`,
+                imageUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Image?path={0}`
+            }
+        }
+    });
+
+    const treeViewDataSource = new kendo.data.HierarchicalDataSource({
+        schema: {
+            data: function (result) {
+                return result.model || result;
+            },
+            model: { id: "id", name: 'name', children: 'items' },
+        },
+        transport: {
+            read: {
+                url: `${appConfig.apiHostUrl}/${TOPICS_API.GET_TREES}`,
+                dataType: "json",
+                type: 'GET'
+            }
+        }
+    });
+
+    $("#cat_treeview").kendoTreeView({
+        dataSource: treeViewDataSource,
+        dataTextField: 'name',
+        checkboxes: true,
+        check: onCheck,
+    });
+
+    jQuery.extend(jQuery.validator.messages, {
+        required: "Yêu cầu bắt buộc phải điền",
+        remote: "Please fix this field.",
+        email: "Please enter a valid email address.",
+        url: "Please enter a valid URL.",
+        date: "Please enter a valid date.",
+        dateISO: "Please enter a valid date (ISO).",
+        number: "Please enter a valid number.",
+        digits: "Please enter only digits.",
+        creditcard: "Please enter a valid credit card number.",
+        equalTo: "Please enter the same value again.",
+        accept: "Please enter a value with a valid extension.",
+        maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+        minlength: jQuery.validator.format("Please enter at least {0} characters."),
+        rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+        range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+        max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+        min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+    });
+    $("#frm_contact").submit(function (event) {
+        captcha.validateUnsafe(function (isCaptchaCodeCorrect) {
+
+            if (isCaptchaCodeCorrect) {
+                // Captcha code is correct
+            } else {
+                // Captcha code is incorrect
+            }
+
+        });
+
+        event.preventDefault();
+    });
+
+    $("#contact_form2 input").focus(function (e) {
+        e.preventDefault();
+        $("#myModal").modal("show");
+    });
+
+    $("#contact_form2").click(function (e) {
+        e.preventDefault();
+        $("#myModal").modal("show");
+    })
+});
 

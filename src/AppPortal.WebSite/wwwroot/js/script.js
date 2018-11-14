@@ -18,7 +18,7 @@
 		}
 	}
 	// Gallery Front Page
-	jQuery('#block_front_slider .content').adGallery({
+	$('#block_front_slider .content').adGallery({
 		loader_image : 'images/preloader.gif',
 		width : 472,
 		height : 332,
@@ -290,7 +290,7 @@
     });
 
 	if ($(window).width() > 979) {
-		jQuery('#content .ad-gallery').adGallery({
+		$('#content .ad-gallery').adGallery({
 			loader_image : 'images/preloader.gif',
 			width : 618,
 			height : 468,
@@ -304,7 +304,7 @@
 		$('.ad-image-wrapper .ad-image img').attr('style', 'width: 618px; height: 468px;');
 	}
 	if ($(window).width() < 979) {
-		jQuery('#content .ad-gallery').adGallery({
+		$('#content .ad-gallery').adGallery({
 			loader_image : 'images/preloader.gif',
 			width : 500,
 			height : 340,
