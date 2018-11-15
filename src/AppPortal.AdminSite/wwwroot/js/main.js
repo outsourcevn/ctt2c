@@ -40,4 +40,53 @@ $(function () {
             '/cors/result.html?%s'
         )
     );
+
+    $('#fileupload2').fileupload({
+        url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie("ACCESS-TOKEN"));
+            xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew_nhapketqua .IdReport").val()));
+        }
+    });
+
+    $('#fileupload2').on('fileuploaddestroy', function (e, data) {
+        var val = $('input[name="_csrfToken"]').val();
+        data.headers = { 'Authorization': 'Bearer ' + getCookie("ACCESS-TOKEN") };
+    });
+
+    // Enable iframe cross-domain access via redirect option:
+    $('#fileupload2').fileupload(
+        'option',
+        'redirect',
+        window.location.href.replace(
+            /\/[^\/]*$/,
+            '/cors/result.html?%s'
+        )
+    );
+
+    $('#fileupload3').fileupload({
+        // Uncomment the following to send cross-domain cookies:
+        //xhrFields: {withCredentials: true},
+        url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie("ACCESS-TOKEN"));
+            xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew_nhapketqua .IdReport").val()));
+        }
+    });
+
+    $('#fileupload3').on('fileuploaddestroy', function (e, data) {
+        var val = $('input[name="_csrfToken"]').val();
+        //data.formData = {_csrfToken: val};
+        data.headers = { 'Authorization': 'Bearer ' + getCookie("ACCESS-TOKEN") };
+    });
+
+    // Enable iframe cross-domain access via redirect option:
+    $('#fileupload3').fileupload(
+        'option',
+        'redirect',
+        window.location.href.replace(
+            /\/[^\/]*$/,
+            '/cors/result.html?%s'
+        )
+    );
 });

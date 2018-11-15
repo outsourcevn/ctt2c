@@ -307,7 +307,6 @@ function baocaolanhdao(news_id) {
 
 function clickNotes() {
     var grid = $('#dataGrid').data('kendoGrid');
-    if (ngNews.lstNewsId.length > 0) {
         var data = {
             note: $("#noidungNote").val(),
             ids: $("#IdNotes").val()
@@ -347,7 +346,6 @@ function clickNotes() {
                     }
                 )
             })
-    }
 }
 
 

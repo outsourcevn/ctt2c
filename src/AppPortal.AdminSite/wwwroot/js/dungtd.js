@@ -482,7 +482,10 @@ function nhapketqua(news_id) {
         function (success) {
             try {
                 $("#exampleModalNew_nhapketqua .commentNews").val(success[0].Data);
-                editor2.setData(success[0].Data);
+                if (success[0].Data) {
+                    editor2.setData(success[0].Data);
+                }
+                
                 $("#exampleModalNew_nhapketqua .IdReport").val(success[0].Id);
             } catch (e) {
                 $("#IdReport").val("0");

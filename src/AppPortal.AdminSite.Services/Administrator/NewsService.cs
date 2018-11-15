@@ -215,16 +215,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 var itemCat = _category.GetById(model.CategoryId.Value) ?? null;
                 entity.IsStatus = model.IsStatus != null ? (IsStatus)model.IsStatus : IsStatus.tiepnhan;
                 entity.OnCreated = DateTime.Now;
-                entity.NewsCategories = new List<NewsCategory>
-                {
-                    new NewsCategory
-                    {
-                        CategoryId = entity.CategoryId,
-                        NewsId = entity.Id,
-                        News = entity,
-                        Categories = itemCat
-                    }
-                };
+                entity.CategoryId = model.CategoryId;
                 var modelAdd = _news.Add(entity);
 
                 //push notifi
@@ -437,7 +428,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 if (username == "vptc" || username == "ldtcmt" || GroupId == "vptc")
                 {
                     query = query.Where(z =>
-                        _newLog.Table.Where(i => i.NewsId == z.Id).Select(x => x.GroupNameTo).Contains(GroupId)
+                        _newLog.Table.Where(i => i.NewsId == z.Id).Select(x => x.GroupNameTo).Contains(username)
                     );
                 }
                 else
@@ -494,7 +485,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 if (username == "vptc" || username == "ldtcmt" || GroupId == "vptc")
                 {
                     var data2 = _newLog.Table.Where(x => x.NewsId == itemdata.Id)
-                        .Where(i => i.GroupNameTo == GroupId).FirstOrDefault();
+                        .Where(i => i.GroupNameTo == username).FirstOrDefault();
                     itemdata.Note = data2.Note;
                 }
                 else
