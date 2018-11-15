@@ -434,7 +434,7 @@ namespace AppPortal.AdminSite.Services.Administrator
 
             if (!string.IsNullOrEmpty(username))
             {
-                if (username == "vptc" || username == "ldtcmt")
+                if (username == "vptc" || username == "ldtcmt" || GroupId == "vptc")
                 {
                     query = query.Where(z =>
                         _newLog.Table.Where(i => i.NewsId == z.Id).Select(x => x.GroupNameTo).Contains(GroupId)
@@ -491,7 +491,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             var dataNews = new List<ListItemNewsModel>();
             foreach(var itemdata in dataRetun)
             {
-                if (username == "vptc" || username == "ldtcmt")
+                if (username == "vptc" || username == "ldtcmt" || GroupId == "vptc")
                 {
                     var data2 = _newLog.Table.Where(x => x.NewsId == itemdata.Id)
                         .Where(i => i.GroupNameTo == GroupId).FirstOrDefault();

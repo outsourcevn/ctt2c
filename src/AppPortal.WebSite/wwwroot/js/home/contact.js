@@ -130,7 +130,7 @@ function onCompleted() {
             UserFullName: $("input[id='UserFullName']").val(),
             UserEmail: $("input[id='UserEmail']").val(),
             Link: $("input[id='Link']").val(),
-            UserName: 'vptc',
+            UserName: 'ttdl',
             AddressString: $("#address_map").val(),
             Lat: $("#lat").val(),
             Lng: $("#lng").val(),
