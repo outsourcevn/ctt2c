@@ -276,3 +276,32 @@
         </div>
     </div>
 </div>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlLvJ9NzDhCd9z-urxEAe83JGCqv1G0TI&libraries=places&callback=googleInput2" async defer></script>
+<script>
+    function googleInput2() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -33.8688, lng: 151.2195 },
+            zoom: 13,
+            mapTypeId: 'roadmap'
+        });
+
+        var input = document.getElementById('address_map');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
+            if (places.length > 0) {
+                $("#lat").val(places[0].geometry.location.lat());
+                $("#lng").val(places[0].geometry.location.lng());
+                var address_map = $("#address_map").val();
+                var html = ' <div style="width: 100%"><iframe id="mapframe" height="280" src = "https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=' + encodeURI(address_map) + '&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder = "0" scrolling = "no" marginheight = "0" marginwidth = "0" > <a href="https://www.maps.ie/create-google-map/">Add map to website</a></iframe ></div > <br />';
+                $("#mapframe").html(html);
+            }
+        });
+    }
+</script>
+<style>
+    .pac-container {
+        z-index: 10000 !important;
+    }
+</style>
