@@ -418,6 +418,17 @@ namespace AppPortal.AdminSite.Services.Administrator
             return _homeNews.Table.SingleOrDefault(x => x.Id == id);
         }
 
+        public IList<HomeNews> GetHomeNewsByCate(int id , int? number = 0)
+        {
+            var homeNews = _homeNews.Table.Where(x => x.CategoryId == id && x.IsStatus != IsStatus.deleted && !x.OnDeleted.HasValue);
+            if(number != 0)
+            {
+                homeNews = homeNews.Take((int)number);
+            }
+            homeNews = homeNews.OrderByDescending(x => x.OnCreated);
+            return homeNews.ToList();
+        }
+
         public void UpdateStatus(string id, IsStatus status)
         {
             var data = _news.GetById(Int32.Parse(id));

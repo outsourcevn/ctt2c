@@ -16,6 +16,7 @@ namespace AppPortal.AdminSite.Services.Interfaces
         void DeleteHome(int id);
         NewsModel GetNewsById(int id);
         HomeNews GetHomeNewsById(int id);
+        IList<HomeNews> GetHomeNewsByCate(int id , int? number);
         IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "", int? categoryId = -1, int? status = -1, 
             int? type = -1 , string username = "" , string GroupId = "");
         IList<ListItemNewsModel> GetLstHomeNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "", int? categoryId = -1, int? status = -1,

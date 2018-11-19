@@ -82,6 +82,14 @@ namespace AppPortal.ApiHost.Controllers
             return ResponseInterceptor(newsHome);
         }
 
+        [AllowAnonymous]
+        [HttpGet("getHomeNewsByCate")]
+        public IActionResult ListHomeNewsAsyncByCate(int id , int? number = 0)
+        {
+            var newsHome = _newsService.GetHomeNewsByCate(id , number);
+            return ResponseInterceptor(newsHome);
+        }
+
         // get notifi
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("GetNotifi")]
