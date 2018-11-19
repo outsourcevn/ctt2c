@@ -4,6 +4,15 @@ var grid = $("#dataGrid").data("kendoGrid");
 (function ($) {
     'use strict';
     $(document).ready(function () {
+        const toolMinis = ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor"];
+        $("#exampleModalNew_xemchitiet .tomtat").kendoEditor({
+            tools:[]
+        });
+
+        $("#exampleModalNew_xemchitiet .noidung").kendoEditor({
+            tools: []
+        });
+
         var jwtToken = getCookie("ACCESS-TOKEN");
 
         var dataSource = new kendo.data.DataSource({
@@ -83,6 +92,13 @@ var grid = $("#dataGrid").data("kendoGrid");
                     template: "#=templateNote(abstract)#"
                 },
                 {
+                    field: "is_status", title: "Trạng thái", width: "150px",
+                    template: "#=templateStatus(is_status)#"
+                },
+                {
+                    field: "note", title: "Góp ý", width: "150px",
+                },
+                {
                     field: "image", title: "Ảnh đại diện", width: "50px",
                     template: "#=templatefileupload(image)#"
                 },        
@@ -91,7 +107,7 @@ var grid = $("#dataGrid").data("kendoGrid");
                 },
                 {
                     field: "id", title: "Hành động", width: "100px",
-                    template: "<a class='k-button' href='/homenews/Edit?id=#=id#'><i class='fa fa-edit'></i>&nbsp;Sửa</a> <button type='button' class='btn btn-danger delete'><i class= 'glyphicon glyphicon-trash' ></i> <span>Xóa</span></button>"
+                    template: "#=templateAction(id , is_status)#"
                 }
             ]
         }).addClass("table table-responsive");
@@ -288,23 +304,61 @@ var grid = $("#dataGrid").data("kendoGrid");
 })(jQuery);
 
 
-function baocaolanhdao(news_id) {
+function deleteNewHome(id) {
+    var grid = $('#dataGrid').data('kendoGrid');
+    kendo.confirm("Xác nhận xóa?")
+        .done(function () {
+            callAjax(
+                `${appConfig.apiHostUrl}` + '/api/News/DeleteHome?id=' + id,
+                null,
+                AjaxConst.PostRequest,
+                function (xhr) {
+                    $(this).addClass('disabled').attr('disabled', true);
+                    xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                },
+                function (success) {
+                    if (!success.did_error) {
+                        messagerSuccess('Thông báo', success.model);
+                    }
+                    if (grid) {
+                        grid.clearSelection();
+                        grid.dataSource.read();
+                    }
+                },
+                function (xhr, status, error) {
+                    if (xhr.status === 400) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        err.forEach(function (item) {
+                            messagerError(item.Code, item.Description);
+                        });
+                    } else {
+                        messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                    }
+                },
+                function (complete) {
+                    $(this).removeClass('disabled').removeAttr('disabled');
+                }
+            )
+        })
+}
+
+function gopy(news_id) {
     $("#IdNotes").val(news_id);
     $("#exampleModalNew4").modal('show');
 }
 
 function clickNotes() {
     var grid = $('#dataGrid').data('kendoGrid');
-    if (ngNews.lstNewsId.length > 0) {
+    
         var data = {
             note: $("#noidungNote").val(),
             ids: $("#IdNotes").val()
         }
 
-        kendo.confirm("Xác nhận duyệt tin này và chuyển lên lãnh đạo tổng cục?")
+        kendo.confirm("Xác nhận góp ý?")
             .done(function () {
                 callAjax(
-                    `${appConfig.apiHostUrl}/${NEWS_API.SAVE_PUBLISH_NEW_NOTE}`,
+                    `${appConfig.apiHostUrl}` + '/api/News/gop-y',
                     data,
                     AjaxConst.PostRequest,
                     function (xhr) {
@@ -335,7 +389,7 @@ function clickNotes() {
                     }
                 )
             })
-    }
+
 }
 
 
@@ -347,7 +401,7 @@ function xacminhthongtin(news_id) {
 
 function updateTrangThai(isStatus) {
     var grid = $('#dataGrid').data('kendoGrid');
-    var url = `${appConfig.apiHostUrl}/${NEWS_API.UPDATE_STATUS}` + '?Id=' + $("#newsid").val() + '&Status=' + isStatus;
+    var url = `${appConfig.apiHostUrl}` + '/api/News/UpdateStatusNewHome?Id=' + $("#newsid").val() + '&Status=' + isStatus;
     callAjax(
         url,
         null,
@@ -385,41 +439,64 @@ function updateTrangThai(isStatus) {
     )
 }
 
-function templateAction(is_status, news_id) {
-    var name = '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Xác minh</button>';
-    var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
+function xemchitiet(id) {
+    var url = `${appConfig.apiHostUrl}` + '/api/News/getHomeNewsById?id=' + id;
+    callAjax(
+        url,
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (success) {
+            if (!success.did_error) {
+                var data = success.model;
+                $("#exampleModalNew_xemchitiet .tieude").val(data.Name);
+                $("#exampleModalNew_xemchitiet .tomtat").val(data.Abstract);
+                $("#exampleModalNew_xemchitiet .noidung").val(data.Content);
+                var tomtatedit = $("#exampleModalNew_xemchitiet .tomtat").data("kendoEditor");
+                tomtatedit.value(data.Abstract);
+                var noidungedit = $("#exampleModalNew_xemchitiet .noidung").data("kendoEditor");
+                noidungedit.value(data.Content);
+                $("#exampleModalNew_xemchitiet").modal("show");
+            }
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
+        },
+        function (xhr, status, error) {
+            if (xhr.status === 400) {
+                var err = eval("(" + xhr.responseText + ")");
+                err.forEach(function (item) {
+                    messagerError(item.Code, item.Description);
+                });
+            } else {
+                messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+            }
+        },
+        function (complete) {
+            $(this).removeClass('disabled').removeAttr('disabled');
+        }
+    )
+}
+
+function templateAction(news_id , status) {
+    var name = '';
+    var editbutton = "<a class='k-button' href='/homenews/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a> <button onclick='deleteNewHome(" + news_id + ")' type='button' class='btn btn-danger delete'><i class= 'glyphicon glyphicon-trash' ></i> <span>Xóa</span></button>";
     // label-success label-danger label-info label-warning
     if (GroupId === "vptc") {
-        switch (is_status) {
-            case 8: name += '<button type="button" class="btn btn-primary btn-xs" onclick="baocaolanhdao(' + news_id + ')">Báo cáo lãnh đạo</button>'; break;
-            case 6: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công khai</button>'; break;
-            default: name += ''; break;
-        }
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
-        name = name + editbutton;
+        name = editbutton;
     }
 
-    if (GroupId === "ldtcmt") {
-        switch (is_status) {
-            case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Phân công</button>'; break;
-            default:
-                name = '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Phân công</button>';
-                break;
+    if (GroupId === "sysadmin") {
+        name = '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem chi tiết</button>'
+        if (status == 0) {
+            name += '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Duyệt bài</button>';
         }
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
-        name = name + editbutton;
-    }
-
-    if (GroupId === "dvct") {
-        switch (is_status) {
-            case 5: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
-            default: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
-        }
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Báo cáo kết quả xử lý</button>';
-    }
-
-    if (GroupId === "dvct_dp") {
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Nhập kết quả xử lý</button>';
+       
+        name += '<button type="button" class="btn btn-primary btn-xs" onclick="gopy(' + news_id + ')">Góp ý</button>';
     }
 
     return name;
@@ -503,6 +580,17 @@ function templateNote(note) {
 function templateImage(image) {
     if (image === null) return '';
     return `<img class="rounded" src="${appConfig.apiCdnUrl}${image}" width="100" height="100" />`;
+}
+
+function templateStatus(status) {
+    var name = '';
+    // label-success label-danger label-info label-warning
+    switch (status) {
+        case 0: name = '<label class="label">Đang chờ duyệt</label>'; break;
+        case 1: name = '<label class="label label-primary">Đã duyệt</label>'; break;
+        case 4: name = '<label class="label label-primary">Đã xóa</label>'; break;
+    }
+    return name;
 }
 
 function templateSpecial(status, news_id) {

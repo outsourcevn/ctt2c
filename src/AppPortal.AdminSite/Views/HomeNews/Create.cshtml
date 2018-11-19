@@ -12,13 +12,17 @@
 
     var StatusMessage = (string)TempData["StatusMessage"];
 }
-
 @section Styles {
 <style>
-    form#@formView label { font-weight: 700 !important; }
+    form#@formView label {
+        font-weight: 700 !important;
+    }
+
+    .k-i-insert-video{
+        background-image: url("../images/video.png");
+    }
 </style>
 }
-
 <div class="row">
     <div class="col col-sm-12">
         @await Html.PartialAsync("_StatusMessage", StatusMessage)
@@ -26,14 +30,12 @@
         <div class="card card-primary card-outline">
             <div class="card-header">
                 <h3 class="card-title">@ViewData["Title"]</h3>
-
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
             </div>
-
             <form id="@formView" class="needs-validation" method="post">
                 <div class="card-body">
                     <input type="hidden" readonly id="News_id" asp-for="Id" value="0" />
@@ -43,17 +45,14 @@
                     <input type="hidden" readonly id="News_UserFullName" asp-for="UserFullName" value="@_UserFullName" />
                     <div class="row">
                         <div class="col-sm-9">
-
                             <div class="form-group">
                                 <label asp-for="CategoryId" class="control-label"></label>
                                 <input asp-for="CategoryId" required style="width: 0; border: 0; visibility: hidden;" class="form-control " />
                                 <span asp-validation-for="CategoryId" class="invalid-feedback"></span>
-
                                 <div class="demo-section k-content" style="overflow: auto;">
                                     <div id="cat_treeview"></div>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label asp-for="Name" class="control-label"></label>
                                 <input asp-for="Name" class="form-control" />
@@ -69,7 +68,6 @@
                                 <textarea rows="20" cols="30" asp-for="Content" class="form-control" style="width:100%; height:600px"></textarea>
                                 <span asp-validation-for="Content" class="invalid-feedback"></span>
                             </div>
-
                         </div>
                         <div class="col-md-3" style="border-left: 1px solid #dfdfdf">
                             <div class="form-group">
@@ -81,7 +79,6 @@
                                 <span asp-validation-for="Image" class="invalid-feedback"></span>
                                 <img id="image_preview" src="" style="width: 100px; height: 100px;" />
                             </div>
-
                             <div class="form-group">
                                 <label asp-for="SourceNews" class="control-label">Nguồn tin</label>
                                 <input asp-for="SourceNews" class="form-control" mav>
@@ -94,36 +91,129 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div asp-validation-summary="ModelOnly" class="invalid-feedback"></div>
                     </div>
                 </div>
-
                 <div class="card-footer">
                     <div class="form-group">
                         <a asp-action="Index" class="btn btn-default btn-flat"><i class="fa fa-fast-backward"></i> Quay lại danh sách</a>
                         <button type="submit" class="btn btn-primary btn-flat">Tạo tin tức</button>
                     </div>
                 </div>
-
             </form>
-
         </div>
     </div>
 </div>
-
 @section Scripts {
-<script src="~/js/news/scripts.js" asp-append-version="true"></script>
+    <script src="~/js/news/scripts.js" asp-append-version="true"></script>
     @await Html.PartialAsync("_ValidationScriptsPartial")
-<script type="text/javascript">
-    var ngNews = {
-        formName: '@formView'
-    };
-    ngNews._UserId = '@_UserId';
-    ngNews._UserEmail = '@_UserEmail';
-    ngNews._UserName = '@_UserName';
-    ngNews._UserFullName = '@_UserFullName';
-</script>
-<script src="~/js/news/create_news.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        var ngNews = {
+            formName: '@formView'
+        };
+        ngNews._UserId = '@_UserId';
+        ngNews._UserEmail = '@_UserEmail';
+        ngNews._UserName = '@_UserName';
+        ngNews._UserFullName = '@_UserFullName';
+    </script>
+
+    <script type="text/x-kendo-template" id="insertVideo-template">
+        <div>
+            <label for="videoUrl">Dán link video YouTube:</label>
+            <input type="text" id="videoUrl" name="videoUrl" />
+
+            <div class="insertVideo-actions">
+                <button class="k-button insertVideo-insert">Thêm</button>
+                <button class="k-button insertVideo-cancel">Bỏ qua</button>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-kendo-template" id="youTube-template">
+        <iframe width="458" height="315" src="http://www.youtube.com/embed/#= source #?wmode=opaque&rel=0" frameborder="0"></iframe>
+    </script>
+
+    <script>
+        function insertVideo(e) {
+            var editor = $(this).data("kendoEditor");
+
+            var dialog = $($("#insertVideo-template").html())
+                .find(".insertVideo-insert")
+                .click(function () {
+
+                    var media = testUrlForMedia(dialog.element.find("input").val());
+                    if (media) {
+                        var template = kendo.template($("#youTube-template").html());
+
+                        editor.exec("insertHtml", { value: template({ source: media.id }) });
+                    }
+
+                    dialog.close();
+                })
+                .end()
+                .find(".insertVideo-cancel")
+                .click(function () {
+                    dialog.close();
+                })
+                .end()
+                .kendoWindow({
+                    modal: true,
+                    title: "Insert Video",
+                    animation: false,
+                    deactivate: function () {
+                        dialog.destroy();
+                    }
+                }).data("kendoWindow");
+
+            dialog.center().open();
+        }
+
+        // Check inserted URL for valid Media Link
+        function testUrlForMedia(pastedData) {
+            var success = false;
+            var media = {};
+            if (pastedData.match('https://(www.)?youtube|youtu\.be') || pastedData.match('http://(www.)?youtube|youtu\.be')) {
+                if (pastedData.match('embed')) {
+                    youtube_id = pastedData.split(/embed\//)[1].split('"')[0];
+                } else {
+                    youtube_id = pastedData.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0];
+                }
+                media.type = "youtube";
+                media.id = youtube_id;
+                success = true;
+            }
+
+            if (success) {
+                return media;
+            } else {
+                alert("Đây không phải video youtube");
+            }
+            return false;
+        }
+        const tools2 = ["flashManager" ,"bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "insertFile", { name: "videoExternal", tooltip: "Embed Youtube Video", exec: insertVideo }, "subscript", "superscript", "tableWizard", "createTable", "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor", "print"];
+        $("textarea#Content").kendoEditor({
+            tools: tools2,
+            imageBrowser: {
+                messages: {
+                    dropFilesHere: "Drop files here"
+                },
+                transport: {
+                    read: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
+                    destroy: {
+                        url: `${appConfig.apiCdnUrl}/ImageBrowser/Destroy`,
+                        type: AjaxConst.PostRequest
+                    },
+                    create: {
+                        url: `${appConfig.apiCdnUrl}/ImageBrowser/Create`,
+                        type: AjaxConst.PostRequest
+                    },
+                    thumbnailUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Thumbnail`,
+                    uploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`,
+                    imageUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Image?path={0}`
+                }
+            },
+        });
+    </script>
+    <script src="~/js/news/create_news.js" asp-append-version="true"></script>
 }

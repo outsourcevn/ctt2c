@@ -11,7 +11,9 @@ namespace AppPortal.AdminSite.Services.Interfaces
         News AddOrUpdateModel(NewsModel model);
         void AddOrUpdate(NewsModel model);
         void AddOrUpdateHome(NewsModel model);
+        void AddOrUpdateHomeNews(HomeNews model);
         void Delete(int id);
+        void DeleteHome(int id);
         NewsModel GetNewsById(int id);
         HomeNews GetHomeNewsById(int id);
         IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "", int? categoryId = -1, int? status = -1, 

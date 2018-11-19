@@ -74,6 +74,14 @@ namespace AppPortal.ApiHost.Controllers
             });
         }
 
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpGet("getHomeNewsById")]
+        public IActionResult ListHomeNewsAsyncById(int id)
+        {
+            var newsHome = _newsService.GetHomeNewsById(id);
+            return ResponseInterceptor(newsHome);
+        }
+
         // get notifi
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("GetNotifi")]
@@ -84,8 +92,83 @@ namespace AppPortal.ApiHost.Controllers
         }
 
 
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpPost("gop-y")]
+        // save all to Publishs
+        public IActionResult GopY([FromBody] NewVew3 newView)
+        {
+            var ids = newView.ids;
+            var note = newView.note;
+            if (ids == null || ids.Count() == 0)
+            {
+                return ToHttpBadRequest("The ids is required.");
+            }
+
+            string message = "Update thành công";
+            try
+            {
+
+                var entityModel = _newsService.GetHomeNewsById(Int32.Parse(ids));
+                if(entityModel != null)
+                {
+                    entityModel.Note = note;
+                    message = "Cập nhật tin tức thành công";
+                    _newsService.AddOrUpdateHomeNews(entityModel);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
+
         //UpdateStatus
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpGet("UpdateStatusNewHome")]
+        public IActionResult UpdateStatusNewHome(int Id = 0, int Status = 0)
+        {
+            string message = "Update trạng thái thành công";
+            try
+            {
+                if (Id > 0)
+                {
+                    var entityModel = _newsService.GetHomeNewsById(Id);
+                    if (Status > 0)
+                    {
+                        IsStatus converStatus = IsStatus.pending;
+                        if(Status == 1)
+                        {
+                            converStatus = IsStatus.publish;
+                        }
+                        entityModel.IsStatus = converStatus;
+                    }
+                    message = "Cập nhật tin tức thành công";
+                    _newsService.AddOrUpdateHomeNews(entityModel);
+
+                    // Update log file
+
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
         
+
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("UpdateStatus")]
         public IActionResult UpdateStatus(int Id = 0, int Status = 0)
@@ -184,6 +267,36 @@ namespace AppPortal.ApiHost.Controllers
             return ResponseInterceptor(message);
         }
 
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpPost("DeleteHome")]
+        public IActionResult DeleteHome(int? Id)
+        {
+            if (!Id.HasValue)
+            {
+                return ToHttpBadRequest("The Id is request");
+            }
+            var entity = _newsService.GetHomeNewsById(Id.Value);
+            if (entity == null)
+            {
+                return ToHttpBadRequest("Tin tức không tồn tại.");
+            }
+            string message = "";
+            try
+            {
+                _newsService.DeleteHome(Id.Value);
+                message = "Tin tức đã được xóa.";
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
         // delete
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpPost("Delete")]

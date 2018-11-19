@@ -252,6 +252,28 @@ namespace AppPortal.AdminSite.Services.Administrator
             }
         }
 
+        public void AddOrUpdateHomeNews(HomeNews model)
+        {
+            HomeNews entity = null;
+            if (model.Id > 0) entity = _homeNews.GetById(model.Id);
+            entity = model.ModelToEntityHomeNews(entity);
+            if (model.Id > 0)
+            {
+
+                entity.IsStatus = (IsStatus)model.IsStatus;
+                entity.OnUpdated = DateTime.Now;
+                _homeNews.Update(entity);
+            }
+            else
+            {
+                var itemCat = _category.GetById(model.CategoryId.Value) ?? null;
+                entity.IsStatus = (IsStatus)model.IsStatus;
+                entity.OnCreated = DateTime.Now;
+                entity.CategoryId = model.CategoryId;
+                var modelAdd = _homeNews.Add(entity);
+            }
+        }
+
         public void AddOrUpdate(NewsModel model)
         {
             News entity = null;
@@ -303,6 +325,20 @@ namespace AppPortal.AdminSite.Services.Administrator
                 _news.Update(entity);
             }
         }
+
+        public void DeleteHome(int id)
+        {
+            var entity = _homeNews.GetById(id);
+            if (entity != null)
+            {
+                entity.OnDeleted = DateTime.Now;
+                entity.IsShow = false;
+                entity.IsStatus = IsStatus.deleted;
+                _homeNews.Update(entity);
+            }
+        }
+
+
 
         public int DeleteAll(params string[] ids)
         {
@@ -520,6 +556,11 @@ namespace AppPortal.AdminSite.Services.Administrator
             if (categoryId > 0) query = query.Where(x => x.CategoryId == categoryId);
             if (status >= 0) query = query.Where(x => x.IsStatus == (IsStatus)status);
             if (type > 0) query = query.Where(x => x.IsType == (IsType)type);
+            if(status != 4)
+            {
+                query = query.Where(x => x.IsStatus != IsStatus.deleted && !x.OnDeleted.HasValue);
+            }
+            
             rows = query.Count();
 
             if (skip > rows)

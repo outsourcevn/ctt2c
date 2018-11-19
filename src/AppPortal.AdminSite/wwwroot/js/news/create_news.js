@@ -1,9 +1,13 @@
 ﻿'use strict';
 
 $(document).ready(function () {
+    
+
+    
+
     var jwtToken = getCookie("ACCESS-TOKEN");
     const toolMinis = ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor"];
-    const tools = ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "insertFile", "subscript", "superscript", "tableWizard", "createTable", "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor", "print"];
+    const tools = ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "insertFile", { name: "insertVideo", tooltip: "Embed Youtube Video", exec: insertVideo },, "subscript", "superscript", "tableWizard", "createTable", "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor", "print"];
     $("#files").kendoUpload({
         multiple: false,
         async: {
@@ -27,46 +31,7 @@ $(document).ready(function () {
     $("textarea#Abstract").kendoEditor({
         tools: toolMinis
     });
-    $("textarea#Content").kendoEditor({
-        tools: tools,
-        imageBrowser: {
-            messages: {
-                dropFilesHere: "Drop files here"
-            },
-            transport: {
-                read: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
-                destroy: {
-                    url: `${appConfig.apiCdnUrl}/ImageBrowser/Destroy`,
-                    type: AjaxConst.PostRequest
-                },
-                create: {
-                    url: `${appConfig.apiCdnUrl}/ImageBrowser/Create`,
-                    type: AjaxConst.PostRequest
-                },
-                thumbnailUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Thumbnail`,
-                uploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`,
-                imageUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Image?path={0}`
-            }
-        },
-        //fileBrowser: {
-        //    messages: {
-        //        dropFilesHere: "Drop files here"
-        //    },
-        //    transport: {
-        //        read: "/kendo-ui/service/FileBrowser/Read",
-        //        destroy: {
-        //            url: "/kendo-ui/service/FileBrowser/Destroy",
-        //            type: "POST"
-        //        },
-        //        create: {
-        //            url: "/kendo-ui/service/FileBrowser/Create",
-        //            type: "POST"
-        //        },
-        //        uploadUrl: "/kendo-ui/service/FileBrowser/Upload",
-        //        fileUrl: "/kendo-ui/service/FileBrowser/File?fileName={0}"
-        //    }
-        //}
-    });
+    
 
     const treeViewDataSource = new kendo.data.HierarchicalDataSource({
         schema: {
@@ -182,7 +147,7 @@ function onCheck(e) {
                     UserEmail: $("input[id='News_UserEmail']").val(),
                     SourceNews: $("input[id='SourceNews']").val(),
                     Note: $("textarea[id='Note']").val(),
-                    IsStatus: $("select[name='IsStatus'] option:selected").val(),
+                    IsStatus: 0,
                 };
                 //console.log(dataJson);
                 callAjax(
