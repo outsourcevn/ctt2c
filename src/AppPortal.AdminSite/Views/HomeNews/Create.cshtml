@@ -259,7 +259,7 @@
                             done: function (e, data) {
                                 var monkey = data.response().result.files.url;
                                 $("#filesContent").html("");
-                                $("#filesContent").html('<video width="400" controls><source src="' + monkey +'" type = "video/mp4"></video>');
+                                $("#filesContent").html('<iframe width="458" height="315" src="'+ monkey +'" frameborder="0"></iframe>');
                             },
                             error: function (e, data) {
                                 var text = e.responseJSON.err;

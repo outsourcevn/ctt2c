@@ -498,7 +498,7 @@ function templateAction(news_id , status) {
     }
 
     if (GroupId === "sysadmin") {
-        name += '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem chi tiết</button>';
+        name += '';
         if (status === 0) {
             name += '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Duyệt bài</button>';
         }
