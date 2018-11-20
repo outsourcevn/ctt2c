@@ -198,5 +198,60 @@ namespace AppPortal.ApiHost.Controllers
                 return BadRequest(new { err = e.Message });
             }
         }
+
+        [AllowAnonymous]
+        [HttpPost("uploadAnoVideo")]
+        public virtual async Task<IActionResult> UploadAnoVideo(string __RequestVerificationToken, IFormFile files)
+        {
+            try
+            {
+                var urlWeb = apiSettings.BaseUrl;
+                long size = files.Length;
+                var fileType = files.ContentType;
+                if(fileType.IndexOf("video") != -1)
+                {
+                    if(size <= 50000000)
+                    {
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploadsAno/");
+                        if (!Directory.Exists(filePath))
+                        {
+                            Directory.CreateDirectory(filePath);
+                        }
+
+                        var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(files.FileName);
+                        if (files.Length > 0)
+                        {
+                            using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+                            {
+                                await files.CopyToAsync(stream);
+                            }
+                        }
+                        var obj = new FileUpload();
+                        obj.deleteType = "DELETE";
+                        obj.name = files.FileName;
+                        obj.size = files.Length;
+                        obj.thumbnailUrl = urlWeb + "/uploadsAno/" + fileName;
+                        obj.type = files.ContentType;
+                        obj.url = urlWeb + "/uploadsAno/" + fileName;
+                        obj.deleteUrl = urlWeb + "/api/NewsLog/deleteAno/" + fileName;
+
+                        return Ok(new { files = obj });
+                    }
+                    else
+                    {
+                        return BadRequest(new { err = "Dung lượng nhỏ hơn 50mb!" });
+                    }
+                    
+                }
+                else
+                {
+                    return BadRequest(new { err = "Đây không phải là tệp video!" });
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { err = e.Message });
+            }
+        }
     }
 }

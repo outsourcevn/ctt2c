@@ -41,3 +41,9 @@ body.body__login {
 .user-panel{
     height: 180px !important;
 }
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

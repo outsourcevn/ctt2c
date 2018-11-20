@@ -89,7 +89,10 @@ var grid = $("#dataGrid").data("kendoGrid");
                 },
                 {
                     field: "abstract", title: "Tóm tắt", width: "150px",
-                    template: "#=templateNote(abstract)#"
+                    template: "#=templateNote(abstract)#",
+                    attributes: {
+                        "class": "line-clamp"
+                    }
                 },
                 {
                     field: "is_status", title: "Trạng thái", width: "150px",
@@ -98,10 +101,10 @@ var grid = $("#dataGrid").data("kendoGrid");
                 {
                     field: "note", title: "Góp ý", width: "150px",
                 },
-                {
-                    field: "image", title: "Ảnh đại diện", width: "50px",
-                    template: "#=templatefileupload(image)#"
-                },        
+                //{
+                //    field: "image", title: "Ảnh đại diện", width: "50px",
+                //    template: "#=templatefileupload(image)#"
+                //},        
                 {
                     field: "on_created", title: "Ngày tạo", template: "#=templateDate(on_created)#", width: "90px"
                 },
@@ -455,10 +458,13 @@ function xemchitiet(id) {
                 $("#exampleModalNew_xemchitiet .tieude").val(data.Name);
                 $("#exampleModalNew_xemchitiet .tomtat").val(data.Abstract);
                 $("#exampleModalNew_xemchitiet .noidung").val(data.Content);
+                $("#exampleModalNew_xemchitiet .anhdaidien").attr("src", appConfig.apiCdnUrl + data.Image);
                 var tomtatedit = $("#exampleModalNew_xemchitiet .tomtat").data("kendoEditor");
                 tomtatedit.value(data.Abstract);
                 var noidungedit = $("#exampleModalNew_xemchitiet .noidung").data("kendoEditor");
                 noidungedit.value(data.Content);
+
+
                 $("#exampleModalNew_xemchitiet").modal("show");
             }
             if (grid) {
@@ -483,16 +489,17 @@ function xemchitiet(id) {
 }
 
 function templateAction(news_id , status) {
-    var name = '';
-    var editbutton = "<a class='k-button' href='/homenews/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a> <button onclick='deleteNewHome(" + news_id + ")' type='button' class='btn btn-danger delete'><i class= 'glyphicon glyphicon-trash' ></i> <span>Xóa</span></button>";
+    var name = '<button type="button" style="margin-right: 5px;" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem chi tiết</button>';
+    
+    var editbutton = "<a class='btn btn-primary btn-xs' href='/homenews/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a> <button onclick='deleteNewHome(" + news_id + ")' type='button' class='btn btn-danger delete btn-xs'><i class= 'fa fa-trash' ></i> <span>Xóa</span></button>";
     // label-success label-danger label-info label-warning
     if (GroupId === "vptc") {
-        name = editbutton;
+        name += editbutton;
     }
 
     if (GroupId === "sysadmin") {
-        name = '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem chi tiết</button>'
-        if (status == 0) {
+        name += '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem chi tiết</button>';
+        if (status === 0) {
             name += '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Duyệt bài</button>';
         }
        
@@ -570,7 +577,7 @@ function templatefileupload(image) {
 
 function templateNote(note) {
     if (note) {
-        return "<span class=''>" + note + "</span>";
+        return "<span class=''>" + note  + "...</span>";
     } else {
         return "";
     }

@@ -1,13 +1,8 @@
 ﻿'use strict';
 
 $(document).ready(function () {
-    
-
-    
-
     var jwtToken = getCookie("ACCESS-TOKEN");
     const toolMinis = ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor"];
-    const tools = ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "insertFile", { name: "insertVideo", tooltip: "Embed Youtube Video", exec: insertVideo },, "subscript", "superscript", "tableWizard", "createTable", "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor", "print"];
     $("#files").kendoUpload({
         multiple: false,
         async: {
