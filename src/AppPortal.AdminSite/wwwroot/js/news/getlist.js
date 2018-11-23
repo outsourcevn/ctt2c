@@ -400,9 +400,10 @@ function templateAction(is_status, news_id) {
     var name = '';
     var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
     // label-success label-danger label-info label-warning
-    if (GroupId == "vptc") {
+    if (GroupId === "vptc") {
+        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phanloai(' + news_id + ')">Phân loại</button>';
+        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Phân công</button>';
         switch (is_status) {
-            case 7: name += '<button type="button" class="btn btn-primary btn-xs" onclick="baocaolanhdao(' + news_id + ')">Báo cáo lãnh đạo</button>'; break;
             case 6: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công khai</button>'; break;
             default: name += ''; break;
         }
@@ -410,18 +411,18 @@ function templateAction(is_status, news_id) {
         name = name + editbutton;
     }
 
-    if (GroupId == "ldtcmt") {
+    if (GroupId === "ldtcmt") {
         switch (is_status) {
-            case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Phân công</button>'; break;
+            case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="duyettin(' + news_id + ')">Duyệt tin</button>'; break;
             default:
-                name = '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Phân công</button>';
+                name = '<button type="button" class="btn btn-primary btn-xs" onclick="duyettin(' + news_id + ')">Duyệt tin</button>';
                 break;
         }
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
         name = name + editbutton;
     }
 
-    if (GroupId == "dvct") {
+    if (GroupId === "dvct") {
         switch (is_status) {
             case 5: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
             default: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
@@ -429,7 +430,7 @@ function templateAction(is_status, news_id) {
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Báo cáo kết quả xử lý</button>';
     }
 
-    if (GroupId == "dvct_dp") {  
+    if (GroupId === "dvct_dp") {  
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Nhập kết quả xử lý</button>';
     }
 
