@@ -305,6 +305,37 @@ namespace AppPortal.ApiHost.Controllers
             }
             return ResponseInterceptor(message);
         }
+
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpPost("Hoantac")]
+        public IActionResult Hoactac(int? Id)
+        {
+            if (!Id.HasValue)
+            {
+                return ToHttpBadRequest("The Id is request");
+            }
+            var entity = _newsService.GetHomeNewsById(Id.Value);
+            if (entity == null)
+            {
+                return ToHttpBadRequest("Tin tức không tồn tại.");
+            }
+            string message = "";
+            try
+            {
+                _newsService.Hoactac(Id.Value);
+                message = "Tin tức đã được hoàn tác.";
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
         // delete
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpPost("Delete")]

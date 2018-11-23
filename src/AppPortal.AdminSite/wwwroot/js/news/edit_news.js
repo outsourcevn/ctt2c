@@ -25,49 +25,49 @@ $(document).ready(function () {
         },
     });
 
-    $("textarea#Abstract").kendoEditor({
-        tools: toolMinis
-    });
-    $("textarea#Content").kendoEditor({
-        tools: tools,
-        imageBrowser: {
-            messages: {
-                dropFilesHere: "Drop files here"
-            },
-            transport: {
-                read: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
-                destroy: {
-                    url: `${appConfig.apiCdnUrl}/ImageBrowser/Destroy`,
-                    type: AjaxConst.PostRequest
-                },
-                create: {
-                    url: `${appConfig.apiCdnUrl}/ImageBrowser/Create`,
-                    type: AjaxConst.PostRequest
-                },
-                thumbnailUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Thumbnail`,
-                uploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`,
-                imageUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Image?path={0}`
-            }
-        },
-        //fileBrowser: {
-        //    messages: {
-        //        dropFilesHere: "Drop files here"
-        //    },
-        //    transport: {
-        //        read: "/kendo-ui/service/FileBrowser/Read",
-        //        destroy: {
-        //            url: "/kendo-ui/service/FileBrowser/Destroy",
-        //            type: "POST"
-        //        },
-        //        create: {
-        //            url: "/kendo-ui/service/FileBrowser/Create",
-        //            type: "POST"
-        //        },
-        //        uploadUrl: "/kendo-ui/service/FileBrowser/Upload",
-        //        fileUrl: "/kendo-ui/service/FileBrowser/File?fileName={0}"
-        //    }
-        //}
-    });
+    //$("textarea#Abstract").kendoEditor({
+    //    tools: toolMinis
+    //});
+    //$("textarea#Content").kendoEditor({
+    //    tools: tools,
+    //    imageBrowser: {
+    //        messages: {
+    //            dropFilesHere: "Drop files here"
+    //        },
+    //        transport: {
+    //            read: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
+    //            destroy: {
+    //                url: `${appConfig.apiCdnUrl}/ImageBrowser/Destroy`,
+    //                type: AjaxConst.PostRequest
+    //            },
+    //            create: {
+    //                url: `${appConfig.apiCdnUrl}/ImageBrowser/Create`,
+    //                type: AjaxConst.PostRequest
+    //            },
+    //            thumbnailUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Thumbnail`,
+    //            uploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`,
+    //            imageUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Image?path={0}`
+    //        }
+    //    },
+    //    //fileBrowser: {
+    //    //    messages: {
+    //    //        dropFilesHere: "Drop files here"
+    //    //    },
+    //    //    transport: {
+    //    //        read: "/kendo-ui/service/FileBrowser/Read",
+    //    //        destroy: {
+    //    //            url: "/kendo-ui/service/FileBrowser/Destroy",
+    //    //            type: "POST"
+    //    //        },
+    //    //        create: {
+    //    //            url: "/kendo-ui/service/FileBrowser/Create",
+    //    //            type: "POST"
+    //    //        },
+    //    //        uploadUrl: "/kendo-ui/service/FileBrowser/Upload",
+    //    //        fileUrl: "/kendo-ui/service/FileBrowser/File?fileName={0}"
+    //    //    }
+    //    //}
+    //});
 
     const treeViewDataSource = new kendo.data.HierarchicalDataSource({
         schema: {

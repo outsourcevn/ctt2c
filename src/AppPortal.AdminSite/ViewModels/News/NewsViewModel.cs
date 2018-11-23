@@ -18,8 +18,8 @@ namespace AppPortal.AdminSite.ViewModels.News
         [Display(Name = "Nội dung")]
         [Required(ErrorMessage = "{0} không được để trống.")]
         public string Content { get; set; }
+
         [Display(Name = "Ảnh đại diện")]
-        [Required(ErrorMessage = "{0} không được để trống.")]
         public string Image { get; set; }
         [Display(Name = "Link")]
         public string Link { get; set; }

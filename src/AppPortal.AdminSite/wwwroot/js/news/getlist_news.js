@@ -306,6 +306,43 @@ var grid = $("#dataGrid").data("kendoGrid");
     });
 })(jQuery);
 
+function hoantac(id) {
+    var grid = $('#dataGrid').data('kendoGrid');
+    kendo.confirm("Xác nhận hoàn tác tin này?")
+        .done(function () {
+            callAjax(
+                `${appConfig.apiHostUrl}` + '/api/News/Hoantac?id=' + id,
+                null,
+                AjaxConst.PostRequest,
+                function (xhr) {
+                    $(this).addClass('disabled').attr('disabled', true);
+                    xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                },
+                function (success) {
+                    if (!success.did_error) {
+                        messagerSuccess('Thông báo', success.model);
+                    }
+                    if (grid) {
+                        grid.clearSelection();
+                        grid.dataSource.read();
+                    }
+                },
+                function (xhr, status, error) {
+                    if (xhr.status === 400) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        err.forEach(function (item) {
+                            messagerError(item.Code, item.Description);
+                        });
+                    } else {
+                        messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                    }
+                },
+                function (complete) {
+                    $(this).removeClass('disabled').removeAttr('disabled');
+                }
+            )
+        })
+}
 
 function deleteNewHome(id) {
     var grid = $('#dataGrid').data('kendoGrid');
@@ -488,25 +525,32 @@ function xemchitiet(id) {
     )
 }
 
-function templateAction(news_id , status) {
-    var name = '<button type="button" style="margin-right: 5px;" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem chi tiết</button>';
-    
-    var editbutton = "<a class='btn btn-primary btn-xs' href='/homenews/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a> <button onclick='deleteNewHome(" + news_id + ")' type='button' class='btn btn-danger delete btn-xs'><i class= 'fa fa-trash' ></i> <span>Xóa</span></button>";
-    // label-success label-danger label-info label-warning
-    if (GroupId === "vptc") {
-        name += editbutton;
-    }
+function templateAction(news_id, status) {
+    if (status === 4) {
+        var name2 = '<button type="button" style="margin-right: 5px;" class="btn btn-primary btn-xs" onclick="hoantac(' + news_id + ')">Hoàn tác tin</button>';
+        return name2;
+    } else {
+        var name = '<button type="button" style="margin-right: 5px;" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem chi tiết</button>';
 
-    if (GroupId === "sysadmin") {
-        name += '';
-        if (status === 0) {
-            name += '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Duyệt bài</button>';
+        var editbutton = "<a class='btn btn-primary btn-xs' href='/homenews/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a> <button onclick='deleteNewHome(" + news_id + ")' type='button' class='btn btn-danger delete btn-xs'><i class= 'fa fa-trash' ></i> <span>Xóa</span></button>";
+        // label-success label-danger label-info label-warning
+        if (GroupId === "vptc") {
+            name += editbutton;
         }
-       
-        name += '<button type="button" class="btn btn-primary btn-xs" onclick="gopy(' + news_id + ')">Góp ý</button>';
-    }
 
-    return name;
+        if (GroupId === "sysadmin") {
+            name += '';
+            if (status === 0) {
+                name += '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Duyệt bài</button>';
+            }
+
+            name += '<button type="button" class="btn btn-primary btn-xs" onclick="gopy(' + news_id + ')">Góp ý</button>';
+        }
+        return name;
+    }
+   
+
+    
 }
 
 //name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="baocaoketqua(' + news_id + ')">Tổng hợp kết quả xử lý</button>';

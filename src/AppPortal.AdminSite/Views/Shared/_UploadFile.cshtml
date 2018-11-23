@@ -1,0 +1,224 @@
+﻿<script id="template-upload" type="text/x-tmpl">
+    {% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+            <button class="btn btn-primary start" disabled>
+                <i class="glyphicon glyphicon-upload"></i>
+                <span>Tải lên</span>
+            </button>
+            {% } %}
+            {% if (!i) { %}
+            <button class="btn btn-warning cancel">
+                <i class="glyphicon glyphicon-ban-circle"></i>
+                <span>Loại bỏ</span>
+            </button>
+            {% } %}
+        </td>
+    </tr>
+    {% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+    {% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img style="width: 200px" src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                <a href="{%=file.url%}" target="_blank" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+            <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
+                <i class="glyphicon glyphicon-trash"></i>
+                <span>Xóa</span>
+            </button>
+            {% } else { %}
+            <button class="btn btn-warning cancel">
+                <i class="glyphicon glyphicon-ban-circle"></i>
+                <span>Cancel</span>
+            </button>
+            {% } %}
+        </td>
+    </tr>
+    {% } %}
+</script>
+
+<script type="text/x-kendo-template" id="insertVideo-template">
+    <div>
+        @*<label for="videoUrl">Dán link video YouTube:</label>
+            <input type="text" id="videoUrl" name="videoUrl" />*@
+
+        <span class="btn btn-success fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Select files...</span>
+            <!-- The file input field used as target for the file upload widget -->
+            <input id="fileupload" type="file" name="files">
+        </span>
+        <br>
+        <br>
+        <!-- The global progress bar -->
+        <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
+        </div>
+        <!-- The container for the uploaded files -->
+        <div id="filesContent" style="margin-top: 10px;" class="files"></div>
+
+        <div class="insertVideo-actions">
+            <button class="k-button insertVideo-insert">Thêm</button>
+            <button class="k-button insertVideo-cancel">Bỏ qua</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="youTube-template">
+    <iframe width="458" height="315" src="http://www.youtube.com/embed/#= source #?wmode=opaque&rel=0" frameborder="0"></iframe>
+</script>
+
+<script>
+        function insertVideo(e) {
+            var editor = $(this).data("kendoEditor");
+
+            var dialog = $($("#insertVideo-template").html())
+                .find(".insertVideo-insert")
+                .click(function () {
+                    editor.exec("insertHtml", { value: $("#filesContent").html()  });
+                    dialog.close();
+                })
+                .end()
+                .find(".insertVideo-cancel")
+                .click(function () {
+                    dialog.close();
+                })
+                .end()
+                .kendoWindow({
+                    modal: true,
+                    width: "630px",
+                    title: "Insert Video",
+                    animation: false,
+                    deactivate: function () {
+                        dialog.destroy();
+                    },
+                    open: function () {
+                        $('#fileupload').fileupload({
+                            url: `${appConfig.apiHostUrl}` + '/api/NewsLog/uploadAnoVideo',
+                            dataType: 'json',
+                            formData: { __RequestVerificationToken: 'test' },
+                            done: function (e, data) {
+                                var monkey = data.response().result.files.url;
+                                $("#filesContent").html("");
+                                $("#filesContent").html('<iframe width="458" height="315" src="'+ monkey +'" frameborder="0"></iframe>');
+                            },
+                            error: function (e, data) {
+                                var text = e.responseJSON.err;
+                                $("#filesContent").html("<p class='label label-danger'>" + text + "</p>");
+                            },
+                            progressall: function (e, data) {
+                                var progress = parseInt(data.loaded / data.total * 100, 10);
+                                $('#progress .progress-bar').css(
+                                    'width',
+                                    progress + '%'
+                                );
+                            }
+                        }).prop('disabled', !$.support.fileInput)
+                            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+                    }
+                }).data("kendoWindow");
+
+            dialog.center().open();
+
+        }
+
+        // Check inserted URL for valid Media Link
+        function testUrlForMedia(pastedData) {
+            var success = false;
+            var media = {};
+            if (pastedData.match('https://(www.)?youtube|youtu\.be') || pastedData.match('http://(www.)?youtube|youtu\.be')) {
+                if (pastedData.match('embed')) {
+                    youtube_id = pastedData.split(/embed\//)[1].split('"')[0];
+                } else {
+                    youtube_id = pastedData.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0];
+                }
+                media.type = "youtube";
+                media.id = youtube_id;
+                success = true;
+            }
+
+            if (success) {
+                return media;
+            } else {
+                alert("Đây không phải video youtube");
+            }
+            return false;
+        }
+
+        const tools2 = ["flashManager", "bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "insertFile", { name: "videoExternal", tooltip: "Embed Youtube Video", exec: insertVideo }, "subscript", "superscript", "tableWizard", "createTable", "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor", "print"];
+        //var editorContent = CKEDITOR.replace('Content', {
+        //    height: 800,
+        //    extraPlugins: 'imageuploader',
+        //    filebrowserImageBrowseUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
+        //    filebrowserImageUploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`
+        //});
+
+        //var configAbstract = CKEDITOR.replace('Abstract');
+
+        $("textarea#Content").kendoEditor({
+            tools: tools2,
+            imageBrowser: {
+                messages: {
+                    dropFilesHere: "Drop files here"
+                },
+                transport: {
+                    read: `${appConfig.apiCdnUrl}/ImageBrowser/Read`,
+                    destroy: {
+                        url: `${appConfig.apiCdnUrl}/ImageBrowser/Destroy`,
+                        type: AjaxConst.PostRequest
+                    },
+                    create: {
+                        url: `${appConfig.apiCdnUrl}/ImageBrowser/Create`,
+                        type: AjaxConst.PostRequest
+                    },
+                    thumbnailUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Thumbnail`,
+                    uploadUrl: `${appConfig.apiCdnUrl}/ImageBrowser/upload`,
+                    imageUrl: `${appConfig.apiCdnUrl}/ImageBrowser/Image?path={0}`
+                }
+            },
+        });
+</script>
+
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="~/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="~/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="~/js/jquery.fileupload.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

@@ -338,7 +338,17 @@ namespace AppPortal.AdminSite.Services.Administrator
             }
         }
 
-
+        public void Hoactac(int id)
+        {
+            var entity = _homeNews.GetById(id);
+            if (entity != null)
+            {
+                entity.OnDeleted = null;
+                entity.IsShow = true;
+                entity.IsStatus = IsStatus.publish;
+                _homeNews.Update(entity);
+            }
+        }
 
         public int DeleteAll(params string[] ids)
         {
