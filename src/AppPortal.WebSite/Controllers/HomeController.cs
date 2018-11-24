@@ -22,8 +22,6 @@ namespace AppPortal.WebSite.Controllers
 
         public IActionResult Index()
         {
-            //ViewData["data"] = _newsService.GetNewsList();
-           // @ViewData["activeHome"] = "active";
             return View();
         }
 

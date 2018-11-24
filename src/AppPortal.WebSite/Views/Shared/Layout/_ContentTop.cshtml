@@ -45,6 +45,7 @@
     #block-search-form .form-text {
         margin-top: 0 !important;
     }
+
     .col-md-8 .block {
         width: 100% !important;
     }
@@ -115,7 +116,7 @@
                             <div class="form-item">
                                 <label asp-for="Link" class="control-label">Địa điểm:</label>
                                 <input asp-for="Link" class="form-text" id="address_map" placeholder="Địa điểm diễn ra" />
-                                
+
                                 <input type="hidden" id="lat" name="lat" />
                                 <input type="hidden" id="lng" name="lng" />
                                 <span asp-validation-for="Link" class="form-required"></span>
@@ -225,7 +226,7 @@
             <section class="block block_business_news">
                 <h3 class="block_title_black">TIN MỚI NHẤT<a href="#" class="view_all" style="opacity: 0.5;"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="content">
-                    <div class="left">
+                    <div id="tin-moi-nhat-content" class="left">
                         <article class="border-dot">
                             <hgroup>
                                 <h4 class="title"><a href="#">Xử lý các cơ sở gây ô nhiễm nghiêm trọng chậm do thiếu vốn.</a></h4>
@@ -256,28 +257,17 @@
                             </p>
                         </article>
 
-                        @*<article class="border-dot">
-                        <hgroup>
-                            <h4 class="title"><a href="#">Tổng cục Môi trường nói về việc cập nhật và công bố danh sách các tổ chức, cá nhân được cấp GCN nhập khẩu phế liệu.</a></h4>
-                        </hgroup>
-                        <p class="date">
-                            <time>
-                                011/11/2018 10:19:43 PM
-                            </time>
-                            <span class="comments_count"><a href="#">5</a></span>
-                        </p>
-                        <p style="line-height: 15px;">
-                            Theo quy định tại Thông tư số 08/2018/TT-BTNMT và Thông tư số 09/2018/TT-BTNMT ngày 14/9/2018 của Bộ trưởng Bộ Tài nguyên và Môi trường về việc ban hành quy chuẩn kỹ thuật quốc gia về môi trường, thì các loại phế liệu...
-                        </p>
-                    </article>*@
+
                     </div>
                 </div>
             </section>
         </div>
     </div>
 </div>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlLvJ9NzDhCd9z-urxEAe83JGCqv1G0TI&libraries=places&callback=googleInput2" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlLvJ9NzDhCd9z-urxEAe83JGCqv1G0TI&libraries=places&callback=googleInput2" async defer></script>
+
 <script>
+   
     function googleInput2() {
         var map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: -33.8688, lng: 151.2195 },
@@ -299,9 +289,10 @@
             }
         });
     }
+
 </script>
-<style>
-    .pac-container {
-        z-index: 10000 !important;
-    }
-</style>
+    <style>
+        .pac-container {
+            z-index: 10000 !important;
+        }
+    </style>
