@@ -74,7 +74,7 @@ namespace AppPortal.ApiHost.Controllers
             });
         }
 
-        [Authorize(PolicyRole.EDIT_ONLY)]
+        [AllowAnonymous]
         [HttpGet("getHomeNewsById")]
         public IActionResult ListHomeNewsAsyncById(int id)
         {

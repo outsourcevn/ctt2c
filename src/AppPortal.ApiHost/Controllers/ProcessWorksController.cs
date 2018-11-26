@@ -347,7 +347,7 @@ namespace AppPortal.ApiHost.Controllers
                 //logs 
                 var logs = new NewsLog();
                 logs.NewsId = newsData.Id;
-                logs.UserName = newsData.UserId;
+                logs.UserName = newsData.UserName;
                 logs.GroupNameTo = newsData.UserName;
                 logs.OnCreated = DateTime.Now;
                 _newLog.AddOrUpdate(logs);

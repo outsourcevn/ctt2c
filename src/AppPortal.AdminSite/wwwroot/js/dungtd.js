@@ -758,14 +758,16 @@ function xemchitiet(news_id) {
             $("#thongtinbody").html("");
             success.forEach(function (value) {
                 var html = "";
-                if (value.Data) {
-                    html = '<label for="recipient-name" class="col-form-label">' + value.FullUserName + '</label><p>' + value.Data + '</p>';
-                    for (var i = 0; i < value.files.length; i++) {
-                        html += '<a href="' + value.files[0].url +'" target="_blank">' + value.files[0].name + '</a><br>';
-                    }
-                    
-                    $("#thongtinbody").append(html);
+                if (!value.Data) {
+                    value.Data = "";
                 }
+                html = '<label for="recipient-name" class="col-form-label">' + value.FullUserName + '</label><p>' + value.Data + '</p>';
+                for (var i = 0; i < value.files.length; i++) {
+                    html += '<a href="' + value.files[0].url +'" target="_blank">' + value.files[0].name + '</a><br>';
+                }
+                    
+                $("#thongtinbody").append(html);
+
             });
 
             $("#exampleModalNew_xemchitiet").modal("show");

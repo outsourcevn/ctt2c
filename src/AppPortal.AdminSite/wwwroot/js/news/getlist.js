@@ -446,7 +446,7 @@ function templateAction(is_status, news_id) {
 
     if (GroupId === "ldtcmt") {
         switch (is_status) {
-            case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')"Công bố</button>'; break;
+            case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công bố</button>'; break;
             default:
                 name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công bố</button>';
                 break;

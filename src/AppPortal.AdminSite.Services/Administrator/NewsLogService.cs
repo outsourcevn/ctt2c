@@ -96,7 +96,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         public IList<NewLogUpLoad> GetReport(int NewsId)
         {
             var dataReturn = new List<NewLogUpLoad>();
-            var data = _newslog.Table.Where(x => x.NewsId == NewsId).ToList();
+            var data = _newslog.Table.Where(x => x.NewsId == NewsId).Where(x => x.GroupNameTo == "dvct").ToList();
             foreach(var item in data)
             {
                 var obj = new NewLogUpLoad();
