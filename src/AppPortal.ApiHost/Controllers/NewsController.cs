@@ -476,9 +476,17 @@ namespace AppPortal.ApiHost.Controllers
             try
             {
                 _newsService.UpdateStatus(ids , IsStatus.phancong);
+                
                 var item = _newsService.GetNewsById(Int32.Parse(ids));
                 if (item != null)
                 {
+                    var newlogTTDL = _newLog.GetInfoNewLog(item.Id, "ttdl");
+                    if (newlogTTDL != null)
+                    {
+                        newlogTTDL.Note = note;
+                        _newLog.AddOrUpdate(newlogTTDL);
+                    }
+
                     if (!string.IsNullOrEmpty(username))
                     {
                         var lstUserName = username.Split(",");
@@ -494,19 +502,19 @@ namespace AppPortal.ApiHost.Controllers
                                     logs.UserName = usernameData;
                                     if (newView.type == 3)
                                     {
-                                        logs.GroupNameFrom = "ldtcmt";
+                                        logs.GroupNameFrom = "ttdl";
                                         logs.GroupNameTo = "dvct";
                                         logs.TypeStatus = IsTypeStatus.is_phancong;
                                         logs.DetailTypeStatus = "Phân công";
                                     }
-                                    else if (newView.type == 4)
-                                    {
-                                        logs.GroupNameFrom = "dvct";
-                                        logs.TypeStatus = IsTypeStatus.is_chuyencongvan;
-                                        logs.DetailTypeStatus = "Chuyển công văn";
-                                    }
+                                    //else if (newView.type == 4)
+                                    //{
+                                    //    logs.GroupNameFrom = "dvct";
+                                    //    logs.TypeStatus = IsTypeStatus.is_chuyencongvan;
+                                    //    logs.DetailTypeStatus = "Chuyển công văn";
+                                    //}
 
-                                    logs.Note = note;
+                                    //logs.Note = note;
                                     logs.OnCreated = DateTime.Now;
                                     logs.FullUserName = userFrom.FullName;
                                     _newLog.AddOrUpdate(logs);
@@ -675,6 +683,38 @@ namespace AppPortal.ApiHost.Controllers
                 _newsService.AddNewRelated(entityModel);
                 message = "Tin tức liên quan đã được cập nhật.";
 
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
+
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpGet("phanloai")]
+        // AddNewRelated
+        public IActionResult PhanLoai(int? Id ,int? istype)
+        {
+            string message = "";
+            try
+            {
+                if ((int)Id > 0)
+                {
+                    var entityModel = _newsService.GetNewsById((int)Id);
+                    if (Id.HasValue && Id > 0)
+                    {
+                        entityModel.IsType = istype;
+                        entityModel.OnUpdated = DateTime.Now;
+                    }
+                    _newsService.AddOrUpdate(entityModel);
+                    message = "Phân loại thành công.";
+                }
             }
             catch (System.Exception ex)
             {

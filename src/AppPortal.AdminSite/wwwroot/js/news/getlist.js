@@ -60,6 +60,54 @@ var grid = $("#dataGrid").data("kendoGrid");
             };
         };
 
+        var columnsData = [
+            { selectable: true, hidden: true },
+            {
+                field: "name",
+                title: "Tiêu đề"
+            },
+            //{
+            //    field: "note", title: "Ghi chú", width: "150px",
+            //    template: "#=templateNote(note)#"
+            //},
+            {
+                field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDate(on_created)#", width: "90px"
+            }
+        ];
+
+        if (GroupId != "dvct") {
+            var objDVCT = {
+                field: "is_status", title: "Trạng thái", width: "150px",
+                template: "#=templateSpecial(is_status, id)#"
+            };
+            columnsData.push(objDVCT);
+        } else {
+            var objDVCT2 = {
+                field: "is_type", title: "Phân loại", width: "200px",
+                template: "#=templatePhanloai2(is_type , id)#"
+            };
+
+            var objDVCT3 = {
+                field: "note", title: "Ghi chú", width: "200px",
+                template: "#=templateNoteDVCT(id)#"
+            };
+            columnsData.push(objDVCT2);
+            columnsData.push(objDVCT3);
+        }
+
+        if (GroupId == "ttdl") {
+            var objVPTC = {
+                field: "is_type", title: "Phân loại", width: "100px",
+                template: "#=templatePhanloai(is_type , id)#"
+            };
+            columnsData.push(objVPTC);
+        }
+
+        columnsData.push({
+            field: "id", title: "Hành động", width: "100px",
+            template: "#=templateAction(is_status , id)#"
+        });
+        
         $("#dataGrid").kendoGrid({
             dataSource: dataSource,
             pageable: {
@@ -72,40 +120,7 @@ var grid = $("#dataGrid").data("kendoGrid");
             persistSelection: true,
             change: onChange,
             page: onPaging,
-            columns: [
-                { selectable: true, hidden: true },
-                {
-                    field: "name",
-                    title: "Tiêu đề"
-                },
-                {
-                    field: "is_status", title: "Trạng thái", width: "150px",
-                    template: "#=templateSpecial(is_status, id)#"
-                },
-                {
-                    field: "file_upload", title: "Tài liệu", width: "50px",
-                    template: "#=templatefileupload(file_upload)#"
-                },
-                //{
-                //    field: "is_type", title: "Phân loại", width: "100px",
-                //    template: "#=templatePhanloai(is_type , id)#"
-                //},
-                {
-                    field: "note", title: "Ghi chú", width: "150px",
-                    template: "#=templateNote(note)#"
-                },
-                {
-                    field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDate(on_created)#", width: "90px"
-                },
-                //{
-                //    field: "on_published", title: "Ngày Duyệt", template: "#=templateDate(on_published)#", width: "90px"
-                //},
-                {
-                    field: "id", title: "Hành động", width: "100px",
-                    template: "#=templateAction(is_status , id)#"
-                   // template: "<a class='k-button' href='/News/Edit?id=#=id#'><i class='fa fa-edit'></i>&nbsp;Sửa</a>"
-                }
-            ]
+            columns: columnsData
         }).addClass("table table-responsive");
 
         $('#txtName').keypress(function (e) {
@@ -400,8 +415,7 @@ function templateAction(is_status, news_id) {
     var name = '';
     var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
     // label-success label-danger label-info label-warning
-    if (GroupId === "vptc") {
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phanloai(' + news_id + ')">Phân loại</button>';
+    if (GroupId === "ttdl") {
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Phân công</button>';
         switch (is_status) {
             case 6: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công khai</button>'; break;
@@ -423,10 +437,10 @@ function templateAction(is_status, news_id) {
     }
 
     if (GroupId === "dvct") {
-        switch (is_status) {
-            case 5: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
-            default: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
-        }
+        //switch (is_status) {
+        //    case 5: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
+        //    default: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
+        //}
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Báo cáo kết quả xử lý</button>';
     }
 
@@ -446,9 +460,50 @@ function onChange(arg) {
 function onPaging(arg) {
 }
 
+function phanloaiNews(args, id) {
+    var istype = parseInt($(args).val());
+    var grid = $('#dataGrid').data('kendoGrid');
+    var url = `${appConfig.apiHostUrl}` + '/api/News/phanloai?Id=' + id + '&istype=' + istype;
+    callAjax(
+        url,
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (success) {
+            if (!success.did_error) {
+                messagerSuccess('Thông báo', success.model);
+            }
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
+        },
+        function (xhr, status, error) {
+            if (xhr.status === 400) {
+                var err = eval("(" + xhr.responseText + ")");
+                err.forEach(function (item) {
+                    messagerError(item.Code, item.Description);
+                });
+            } else {
+                messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+            }
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
+        },
+        function (complete) {
+            $(this).removeClass('disabled').removeAttr('disabled');
+        }
+    )
+}
+
 function templatePhanloai(istype, id) {
     var html = '<div class="form-group">';
-    html += '<select class="form-control" style="font-size: 11px; color: blue;height: 15px;width: 120px;" id="sel1">';
+    html += '<select class="form-control" onchange="phanloaiNews(this,'+id+')" style="font-size: 12px; color: blue;height: 15px;width: 120px;" id="sel1">';
     if (istype != "6" && istype != "7" && istype != "8" ) {
         html += '<option disabled selected>Chưa phân loại</option>';
     } else {
@@ -474,6 +529,17 @@ function templatePhanloai(istype, id) {
     }
   
     html += '    </select>';
+    return html;
+}
+
+function templatePhanloai2(istype) {
+    var html = '';
+    switch (istype) {
+        case 6: html = ' <span class="label label-success">Ô nhiễm môi trường</span>';
+        case 7: html = ' <span class="label label-success">Cơ chế, chính sách, thủ tục hành chính</span>';
+        case 8: html = ' <span class="label label-success">Giải pháp, sáng kiến bảo vệ môi trường</span>';
+    }
+
     return html;
 }
 
@@ -515,6 +581,10 @@ function templateNote(note) {
         return "";
     }
     
+}
+
+function templateNoteDVCT(id) {
+
 }
 
 function templateImage(image) {

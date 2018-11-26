@@ -52,7 +52,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             if (model.Id > 0) entity = _newslog.GetById(model.Id);
             if (model.Id > 0)
             {
-
+                entity.Note = model.Note;
                 entity.OnCreated = DateTime.Now;
                 _newslog.Update(entity);
             }
@@ -115,6 +115,20 @@ namespace AppPortal.AdminSite.Services.Administrator
             return _newslog.Table.Where(x => x.NewsId == NewsId)
                 .Where(z => z.UserName == UserName)
                 .ToList();
+        }
+
+        public NewsLog GetInfoNewLog(int news_id, string group)
+        {
+            return _newslog.Table.Where(x => x.NewsId == news_id)
+                .Where(z => z.GroupNameTo == group)
+                .FirstOrDefault();
+        }
+
+        public IList<NewsLog> GetPhanCongList(int news_id, string group)
+        {
+            return _newslog.Table.Where(x => x.NewsId == news_id)
+               .Where(z => z.GroupNameFrom == group)
+               .ToList();
         }
 
         public NewsLog AddOrUpdateReport(int id, string data)

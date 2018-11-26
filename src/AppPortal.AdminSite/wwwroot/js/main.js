@@ -70,7 +70,7 @@ $(function () {
         url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie("ACCESS-TOKEN"));
-            xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew_nhapketqua .IdReport").val()));
+            xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew .NewsLogId").val()));
         }
     });
 

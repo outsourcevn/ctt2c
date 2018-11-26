@@ -18,5 +18,7 @@ namespace AppPortal.AdminSite.Services.Interfaces
         int AddtoFileTable(FileUpload fileUpload, string id);
         string DeleteFile(int id);
         List<FileUpload> GetFile(int id, string urlWeb);
+        NewsLog GetInfoNewLog(int news_id, string group);
+        IList<NewsLog> GetPhanCongList(int news_id, string group);
     }
 }

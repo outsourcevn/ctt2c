@@ -15,7 +15,7 @@ $(document).ready(function () {
         $(".sysadmin").show();
     }
 
-    if (GroupId === 'vptc') {
+    if (GroupId === 'ttdl') {
         $("#btn-phan-cong").hide();
         $("#btn-bao-cao").hide();
         $(".tonghopbaocao").show();
@@ -346,37 +346,37 @@ $(document).ready(function () {
         }
     });
 
-    //select 2
-    var urlselect2 = `${appConfig.apiHostUrl}` + '/api/Users/getUsersForType?type=dvct';
-    $('.js-data-example-ajax').select2({
-        minimumResultsForSearch: -1,
-        width: '100%',
-        ajax: {
-            url: urlselect2,
-            dataType: 'json',
-            beforeSend: function (xhr) {
-                $(this).addClass('disabled').attr('disabled', true);
-                xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
-            },
-            processResults: function (data, params) {
-                var dataReturn = [];
-                for (var i = 0; i < data.length; i++) {
-                    var id = data[i].UserName;
-                    var text = data[i].FullName;
-                    var obj = {
-                        id: id,
-                        text: text
-                    }
-                    dataReturn.push(obj);
-                }
+    ////select 2
+    //var urlselect2 = `${appConfig.apiHostUrl}` + '/api/Users/getUsersForType?type=dvct';
+    //$('.js-data-example-ajax').select2({
+    //    minimumResultsForSearch: -1,
+    //    width: '100%',
+    //    ajax: {
+    //        url: urlselect2,
+    //        dataType: 'json',
+    //        beforeSend: function (xhr) {
+    //            $(this).addClass('disabled').attr('disabled', true);
+    //            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+    //        },
+    //        processResults: function (data, params) {
+    //            var dataReturn = [];
+    //            for (var i = 0; i < data.length; i++) {
+    //                var id = data[i].UserName;
+    //                var text = data[i].FullName;
+    //                var obj = {
+    //                    id: id,
+    //                    text: text
+    //                }
+    //                dataReturn.push(obj);
+    //            }
                 
-                return {
-                    results: dataReturn
-                };
-            },
-            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-        }
-    });
+    //            return {
+    //                results: dataReturn
+    //            };
+    //        },
+    //        // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+    //    }
+    //});
 
     var urlselect3 = `${appConfig.apiHostUrl}` + '/api/Users/getUsersForType?type=dvct_dp';
     $('.js-data-example-ajax-chuyencongvan').select2({
@@ -410,9 +410,119 @@ $(document).ready(function () {
     });
 });
 
+function createSelect2(dataSeelcted) {
+    var urlselect3 = `${appConfig.apiHostUrl}` + '/api/Users/getUsersForType?type=dvct';
+    callAjax(
+        urlselect3,
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (data) {
+            if (data) {
+                var dataReturn = [];
+                for (var i = 0; i < data.length; i++) {
+                    var id = data[i].UserName;
+                    var text = data[i].FullName;
+                    var obj = {
+                        id: id,
+                        text: text
+                    }
+                    dataReturn.push(obj);
+                }
+
+                $('.js-data-example-ajax').select2({
+                    minimumResultsForSearch: -1,
+                    width: '100%',
+                    data: dataReturn
+                });
+
+                var data2 = [];
+                for (var j = 0; j < dataSeelcted.length; j++) {
+                    data2.push(dataSeelcted[j].UserName);
+                }
+
+                $('.js-data-example-ajax').val(data2).trigger('change');
+            } else {
+                messagerError("Error", "Lỗi hệ thống xin thử lại!");
+            }
+        },
+        function (xhr, status, error) {
+
+            if (xhr.status === 400) {
+                var err = eval("(" + xhr.responseText + ")");
+                err.forEach(function (item) {
+                    messagerError(item.Code, item.Description);
+                });
+            } else {
+                messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+            }
+        },
+        function (complete) {
+            $(this).removeClass('disabled').removeAttr('disabled');
+        }
+    )
+}
+
 function phancong(news_id) {
-    $("#exampleModalNew .NewsId").val(news_id);
-    $("#exampleModalNew").modal('show');
+    callAjax(
+        `${appConfig.apiHostUrl}` + '/api/NewsLog/GetInfoNewLog?news_id=' + news_id + '&group=ttdl',
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (data) {
+            if (data) {
+                var success = data.info;
+                createSelect2(data.phancong);
+                $("#exampleModalNew .ghichubaocao").val("");
+                $("#exampleModalNew .NewsId").val(news_id);
+                $("#exampleModalNew .NewsLogId").val(success.Id);
+                $("#exampleModalNew .ghichubaocao").val(success.Note);
+                $("#exampleModalNew").modal('show');
+
+                $('#fileupload3').addClass('fileupload-processing');
+                $("#filebaocao3 tbody").empty();
+                $.ajax({
+                    // Uncomment the following to send cross-domain cookies:
+                    //xhrFields: {withCredentials: true},
+                    url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload/' + $("#exampleModalNew .NewsLogId").val(),
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie("ACCESS-TOKEN"));
+                        xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew .NewsLogId").val()));
+                    },
+                    dataType: 'json',
+                    context: $('#fileupload3')[0]
+                }).always(function () {
+                    $(this).removeClass('fileupload-processing');
+                }).done(function (result) {
+                    $(this).fileupload('option', 'done')
+                        .call(this, $.Event('done'), { result: result });
+                });
+
+            } else {
+                messagerError("Error", "Lỗi hệ thống xin thử lại!");
+            }
+        },
+        function (xhr, status, error) {
+
+            if (xhr.status === 400) {
+                var err = eval("(" + xhr.responseText + ")");
+                err.forEach(function (item) {
+                    messagerError(item.Code, item.Description);
+                });
+            } else {
+                messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+            }
+        },
+        function (complete) {
+            $(this).removeClass('disabled').removeAttr('disabled');
+        }
+    )
 }
 
 function chuyencongvan(news_id) {

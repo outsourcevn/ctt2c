@@ -79,6 +79,23 @@ namespace AppPortal.ApiHost.Controllers
             return _newLog.GetReport(NewsId);
         }
 
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpGet("GetInfoNewLog")]
+        public async Task<IActionResult> GetInfoNewLog(int news_id, string group)
+        {
+            try
+            {
+                var phancongData = _newLog.GetPhanCongList(news_id, group);
+                var info = _newLog.GetInfoNewLog(news_id, group);
+                return Ok(new { phancong = phancongData, info = info });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { err = ex.Message });
+            }
+           
+        }
+        
         [HttpDelete("delete/{id}")]
         public string deletefile(int id)
         {
@@ -103,38 +120,55 @@ namespace AppPortal.ApiHost.Controllers
                 var idReport = id.Value;
                 long size = files.Sum(f => f.Length);
                 var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/");
-                if (!Directory.Exists(filePath))
-                {
-                    Directory.CreateDirectory(filePath);
-                }
-
-                var dataReturn = new List<FileUpload>();
-                foreach (var formFile in files)
-                {
-                    var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(formFile.FileName);
-                    if (formFile.Length > 0)
+               
+                    if (!Directory.Exists(filePath))
                     {
-                        using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+                        Directory.CreateDirectory(filePath);
+                    }
+
+                    var dataReturn = new List<FileUpload>();
+                    foreach (var formFile in files)
+                    {
+                        var fileType = formFile.ContentType;
+                        var fileSize = formFile.Length;
+                        if (fileType.IndexOf("image") != -1 || fileType.IndexOf("officedocument") != -1)
                         {
-                            await formFile.CopyToAsync(stream);
+                            if(fileSize < 50000000)
+                            {
+                                var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(formFile.FileName);
+                                if (formFile.Length > 0)
+                                {
+                                    using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+                                    {
+                                        await formFile.CopyToAsync(stream);
+                                    }
+                                }
+                                var obj = new FileUpload();
+                                obj.deleteType = "DELETE";
+                                obj.name = formFile.FileName;
+                                obj.size = formFile.Length;
+                                obj.thumbnailUrl = urlWeb + "/uploads/" + fileName;
+                                obj.type = formFile.ContentType;
+                                obj.url = urlWeb + "/uploads/" + fileName;
+                                int fileid = _newLog.AddtoFileTable(obj, idReport);
+                                if (fileid > 0)
+                                {
+                                    obj.deleteUrl = urlWeb + "/api/NewsLog/delete/" + fileid.ToString();
+                                    dataReturn.Add(obj);
+                                }
+                            }
+                            else
+                            {
+                                return BadRequest("File lớn!");
+                            }
+                            
+                        }
+                        else
+                        {
+                            return BadRequest("Không đúng định dạng file!");
                         }
                     }
-                    var obj = new FileUpload();
-                    obj.deleteType = "DELETE";  
-                    obj.name = formFile.FileName;
-                    obj.size = formFile.Length;
-                    obj.thumbnailUrl = urlWeb + "/uploads/" + fileName;
-                    obj.type = formFile.ContentType;
-                    obj.url = urlWeb + "/uploads/" + fileName;
-                    int fileid = _newLog.AddtoFileTable(obj, idReport);
-                    if(fileid > 0)
-                    {
-                        obj.deleteUrl = urlWeb + "/api/NewsLog/delete/" + fileid.ToString();
-                        dataReturn.Add(obj);
-                    }
-                }
-                
-                return Ok(new { files = dataReturn});
+                    return Ok(new { files = dataReturn });
             }
             catch (Exception e) {
                 return BadRequest(new { err = e.Message });

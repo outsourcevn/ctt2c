@@ -43,9 +43,8 @@ namespace AppPortal.AdminSite.ViewModels.Users
         [Display(Name = "Mã nhóm")]
         public string GroupId { get; set; }
         public List<SelectListItem> GroupIds { get; } = new List<SelectListItem>() {
-                new SelectListItem() { Value = "vptc", Text = "Văn phòng tổng cục" ,Selected = true },
+                new SelectListItem() { Value = "ttdl", Text = "Trung tâm Thông tin và Dữ liệu môi trường" ,Selected = true },
                 new SelectListItem() { Value = "cbtddn", Text = "Cán bộ đường dây nóng" },
-                new SelectListItem() { Value = "dvct_dp", Text = "Đơn vị chủ trì cấp địa phương" },
                 new SelectListItem() { Value = "dvct", Text = "Đơn vị chủ trì" },
                 new SelectListItem() { Value = "ldtcmt", Text = "Lãnh đạo tổng cục môi trường" },
                 new SelectListItem() { Value = "sysadmin", Text = "Tài khoản quản trị (Admin)" }

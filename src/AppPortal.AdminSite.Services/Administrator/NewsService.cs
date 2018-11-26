@@ -291,6 +291,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 var itemCat = _category.GetById(model.CategoryId.Value) ?? null;
                 entity.IsStatus = model.IsStatus != null ? (IsStatus)model.IsStatus : IsStatus.tiepnhan;
                 entity.OnCreated = DateTime.Now;
+                entity.OnUpdated = DateTime.Now;
                 entity.NewsCategories = new List<NewsCategory>
                 {
                     new NewsCategory
@@ -487,10 +488,10 @@ namespace AppPortal.AdminSite.Services.Administrator
 
             if (!string.IsNullOrEmpty(username))
             {
-                if (username == "vptc" || username == "ldtcmt" || GroupId == "vptc")
+                if (GroupId == "ldtcmt" || GroupId == "ttdl")
                 {
                     query = query.Where(z =>
-                        _newLog.Table.Where(i => i.NewsId == z.Id).Select(x => x.GroupNameTo).Contains(username)
+                        _newLog.Table.Where(i => i.NewsId == z.Id).Select(x => x.GroupNameTo).Contains(GroupId)
                     );
                 }
                 else
@@ -523,6 +524,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             }
             else query = query.OrderByDescending(x => x.Id).Skip(skip.Value).Take(take.Value);
 
+            query = query.OrderByDescending(x => x.OnUpdated);
             var dataRetun =  query.Select(x => new ListItemNewsModel
             {
                 Id = x.Id,
@@ -539,12 +541,14 @@ namespace AppPortal.AdminSite.Services.Administrator
                 status = x.IsStatus,
                 Note = x.Note,
                 fileUpload = x.fileUpload,
-                IsType = x.IsType
+                IsType = x.IsType,
+                
+
             }).ToList();
             var dataNews = new List<ListItemNewsModel>();
             foreach(var itemdata in dataRetun)
             {
-                if (username == "vptc" || username == "ldtcmt" || GroupId == "vptc")
+                if (GroupId == "ldtcmt" || GroupId == "ttdl")
                 {
                     var data2 = _newLog.Table.Where(x => x.NewsId == itemdata.Id)
                         .Where(i => i.GroupNameTo == username).FirstOrDefault();

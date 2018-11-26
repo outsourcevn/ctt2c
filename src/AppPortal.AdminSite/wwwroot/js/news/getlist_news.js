@@ -534,7 +534,7 @@ function templateAction(news_id, status) {
 
         var editbutton = "<a class='btn btn-primary btn-xs' href='/homenews/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a> <button onclick='deleteNewHome(" + news_id + ")' type='button' class='btn btn-danger delete btn-xs'><i class= 'fa fa-trash' ></i> <span>Xóa</span></button>";
         // label-success label-danger label-info label-warning
-        if (GroupId === "vptc") {
+        if (GroupId === "ttdl") {
             name += editbutton;
         }
 
