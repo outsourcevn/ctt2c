@@ -35,6 +35,11 @@ namespace AppPortal.WebSite.Controllers
             return View(nameof(News));
         }
 
+        public IActionResult DetailNews()
+        {
+            return View(nameof(DetailNews));
+        }
+
         public IActionResult About()
         {
             return View();
