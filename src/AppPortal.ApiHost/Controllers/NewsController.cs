@@ -727,5 +727,32 @@ namespace AppPortal.ApiHost.Controllers
             }
             return ResponseInterceptor(message);
         }
+
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpGet("xemchitiet")]
+        public IActionResult xemchitiet(int? Id)
+        {
+            string message = "";
+            try
+            {
+                if ((int)Id > 0)
+                {
+                    var ttdl = _newLog.GetInfoNewLogAndFile((int)Id, "ttdl");
+                    var ldtcmt = _newLog.GetInfoNewLogAndFile((int)Id, "ldtcmt");
+                    var info = _newsService.GetNewsById((int)Id);
+                    return Ok(new { ttdl = ttdl, ldtcmt = ldtcmt, info = info });
+                }
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
     }
 }

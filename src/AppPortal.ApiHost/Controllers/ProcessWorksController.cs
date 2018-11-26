@@ -351,6 +351,14 @@ namespace AppPortal.ApiHost.Controllers
                 logs.GroupNameTo = newsData.UserName;
                 logs.OnCreated = DateTime.Now;
                 _newLog.AddOrUpdate(logs);
+
+                //ldtc
+                var logs2 = new NewsLog();
+                logs2.NewsId = newsData.Id;
+                logs2.UserName = "ldtcmt";
+                logs2.GroupNameTo = "ldtcmt";
+                logs2.OnCreated = DateTime.Now;
+                _newLog.AddOrUpdate(logs2);
             }
             catch (System.Exception ex)
             {

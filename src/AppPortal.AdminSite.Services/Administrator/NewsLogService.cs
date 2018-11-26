@@ -124,6 +124,17 @@ namespace AppPortal.AdminSite.Services.Administrator
                 .FirstOrDefault();
         }
 
+        public NewsLogFile GetInfoNewLogAndFile(int news_id, string group)
+        {
+            return _newslog.Table.Where(x => x.NewsId == news_id)
+                .Where(z => z.GroupNameTo == group)
+                .GroupJoin(_files.Table, x => x.Id, y => y.NewsLogId, (newslog, filesLst) => new NewsLogFile
+                {
+                    newsLog = newslog,
+                    lstFiles = filesLst.Where(z => z.NewsLogId == newslog.Id).ToList()
+                }).FirstOrDefault();
+        }
+
         public IList<NewsLog> GetPhanCongList(int news_id, string group)
         {
             return _newslog.Table.Where(x => x.NewsId == news_id)

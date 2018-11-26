@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AppPortal.AdminSite.Services.Models.Addresses;
 using AppPortal.AdminSite.Services.Models.Cats;
 using AppPortal.AdminSite.Services.Models.News;
@@ -90,10 +91,9 @@ namespace AppPortal.AdminSite.Services.Extensions
             item.Lng = model.Lng ?? null;
             item.SourceNews = model.SourceNews ?? null;
             item.Note = model.Note ?? null;
-            item.OnCreated = model.OnCreated ?? null;
             item.OnDeleted = model.OnDeleted ?? null;
             item.OnPublished = model.OnPublished ?? null;
-            item.OnUpdated = model.OnUpdated ?? null;
+            item.OnUpdated = model.OnUpdated ?? DateTime.Now;
             item.IsStatus = model.IsStatus != null ? (IsStatus)model.IsStatus : IsStatus.pending;
             item.IsNew = model.IsNew != null ? (IsNew)model.IsNew : IsNew.isComment;
             item.IsPosition = model.IsPosition != null ? (IsPosition)model.IsPosition : IsPosition.isNormal;

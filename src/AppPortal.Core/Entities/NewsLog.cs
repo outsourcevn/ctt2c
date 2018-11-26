@@ -47,4 +47,10 @@ namespace AppPortal.Core.Entities
         public string Data { get; set; }
         public IList<Files> files { get; set; }
     }
+
+    public class NewsLogFile
+    {
+        public NewsLog newsLog;
+        public IList<Files> lstFiles { get; set; }
+    }
 }

@@ -20,5 +20,6 @@ namespace AppPortal.AdminSite.Services.Interfaces
         List<FileUpload> GetFile(int id, string urlWeb);
         NewsLog GetInfoNewLog(int news_id, string group);
         IList<NewsLog> GetPhanCongList(int news_id, string group);
+        NewsLogFile GetInfoNewLogAndFile(int news_id, string group);
     }
 }

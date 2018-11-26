@@ -281,8 +281,11 @@ namespace AppPortal.AdminSite.Services.Administrator
             entity = model.ModelToEntity(entity);
             if (model.Id > 0)
             {
-
-                entity.IsStatus = model.IsStatus != null ? (IsStatus)model.IsStatus : IsStatus.tiepnhan;
+                //entity.IsStatus = model.IsStatus != null ? (IsStatus)model.IsStatus : IsStatus.tiepnhan;
+                if (!(entity.CategoryId > 0))
+                {
+                    entity.CategoryId = 12;
+                }
                 entity.OnUpdated = DateTime.Now;
                 _news.Update(entity);               
             }

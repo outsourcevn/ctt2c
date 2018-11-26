@@ -66,13 +66,6 @@ var grid = $("#dataGrid").data("kendoGrid");
                 field: "name",
                 title: "Tiêu đề"
             },
-            //{
-            //    field: "note", title: "Ghi chú", width: "150px",
-            //    template: "#=templateNote(note)#"
-            //},
-            {
-                field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDate(on_created)#", width: "90px"
-            }
         ];
 
         if (GroupId != "dvct") {
@@ -87,12 +80,7 @@ var grid = $("#dataGrid").data("kendoGrid");
                 template: "#=templatePhanloai2(is_type , id)#"
             };
 
-            var objDVCT3 = {
-                field: "note", title: "Ghi chú", width: "200px",
-                template: "#=templateNoteDVCT(id)#"
-            };
             columnsData.push(objDVCT2);
-            columnsData.push(objDVCT3);
         }
 
         if (GroupId == "ttdl") {
@@ -103,10 +91,25 @@ var grid = $("#dataGrid").data("kendoGrid");
             columnsData.push(objVPTC);
         }
 
+        if (GroupId == "ldtcmt") {
+            var objDVCT6 = {
+                field: "is_type", title: "Phân loại", width: "200px",
+                template: "#=templatePhanloai2(is_type , id)#"
+            };
+
+            columnsData.push(objDVCT6);
+        }
+
+        columnsData.push({
+            field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDate(on_created)#", width: "90px"
+        });
+
         columnsData.push({
             field: "id", title: "Hành động", width: "100px",
             template: "#=templateAction(is_status , id)#"
         });
+
+        
         
         $("#dataGrid").kendoGrid({
             dataSource: dataSource,
@@ -311,6 +314,22 @@ var grid = $("#dataGrid").data("kendoGrid");
                 messagerWarn('Thông báo', 'Vui lòng chọn tin.');
             }
         });
+
+        $("#exampleModalNew_xemchitiet2 .tomtat").kendoEditor({
+            tools: []
+        });
+
+        $("#exampleModalNew_xemchitiet2 .noidung").kendoEditor({
+            tools: []
+        });
+
+        $("#exampleModalNew_xemchitiet2 .noidung-ttdl").kendoEditor({
+            tools: []
+        });
+
+        $("#exampleModalNew_xemchitiet2 .noidung-ldtcmt").kendoEditor({
+            tools: []
+        });
     });
 })(jQuery);
 
@@ -427,13 +446,14 @@ function templateAction(is_status, news_id) {
 
     if (GroupId === "ldtcmt") {
         switch (is_status) {
-            case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="duyettin(' + news_id + ')">Duyệt tin</button>'; break;
+            case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')"Công bố</button>'; break;
             default:
-                name = '<button type="button" class="btn btn-primary btn-xs" onclick="duyettin(' + news_id + ')">Duyệt tin</button>';
+                name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công bố</button>';
                 break;
         }
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
-        name = name + editbutton;
+        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem nội dung</button>';
+        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="gopychidao(' + news_id + ')">Góp ý chỉ đạo</button>';
     }
 
     if (GroupId === "dvct") {
@@ -442,6 +462,7 @@ function templateAction(is_status, news_id) {
         //    default: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
         //}
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Báo cáo kết quả xử lý</button>';
+        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem chi tiết</button>';
     }
 
     if (GroupId === "dvct_dp") {  
@@ -449,6 +470,85 @@ function templateAction(is_status, news_id) {
     }
 
     return name;
+}
+
+function xemchitietNoiDung(news_id) {
+    var element = $("#exampleModalNew_xemchitiet2");
+    var editor = element.find(".noidung").data("kendoEditor");
+    var editor2 = element.find(".noidung-ttdl").data("kendoEditor");
+    var editor3 = element.find(".noidung-ldtcmt").data("kendoEditor");
+    $(".item-from-file-ttdl").html("");
+    element.find(".tieude").val("");
+    editor.value("");
+    editor.value("");
+    $("#exampleModalNew_xemchitiet2").modal("show");
+    var url = `${appConfig.apiHostUrl}` + '/api/News/xemchitiet?Id=' + news_id;
+    callAjax(
+        url,
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (success) {
+            if (!success.did_error) {
+                var info = success.info;
+                var ldtcmt = success.ldtcmt;
+                var ttdl = success.ttdl;
+               
+                element.find(".tieude").val(info.Name);
+               
+                editor.value(info.Content);
+
+                //ttdl
+               
+                editor2.value(ttdl.newsLog.Note);
+
+                var htmlTtdl = "";
+                if (ttdl.lstFiles.length > 0) {
+                    for (var i = 0; i < ttdl.lstFiles.length; i++) {
+                        var fileItem = ttdl.lstFiles[i];
+                        htmlTtdl += '<a target="_blank" href="' + fileItem.url + '">' + fileItem.name + '</a></br>';
+                    }
+                    $(".item-from-file-ttdl").html(htmlTtdl);
+                }
+
+                //ldtcmt
+                
+                editor3.value(ldtcmt.newsLog.Data);
+                var htmlldtcmt = "";
+                if (ldtcmt.lstFiles.length > 0) {
+                    for (var j = 0; j < ldtcmt.lstFiles.length; j++) {
+                        var fileItem2 = ttdl.lstFiles[j];
+                        htmlldtcmt += '<a target="_blank" href="' + fileItem2.url + '">' + fileItem2.name + '</a></br>';
+                    }
+                    $(".item-from-file-ldtcmt").html(htmlldtcmt);
+                }
+            }
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
+        },
+        function (xhr, status, error) {
+            if (xhr.status === 400) {
+                var err = eval("(" + xhr.responseText + ")");
+                err.forEach(function (item) {
+                    messagerError(item.Code, item.Description);
+                });
+            } else {
+                messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+            }
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
+        },
+        function (complete) {
+            $(this).removeClass('disabled').removeAttr('disabled');
+        }
+    );
 }
 
 //name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="baocaoketqua(' + news_id + ')">Tổng hợp kết quả xử lý</button>';
@@ -535,9 +635,9 @@ function templatePhanloai(istype, id) {
 function templatePhanloai2(istype) {
     var html = '';
     switch (istype) {
-        case 6: html = ' <span class="label label-success">Ô nhiễm môi trường</span>';
-        case 7: html = ' <span class="label label-success">Cơ chế, chính sách, thủ tục hành chính</span>';
-        case 8: html = ' <span class="label label-success">Giải pháp, sáng kiến bảo vệ môi trường</span>';
+        case 6: html = ' <span class="label label-success">Ô nhiễm môi trường</span>'; break;
+        case 7: html = ' <span class="label label-success">Cơ chế, chính sách, thủ tục hành chính</span>'; break;
+        case 8: html = ' <span class="label label-success">Giải pháp, sáng kiến bảo vệ môi trường</span>'; break;
     }
 
     return html;
@@ -581,10 +681,6 @@ function templateNote(note) {
         return "";
     }
     
-}
-
-function templateNoteDVCT(id) {
-
 }
 
 function templateImage(image) {
