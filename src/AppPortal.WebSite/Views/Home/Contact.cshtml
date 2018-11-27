@@ -58,43 +58,36 @@
                         <form id="@formView" class="needs-validation" method="post">
                             <div class="row">
                                 <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
-                                <div style="width: 50%; float: left;" class="col-sm-6">
-                                    <div class="form-item">
-                                        <label for="UserFullName" class="control-label">Họ tên:</label>
-                                        <input class="form-text" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên" />
+                                <div float: left;" class="col-sm-12">
+                                    <label for="UserFullName" class="col-sm-3 control-label">Họ tên:</label>
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên"> </div>
+
+                                    <label for="UserAddress" class="control-label col-sm-3">Địa chỉ:</label>
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" required placeholder="Địa chỉ"> </div>
+
+
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                        <div class="form-group">
+                                            <select id="thanhpho" required class="col-sm-4">
+                                                <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
+                                            </select>
+                                            <select id="quantp" required class="col-sm-4">
+                                                <option selected disabled>--- Lựa chọn quận/huyện ---</option>
+                                            </select>
+                                            <select id="huyen" required class="col-sm-4">
+                                                <option selected disabled>--- Lựa chọn phường xã ---</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="form-item">
-                                        <label for="UserAddress" class="control-label">Địa chỉ:</label>
-                                        <input class="form-text" asp-for="UserAddress" required placeholder="Địa chỉ" />
-                                    </div>
-                                    <div class="form-group">
-                                        <select id="thanhpho">
-                                            <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
-                                        </select>
-                                        <select id="quantp">
-                                            <option selected disabled>--- Lựa chọn quận/huyện ---</option>
-                                        </select>
-                                        <select id="huyen">
-                                            <option selected disabled>--- Lựa chọn phường xã ---</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-item">
-                                        <label for="UserEmail" class="control-label">Điện thoại:</label>
-                                        <input class="form-text" asp-for="UserPhone" required placeholder="Điện thoại" />
-                                    </div>
-                                    <div class="form-item">
-                                        <label for="UserEmail" class="control-label">Địa chỉ E-mail:</label>
-                                        <input class="form-text" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc" />
-                                    </div>
+
+                                    <label for="UserEmail" class="control-label col-sm-3">Điện thoại:</label>
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserPhone" required placeholder="Điện thoại"> </div>
+
+                                    <label for="UserEmail" class="control-label col-sm-3">Địa chỉ E-mail:</label>
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc"> </div>
+
                                 </div>
-                                <div class="col-sm-6" id="mapframe" style="width: 49%; float: right;">
-                                    <div style="width: 100%">
-                                        <iframe height="280"
-                                                src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=ha%20noi&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
-                                            <a href="https://www.maps.ie/create-google-map/">Add map to website</a>
-                                        </iframe>
-                                    </div><br />
-                                </div>
+                                
                             </div>
                             <div class="row">
                                 <p style="font-weight: 600">NỘI DUNG TRAO ĐỔI</p>
@@ -104,7 +97,7 @@
                                     <input asp-for="Name" class="form-text" placeholder="Tiêu đề phản ánh" required />
                                     <span asp-validation-for="Name" class="form-required"></span>
                                 </div>
-                                <div id="map"></div>
+                                
                                 <div class="form-item">
                                     <label asp-for="Link" class="control-label">Địa điểm:</label>
                                     <input asp-for="Link" class="form-text" id="address_map" placeholder="Địa điểm diễn ra" />
@@ -114,15 +107,6 @@
                                     <span asp-validation-for="Link" class="form-required"></span>
                                 </div>
 
-                                @*<div class="form-item">
-                                        <label asp-for="CategoryId" class="control-label">Chủ đề phản ánh:</label>
-                                        <input asp-for="CategoryId" required style="width: 0; height: 0; border: 0; visibility: hidden;" class="form-text " />
-                                        <span asp-validation-for="CategoryId" class="form-required"></span>
-
-                                        <div class="demo-section k-content" style="overflow: auto; max-height: 300px; background: transparent;">
-                                            <div id="cat_treeview"></div>
-                                        </div>
-                                    </div>*@
 
                                 <div class="form-item" style="display: none;">
                                     <label asp-for="Abstract" class="control-label">Tóm tắt:</label>
@@ -137,9 +121,9 @@
 
                                 <div id="botdetect-captcha" data-stylename="exampleCaptcha"></div>
 
-                                @*<div class="form-item">
+                                <div class="form-item">
                                         <div class="g-recaptcha" data-sitekey="6LeC1HYUAAAAAKwSLhUFdKLggrlFy2QqIsLD1Evr" data-size="invisible" data-callback="onCompleted"></div>
-                                    </div>*@
+                                    </div>
                             </div>
                             <div class="form-item">
                                 <div asp-validation-summary="All" class="form-required"></div>
@@ -182,6 +166,8 @@
                                 <span class="view_all_medium"><span><span>Gửi phản ánh kiến nghị</span></span></span>
                             </button>
                         </div>
+
+
                     </div>
                 </div>
             </article>

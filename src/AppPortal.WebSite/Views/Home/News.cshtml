@@ -55,7 +55,7 @@
 <div class="container">
     <div id="tat-ca-tin" class="col-md-8">
         <div class="content">
-
+           
         </div>
 
     </div>
@@ -101,20 +101,20 @@
                 if (data.model[i].Image.trim() == "") {
                     content += '<div class="newestItem firstNewsetItem">'
                     content += '<div class="newestItemTitle-Detail">'
-                    content += '<a title="' + data.model[i].Name + '" href="/home/detailnews' + data.model[i].Sename + '">'
+                    content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + '"  onclick="return goToDetail(' + data.model[i].Id+');" >'
                     content += data.model[i].Name + '<img width="31px" height="20px" src="' + data.model[i].Image + '" style="display:none">'
                     content += '</a>'
                     content += '</div>'
 
                     content += '<div class="content">'
                     content += '<p>'
-                    content += '<a title="' + data.model[i].Name + '" href="' + data.model[i].Sename + '">'
-                    content += '<img alt="(Ảnh minh họa)" src="~/images/content/toan-canh-ht.jpg" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+                    content += '<a title="' + data.model[i].Name + '" href=/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +');" >'
+                    content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
                     content += '</a>'
                     content += '<span style="position:relative; top:5px;">' + data.model[i].Abstract + '</span>'
                     content += '</p>'
                     content += '<div class="readMoreDetail">'
-                    content += '<a title="Đề xuất nâng tiêu chuẩn khí thải đối với ô tô để bảo vệ môi trường" href="' + data.model[i].Sename + '">'
+                    content += '<a title="Đề xuất nâng tiêu chuẩn khí thải đối với ô tô để bảo vệ môi trường" href="/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +')" >'
                     content += '<span id="ctl00_PlaceHolderTopColMiddle_g_5271cf1b_ba26_4ac5_99bc_7a7b243c3627_ctl00_rptintuc_ctl01_lblchitiet"> Chi Tiết</span>'
                     content += '</a>'
                     content += '</div>'
@@ -129,7 +129,7 @@
                 } else {
                     content += '<div class="newestItem firstNewsetItem">'
                     content += '<div class="newestItemTitle-Detail">'
-                    content += '<a title="' + data.model[i].Name + '" href="' + data.model[i].Sename + '">'
+                    content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + ' onclick="return goToDetail(' + data.model[i].Id +');">'
                     content += data.model[i].Name + '<img width="31px" height="20px" src="' + data.model[i].Image + '" style="display:none">'
                     content += '</a>'
                     content += '</div>'
@@ -139,7 +139,7 @@
                     content += '<span style="position:relative; top:5px;">' + data.model[i].Abstract + '</span>'
                     content += '</p>'
                     content += '<div class="readMoreDetail">'
-                    content += '<a title="Đề xuất nâng tiêu chuẩn khí thải đối với ô tô để bảo vệ môi trường" href="' + data.model[i].Sename + '">'
+                    content += '<a title="Đề xuất nâng tiêu chuẩn khí thải đối với ô tô để bảo vệ môi trường" href="/home/detailnews?id=' + data.model[i].Id + '" onclick="goToDetail(' + data.model[i].Id +')">'
                     content += '<span id="ctl00_PlaceHolderTopColMiddle_g_5271cf1b_ba26_4ac5_99bc_7a7b243c3627_ctl00_rptintuc_ctl01_lblchitiet"> Chi Tiết</span>'
                     content += '</a>'
                     content += '</div>'
@@ -162,7 +162,7 @@
                 if (i != data.model.length - 1) {
                     content += '<article class="border-dot">';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="' + data.model[i].Sename + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '" >' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
@@ -176,7 +176,7 @@
                 } else {
                     content += '<article>';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="' + data.model[i].Sename + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
@@ -198,7 +198,7 @@
                 if (i != data.model.length - 1) {
                     content += '<article class="border-dot">';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="' + data.model[i].Sename + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
@@ -212,7 +212,7 @@
                 } else {
                     content += '<article>';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="' + data.model[i].Sename + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
@@ -235,7 +235,7 @@
                 if (i != data.model.length - 1) {
                     content += '<article class="border-dot">';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="' + data.model[i].Sename + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
@@ -249,7 +249,7 @@
                 } else {
                     content += '<article>';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="' + data.model[i].Sename + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
