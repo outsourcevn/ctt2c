@@ -53,7 +53,7 @@
                         @Html.Partial("Layout/_Pages.cshtml")
                     </div>
                 </div>
-              
+
 
                 <!-- right sidebar -->
                 <!-- end right sidebar -->
@@ -72,34 +72,22 @@
     </div>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script>
-            !window.jQuery && document.write('<script src="/lib/jquery/jquery-1.12.4.min.js"><\/script>')
-        </script>
+        <script></script>
         <script src="~/lib/jquery-ui/ui/minified/jquery-ui.min.js"></script>
         <script src="~/js/jquery.ad-gallery.pack.js"></script>
         <script src="~/js/jquery.flexslider-min.js"></script>
         <script src="~/lib/jquery-colorbox/jquery.colorbox-min.js"></script>
         <script src="~/js/custom.js" asp-append-version="true"></script>
         <script src="~/js/script.js" asp-append-version="true"></script>
-        <script>
-            const appConfig = {};
-            //appConfig.apiCdnUrl = "http://localhost:54145";
-            //appConfig.apiHostUrl = "http://localhost:50642";
-
-            appConfig.apiCdnUrl = "http://cdn.eportal.today";
-            appConfig.apiHostUrl = "http://apinode.eportal.today";
-        </script>
+        <script></script>
     </environment>
 
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.12.4.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
-                crossorigin="anonymous">
-        </script>
-        <script>
-            !window.jQuery && document.write('<script src="/lib/jquery/jquery-1.12.4.min.js"><\/script>')
-        </script>
+                crossorigin="anonymous"></script>
+        <script></script>
         <script src="~/lib/jquery-ui/ui/minified/jquery-ui.min.js"></script>
         <script src="~/js/jquery.ad-gallery.pack.js"></script>
         <script src="~/js/jquery.flexslider-min.js"></script>
@@ -107,25 +95,18 @@
         <script src="~/js/custom.js" asp-append-version="true"></script>
         <script src="~/js/script.js" asp-append-version="true"></script>
 
-        <script>
-            const appConfig = {};
-            appConfig.apiCdnUrl = "http://cdn.eportal.today";
-            appConfig.apiHostUrl = "http://apinode.eportal.today";
-        </script>
+        <script></script>
     </environment>
-    <script>
-        $(document).ready(function () {
-            $("#block_main_menu ul li").hover(
-                function () {
-                    $(this).addClass("active");
-                },
-                function () {
-                    $(this).removeClass("active");
-                }
-            );
-
-        });
-    </script>
+    <script></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+@section Scripts {
+    <script>
+        var detailId = 0;
+        function goToDetail(id) {
+            detailId = id;
+            console.log("view detail news: " + detailId);
+        }
+    </script>
+}

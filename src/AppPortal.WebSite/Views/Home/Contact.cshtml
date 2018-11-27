@@ -58,34 +58,34 @@
                         <form id="@formView" class="needs-validation" method="post">
                             <div class="row">
                                 <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
-                                <div style="width: 50%; float: left;" class="col-sm-6">
-                                    <div class="form-item">
-                                        <label for="UserFullName" class="control-label">Họ tên:</label>
-                                        <input class="form-text" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên" />
+                                <div float: left;" class="col-sm-12">
+                                    <label for="UserFullName" class="col-sm-3 control-label">Họ tên:</label>
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên"> </div>
+
+                                    <label for="UserAddress" class="control-label col-sm-3">Địa chỉ:</label>
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" required placeholder="Địa chỉ"> </div>
+
+
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                        <div class="form-group">
+                                            <select id="thanhpho" required class="col-sm-4">
+                                                <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
+                                            </select>
+                                            <select id="quantp" required class="col-sm-4">
+                                                <option selected disabled>--- Lựa chọn quận/huyện ---</option>
+                                            </select>
+                                            <select id="huyen" required class="col-sm-4">
+                                                <option selected disabled>--- Lựa chọn phường xã ---</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="form-item">
-                                        <label for="UserAddress" class="control-label">Địa chỉ:</label>
-                                        <input class="form-text" asp-for="UserAddress" required placeholder="Địa chỉ" />
-                                    </div>
-                                    <div class="form-group">
-                                        <select id="thanhpho">
-                                            <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
-                                        </select>
-                                        <select id="quantp">
-                                            <option selected disabled>--- Lựa chọn quận/huyện ---</option>
-                                        </select>
-                                        <select id="huyen">
-                                            <option selected disabled>--- Lựa chọn phường xã ---</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-item">
-                                        <label for="UserEmail" class="control-label">Điện thoại:</label>
-                                        <input class="form-text" asp-for="UserPhone" required placeholder="Điện thoại" />
-                                    </div>
-                                    <div class="form-item">
-                                        <label for="UserEmail" class="control-label">Địa chỉ E-mail:</label>
-                                        <input class="form-text" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc" />
-                                    </div>
+
+                                    <label for="UserEmail" class="control-label col-sm-3">Điện thoại:</label>
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserPhone" required placeholder="Điện thoại"> </div>
+
+                                    <label for="UserEmail" class="control-label col-sm-3">Địa chỉ E-mail:</label>
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc"> </div>
+
                                 </div>
                                 
                             </div>
@@ -166,6 +166,8 @@
                                 <span class="view_all_medium"><span><span>Gửi phản ánh kiến nghị</span></span></span>
                             </button>
                         </div>
+
+
                     </div>
                 </div>
             </article>
