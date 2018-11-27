@@ -138,11 +138,12 @@ function onCheck(e) {
                     MetaDescription: $("textarea[id='MetaDescription']").val(),
                     UserId: $("input[id='News_UserId']").val(),
                     UserName: $("input[id='News_UserName']").val(),
-                    UserFullName: $("input[id='News_UserFullName']").val(),
+                    UserFullName: $("input[id='UserFullName']").val(),
                     UserEmail: $("input[id='News_UserEmail']").val(),
                     SourceNews: $("input[id='SourceNews']").val(),
                     Note: $("textarea[id='Note']").val(),
                     IsStatus: 0,
+                    OnPublished: $("input[id='OnPublished']").val(),
                 };
                 //console.log(dataJson);
                 callAjax(

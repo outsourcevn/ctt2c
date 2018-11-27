@@ -83,6 +83,19 @@
                                 <span asp-validation-for="Image" class="invalid-feedback"></span>
                                 <img id="image_preview" src="" style="width: 100px; height: 100px;" />
                             </div>
+
+                            <div class="form-group">
+                                <label asp-for="UserFullName" class="control-label">Tác giả:</label>
+                                <input asp-for="UserFullName" class="form-control" mav>
+                                <span asp-validation-for="UserFullName" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="OnPublished" class="control-label">Ngày công bố:</label>
+                                <input asp-for="OnPublished" type="date" class="form-control" mav>
+                                <span asp-validation-for="OnPublished" class="invalid-feedback"></span>
+                            </div>
+
                             <div class="form-group">
                                 <label asp-for="SourceNews" class="control-label">Nguồn tin</label>
                                 <input asp-for="SourceNews" class="form-control" mav>

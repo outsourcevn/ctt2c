@@ -93,32 +93,19 @@
                                 <span asp-validation-for="Image" class="invalid-feedback"></span>
                                 <img id="image_preview" src="" style="width: 100px; height: 100px;" />
                             </div>
-                            @*<div class="form-group">
-                                    <label asp-for="Link" class="control-label"></label>
-                                    <input asp-for="Link" class="form-control" />
-                                    <span asp-validation-for="Link" class="invalid-feedback"></span>
-                                </div>
 
-                                <div class="form-group">
-                                    <label asp-for="Sename" class="control-label"></label>
-                                    <input asp-for="Sename" class="form-control" />
-                                    <span asp-validation-for="Sename" class="invalid-feedback"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="MetaTitle" class="control-label"></label>
-                                    <input asp-for="MetaTitle" class="form-control" />
-                                    <span asp-validation-for="MetaTitle" class="invalid-feedback"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="MetaKeywords" class="control-label"></label>
-                                    <input asp-for="MetaKeywords" class="form-control" />
-                                    <span asp-validation-for="MetaKeywords" class="invalid-feedback"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="MetaDescription" class="control-label"></label>
-                                    <textarea rows="5" asp-for="MetaDescription" class="form-control" mav></textarea>
-                                    <span asp-validation-for="MetaDescription" class="invalid-feedback"></span>
-                                </div>*@
+                            <div class="form-group">
+                                <label asp-for="UserFullName" class="control-label">Tác giả:</label>
+                                <input asp-for="UserFullName" class="form-control" mav>
+                                <span asp-validation-for="UserFullName" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="OnPublished" class="control-label">Ngày công bố:</label>
+                                <input asp-for="OnPublished" type="date" class="form-control" mav>
+                                <span asp-validation-for="OnPublished" class="invalid-feedback"></span>
+                            </div>
+
                             <div class="form-group">
                                 <label asp-for="SourceNews" class="control-label">Nguồn tin</label>
                                 <input asp-for="SourceNews" class="form-control" mav>
@@ -130,17 +117,6 @@
                                 <span asp-validation-for="Note" class="invalid-feedback"></span>
                             </div>
                             <input type="hidden" id="IsStatus" asp-for="IsStatus" />
-                            @*<div class="form-group">
-                                    <label asp-for="IsStatus"></label>
-                                    <select class="form-control" asp-for="IsStatus" asp-items="@ViewData["statusNews"] as IEnumerable<SelectListItem>"></select>
-                                </div>*@
-                            @*<div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input asp-for="IsShow" /> @Html.DisplayNameFor(model => model.IsShow)
-                                        </label>
-                                    </div>
-                                </div>*@
                         </div>
                     </div>
 

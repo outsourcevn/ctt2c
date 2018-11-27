@@ -445,7 +445,16 @@ namespace AppPortal.AdminSite.Services.Administrator
                 homeNews = homeNews.Take((int)number);
             }
             homeNews = homeNews.OrderByDescending(x => x.OnCreated);
-            return homeNews.ToList();
+            var homeNewsLst = homeNews.ToList();
+
+            foreach (var iem in homeNewsLst)
+            {
+                if (!string.IsNullOrEmpty(iem.Image))
+                {
+                    iem.Image = "http://cdn.eportal.today" + iem.Image;
+                }
+            }
+            return homeNewsLst;
         }
 
         public void UpdateStatus(string id, IsStatus status)

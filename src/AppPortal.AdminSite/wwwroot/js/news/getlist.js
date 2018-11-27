@@ -445,12 +445,12 @@ function templateAction(is_status, news_id) {
     }
 
     if (GroupId === "ldtcmt") {
-        switch (is_status) {
-            case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công bố</button>'; break;
-            default:
-                name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công bố</button>';
-                break;
-        }
+        //switch (is_status) {
+        //    case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công bố</button>'; break;
+        //    default:
+        //        name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công bố</button>';
+        //        break;
+        //}
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem nội dung</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="gopychidao(' + news_id + ')">Góp ý chỉ đạo</button>';
@@ -516,7 +516,7 @@ function xemchitietNoiDung(news_id) {
 
                 //ldtcmt
                 
-                editor3.value(ldtcmt.newsLog.Data);
+                editor3.value(ldtcmt.newsLog.Data );
                 var htmlldtcmt = "";
                 if (ldtcmt.lstFiles.length > 0) {
                     for (var j = 0; j < ldtcmt.lstFiles.length; j++) {
