@@ -98,9 +98,9 @@ var grid = $("#dataGrid").data("kendoGrid");
                     field: "is_status", title: "Trạng thái", width: "150px",
                     template: "#=templateStatus(is_status)#"
                 },
-                {
-                    field: "note", title: "Góp ý", width: "150px",
-                },
+                //{
+                //    field: "note", title: "Góp ý", width: "150px",
+                //},
                 //{
                 //    field: "image", title: "Ảnh đại diện", width: "50px",
                 //    template: "#=templatefileupload(image)#"

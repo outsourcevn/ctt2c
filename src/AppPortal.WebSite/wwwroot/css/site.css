@@ -104,3 +104,8 @@ h3.block_title_black{
 .pac-container {
     z-index: 10000 !important;
 }
+
+#detail-news p {
+    line-height: 20px;
+    font-size: 14px;
+}

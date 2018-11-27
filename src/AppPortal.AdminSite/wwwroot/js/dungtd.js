@@ -552,7 +552,7 @@ function nhapketquaxuly() {
                     function (success) {
                         
                         if (!success.did_error) {
-                            messagerSuccess('Thông báo', 'Nhập kết quả thành công!');
+                            messagerSuccess('Thông báo', 'Gửi báo cáo thành công!');
                         }
                         if (grid) {
                             grid.clearSelection();

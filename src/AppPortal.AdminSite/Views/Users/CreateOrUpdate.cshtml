@@ -6,8 +6,10 @@
     var formView = "frm_create_or_update_user";
     if (Model != null)
     {
-        ViewData["Title"] = string.IsNullOrEmpty(Model.AccountId) ? "Tạo tài khoản" : "Cập nhật tài khoản";
+        ViewData["Title"] = string.IsNullOrEmpty(Model.AccountId) ? "Tạo tài khoản" : "Cập nhật thông tin tài khoản";
     }
+
+    var buttonData = string.IsNullOrEmpty(Model.AccountId) ? "Tạo tài khoản" : "Cập nhật thông tin";
 }
 
 <div class="row">
@@ -99,7 +101,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Cập nhật mật khẩu</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">@buttonData</button>
                     </div>
                 </div>
             </form>

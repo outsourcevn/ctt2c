@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewData["FeatureTitle"] = "Quản trị tin tức";
-    ViewData["Title"] = "Tin tức";
+    ViewData["FeatureTitle"] = "Quản trị Góp ý/ Phản ánh";
+    ViewData["Title"] = "Góp ý/ Phản ánh";
 
     var take = (int)ViewData["take"];
     var keyword = (string)ViewData["keyword"];
@@ -198,10 +198,10 @@
                                     <span>Thêm tệp tin...</span>
                                     <input type="file" name="files" multiple>
                                 </span>
-                                <button type="submit" class="btn btn-primary start">
+                                @*<button type="submit" class="btn btn-primary start">
                                     <i class="glyphicon glyphicon-upload"></i>
                                     <span>Bắt đầu upload</span>
-                                </button>
+                                </button>*@
                                 <!-- The global file processing state -->
                                 <span class="fileupload-process"></span>
                             </div>
@@ -254,14 +254,14 @@
     <div class="modal-dialog" style="width: 600px;margin: 0 auto;max-width:900px" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nhập kết quả xử lý</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Báo cáo kết quả xử lý</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Nội dung kết quả xử lý:</label>
+                    <label for="recipient-name" class="col-form-label">Nội dung:</label>
                     <textarea class="form-control commentNews" rows="10"></textarea>
                     <input type="hidden" class="IdReport" />
                 </div>
@@ -278,10 +278,10 @@
                                     <span>Thêm tệp tin...</span>
                                     <input type="file" name="files" multiple>
                                 </span>
-                                <button type="submit" class="btn btn-primary start">
+                                @*<button type="submit" class="btn btn-primary start">
                                     <i class="glyphicon glyphicon-upload"></i>
                                     <span>Bắt đầu upload</span>
-                                </button>
+                                </button>*@
                                 @*<button type="reset" class="btn btn-warning cancel">
                                         <i class="glyphicon glyphicon-ban-circle"></i>
                                         <span>Cancel upload</span>
@@ -311,7 +311,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" onclick="nhapketquaxuly()">Nhập kết quả</button>
+                <button type="button" class="btn btn-primary" onclick="nhapketquaxuly()">Báo cáo</button>
             </div>
         </div>
     </div>
@@ -345,10 +345,10 @@
                                     <span>Thêm tệp tin...</span>
                                     <input type="file" name="files" multiple>
                                 </span>
-                                <button type="submit" class="btn btn-primary start">
+                                @*<button type="submit" class="btn btn-primary start">
                                     <i class="glyphicon glyphicon-upload"></i>
                                     <span>Bắt đầu upload</span>
-                                </button>
+                                </button>*@
                                 @*<button type="reset" class="btn btn-warning cancel">
                                         <i class="glyphicon glyphicon-ban-circle"></i>
                                         <span>Cancel upload</span>
@@ -411,10 +411,10 @@
                                     <span>Thêm tệp tin...</span>
                                     <input type="file" name="files" multiple>
                                 </span>
-                                <button type="submit" class="btn btn-primary start">
+                                @*<button type="submit" class="btn btn-primary start">
                                     <i class="glyphicon glyphicon-upload"></i>
                                     <span>Bắt đầu upload</span>
-                                </button>
+                                </button>*@
                                 <!-- The global file processing state -->
                                 <span class="fileupload-process"></span>
                             </div>

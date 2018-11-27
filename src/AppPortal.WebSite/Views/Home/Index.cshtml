@@ -434,7 +434,7 @@
     <script src="~/js/home/home.js" asp-append-version="true"></script>
     <script src="~/js/date.format.js"></script>
     <script>
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?number=2", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=2", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 content += '<article class="border-dot">';
@@ -454,7 +454,7 @@
             $('#tin-moi-nhat-content').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=13&number=4", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=13&number=4", function (data, status) {
             var header = '';
             header += '<p>';
             header += '<img src="' + data.model[0].Image + '" alt="World News" />';
@@ -492,7 +492,7 @@
             }
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=1&number=2", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=1&number=2", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 content += '<li class="first">';
@@ -515,7 +515,7 @@
             $('#van-ban-chinh-sach-from-second').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=2&number=5", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=2&number=5", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 content += '<li class="first">';
@@ -537,7 +537,7 @@
             $('#phan-anh-moi-truong-content').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=14&number=4", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=14&number=4", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 content += '<li>';

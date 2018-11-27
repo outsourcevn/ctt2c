@@ -95,19 +95,19 @@
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?number=15", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=15", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (data.model[i].Image.trim() == "") {
                     content += '<div class="newestItem firstNewsetItem">'
                     content += '<div class="newestItemTitle-Detail">'
                     content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + '"  onclick="return goToDetail(' + data.model[i].Id+');" >'
-                    content += data.model[i].Name + '<img width="31px" height="20px" src="' + data.model[i].Image + '" style="display:none">'
+                    content += data.model[i].Name
                     content += '</a>'
                     content += '</div>'
 
                     content += '<div class="content">'
-                    content += '<p>'
+                    content += '<img width="120px" height="85px" src="' + data.model[i].Image + '"><p>'
                     content += '<a title="' + data.model[i].Name + '" href=/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +');" >'
                     content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
                     content += '</a>'
@@ -129,13 +129,13 @@
                 } else {
                     content += '<div class="newestItem firstNewsetItem">'
                     content += '<div class="newestItemTitle-Detail">'
-                    content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + ' onclick="return goToDetail(' + data.model[i].Id +');">'
-                    content += data.model[i].Name + '<img width="31px" height="20px" src="' + data.model[i].Image + '" style="display:none">'
+                    content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +');">'
+                    content += data.model[i].Name
                     content += '</a>'
                     content += '</div>'
 
                     content += '<div class="content">'
-                    content += '<p>'
+                    content += '<img width="120px" height="85px" src="' + data.model[i].Image + '" style="float: left;margin-right: 10px;"><p>'
                     content += '<span style="position:relative; top:5px;">' + data.model[i].Abstract + '</span>'
                     content += '</p>'
                     content += '<div class="readMoreDetail">'
@@ -156,7 +156,7 @@
             $('#tat-ca-tin').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
@@ -192,7 +192,7 @@
             $('#tin-chuyen-muc-content').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
@@ -229,7 +229,7 @@
             $('#tin-moi-content').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
