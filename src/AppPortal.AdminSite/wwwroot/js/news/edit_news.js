@@ -25,9 +25,9 @@ $(document).ready(function () {
         },
     });
 
-    //$("textarea#Abstract").kendoEditor({
-    //    tools: toolMinis
-    //});
+    $("textarea#Abstract").kendoEditor({
+        tools: toolMinis
+    });
     //$("textarea#Content").kendoEditor({
     //    tools: tools,
     //    imageBrowser: {

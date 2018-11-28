@@ -26,7 +26,6 @@ $(document).ready(function () {
     $("textarea#Abstract").kendoEditor({
         tools: toolMinis
     });
-    
 
     const treeViewDataSource = new kendo.data.HierarchicalDataSource({
         schema: {
@@ -79,6 +78,7 @@ $(document).ready(function () {
                 function () { });
         }
     })
+
 });
 
 function traverse(nodes, callback) {
@@ -106,6 +106,10 @@ function onCheck(e) {
     });
     console.log(dataItem.id);
     $('#CategoryId').val(dataItem.id);
+}
+
+function preview() {
+    $("#previewModal").modal("show");
 }
 
 (function () {
