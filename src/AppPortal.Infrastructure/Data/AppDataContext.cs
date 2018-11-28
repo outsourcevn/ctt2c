@@ -25,6 +25,7 @@ namespace AppPortal.Infrastructure.App
             modelBuilder.Entity<NewsLog>(ConfigureNewsLog);
             modelBuilder.Entity<Files>(ConfigureFiles);
             modelBuilder.Entity<HomeNews>(ConfigureHomeNews);
+            modelBuilder.Entity<Media>(ConfigureMedia);
         }
 
         #region Mapping
@@ -173,6 +174,12 @@ namespace AppPortal.Infrastructure.App
             b.Property(c => c.IsStatus).HasColumnType("int");
             b.Property(c => c.IsType).HasColumnType("int");
             b.Property(c => c.IsView).HasColumnType("int");
+        }
+
+        private void ConfigureMedia(EntityTypeBuilder<Media> b)
+        {
+            b.ToTable("Media", "AppPortal");
+            b.Property(c => c.description).HasMaxLength(2000);
         }
 
         #endregion
