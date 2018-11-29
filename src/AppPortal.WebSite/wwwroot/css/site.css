@@ -109,3 +109,7 @@ h3.block_title_black{
     line-height: 20px;
     font-size: 14px;
 }
+
+.dropdown-content a {
+    text-align: left !important;
+}
