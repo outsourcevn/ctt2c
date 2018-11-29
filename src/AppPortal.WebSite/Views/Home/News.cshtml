@@ -98,7 +98,7 @@
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=15", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
-                if (data.model[i].Image.trim() == "") {
+                if (data.model[i].Image != "") {
                     content += '<div class="newestItem firstNewsetItem">'
                     content += '<div class="newestItemTitle-Detail">'
                     content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + '"  onclick="return goToDetail(' + data.model[i].Id+');" >'
@@ -107,7 +107,7 @@
                     content += '</div>'
 
                     content += '<div class="content">'
-                    content += '<img width="120px" height="85px" src="' + data.model[i].Image + '"><p>'
+                    content += '<p>'
                     content += '<a title="' + data.model[i].Name + '" href=/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +');" >'
                     content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
                     content += '</a>'
@@ -120,7 +120,7 @@
                     content += '</div>'
                     content += '<p class="date">'
                     content += '<time datetime="2013-01-21">'
-                    content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                     content += '</time>'
                     content += '<span class="comments_count"></span>'
                     content += '</p>'
@@ -135,7 +135,7 @@
                     content += '</div>'
 
                     content += '<div class="content">'
-                    content += '<img width="120px" height="85px" src="' + data.model[i].Image + '" style="float: left;margin-right: 10px;"><p>'
+                    content += '<p>'
                     content += '<span style="position:relative; top:5px;">' + data.model[i].Abstract + '</span>'
                     content += '</p>'
                     content += '<div class="readMoreDetail">'
@@ -145,7 +145,7 @@
                     content += '</div>'
                     content += '<p class="date">'
                     content += '<time datetime="2013-01-21">'
-                    content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                     content += '</time>'
                     content += '<span class="comments_count"></span>'
                     content += '</p>'
@@ -166,7 +166,7 @@
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
-                    content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                     content += '</time>';
                     content += '</p>';
                     content += '<p style="line-height: 15px;">';
@@ -180,7 +180,7 @@
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
-                    content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                     content += '</time>';
                     content += '</p>';
                     content += '<p style="line-height: 15px;">';
@@ -202,7 +202,7 @@
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
-                    content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                     content += '</time>';
                     content += '</p>';
                     content += '<p style="line-height: 15px;">';
@@ -216,7 +216,7 @@
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
-                    content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                     content += '</time>';
                     content += '</p>';
                     content += '<p style="line-height: 15px;">';
@@ -239,12 +239,12 @@
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
-                    content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                     content += '</time>';
                     content += '</p>';
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
-                    content += '...</p>';
+                    content += '</p>';
                     content += '</article>';
                 } else {
                     content += '<article>';
@@ -253,12 +253,12 @@
                     content += '</hgroup>';
                     content += '<p class="date">';
                     content += '<time>';
-                    content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                     content += '</time>';
                     content += '</p>';
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
-                    content += '...</p>';
+                    content += '</p>';
                     content += '</article>';
                 }
             }
