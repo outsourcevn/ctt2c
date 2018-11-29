@@ -8,8 +8,8 @@ namespace AppPortal.AdminSite.Services.Interfaces
 {
     public interface IMediaService
     {
-        IList<Media> GetMedia(string type);
-        void AddOrEdit(Media model);
+        IList<Media> GetMedia(string type , int is_publish);
+        Media AddOrEdit(Media model);
         void delete(int id);
     }
 }

@@ -145,6 +145,7 @@ namespace AppPortal.ApiHost
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<INewsLog, NewsLogService>();
+            services.AddScoped<IMediaService, MediaService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddSingleton<IDatetimeProvider, DatetimeProvider>();
             // PasswordHasher

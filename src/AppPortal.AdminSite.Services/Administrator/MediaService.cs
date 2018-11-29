@@ -12,46 +12,24 @@ namespace AppPortal.AdminSite.Services.Administrator
 {
     public class MediaService : IMediaService
     {
-        private readonly IRepository<News, int> _news;
-        private readonly IAsyncRepository<News, int> _newsAsync;
-        private readonly IRepository<NewsCategory, int> _newsCat;
-        private readonly IRepository<NewsRelated, int> _newsRelated;
-        private readonly IRepository<Category, int> _category;
-        private readonly IAppLogger<NewsService> _appLogger;
-        private readonly IRepository<ReportNews, int> _rptNews;
-        private readonly IRepository<Notifications, int> _notifi;
-        private readonly IRepository<NewsLog, int> _newslog;
-        private readonly IRepository<Files, int> _files;
         private readonly IRepository<Media, int> _media;
         public MediaService(
-            IRepository<News, int> news,
-            IAsyncRepository<News, int> newsAsync,
-            IRepository<NewsCategory, int> newsCat,
-            IRepository<NewsRelated, int> newsRelated,
-            IRepository<ReportNews, int> ReportNews,
-            IRepository<Category, int> category,
-            IRepository<Notifications, int> notifi,
-            IRepository<NewsLog, int> newslog,
-            IRepository<Files, int> files,
-            IRepository<Media, int> medias,
-            IAppLogger<NewsService> appLogger)
+            IRepository<Media, int> medias)
         {
-            _news = news;
-            _newsAsync = newsAsync;
-            _newsCat = newsCat;
-            _newsRelated = newsRelated;
-            _category = category;
-            _appLogger = appLogger;
-            _rptNews = ReportNews;
-            _notifi = notifi;
-            _newslog = newslog;
-            _files = files;
             _media = medias;
         }
 
-        public IList<Media> GetMedia(string type)
+        public IList<Media> GetMedia(string type , int is_publish)
         {
-            return _media.Table.Where(x => x.OnDeleted.HasValue && x.OnPublish.HasValue && x.type == type).ToList();
+            if (is_publish == 1)
+            {
+                return _media.Table.Where(x => x.OnDeleted == null && x.OnPublish.HasValue && x.type == type).OrderByDescending(x => x.OnCreated).ToList();
+            }
+            else
+            {
+                return _media.Table.Where(x => x.OnDeleted == null && x.type == type).OrderByDescending(x => x.OnCreated).ToList();
+            }
+           
         }
 
         public void delete(int id)
@@ -64,7 +42,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             }
         }
 
-        public void AddOrEdit(Media model)
+        public Media AddOrEdit(Media model)
         {
             if(model.Id > 0)
             {
@@ -74,8 +52,10 @@ namespace AppPortal.AdminSite.Services.Administrator
                 {
                     media.description = model.description;
                     media.name = model.name;
+                    media.OnPublish = model.OnPublish;
                     _media.Update(media);
                 }
+                return media;
             }
             else
             {
@@ -85,9 +65,12 @@ namespace AppPortal.AdminSite.Services.Administrator
                 media.size = model.size;
                 media.type = model.type;
                 media.OnCreated = DateTime.Now;
+                media.OnPublish = model.OnPublish;
                 media.url = model.url;
                 _media.Add(media);
+                return media;
             }
+            
         }
 
     }
