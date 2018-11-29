@@ -443,12 +443,12 @@
                 content += '</hgroup>';
                 content += '<p class="date">';
                 content += '<time>';
-                content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                 content += '</time>';
                 content += '</p>';
                 content += '<p style="line-height: 15px;">';
                 content += data.model[i].Abstract;
-                content += '...</p>';
+                content += '</p>';
                 content += '</article>';
             }
             $('#tin-moi-nhat-content').html(content);
@@ -464,12 +464,12 @@
             header += '</hgroup>';
             header += '<p class="date">';
             header += '<time datetime="2013-01-24">';
-            header += new Date(data.model[0].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+            header += new Date(data.model[0].OnPublished ).format("dd/mm/yyyy");
             header += '</time>';
             header += '</p>';
             header += '<p>'
             header += data.model[0].Abstract;
-            header += '...</p>';
+            header += '</p>';
             $("#truyen-thong-news-header").html(header);
 
 
@@ -481,12 +481,12 @@
                 news += '</hgroup>';
                 news += '<p class="date">';
                 news += '<time datetime="2013-01-21">';
-                news += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                news += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                 news += '</time>';
                 news += '</p>';
                 news += '<p>';
                 news += data.model[i].Abstract;
-                news += '...</p>';
+                news += '</p>';
                 news += '</li >';
                 $("#truyen-thong-news-content").html(news);
             }
@@ -502,12 +502,12 @@
                 content += '</hgroup>';
                 content += '<p class="date">';
                 content += '<time datetime="2013-01-21">';
-                content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                 content += '</time>';
                 content += '</p>';
                 content += '<p>';
                 content += data.model[i].Abstract;
-                content += '...</p>';
+                content += '</p>';
                 content += '<a style="color: red;text-decoration: underline" href="http://demo.eportal.today/doc/235-qd-btnmt.pdf" target="_blank">Tải xuống Quyết định số 235/QĐ-BTNMT</a>';
                 content += '</article>';
                 content += '</li>';
@@ -525,12 +525,12 @@
                 content += '</hgroup>';
                 content += '<p class="date">';
                 content += '<time datetime="2013-01-21">';
-                content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                 content += '</time>';
                 content += '</p>';
                 content += '<p>';
                 content += data.model[i].Abstract;
-                content += '...</p>';
+                content += '</p>';
                 content += '</article>';
                 content += '</li>';
             }
@@ -547,12 +547,12 @@
                 content += '</hgroup>';
                 content += '<p class="date">';
                 content += '<time datetime="2013-01-21">';
-                content += new Date(data.model[i].OnCreated).format("dd/mm/yyyy HH:MM:ss");
+                content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
                 content += '</time>';
                 content += '</p>';
                 content += '<p>';
                 content += data.model[i].Abstract;
-                content += '...</p>';
+                content += '</p>';
                 content += '</article>';
                 content += '</li>';
             }
