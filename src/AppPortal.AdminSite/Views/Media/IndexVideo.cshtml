@@ -28,7 +28,7 @@
 
                         <div class="form-check">
                             <input type="checkbox" name="is_publish" class="form-check-input" id="is_publish">
-                            <label class="form-check-label" for="exampleCheck1">Đăng lên trang chủ</label>
+                            <label class="form-check-label" for="exampleCheck1">Hiện thị trên trang chủ</label>
                         </div>
                         <input type="hidden" name="type" value="video" />
                     </form>
@@ -104,22 +104,22 @@
                         },
                         parameterMap: function (options, operation) {
                             if (operation == "update") {
-                                var data = options.models[0];
+                                var data = options;
                                 if (data.OnPublish) {
                                     data.OnPublish = formatDate(new Date());
                                 } else {
                                     data.OnPublish = null;
                                 }
                                 return data;
-                            } else if (operation == "destroy" && options.models) {
+                            } else if (operation == "destroy" && options) {
 
-                                var data = options.models[0];
+                                var data = options;
                                 return {
                                     id: data.Id
                                 }
-                            } else if (operation !== "read" && options.models) {
+                            } else if (operation !== "read" && options) {
                                 return {
-                                    models: kendo.stringify(options.models)
+                                    models: kendo.stringify(options)
                                 };
                             }
                         }
@@ -130,13 +130,12 @@
                             messagerSuccess("Sửa thành công!");
                         }
                     },
-                    batch: true,
+                    batch: false,
                     pageSize: 20,
                     schema: {
                         model: {
                             id: "Id",
                             fields: {
-                                Id: { editable: false },
                                 url: { editable: false },
                                 description: { type: "string", validation: { required: true } },
                                 OnCreated: { type: "date", editable: false },
@@ -160,7 +159,7 @@
                         { field: "url", title: "Video", width: "250px", template: "#=templateimage(url)#" },
                         { field: "description", title: "Mô tả", width: "250px" },
                         { field: "OnCreated", title: "Ngày tạo", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },
-                        { field: "OnPublish", title: "Đăng lên trang chủ", width: "100px", template: "#=templateOnPublish(OnPublish)#" },
+                        { field: "OnPublish", title: "Hiện thị trên trang chủ", width: "100px", template: "#=templateOnPublish(OnPublish)#" },
                         {
                             command: [
                                 { name: "edit" },
