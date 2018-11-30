@@ -7,7 +7,6 @@
     <button type="button" style="margin: 10px 0px" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
         Thêm ảnh
     </button>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -52,8 +51,9 @@
             <button class="k-button" id="yesButton">Xóa</button>
             <button class="k-button" id="noButton"> Không</button>
         </div>
-       
+
     </script>
+
     @section Scripts{
         <script>
             var jwtToken = getCookie("ACCESS-TOKEN");
@@ -64,7 +64,10 @@
             $(document).ready(function () {
                 $("#uploadFileData").attr("action", `${appConfig.apiHostUrl}` + '/api/Media/upLoadFile');
                 $("#files").kendoUpload({
-                    multiple: false
+                    multiple: false,
+                    validation: {
+                        allowedExtensions: [".gif", ".jpg", ".png"]
+                    }
                 });
 
                 dataSource = new kendo.data.DataSource({
@@ -102,8 +105,10 @@
                         parameterMap: function (options, operation) {
                             if (operation == "update") {
                                 var data = options.models[0];
-                                if (data.OnPublish != null) {
-                                    data.OnPublish = formatDate(data.OnPublish);
+                                if (data.OnPublish) {
+                                    data.OnPublish = formatDate(new Date());
+                                } else {
+                                    data.OnPublish = null;
                                 }
                                 return data;
                             } else if (operation == "destroy" && options.models) {
@@ -118,7 +123,7 @@
                                 };
                             }
                         }
-                        
+
                     },
                     requestEnd: function (e) {
                         if (e.type == "update") {
@@ -135,7 +140,7 @@
                                 url: { editable: false },
                                 description: { type: "string", validation: { required: true } },
                                 OnCreated: { type: "date", editable: false },
-                                OnPublish: { type: "date" }
+                                OnPublish: { type: "boolean" }
                             }
                         }
                     }
@@ -155,7 +160,7 @@
                         { field: "url", title: "Ảnh", width: "250px", template: "#=templateimage(url)#" },
                         { field: "description", title: "Mô tả", width: "250px" },
                         { field: "OnCreated", title: "Ngày tạo", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },
-                        { field: "OnPublish", title: "Đăng lên trang chủ", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },
+                        { field: "OnPublish", title: "Đăng lên trang chủ", width: "100px", template: "#=templateOnPublish(OnPublish)#" },
                         {
                             command: [
                                 { name: "edit" },
@@ -208,6 +213,14 @@
 
             function templateimage(url) {
                 return '<img src="' + url + '" alt="Smiley face" height="auto" width="200px">';
+            }
+
+            function templateOnPublish(OnPublish) {
+                if (OnPublish == null) {
+                    return '<input type="checkbox" disabled>';
+                } else {
+                    return '<input type="checkbox" checked disabled>';
+                }
             }
 
             function formatDate(date) {

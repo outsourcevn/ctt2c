@@ -72,7 +72,6 @@
                 </ul>
             </li>
         </secure-content>*@
-
                     <li class="nav-item has-treeview sysadmin">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa fa-angle-double-right"></i>
@@ -125,7 +124,6 @@
                             </secure-content>
                         </ul>
                     </li>
-
                     <secure-content asp-controller="Categories">
                         <li class="nav-item has-treeview sysadmin">
                             <a href="#" class="nav-link">
@@ -152,7 +150,6 @@
                             </ul>
                         </li>
                     </secure-content>
-
                     <secure-content asp-controller="News">
                         <li id="News" class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -177,12 +174,12 @@
                                     </a>
                                 </li>
                                 @*<li class="nav-item">
-                                    <a href="/news?status=8" class="nav-link">
-                                        <i class="fa fa-warning nav-icon"></i>
-                                        <p>Tin đã xác minh</p>
-                                        <span class="badge badge-info right"></span>
-                                    </a>
-                                </li>*@
+                        <a href="/news?status=8" class="nav-link">
+                            <i class="fa fa-warning nav-icon"></i>
+                            <p>Tin đã xác minh</p>
+                            <span class="badge badge-info right"></span>
+                        </a>
+                    </li>*@
                                 <li class="nav-item">
                                     <a href="/news?status=3" class="nav-link">
                                         <i class="fa fa-check nav-icon"></i>
@@ -198,23 +195,22 @@
                                     </a>
                                 </li>
                                 @*<li class="nav-item">
-                                    <a href="/news?status=3" class="nav-link">
-                                        <i class="fa fa-check nav-icon"></i>
-                                        <p>Góp ý/ Phản ánh đã xác nhận</p>
-                                        <span class="badge badge-info right"></span>
-                                    </a>
-                                </li>*@
+                        <a href="/news?status=3" class="nav-link">
+                            <i class="fa fa-check nav-icon"></i>
+                            <p>Góp ý/ Phản ánh đã xác nhận</p>
+                            <span class="badge badge-info right"></span>
+                        </a>
+                    </li>*@
                                 @*<li class="nav-item">
-                                    <a href="/news?status=9" class="nav-link">
-                                        <i class="fa fa-remove nav-icon"></i>
-                                        <p>Tin tức bị từ chối</p>
-                                        <span class="badge badge-info right"></span>
-                                    </a>
-                                </li>*@
+                        <a href="/news?status=9" class="nav-link">
+                            <i class="fa fa-remove nav-icon"></i>
+                            <p>Tin tức bị từ chối</p>
+                            <span class="badge badge-info right"></span>
+                        </a>
+                    </li>*@
                             </ul>
                         </li>
                     </secure-content>
-
                     <secure-content asp-controller="HomeNews">
                         <li id="News" class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -248,34 +244,58 @@
                             </ul>
                         </li>
                     </secure-content>
-
-
-                    @*<secure-content asp-controller="Topics">
-                        <li id="Topics" class="nav-item has-treeview">
+                    <secure-content asp-controller="Media">
+                        <li id="News" class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-angle-double-right"></i>
                                 <p>
-                                    Quản trị chủ đề góp ý
+                                    Quản album ảnh/video
                                     <i class="fa fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-controller="Topics" asp-action="create" class="nav-link">
+                                    <a href="/media/IndexImage" class="nav-link">
                                         <i class="fa fa-list-ul nav-icon"></i>
-                                        <p>Tạo chủ đề mới</p>
+                                        <p>Album ảnh</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-controller="Topics" asp-action="Index" class="nav-link">
+                                    <a href="/media/IndexVideo" class="nav-link">
                                         <i class="fa fa-list-ul nav-icon"></i>
-                                        <p>Quản lý chủ đề</p>
+                                        <p>Album video</p>
                                         <span class="badge badge-info right"></span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                    </secure-content>*@
+                    </secure-content>
+                    @*<secure-content asp-controller="Topics">
+            <li id="Topics" class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-angle-double-right"></i>
+                    <p>
+                        Quản trị chủ đề góp ý
+                        <i class="fa fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-controller="Topics" asp-action="create" class="nav-link">
+                            <i class="fa fa-list-ul nav-icon"></i>
+                            <p>Tạo chủ đề mới</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Topics" asp-action="Index" class="nav-link">
+                            <i class="fa fa-list-ul nav-icon"></i>
+                            <p>Quản lý chủ đề</p>
+                            <span class="badge badge-info right"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </secure-content>*@
                     @*<secure-content asp-controller="ProcessWorks">
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">

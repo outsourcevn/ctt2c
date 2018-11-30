@@ -78,7 +78,7 @@ namespace AppPortal.ApiHost.Controllers
                 DateTime nx = new DateTime(1970, 1, 1);
                 TimeSpan ts = DateTime.UtcNow - nx;
                 var fileName = ((int)ts.TotalSeconds).ToString() + ' '+ formFile.FileName;
-                if (fileType.IndexOf("image") != -1)
+                if (fileType.IndexOf("image") != -1 || fileType.IndexOf("video") != -1)
                 {
                     if (fileSize < 50000000)
                     {
