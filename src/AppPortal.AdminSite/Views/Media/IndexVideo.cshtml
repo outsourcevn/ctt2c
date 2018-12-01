@@ -156,10 +156,10 @@
                     pageable: true,
                     height: 550,
                     columns: [
-                        { field: "url", title: "Video", width: "250px", template: "#=templateimage(url)#" },
-                        { field: "description", title: "Mô tả", width: "250px" },
+                        { field: "url", title: "Video", width: "200px", template: "#=templateimage(url)#" },
+                        { field: "description", title: "Mô tả", width: "200px" },
                         { field: "OnCreated", title: "Ngày tạo", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },
-                        { field: "OnPublish", title: "Hiện thị trên trang chủ", width: "100px", template: "#=templateOnPublish(OnPublish)#" },
+                        { field: "OnPublish", title: "Hiện thị trên trang chủ", width: "130px", template: "#=templateOnPublish(OnPublish)#" },
                         {
                             command: [
                                 { name: "edit" },
@@ -183,7 +183,7 @@
                                         })
                                     }
                                 }
-                            ], width: "100px"
+                            ], width: "150px"
                         }
                     ],
                     editable: "inline"

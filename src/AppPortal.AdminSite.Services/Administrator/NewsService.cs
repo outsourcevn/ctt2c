@@ -487,7 +487,32 @@ namespace AppPortal.AdminSite.Services.Administrator
             else query = query.Skip(skip.Value).Take(take.Value);
             return query.Select(x => x.EntityToModel()).ToList();
         }
-        
+
+        public IList<News> GetLstNewsAno(string name, string email, string sdt, string publish_date)
+        {
+            var query = _news.Table;
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(x => x.UserFullName == name);
+            }
+
+            if (!string.IsNullOrEmpty(sdt))
+            {
+                query = query.Where(x => x.UserPhone == sdt);
+            }
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                query = query.Where(x => x.UserEmail == email);
+            }
+
+            //if (!string.IsNullOrEmpty(publish_date))
+            //{
+            //    query = query.Where(x => x.OnPublished == publish_date);
+            //}
+            return query.ToList();
+        }
+
         public IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "",
             int? categoryId = -1, int? status = -1, int? type = -1 , string username = "", string GroupId = "")
         {

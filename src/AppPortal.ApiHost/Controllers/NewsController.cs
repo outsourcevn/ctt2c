@@ -57,6 +57,14 @@ namespace AppPortal.ApiHost.Controllers
             });
         }
 
+        [AllowAnonymous]
+        [HttpGet("getNewsAno")]
+        public IActionResult ListNewsAno(string name = "" , string email= "" , string sdt = "" , string publish_date = "")
+        {
+            var query = _newsService.GetLstNewsAno(name , email, sdt , publish_date);
+            return Ok(query);
+        }
+
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("getHomeNews")]
         public IActionResult ListHomeNewsAsync(int? skip = 0, int? page = 1, int? take = 15, string keyword = "",
