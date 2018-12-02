@@ -580,6 +580,56 @@ function nhapketquaxuly() {
     }
 }
 
+function nhapketcongkhai() {
+    var grid = $('#dataGrid').data('kendoGrid');
+    if ($("#exampleModalNew_congkhai .IdReport").val() !== "") {
+        var idReport = $("#exampleModalNew_congkhai .IdReport").val();
+        var data = {
+            Id: parseInt(idReport),
+            Data: editorGopy.getData()
+        }
+
+        kendo.confirm("Xác nhận trả lời ?")
+            .done(function () {
+                callAjax(
+                    `${appConfig.apiHostUrl}` + '/api/NewsLog/PostReport',
+                    data,
+                    AjaxConst.PostRequest,
+                    function (xhr) {
+                        $(this).addClass('disabled').attr('disabled', true);
+                        xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                    },
+                    function (success) {
+
+                        if (!success.did_error) {
+                            messagerSuccess('Thông báo', 'Trả lời góp ý thành công!');
+                        }
+                        if (grid) {
+                            grid.clearSelection();
+                            grid.dataSource.read();
+                        }
+                    },
+                    function (xhr, status, error) {
+
+                        if (xhr.status === 400) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            err.forEach(function (item) {
+                                messagerError(item.Code, item.Description);
+                            });
+                        } else {
+                            messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                        }
+                    },
+                    function (complete) {
+                        $(this).removeClass('disabled').removeAttr('disabled');
+                    }
+                )
+            })
+    } else {
+        messagerWarn('Thông báo', 'Vui lòng chọn tin.');
+    }
+}
+
 function nhapketquagopy() {
     var grid = $('#dataGrid').data('kendoGrid');
     if ($("#exampleModalNew_gopychidao .IdReport").val() !== "") {
@@ -790,7 +840,7 @@ function xemchitiet(news_id) {
 }
 
 
-function congkhai(news_id) {
+function congkhai2(news_id) {
     var grid = $('#dataGrid').data('kendoGrid');
     var ids = [];
     ids.push(news_id);
@@ -833,6 +883,65 @@ function congkhai(news_id) {
         messagerWarn('Thông báo', 'Vui lòng chọn tin.');
     }
 }
+
+function congkhai(news_id) {
+    $("#exampleModalNew_congkhai .NewsId").val(news_id);
+    callAjax(
+        `${appConfig.apiHostUrl}` + '/api/NewsLog/GetNewsLogByNewsIdNameFrom?NewsId=' + news_id + "&UserName=anonymous",
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (success) {
+            try {
+                $("#exampleModalNew_congkhai .commentNews").val(success[0].Data);
+                if (success[0].Data) {
+                    editorGopy.setData(success[0].Data);
+                }
+
+                $("#exampleModalNew_congkhai .IdReport").val(success[0].Id);
+            } catch (e) {
+                $("#IdReport").val("0");
+            }
+            $("#exampleModalNew_congkhai").modal('show');
+            $('#fileupload5').addClass('fileupload-processing');
+            $("#filecongkhai tbody").empty();
+            $.ajax({
+                // Uncomment the following to send cross-domain cookies:
+                //xhrFields: {withCredentials: true},
+                url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload/' + $("#exampleModalNew_congkhai .IdReport").val(),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie("ACCESS-TOKEN"));
+                    xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew_congkhai .IdReport").val()));
+                },
+                dataType: 'json',
+                context: $('#fileupload5')[0]
+            }).always(function () {
+                $(this).removeClass('fileupload-processing');
+            }).done(function (result) {
+                $(this).fileupload('option', 'done')
+                    .call(this, $.Event('done'), { result: result });
+            });
+        },
+        function (xhr, status, error) {
+
+            if (xhr.status === 400) {
+                var err = eval("(" + xhr.responseText + ")");
+                err.forEach(function (item) {
+                    messagerError(item.Code, item.Description);
+                });
+            } else {
+                messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+            }
+        },
+        function (complete) {
+            $(this).removeClass('disabled').removeAttr('disabled');
+        }
+    )
+}
+
 
 function baocaoketqua(news_id) {
     var url = `${appConfig.apiHostUrl}/${NEWS_API.GET_REPORT}`;

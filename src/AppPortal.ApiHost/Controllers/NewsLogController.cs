@@ -60,6 +60,16 @@ namespace AppPortal.ApiHost.Controllers
         [HttpGet("GetNewsLogByNewsIdNameFrom")]
         public IList<NewsLog> GetNewsLogByNewsIdNameFrom(int NewsId, string UserName)
         {
+            var data = _newLog.GetNewsLogByNewsIdNameFrom(NewsId, UserName);
+            if(data.Count == 0)
+            {
+                var logs3 = new NewsLog();
+                logs3.NewsId = NewsId;
+                logs3.UserName = "anonymous";
+                logs3.GroupNameTo = "anonymous";
+                logs3.OnCreated = DateTime.Now;
+                _newLog.AddOrUpdate(logs3);
+            }
             return _newLog.GetNewsLogByNewsIdNameFrom(NewsId, UserName);
         }
 

@@ -487,7 +487,43 @@ namespace AppPortal.AdminSite.Services.Administrator
             else query = query.Skip(skip.Value).Take(take.Value);
             return query.Select(x => x.EntityToModel()).ToList();
         }
-        
+
+        public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt)
+        {
+            var query = _news.Table.Select(x => new LstItemNews
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Image = x.Image,
+                Sename = x.Sename,
+                Abstract = x.Abstract,
+                OnPublished = x.OnPublished,
+                UserFullName = x.UserFullName,
+                UserEmail = x.UserEmail,
+                UserPhone = x.UserPhone,
+                IsStatus = x.IsStatus,
+                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").ToList()
+            });
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(x => x.UserFullName == name);
+            }
+
+            if (!string.IsNullOrEmpty(sdt))
+            {
+                query = query.Where(x => x.UserPhone == sdt);
+            }
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                query = query.Where(x => x.UserEmail == email);
+            }
+            query = query.Where(x => x.IsStatus == IsStatus.approved);
+            
+            return query.ToList();
+        }
+
         public IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "",
             int? categoryId = -1, int? status = -1, int? type = -1 , string username = "", string GroupId = "")
         {

@@ -359,6 +359,16 @@ namespace AppPortal.ApiHost.Controllers
                 logs2.GroupNameTo = "ldtcmt";
                 logs2.OnCreated = DateTime.Now;
                 _newLog.AddOrUpdate(logs2);
+
+                // tra loi nguoi dan
+
+                //ldtc
+                var logs3 = new NewsLog();
+                logs3.NewsId = newsData.Id;
+                logs3.UserName = "anonymous";
+                logs3.GroupNameTo = "anonymous";
+                logs3.OnCreated = DateTime.Now;
+                _newLog.AddOrUpdate(logs3);
             }
             catch (System.Exception ex)
             {
