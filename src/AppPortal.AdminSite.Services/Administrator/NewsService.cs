@@ -488,9 +488,23 @@ namespace AppPortal.AdminSite.Services.Administrator
             return query.Select(x => x.EntityToModel()).ToList();
         }
 
-        public IList<News> GetLstNewsAno(string name, string email, string sdt, string publish_date)
+        public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt)
         {
-            var query = _news.Table;
+            var query = _news.Table.Select(x => new LstItemNews
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Image = x.Image,
+                Sename = x.Sename,
+                Abstract = x.Abstract,
+                OnPublished = x.OnPublished,
+                UserFullName = x.UserFullName,
+                UserEmail = x.UserEmail,
+                UserPhone = x.UserPhone,
+                IsStatus = x.IsStatus,
+                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").ToList()
+            });
+
             if (!string.IsNullOrEmpty(name))
             {
                 query = query.Where(x => x.UserFullName == name);
@@ -505,11 +519,8 @@ namespace AppPortal.AdminSite.Services.Administrator
             {
                 query = query.Where(x => x.UserEmail == email);
             }
-
-            //if (!string.IsNullOrEmpty(publish_date))
-            //{
-            //    query = query.Where(x => x.OnPublished == publish_date);
-            //}
+            query = query.Where(x => x.IsStatus == IsStatus.approved);
+            
             return query.ToList();
         }
 

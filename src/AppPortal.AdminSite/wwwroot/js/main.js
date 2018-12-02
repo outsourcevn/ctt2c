@@ -116,5 +116,32 @@ $(function () {
         )
     );
 
+    // tra loi nguoi dan
+    $('#fileupload5').fileupload({
+        // Uncomment the following to send cross-domain cookies:
+        //xhrFields: {withCredentials: true},
+        url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie("ACCESS-TOKEN"));
+            xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew_congkhai .IdReport").val()));
+            xhr.setRequestHeader('NewsId', parseInt($("#exampleModalNew_congkhai .NewsId").val()));
+        }
+    });
+
+    $('#fileupload5').on('fileuploaddestroy', function (e, data) {
+        var val = $('input[name="_csrfToken"]').val();
+        //data.formData = {_csrfToken: val};
+        data.headers = { 'Authorization': 'Bearer ' + getCookie("ACCESS-TOKEN") };
+    });
+
+    // Enable iframe cross-domain access via redirect option:
+    $('#fileupload5').fileupload(
+        'option',
+        'redirect',
+        window.location.href.replace(
+            /\/[^\/]*$/,
+            '/cors/result.html?%s'
+        )
+    );
     
 });
