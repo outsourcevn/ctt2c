@@ -5,6 +5,7 @@
     #right_sidebar {
         display: none !important;
     }
+
     .thumbnail {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
         transition: 0.3s;
@@ -15,6 +16,9 @@
 
     .thumbnail-description {
         min-height: 40px;
+        height: 60px;
+        line-height: 20px;
+        overflow: hidden;
     }
 
     .thumbnail:hover {
@@ -46,27 +50,24 @@
                                     <form class="form-horizontal" role="form" method="post" action="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_mvcPath=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;p_auth=xnYz6bfz">
                                         <div class="form-group">
                                             <label for="inputEmail3" class="col-sm-3 control-label">Tên người gửi</label>
-                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputEmail3" placeholder="Nhập tên công dân" name="tenNguoiGui" value=""> </div>
+                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputName" placeholder="Nhập tên công dân" name="tenNguoiGui" value=""> </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
-                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputEmail3" placeholder="Nhập tên công dân" name="tenNguoiGui" value=""> </div>
+                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputEmail" placeholder="Nhập email" name="tenNguoiGui" value=""> </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputEmail3" class="col-sm-3 control-label">Số điện thoại</label>
-                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputEmail3" placeholder="Nhập tên công dân" name="tenNguoiGui" value=""> </div>
+                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputSdt" placeholder="Nhập số điện thoại" name="tenNguoiGui" value=""> </div>
                                         </div>
+                                       
                                         <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-3 control-label">Thời gian công khai</label>
-                                            <div class="col-sm-9"> <input type="date" class="form-control" placeholder="Thời gian công khai" aria-controls="aui_3_4_0_1_89"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-3 col-sm-9"> <button type="submit" class="btn btn-danger"><i class="MR5 fa fa-search" aria-hidden="true"></i>Tìm kiếm</button> <button type="submit" class="btn btn-default">Nhập lại</button> </div>
+                                            <div class="col-sm-offset-3 col-sm-9"> <button type="button" onclick="getdata()" class="btn btn-danger"><i class="MR5 fa fa-search" aria-hidden="true"></i>Tìm kiếm</button> <button type="reset" class="btn btn-default">Nhập lại</button> </div>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="row" style="padding: 10px;">
-                                    <div class="col-md-12">
+                                <div id="lstGopy" class="row" style="padding: 10px;">
+                                    @*<div class="col-md-12">
                                         <div class="thumbnail">
                                             <div class="caption text-center row">
                                                 <div class="col-md-2">
@@ -93,94 +94,7 @@
                                                 <ul class="list-inline" style="height: 100px;"></ul>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="thumbnail">
-                                            <div class="caption text-center row">
-                                                <div class="col-md-2">
-                                                    <div class="position-relative">
-                                                        <img src="https://nguoidan.chinhphu.vn/apca-pakn-portlet/images/MediaObj_Placeholder.png" style="width:72px;height:72px;" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-10">
-                                                    <h4 class="thumbnail-label">Môi trường sống Hà Nội có nguy cơ bùng phát dịch bệnh</h4>
-                                                    <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp;Ông Trần Đức Hiền</p>
-                                                    <br />
-                                                    <time datetime="2013-01-21" style="float: left">
-                                                        22/11/2018 7:23:35 PM
-                                                    </time>
-                                                    <div class="thumbnail-description smaller">
-                                                        <p style="margin-top: 10px; float: left; font-size: 13px;">Nhiều mương thoát nước ở Hà Nội đã bị biến thành mương rác, gây tắc nghẽn và ô nhiễm môi trường nghiêm trọng, trong khi mùa mưa đã tới.</p>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="caption card-footer text-center">
-                                                <ul class="list-inline" style="height: 100px;"></ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="thumbnail">
-                                            <div class="caption text-center row">
-                                                <div class="col-md-2">
-                                                    <div class="position-relative">
-                                                        <img src="https://nguoidan.chinhphu.vn/apca-pakn-portlet/images/MediaObj_Placeholder.png" style="width:72px;height:72px;" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-10">
-                                                    <h4 class="thumbnail-label">Ô nhiễm môi trường sông Tô Lịch</h4>
-                                                    <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp;Ông Nguyễn Văn Nam</p>
-                                                    <br />
-                                                    <time datetime="2013-01-21" style="float: left">
-                                                        02/11/2018 7:23:35 PM
-                                                    </time>
-                                                    <div class="thumbnail-description smaller">
-                                                        <p style="margin-top: 10px; float: left; font-size: 13px;">Sông tô lịch gần đây bốc mùi hôi thối. Rác thải sinh hoạt, nước thải từ các nhà máy và khu dân cư lân cận ngày ngày thải trực tiếp ra khu vực sông Tô Lịch (Hà Nội), khiến dòng nước "ngậm" đầy rác trở nên đen ngòm, nồng nặc hôi tanh.</p>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="caption card-footer text-center">
-                                                <ul class="list-inline" style="height: 100px;"></ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="thumbnail">
-                                            <div class="caption text-center row">
-                                                <div class="col-md-2">
-                                                    <div class="position-relative">
-                                                        <img src="https://nguoidan.chinhphu.vn/apca-pakn-portlet/images/MediaObj_Placeholder.png" style="width:72px;height:72px;" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-10">
-                                                    <h4 class="thumbnail-label">Ô nhiễm không khí tại TP.HCM đang ở mức báo động</h4>
-                                                    <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp;Bà Bùi Thị Thanh Trang</p>
-                                                    <br />
-                                                    <time datetime="2013-01-21" style="float: left">
-                                                        01/10/2018 7:23:35 PM
-                                                    </time>
-                                                    <div class="thumbnail-description smaller">
-                                                        <p style="margin-top: 10px; float: left; font-size: 13px;">Những khu vực có mức độ ô nhiễm cao thường đi kèm với mật độ giao thông đông đúc như khu vực: Ngã tư An Sương, khu vực ra vào cảng Cát Lái, đường Cộng Hòa, Trường Chinh, Nguyễn Hữu Thọ, ngã sáu Gò Vấp….</p>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="caption card-footer text-center">
-                                                <ul class="list-inline" style="height: 100px;"></ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
@@ -355,6 +269,66 @@
             </div>
         </div>
     </div>
-  
-</div>
 
+</div>
+@section Scripts {
+    <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
+    <script>
+            $(document).ready(function () {
+                getdata();
+            });
+
+            function getdata() {
+                $.ajax({
+                    url: appConfig.apiHostUrl + "/api/news/getNewsAno",
+                    data: {
+                        name: $("#inputName").val(),
+                        email: $("#inputEmail").val(),
+                        sdt: $("#inputSdt").val(),
+                    },
+                    success: function (result) {
+                        var dataContainer = $("#lstGopy");
+                        $('#lstGopy').pagination({
+                            dataSource: result,
+                            pageSize: 5,
+                            showGoInput: true,
+                            showGoButton: true,
+                            callback: function (data, pagination) {
+                                var html = templateData(data);
+                                dataContainer.html(html);
+                            }
+                        })
+                    }
+                });
+            }
+        function templateData(data) {
+        var html = '';
+        for (var i = 0; i < data.length; i++) {
+            var noidung = '';
+            noidung = data[i].Content;
+            var content = '<div class="col-md-12">';
+            content += '   <div class="thumbnail">';
+            content += '        <div class="caption text-center row">';
+            content += '            <div class="col-md-2">';
+            content += '               <div class="position-relative">';
+            content += '                   <img src="https://nguoidan.chinhphu.vn/apca-pakn-portlet/images/MediaObj_Placeholder.png" style="width:72px;height:72px;" />';
+            content += '               </div> </div>';
+
+            content += '            <div class="col-md-10">';
+            content += '                <h4 class="thumbnail-label">' + data[i].Name +'</h4>';
+            content += '                <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp;' + data[i].UserFullName +'</p>           <br />';
+            content += '               <time datetime="2013-01-21" style="float: left">22/10/2018 7:23:35 PM </time></br>';
+            content += '               <div class="thumbnail-description smaller">';
+            content += noidung;
+            content += '                 </div></div></div>';
+            content += '       <div class="caption card-footer text-center">       <ul class="list-inline" style="height: 100px;"></ul>    </div>   </div></div>';
+
+            html += content;
+        }
+        return html;
+    }
+
+
+        
+    </script>
+}

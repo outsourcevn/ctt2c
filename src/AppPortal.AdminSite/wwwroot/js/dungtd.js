@@ -586,8 +586,8 @@ function nhapketcongkhai() {
         var idReport = $("#exampleModalNew_congkhai .IdReport").val();
         var data = {
             Id: parseInt(idReport),
-            Data: editorGopy.getData()
-        }
+            Data: editorCongkhai.getData()
+        };
 
         kendo.confirm("Xác nhận trả lời ?")
             .done(function () {
@@ -600,13 +600,39 @@ function nhapketcongkhai() {
                         xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
                     },
                     function (success) {
-
+                        var ids = [];
+                        ids.push($("#exampleModalNew_congkhai .NewsId").val());
                         if (!success.did_error) {
                             messagerSuccess('Thông báo', 'Trả lời góp ý thành công!');
-                        }
-                        if (grid) {
-                            grid.clearSelection();
-                            grid.dataSource.read();
+                            //
+                            callAjax(
+                                `${appConfig.apiHostUrl}/${NEWS_API.SAVE_PROCESS_NEW}`,
+                                ids,
+                                AjaxConst.PostRequest,
+                                function (xhr) {
+                                    $(this).addClass('disabled').attr('disabled', true);
+                                    xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                                },
+                                function (success) {
+                                    if (grid) {
+                                        grid.clearSelection();
+                                        grid.dataSource.read();
+                                    }
+                                },
+                                function (xhr, status, error) {
+                                    if (xhr.status === 400) {
+                                        var err = eval("(" + xhr.responseText + ")");
+                                        err.forEach(function (item) {
+                                            messagerError(item.Code, item.Description);
+                                        });
+                                    } else {
+                                        messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                                    }
+                                },
+                                function (complete) {
+                                    $(this).removeClass('disabled').removeAttr('disabled');
+                                }
+                            );
                         }
                     },
                     function (xhr, status, error) {
@@ -898,7 +924,7 @@ function congkhai(news_id) {
             try {
                 $("#exampleModalNew_congkhai .commentNews").val(success[0].Data);
                 if (success[0].Data) {
-                    editorGopy.setData(success[0].Data);
+                    editorCongkhai.setData(success[0].Data);
                 }
 
                 $("#exampleModalNew_congkhai .IdReport").val(success[0].Id);

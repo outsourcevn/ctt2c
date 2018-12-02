@@ -21,6 +21,14 @@ namespace AppPortal.Core.Entities
         public DateTime? OnCreated { get; set; }
     }
 
+    public class NewsLogModel
+    {
+        public int Id { get; set; }
+        public string Note { get; set; }
+        public string Data { get; set; }
+        public IList<Files> files { get; set; }
+    }
+
     public enum IsTypeStatus : int
     {
         is_logs,

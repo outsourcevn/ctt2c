@@ -13,10 +13,18 @@ namespace AppPortal.AdminSite.Services.Administrator
     public class MediaService : IMediaService
     {
         private readonly IRepository<Media, int> _media;
+        private readonly IRepository<Config, int> _config;
         public MediaService(
+            IRepository<Config, int> config,
             IRepository<Media, int> medias)
         {
             _media = medias;
+            _config = config;
+        }
+
+        public Config GetConfig(string type)
+        {
+            return _config.Table.Where(x => x.type == type).FirstOrDefault();
         }
 
         public IList<Media> GetMedia(string type , int is_publish)

@@ -1,15 +1,35 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    ViewData["Title"] = "Cài đặt hệ thống";
 }
 
-<!DOCTYPE html>
+<div class="demo-section k-content">
+    <ul id="fieldlist">
+        <li>
+            <h4 for="phone_number">Cài đặt bản đồ môi trường:</h4>
+            <input id="map" value="" />
+        </li>
+    </ul>
+</div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Config</title>
-</head>
-<body>
-</body>
-</html>
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+            $("#phone_number").kendoMaskedTextBox({
+                mask: "(999) 000-0000"
+            });
+
+            $("#credit_card").kendoMaskedTextBox({
+                mask: "0000 0000 0000 0000"
+            });
+
+            $("#ssn").kendoMaskedTextBox({
+                mask: "000-00-0000"
+            });
+
+            $("#postcode").kendoMaskedTextBox({
+                mask: "L0L 0LL"
+            });
+        });
+    </script>
+}
+

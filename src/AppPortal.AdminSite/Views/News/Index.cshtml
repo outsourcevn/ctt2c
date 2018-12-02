@@ -751,6 +751,16 @@
                 console.error(error);
             });
 
+        var editorCongkhai;
+        ClassicEditor
+            .create(document.querySelector('#exampleModalNew_congkhai .commentNews'))
+            .then(editor => {
+                editorCongkhai = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
         //var editorGopy1;
         //ClassicEditor
         //    .create(document.querySelector("#exampleModalNew_xemchitiet2 .noidung-ldtcmt"))

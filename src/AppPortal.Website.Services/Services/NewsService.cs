@@ -15,16 +15,24 @@ namespace AppPortal.Website.Services.Websites
         private readonly IAsyncRepository<News, int> _newsAsync;
         private readonly IRepository<Category, int> _category;
         private readonly IAppLogger<NewsService> _appLogger;
+        private readonly IRepository<Config, int> _config;
         public NewsService(
             IRepository<News, int> news,
             IAsyncRepository<News, int> newsAsync,
             IRepository<Category, int> category,
+            IRepository<Config, int> config,
             IAppLogger<NewsService> appLogger)
         {
             _news = news;
             _newsAsync = newsAsync;
             _category = category;
+            _config = config;
             _appLogger = appLogger;
+        }
+
+        public Config GetConfig(string type)
+        {
+            return _config.Table.Where(x => x.type == type).FirstOrDefault();
         }
 
         public void AddOrUpdate(NewsModel model)

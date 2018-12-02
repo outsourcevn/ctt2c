@@ -48,7 +48,8 @@ namespace AppPortal.AdminSite.Services.Models.News
         public DateTime? OnDeleted { get; set; }
         public DateTime? OnPublished { get; set; }
         public IsStatus IsStatus { get; set; }
-        public IList<NewsLog> newslog { get; set; }
+        public NewsLogModel newslog { get; set; }
+
     }
 
     public class ListItemNewsMap

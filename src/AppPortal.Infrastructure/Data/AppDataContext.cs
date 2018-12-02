@@ -26,6 +26,7 @@ namespace AppPortal.Infrastructure.App
             modelBuilder.Entity<Files>(ConfigureFiles);
             modelBuilder.Entity<HomeNews>(ConfigureHomeNews);
             modelBuilder.Entity<Media>(ConfigureMedia);
+            modelBuilder.Entity<Config>(ConfigureConfig);
         }
 
         #region Mapping
@@ -181,6 +182,14 @@ namespace AppPortal.Infrastructure.App
             b.ToTable("Media", "AppPortal");
             b.Property(c => c.description).HasMaxLength(2000);
         }
+
+        private void ConfigureConfig(EntityTypeBuilder<Config> b)
+        {
+            b.ToTable("Config", "AppPortal");
+            b.Property(c => c.url).HasMaxLength(2000);
+        }
+
+        
 
         #endregion
     }

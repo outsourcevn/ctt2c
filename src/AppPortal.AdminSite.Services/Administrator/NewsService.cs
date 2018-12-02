@@ -22,6 +22,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         private readonly IRepository<Notifications , int> _notifi;
         private readonly IRepository<NewsLog , int> _newLog;
         private readonly IRepository<HomeNews , int> _homeNews;
+        private readonly IRepository<Files, int> _files;
 
         public NewsService(
             IRepository<News, int> news,
@@ -33,6 +34,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             IRepository<Notifications, int> notifi,
             IRepository<NewsLog, int> newLog,
             IRepository<HomeNews, int> homeNews,
+             IRepository<Files, int> files,
             IAppLogger<NewsService> appLogger)
         {
             _news = news;
@@ -45,6 +47,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             _notifi = notifi;
             _newLog = newLog;
             _homeNews = homeNews;
+            _files = files;
         }
 
         //Quy trình mới
@@ -497,12 +500,19 @@ namespace AppPortal.AdminSite.Services.Administrator
                 Image = x.Image,
                 Sename = x.Sename,
                 Abstract = x.Abstract,
+                Content = x.Content,
                 OnPublished = x.OnPublished,
                 UserFullName = x.UserFullName,
                 UserEmail = x.UserEmail,
                 UserPhone = x.UserPhone,
                 IsStatus = x.IsStatus,
-                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").ToList()
+                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").GroupJoin(_files.Table, a => a.Id, b => b.NewsLogId, (a, b) => new NewsLogModel
+                {
+                    Id = a.Id,
+                    Note = a.Note,
+                    Data = a.Data,
+                    files = b.Where(c => c.NewsLogId == a.Id && c.isDelete == 0).ToList()
+                }).FirstOrDefault()
             });
 
             if (!string.IsNullOrEmpty(name))

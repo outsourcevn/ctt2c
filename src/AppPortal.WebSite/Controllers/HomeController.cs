@@ -27,6 +27,7 @@ namespace AppPortal.WebSite.Controllers
 
         public IActionResult index2()
         {
+            ViewData["map"] = _newsService.GetConfig("map");
             return View(nameof(Index));
         }
 
