@@ -1,17 +1,43 @@
 ﻿@{
     ViewData["Title"] = "Cài đặt hệ thống";
-    var url = ViewData["url"];
 }
 
 <div class="demo-section k-content" style="padding: 20px;">
     <h4 for="phone_number">Cài đặt bản đồ môi trường:</h4>
-    <input id="map" style="width: 500px;" value="@url" />
+    <input id="map" style="width: 500px;"  />
     <button id="primaryTextButton" onclick="updateMap()" type="button" class="k-primary">Cập nhật</button>
 </div>
 
 @section Scripts{
     <script>
-        
+        var jwtToken = getCookie("ACCESS-TOKEN");
+        callAjax(
+            appConfig.apiHostUrl + "/api/media/GetConfig?type=map",
+            null,
+            AjaxConst.GetRequest,
+            function (xhr) {
+                $(this).addClass('disabled').attr('disabled', true);
+                xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+            },
+            function (success) {
+                $("#map").val(success.url);
+            },
+            function (xhr, status, error) {
+
+                if (xhr.status === 400) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    err.forEach(function (item) {
+                        messagerError(item.Code, item.Description);
+                    });
+                } else {
+                    messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                }
+            },
+            function (complete) {
+                $(this).removeClass('disabled').removeAttr('disabled');
+            }
+        )
+
         function updateMap() {
             var jwtToken = getCookie("ACCESS-TOKEN");
             callAjax(

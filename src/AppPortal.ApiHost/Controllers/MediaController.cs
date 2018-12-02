@@ -50,6 +50,14 @@ namespace AppPortal.ApiHost.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("GetConfig")]
+        public IActionResult GetConfig(string type)
+        {
+            var media = _mediaService.GetConfig(type);
+            return Ok(media);
+        }
+
+        [AllowAnonymous]
         [HttpGet("getMedia")]
         public IActionResult GetMedia(string type , int is_publish)
         {
