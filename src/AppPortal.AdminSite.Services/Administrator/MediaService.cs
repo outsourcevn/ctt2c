@@ -21,6 +21,24 @@ namespace AppPortal.AdminSite.Services.Administrator
             _media = medias;
             _config = config;
         }
+        public Config AddOrEditConfig(string type, string url)
+        {
+            var data = _config.Table.Where(z => z.type == type).FirstOrDefault();
+            if(data != null)
+            {
+                data.url = url;
+                _config.Update(data);
+                return data;
+            }
+            else
+            {
+                var config = new Config();
+                config.type = type;
+                config.url = url;
+                _config.Add(config);
+                return config;
+            }
+        }
 
         public Config GetConfig(string type)
         {

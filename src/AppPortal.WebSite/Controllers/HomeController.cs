@@ -22,12 +22,15 @@ namespace AppPortal.WebSite.Controllers
 
         public IActionResult Index()
         {
+            var data = _newsService.GetConfig("map");
+            ViewData["map"] = data.url;
             return View();
         }
 
         public IActionResult index2()
         {
-            ViewData["map"] = _newsService.GetConfig("map");
+            var data = _newsService.GetConfig("map");
+            ViewData["map"] = data.url;
             return View(nameof(Index));
         }
 
@@ -61,6 +64,8 @@ namespace AppPortal.WebSite.Controllers
         public IActionResult Map()
         {
             //ViewData["activeMap"] = "active";
+            var data = _newsService.GetConfig("map");
+            ViewData["map"] = data.url;
             return View();
         }
 

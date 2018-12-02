@@ -12,5 +12,6 @@ namespace AppPortal.AdminSite.Services.Interfaces
         Media AddOrEdit(Media model);
         void delete(int id);
         Config GetConfig(string type);
+        Config AddOrEditConfig(string type, string url);
     }
 }
