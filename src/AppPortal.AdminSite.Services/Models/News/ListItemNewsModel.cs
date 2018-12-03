@@ -25,6 +25,7 @@ namespace AppPortal.AdminSite.Services.Models.News
         public IsStatus status { get; set; }
 
         public string Note { get; set; }
+        public int stt { get; set; }
     }
 
     public class LstItemNews

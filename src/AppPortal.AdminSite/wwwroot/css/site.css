@@ -47,3 +47,7 @@ body.body__login {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
+.main-sidebar {
+    min-width: 290px !important;
+}

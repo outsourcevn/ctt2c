@@ -602,6 +602,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             else query = query.OrderByDescending(x => x.Id).Skip(skip.Value).Take(take.Value);
 
             query = query.OrderByDescending(x => x.OnUpdated);
+
             var dataRetun =  query.Select(x => new ListItemNewsModel
             {
                 Id = x.Id,
@@ -622,9 +623,12 @@ namespace AppPortal.AdminSite.Services.Administrator
                 
 
             }).ToList();
+            var index = skip + 1;
             var dataNews = new List<ListItemNewsModel>();
             foreach(var itemdata in dataRetun)
             {
+                itemdata.stt = (int)index;
+                index++;
                 if (GroupId == "ldtcmt" || GroupId == "ttdl")
                 {
                     var data2 = _newLog.Table.Where(x => x.NewsId == itemdata.Id)

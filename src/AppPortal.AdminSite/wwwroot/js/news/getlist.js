@@ -63,6 +63,10 @@ var grid = $("#dataGrid").data("kendoGrid");
         var columnsData = [
             { selectable: true, hidden: true },
             {
+                field: "stt",
+                title: "STT"
+            },
+            {
                 field: "name",
                 title: "Tiêu đề"
             },
@@ -436,7 +440,7 @@ function templateAction(is_status, news_id) {
     // label-success label-danger label-info label-warning
     if (GroupId === "ttdl") {
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Phân công</button>';
-        name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công khai</button>';
+        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công khai</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
         name = name + editbutton;
     }

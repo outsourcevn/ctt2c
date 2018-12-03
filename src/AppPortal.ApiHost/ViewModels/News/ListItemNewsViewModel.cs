@@ -36,6 +36,7 @@ namespace AppPortal.ApiHost.ViewModels.News
         public string fileUpload { get; set; }
         [JsonProperty("is_type")]
         public IsType IsType { get; set; }
-        
+        [JsonProperty("stt")]
+        public int stt { get; set; }
     }
 }
