@@ -113,3 +113,11 @@ h3.block_title_black{
 .dropdown-content a {
     text-align: left !important;
 }
+
+#myNavbar {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin: 0 auto;
+}

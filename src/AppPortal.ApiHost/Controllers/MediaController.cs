@@ -33,12 +33,28 @@ namespace AppPortal.ApiHost.Controllers
            IConfiguration configuration,
            IAppLogger<MediaController> logger,
            IMediaService mediaService,
-            IHostingEnvironment environment,
+           IHostingEnvironment environment,
            ICategoryService categoryService) : base(configuration, logger)
         {
             _categoryService = categoryService;
             _mediaService = mediaService;
             _hostingEnvironment = environment;
+        }
+
+        [AllowAnonymous]
+        [HttpGet("AddOrEditConfig")]
+        public IActionResult AddOrEditConfig(string type , string url)
+        {
+            var media = _mediaService.AddOrEditConfig(type, url);
+            return Ok(media);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetConfig")]
+        public IActionResult GetConfig(string type)
+        {
+            var media = _mediaService.GetConfig(type);
+            return Ok(media);
         }
 
         [AllowAnonymous]

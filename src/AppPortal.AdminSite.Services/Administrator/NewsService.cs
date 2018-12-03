@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using AppPortal.AdminSite.Services.Extensions;
 using AppPortal.AdminSite.Services.Interfaces;
 using AppPortal.AdminSite.Services.Models;
@@ -22,6 +24,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         private readonly IRepository<Notifications , int> _notifi;
         private readonly IRepository<NewsLog , int> _newLog;
         private readonly IRepository<HomeNews , int> _homeNews;
+        private readonly IRepository<Files, int> _files;
 
         public NewsService(
             IRepository<News, int> news,
@@ -33,6 +36,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             IRepository<Notifications, int> notifi,
             IRepository<NewsLog, int> newLog,
             IRepository<HomeNews, int> homeNews,
+             IRepository<Files, int> files,
             IAppLogger<NewsService> appLogger)
         {
             _news = news;
@@ -45,6 +49,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             _notifi = notifi;
             _newLog = newLog;
             _homeNews = homeNews;
+            _files = files;
         }
 
         //Quy trình mới
@@ -488,6 +493,23 @@ namespace AppPortal.AdminSite.Services.Administrator
             return query.Select(x => x.EntityToModel()).ToList();
         }
 
+        private string ConvertToUnSign(string input)
+        {
+            input = input.Trim();
+            for (int i = 0x20; i < 0x30; i++)
+            {
+                input = input.Replace(((char)i).ToString(), " ");
+            }
+            Regex regex = new Regex(@"\p{IsCombiningDiacriticalMarks}+");
+            string str = input.Normalize(NormalizationForm.FormD);
+            string str2 = regex.Replace(str, string.Empty).Replace('đ', 'd').Replace('Đ', 'D');
+            while (str2.IndexOf("?") >= 0)
+            {
+                str2 = str2.Remove(str2.IndexOf("?"), 1);
+            }
+            return str2;
+        }
+
         public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt)
         {
             var query = _news.Table.Select(x => new LstItemNews
@@ -497,27 +519,34 @@ namespace AppPortal.AdminSite.Services.Administrator
                 Image = x.Image,
                 Sename = x.Sename,
                 Abstract = x.Abstract,
+                Content = x.Content,
                 OnPublished = x.OnPublished,
                 UserFullName = x.UserFullName,
                 UserEmail = x.UserEmail,
                 UserPhone = x.UserPhone,
                 IsStatus = x.IsStatus,
-                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").ToList()
+                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").GroupJoin(_files.Table, a => a.Id, b => b.NewsLogId, (a, b) => new NewsLogModel
+                {
+                    Id = a.Id,
+                    Note = a.Note,
+                    Data = a.Data,
+                    files = b.Where(c => c.NewsLogId == a.Id && c.isDelete == 0).ToList()
+                }).FirstOrDefault()
             });
 
             if (!string.IsNullOrEmpty(name))
             {
-                query = query.Where(x => x.UserFullName == name);
+                query = query.Where(x => ConvertToUnSign(x.UserFullName).ToLower().IndexOf(name.ToLower()) > 0);
             }
 
             if (!string.IsNullOrEmpty(sdt))
             {
-                query = query.Where(x => x.UserPhone == sdt);
+                query = query.Where(x => x.UserPhone.Contains(sdt));
             }
 
             if (!string.IsNullOrEmpty(email))
             {
-                query = query.Where(x => x.UserEmail == email);
+                query = query.Where(x => x.UserEmail.Contains(email));
             }
             query = query.Where(x => x.IsStatus == IsStatus.approved);
             

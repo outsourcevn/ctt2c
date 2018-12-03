@@ -436,10 +436,7 @@ function templateAction(is_status, news_id) {
     // label-success label-danger label-info label-warning
     if (GroupId === "ttdl") {
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Phân công</button>';
-        switch (is_status) {
-            case 6: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công khai</button>'; break;
-            default: name += ''; break;
-        }
+        name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công khai</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
         name = name + editbutton;
     }

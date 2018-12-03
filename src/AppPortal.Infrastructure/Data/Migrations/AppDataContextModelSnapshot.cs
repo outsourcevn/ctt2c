@@ -98,6 +98,22 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.ToTable("Categories","AppPortal");
                 });
 
+            modelBuilder.Entity("AppPortal.Core.Entities.Config", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("type");
+
+                    b.Property<string>("url")
+                        .HasMaxLength(2000);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Config","AppPortal");
+                });
+
             modelBuilder.Entity("AppPortal.Core.Entities.Files", b =>
                 {
                     b.Property<int>("Id")

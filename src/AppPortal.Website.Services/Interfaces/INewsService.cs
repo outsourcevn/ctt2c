@@ -14,5 +14,6 @@ namespace AppPortal.Website.Services.Interfaces
         IList<NewsModel> GetNewsPaging(out int rows, int? take = 15, int? skip = 0, int? catId = -1);
         IQueryable<News> GetTables(); 
         IList<News> GetNewsList();
+        Config GetConfig(string type);
     }
 }

@@ -13,10 +13,36 @@ namespace AppPortal.AdminSite.Services.Administrator
     public class MediaService : IMediaService
     {
         private readonly IRepository<Media, int> _media;
+        private readonly IRepository<Config, int> _config;
         public MediaService(
+            IRepository<Config, int> config,
             IRepository<Media, int> medias)
         {
             _media = medias;
+            _config = config;
+        }
+        public Config AddOrEditConfig(string type, string url)
+        {
+            var data = _config.Table.Where(z => z.type == type).FirstOrDefault();
+            if(data != null)
+            {
+                data.url = url;
+                _config.Update(data);
+                return data;
+            }
+            else
+            {
+                var config = new Config();
+                config.type = type;
+                config.url = url;
+                _config.Add(config);
+                return config;
+            }
+        }
+
+        public Config GetConfig(string type)
+        {
+            return _config.Table.Where(x => x.type == type).FirstOrDefault();
         }
 
         public IList<Media> GetMedia(string type , int is_publish)

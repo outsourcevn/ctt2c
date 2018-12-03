@@ -99,6 +99,7 @@ namespace AppPortal.AdminSite
             services.AddSingleton(Configuration);
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<INewsService, NewsService>();
+            services.AddScoped<IMediaService, MediaService>();
             services.AddSingleton<IDatetimeProvider, DatetimeProvider>();
             // register server dynamic Role based
             services.AddSingleton<IMvcControllerDiscovery, MvcControllerDiscovery>();
