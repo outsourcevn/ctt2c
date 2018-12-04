@@ -76,24 +76,24 @@
                 <h3 class="block_title_black">VĂN BẢN CHÍNH SÁCH<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="content">
                     @*<div id="van-ban-chinh-sach-first" class="left">
-                        <article class="border-dot">
-                            <p>
-                                <img src="http://www.xaluan.com/images/news/Image/2018/11/04/15bdea11f4d72b.img.jpg" alt="World News" />
-                            </p>
-                            <hgroup>
-                                <h4 class="title"><a href="#">Quy trình mới về kiểm tra phế liệu nhập khẩu: Doanh nghiệp lo thêm nhiều thủ tục.</a></h4>
-                            </hgroup>
-                            <p class="date">
-                                <time datetime="2013-01-24">
-                                    27/7/2018 10:24:28 PM
-                                </time>
-                                <span class="comments_count"><a href="#">7</a></span>
-                            </p>
-                            <p>
-                                ​Một số doanh nghiệp cho rằng, việc tổ chức thực hiện kiểm tra nhà nước về chất lượng phế liệu nhập khẩu làm nguyên liệu sản xuất theo Thông tư 08/2018/TT-BTNMT và Thông tư 09/2018/TT-BTNMT của Bộ Tài nguyên và Môi trường còn nhiều vấn đề chưa phù hợp với thực tế....
-                            </p>
-                        </article>
-                    </div>*@
+                            <article class="border-dot">
+                                <p>
+                                    <img src="http://www.xaluan.com/images/news/Image/2018/11/04/15bdea11f4d72b.img.jpg" alt="World News" />
+                                </p>
+                                <hgroup>
+                                    <h4 class="title"><a href="#">Quy trình mới về kiểm tra phế liệu nhập khẩu: Doanh nghiệp lo thêm nhiều thủ tục.</a></h4>
+                                </hgroup>
+                                <p class="date">
+                                    <time datetime="2013-01-24">
+                                        27/7/2018 10:24:28 PM
+                                    </time>
+                                    <span class="comments_count"><a href="#">7</a></span>
+                                </p>
+                                <p>
+                                    ​Một số doanh nghiệp cho rằng, việc tổ chức thực hiện kiểm tra nhà nước về chất lượng phế liệu nhập khẩu làm nguyên liệu sản xuất theo Thông tư 08/2018/TT-BTNMT và Thông tư 09/2018/TT-BTNMT của Bộ Tài nguyên và Môi trường còn nhiều vấn đề chưa phù hợp với thực tế....
+                                </p>
+                            </article>
+                        </div>*@
                     <div class="right">
                         <ul id="van-ban-chinh-sach-from-second"></ul>
                     </div>
@@ -180,7 +180,7 @@
                         <div class="region">
                             <aside id="block_front_slider" class="block slider" style="height: 520px;width: 620px;padding-right: 28px;">
                                 <div class="flexslider slider" id="block_front_slides" style="height: 450px;width: 620px;">
-                                    <ul class="slides" id="home-image">
+                                    <ul class="slides" id="home-image-preview">
                                         <li>
                                             <img src="~/images/homes/1.jpg" height="430" />
                                             <p class="flex-caption" style="width:620px">
@@ -329,7 +329,7 @@
                                     </ul>
                                 </div>
                                 <div class="flexslider carousel" id="block_front_carousel">
-                                    <ul class="slides">
+                                    <ul class="slides" id="home-image-slide">
                                         <li>
                                             <img src="~/images/homes/1.jpg" />
                                         </li>
@@ -348,7 +348,6 @@
                                         <li>
                                             <img src="~/images/homes/5.jpg" />
                                         </li>
-
                                         <li>
                                             <img src="~/images/homes/5.1.jpg" />
                                         </li>
@@ -444,7 +443,7 @@
                 content += '</hgroup>';
                 content += '<p class="date">';
                 content += '<time>';
-                content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
+                content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
                 content += '</time>';
                 content += '</p>';
                 content += '<p style="line-height: 15px;">';
@@ -465,7 +464,7 @@
             header += '</hgroup>';
             header += '<p class="date">';
             header += '<time datetime="2013-01-24">';
-            header += new Date(data.model[0].OnPublished ).format("dd/mm/yyyy");
+            header += new Date(data.model[0].OnPublished).format("dd/mm/yyyy");
             header += '</time>';
             header += '</p>';
             header += '<p>'
@@ -482,7 +481,7 @@
                 news += '</hgroup>';
                 news += '<p class="date">';
                 news += '<time datetime="2013-01-21">';
-                news += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
+                news += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
                 news += '</time>';
                 news += '</p>';
                 news += '<p>';
@@ -503,7 +502,7 @@
                 content += '</hgroup>';
                 content += '<p class="date">';
                 content += '<time datetime="2013-01-21">';
-                content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
+                content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
                 content += '</time>';
                 content += '</p>';
                 content += '<p>';
@@ -526,7 +525,7 @@
                 content += '</hgroup>';
                 content += '<p class="date">';
                 content += '<time datetime="2013-01-21">';
-                content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
+                content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
                 content += '</time>';
                 content += '</p>';
                 content += '<p>';
@@ -548,7 +547,7 @@
                 content += '</hgroup>';
                 content += '<p class="date">';
                 content += '<time datetime="2013-01-21">';
-                content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
+                content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
                 content += '</time>';
                 content += '</p>';
                 content += '<p>';
@@ -559,7 +558,29 @@
             }
             $('#giai-phap-sang-kien-content').html(content);
         });
+
+        $.get(appConfig.apiHostUrl + "/api/Media/getMedia?type=image&is_publish=1", function (data, status) {
+            var preview = '';
+            var slide = '';
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                preview += '<li>';
+                preview += '<img src="' + data[i].url + '" height="430" />';
+                preview += '<p class="flex-caption" style="width:620px">';
+                preview += data[i].description;
+                preview += '</p>';
+                preview += '</li>';
+
+                slide += '<li>';
+                slide += '<img src="' + data[i].url + '" />';
+                slide += '</li>';
+            }
+            $('#home-image-preview').html(preview);
+            $('#home-image-slide').html(slide);
+        });
+
     </script>
+    <script src="~/js/jquery.flexslider-min.js"></script>
 
 }
 <!-- end right sidebar -->
