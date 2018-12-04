@@ -140,6 +140,7 @@ function onCompleted() {
             quanhuyen: $("#quantp option:selected").text(),
             phuongxa: $("#huyen option:selected").text(),
             fileUpload: fileupload,
+            doituong: parseInt($("input[name=doituong]:checked").val())
         };
         //console.log(dataJson);
         callAjax(

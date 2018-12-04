@@ -393,6 +393,8 @@ namespace AppPortal.Infrastructure.Data.Migrations
 
                     b.Property<string>("UserPhone");
 
+                    b.Property<int>("doituong");
+
                     b.Property<string>("fileUpload");
 
                     b.Property<string>("phuongxa");

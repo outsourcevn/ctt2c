@@ -79,7 +79,7 @@ h3.block_title_black{
 
 .form-group select {
     height: 30px;
-    width: 100%;
+    /*width: 100%;*/
     margin-top: 15px;
 }
 

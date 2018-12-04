@@ -59,15 +59,28 @@
                             <div class="row">
                                 <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
                                 <div float: left;" class="col-sm-12">
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                        <div class="radio">
+                                            <label><input type="radio" value="0" name="doituong" checked>Người dân</label>
+                                        </div>
+                                        <div class="radio">
+                                            <label><input type="radio" value="1" name="doituong">Doanh nghiệp</label>
+                                        </div>
+                                    </div>
+
+
                                     <label for="UserFullName" class="col-sm-3 control-label">Họ tên:</label>
-                                    <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên"> </div>
+                                    <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                        <span id="senderName_error"></span>
+                                        <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên">
+                                    </div>
 
                                     <label for="UserAddress" class="control-label col-sm-3">Địa chỉ:</label>
                                     <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" required placeholder="Địa chỉ"> </div>
 
 
                                     <div class="col-sm-12" id="aui_3_4_0_1_495">
-                                        <div class="form-group">
+                                        <div class="form-group row">
                                             <select id="thanhpho" required class="col-sm-4">
                                                 <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
                                             </select>
@@ -87,49 +100,49 @@
                                     <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc"> </div>
 
                                 </div>
-                                
+
                             </div>
                             <div class="row">
-                                <p style="font-weight: 600">NỘI DUNG TRAO ĐỔI</p>
+                                <p style="font-weight: 600;margin-top: 20px;">NỘI DUNG TRAO ĐỔI</p>
+                                <div class="col-sm-12">
+                                    <div class="form-item col-sm-12">
+                                        <label asp-for="Name" class="control-label">Tiêu đề:</label>
+                                        <input asp-for="Name" class="form-control aui-text-placeholder" placeholder="Tiêu đề phản ánh" required />
+                                        <span asp-validation-for="Name" class="form-required"></span>
+                                    </div>
 
-                                <div class="form-item">
-                                    <label asp-for="Name" class="control-label">Tiêu đề:</label>
-                                    <input asp-for="Name" class="form-text" placeholder="Tiêu đề phản ánh" required />
-                                    <span asp-validation-for="Name" class="form-required"></span>
+                                    <div class="form-item col-sm-12">
+                                        <label asp-for="Link" class="control-label">Địa điểm:</label>
+                                        <input asp-for="Link" class="form-text" id="address_map" placeholder="Địa điểm diễn ra" />
+
+                                        <input type="hidden" id="lat" name="lat" />
+                                        <input type="hidden" id="lng" name="lng" />
+                                        <span asp-validation-for="Link" class="form-required"></span>
+                                    </div>
+
+
+                                    <div class="form-item col-sm-12" style="display: none;">
+                                        <label asp-for="Abstract" class="control-label">Tóm tắt:</label>
+                                        <textarea style="width:100%; height:150px" rows="10" asp-for="Abstract" class="form-text"></textarea>
+                                    </div>
+
+                                    <div class="form-item col-sm-12">
+                                        <label asp-for="Content" class="control-label">Nội dung trao đổi:</label>
+                                        <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text"></textarea>
+                                        <span asp-validation-for="Content" class="form-required"></span>
+                                    </div>
                                 </div>
-                                
-                                <div class="form-item">
-                                    <label asp-for="Link" class="control-label">Địa điểm:</label>
-                                    <input asp-for="Link" class="form-text" id="address_map" placeholder="Địa điểm diễn ra" />
-                                    
-                                    <input type="hidden" id="lat" name="lat" />
-                                    <input type="hidden" id="lng" name="lng" />
-                                    <span asp-validation-for="Link" class="form-required"></span>
-                                </div>
-
-
-                                <div class="form-item" style="display: none;">
-                                    <label asp-for="Abstract" class="control-label">Tóm tắt:</label>
-                                    <textarea style="width:100%; height:150px" rows="10" asp-for="Abstract" class="form-text"></textarea>
-                                </div>
-
-                                <div class="form-item">
-                                    <label asp-for="Content" class="control-label">Nội dung trao đổi:</label>
-                                    <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text"></textarea>
-                                    <span asp-validation-for="Content" class="form-required"></span>
-                                </div>
-
                                 <div id="botdetect-captcha" data-stylename="exampleCaptcha"></div>
 
                                 <div class="form-item">
-                                        <div class="g-recaptcha" data-sitekey="6LeC1HYUAAAAAKwSLhUFdKLggrlFy2QqIsLD1Evr" data-size="invisible" data-callback="onCompleted"></div>
-                                    </div>
+                                    <div class="g-recaptcha" data-sitekey="6LeC1HYUAAAAAKwSLhUFdKLggrlFy2QqIsLD1Evr" data-size="invisible" data-callback="onCompleted"></div>
+                                </div>
                             </div>
                             <div class="form-item">
                                 <div asp-validation-summary="All" class="form-required"></div>
                             </div>
                         </form>
-                        <div class="form-group">
+                        <div class="form-group col-sm-12">
                             <label style="padding: 10px;" for="recipient-name" class="col-form-label">Tài liệu đình kèm:</label>
                             <form id="fileupload" method="POST" enctype="multipart/form-data">
                                 <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -161,7 +174,7 @@
                             </form>
                         </div>
 
-                        <div class="form-item">
+                        <div class="form-item ">
                             <button type="submit" onclick="onCompleted()">
                                 <span class="view_all_medium"><span><span>Gửi phản ánh kiến nghị</span></span></span>
                             </button>
@@ -189,79 +202,79 @@
     @await Html.PartialAsync("_ValidationScriptsPartial")
 
 
-<script id="template-upload" type="text/x-tmpl">
-    {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-upload fade">
-        <td>
-            <span class="preview"></span>
-        </td>
-        <td>
-            <p class="name">{%=file.name%}</p>
-            <strong class="error text-danger"></strong>
-        </td>
-        <td>
-            <p class="size">Processing...</p>
-            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
-        </td>
-        <td>
-            {% if (!i && !o.options.autoUpload) { %}
-            <button class="btn btn-primary start" disabled>
-                <i class="glyphicon glyphicon-upload"></i>
-                <span>Tải lên</span>
-            </button>
-            {% } %}
-            {% if (!i) { %}
-            <button class="btn btn-warning cancel">
-                <i class="glyphicon glyphicon-ban-circle"></i>
-                <span>Loại bỏ</span>
-            </button>
-            {% } %}
-        </td>
-    </tr>
-    {% } %}
-</script>
-<!-- The template to display files available for download -->
-<script id="template-download" type="text/x-tmpl">
-    {% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download fade">
-        <td>
-            <span class="preview">
-                {% if (file.thumbnailUrl) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img style="width: 200px" src="{%=file.thumbnailUrl%}"></a>
+    <script id="template-upload" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        <tr class="template-upload fade">
+            <td>
+                <span class="preview"></span>
+            </td>
+            <td>
+                <p class="name">{%=file.name%}</p>
+                <strong class="error text-danger"></strong>
+            </td>
+            <td>
+                <p class="size">Processing...</p>
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+            </td>
+            <td>
+                {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Tải lên</span>
+                </button>
                 {% } %}
-            </span>
-        </td>
-        <td>
-            <p class="name">
-                {% if (file.url) { %}
-                <a href="{%=file.url%}" target="_blank" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Loại bỏ</span>
+                </button>
+                {% } %}
+            </td>
+        </tr>
+        {% } %}
+    </script>
+    <!-- The template to display files available for download -->
+    <script id="template-download" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        <tr class="template-download fade">
+            <td>
+                <span class="preview">
+                    {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img style="width: 200px" src="{%=file.thumbnailUrl%}"></a>
+                    {% } %}
+                </span>
+            </td>
+            <td>
+                <p class="name">
+                    {% if (file.url) { %}
+                    <a href="{%=file.url%}" target="_blank" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                    {% } else { %}
+                    <span>{%=file.name%}</span>
+                    {% } %}
+                </p>
+                {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                {% } %}
+            </td>
+            <td>
+                <span class="size">{%=o.formatFileSize(file.size)%}</span>
+            </td>
+            <td>
+                {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Xóa</span>
+                </button>
                 {% } else { %}
-                <span>{%=file.name%}</span>
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
                 {% } %}
-            </p>
-            {% if (file.error) { %}
-            <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-            {% } %}
-        </td>
-        <td>
-            <span class="size">{%=o.formatFileSize(file.size)%}</span>
-        </td>
-        <td>
-            {% if (file.deleteUrl) { %}
-            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
-                <i class="glyphicon glyphicon-trash"></i>
-                <span>Xóa</span>
-            </button>
-            {% } else { %}
-            <button class="btn btn-warning cancel">
-                <i class="glyphicon glyphicon-ban-circle"></i>
-                <span>Cancel</span>
-            </button>
-            {% } %}
-        </td>
-    </tr>
-    {% } %}
-</script>
+            </td>
+        </tr>
+        {% } %}
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function () {

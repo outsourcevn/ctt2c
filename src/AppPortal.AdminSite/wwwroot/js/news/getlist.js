@@ -612,9 +612,21 @@ function templatePhanloai(istype, id) {
     }
 
     if (istype == "6") {
-        html += '<option value="6" selected>Ô nhiễm môi trường</option>';
+        html += '<option value="6" selected>Ô nhiễm môi trường - Ô nhiễm chất thải rắn</option>';
     } else {
-        html += '<option value="6">Ô nhiễm môi trường</option>';
+        html += '<option value="6">Ô nhiễm môi trường - Ô nhiễm chất thải rắn</option>';
+    }
+
+    if (istype == "9") {
+        html += '<option value="9" selected>Ô nhiễm môi trường - Ô nhiễm nước thải</option>';
+    } else {
+        html += '<option value="9">Ô nhiễm môi trường - Ô nhiễm nước thải</option>';
+    }
+
+    if (istype == "10") {
+        html += '<option value="10" selected>Ô nhiễm môi trường - Ô nhiễm khí thải</option>';
+    } else {
+        html += '<option value="10">Ô nhiễm môi trường -  Ô nhiễm khí thải</option>';
     }
 
     if (istype == "7") {

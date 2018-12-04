@@ -63,6 +63,7 @@ namespace AppPortal.ApiHost.ViewModels.News
         public string quanhuyen { get; set; }
         public string phuongxa { get; set; }
         public string fileUpload { get; set; }
+        public int doituong { get; set; }
     }
 
     public class NewsCategoryViewModel
