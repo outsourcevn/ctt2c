@@ -108,9 +108,9 @@
             <section class="block_business_news block">
                 <h3 class="block_title_black">VIDEO<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="content">
-                    <aside id="block_front_slider" class="block slider" style="height: 520px;padding-right: 28px;">
+                    <aside id="block_front_slider_video" class="block slider" style="height: 520px;padding-right: 28px;">
                         <div class="flexslider slider video_home" id="block_front_slides_2" style="height: 450px;">
-                            <ul class="slides">
+                            <ul class="slides" id="contentVideo">
                                 <li>
                                     <video style="width: 100%" height="430" controls>
                                         <source src="http://demo.eportal.today/video/v1.mp4">
@@ -126,7 +126,6 @@
                                     </video>
                                     <p class="flex-caption" style="width:620px">
                                         Nam Định Công ty Nhôm đúc Hoàng Anh hoạt động trái phép bất chấp lệnh cấm của chủ tịch UBND huyện
-
                                     </p>
                                 </li>
                                 <li>
@@ -139,17 +138,9 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="flexslider carousel" id="block_front_carousel_2">
-                            <ul class="slides">
-                                <li>
-                                    <img src="http://vea.gov.vn/vn/tintuc/multimedia/PublishingImages/_t/20180919LaoCai_png.jpg" />
-                                </li>
-                                <li>
-                                    <img src="http://vea.gov.vn/vn/tintuc/multimedia/PublishingImages/_t/20180814congtynhom_png.jpg" />
-                                </li>
-                                <li>
-                                    <img src="http://vea.gov.vn/vn/tintuc/multimedia/PublishingImages/_t/20180810bairac_png.jpg" />
-                                </li>
+                        <div class="flexslider carousel" id="block_front_carousel_video">
+                            <ul class="slides" id="contentImage">
+                                
                             </ul>
                         </div>
                     </aside>
@@ -181,227 +172,12 @@
                             <aside id="block_front_slider" class="block slider" style="height: 520px;width: 620px;padding-right: 28px;">
                                 <div class="flexslider slider" id="block_front_slides" style="height: 450px;width: 620px;">
                                     <ul class="slides" id="home-image-preview">
-                                        <li>
-                                            <img src="~/images/homes/1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Làng nghề kim khí Đại Tự Nơm nớp nỗi lo ô nhiễm nguồn nước ngầm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/1.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Làng nghề kim khí Đại Tự Nơm nớp nỗi lo ô nhiễm nguồn nước ngầm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/2.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Nước biển không ô nhiễm, cá chết hàng loạt dạt bờ biển Đà Nẵng...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/3.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Doanh nghiệp dùng phân bón cây, dân kêu trời vì ô nhiễm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/4.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Nam Định: Gây ô nhiễm môi trường, bãi rác bị người dân 'phong tỏa'...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/5.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Điện Biên: Sông Nậm Rốm tiếp tục bị ô nhiễm do sơ chế dong riềng...
-                                            </p>
-                                        </li>
-
-                                        <li>
-                                            <img src="~/images/homes/5.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Điện Biên: Sông Nậm Rốm tiếp tục bị ô nhiễm do sơ chế dong riềng...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/6.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Sài Gòn 'nhức óc' bắt quả tang... tiếng ồn...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/6.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Sài Gòn 'nhức óc' bắt quả tang... tiếng ồn...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/7.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Trạm trộn bê tông trái phép thách thức chính quyền...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/8.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Báo động môi trường vì chôn lấp rác...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/9.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Ô nhiễm làng nghề - 'căn bệnh nan y' ở Phan Bôi...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/10.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Cảng Sa Kỳ ngập rác...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/11.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Ô nhiễm môi trường nghiêm trọng từ các vườn cây Thanh long...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/12.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Nhà vườn xã Lương Hòa Lạc, huyện Chợ Gạo tự ý để những bao phân gia súc, gia cầm tươi ngay cạnh đường giao thông...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/13.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Đại công trường than trái phép núp bóng dự án nghĩa trang ở Quảng Ninh...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/14.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Đất rừng phòng hộ hồ Yên Lập bị đào bới trái phép...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/15.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                30 ha đất bị đào xới với danh nghĩa phục vụ dự án nghĩa trang...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Hàng trăm tấn cá bè ở Tiền Giang chết là do thiếu ôxy?...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Hàng trăm tấn cá bè ở Tiền Giang chết là do thiếu ôxy?...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.2.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Hàng trăm tấn cá bè ở Tiền Giang chết là do thiếu ôxy?...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Khánh Hòa: Nước thải đen ngòm, thối nực trời, dân ngán ngẩm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.1.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Khánh Hòa: Nước thải đen ngòm, thối nực trời, dân ngán ngẩm...
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.2.jpg" height="430" />
-                                            <p class="flex-caption" style="width:620px">
-                                                Khánh Hòa: Nước thải đen ngòm, thối nực trời, dân ngán ngẩm...
-                                            </p>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                                 <div class="flexslider carousel" id="block_front_carousel">
                                     <ul class="slides" id="home-image-slide">
-                                        <li>
-                                            <img src="~/images/homes/1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/1.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/2.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/3.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/4.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/5.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/5.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/6.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/6.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/7.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/8.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/9.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/10.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/11.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/12.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/13.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/14.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/15.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/16.2.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.1.jpg" />
-                                        </li>
-                                        <li>
-                                            <img src="~/images/homes/17.2.jpg" />
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                             </aside>
@@ -559,10 +335,10 @@
             $('#giai-phap-sang-kien-content').html(content);
         });
 
+        //album anhr
         $.get(appConfig.apiHostUrl + "/api/Media/getMedia?type=image&is_publish=1", function (data, status) {
             var preview = '';
             var slide = '';
-            console.log(data);
             for (var i = 0; i < data.length; i++) {
                 preview += '<li>';
                 preview += '<img src="' + data[i].url + '" height="430" />';
@@ -577,6 +353,59 @@
             }
             $('#home-image-preview').html(preview);
             $('#home-image-slide').html(slide);
+            $('#block_front_slides').flexslider({
+                animation: "slide",
+                controlNav: false,
+                directionNav: false,
+                animationLoop: false,
+                slideshow: false,
+                animationDuration: 1000,
+                sync: "#block_front_carousel"
+            });
+
+            $('#block_front_carousel').flexslider({
+                animation: "slide",
+                controlNav: false,
+                directionNav: true,
+                itemWidth: 75,
+                itemMargin: 15,
+                animationDuration: 1000,
+                asNavFor: '#block_front_slides'
+            });
+        });
+        //album, video
+
+        $.get(appConfig.apiHostUrl + "/api/Media/getMedia?type=video&is_publish=1", function (data, status) {
+            var preview = '';
+            var slide = '';
+            for (var i = 0; i < data.length; i++) {
+                preview += '<li> <video style="width: 100%" height="430" controls> <source src="' + data[i].url +'"> </video> <p class="flex-caption" style="width:620px">data[i].description</p> </li>';
+
+                slide += '<li>';
+                slide += '<img src="' + data[i].filesImage + '" />';
+                slide += '</li>';
+            }
+            $('#contentVideo').html(preview);
+            $('#contentImage').html(slide);
+            $('#block_front_slides_video').flexslider({
+                animation: "slide",
+                controlNav: false,
+                directionNav: false,
+                animationLoop: false,
+                slideshow: false,
+                animationDuration: 1000,
+                sync: "#block_front_carousel_video"
+            });
+
+            $('#block_front_carousel_video').flexslider({
+                animation: "slide",
+                controlNav: false,
+                directionNav: true,
+                itemWidth: 75,
+                itemMargin: 15,
+                animationDuration: 1000,
+                asNavFor: '#block_front_slides_video'
+            });
         });
 
     </script>

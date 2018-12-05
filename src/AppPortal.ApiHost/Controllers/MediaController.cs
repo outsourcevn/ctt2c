@@ -74,7 +74,7 @@ namespace AppPortal.ApiHost.Controllers
 
         [AllowAnonymous]
         [HttpPost("upLoadFile")]
-        public virtual async Task<IActionResult> upLoadFile(IFormFile files , string description , string is_publish, string type)
+        public virtual async Task<IActionResult> upLoadFile(IFormFile files , IFormFile filesImage, string description , string is_publish, string type)
         {
             try
             {
@@ -116,11 +116,47 @@ namespace AppPortal.ApiHost.Controllers
                 {
                     return BadRequest("Không đúng định dạng file!");
                 }
+
                 var media = new Media();
                 media.description = description;
                 media.name = formFile.FileName;
                 media.url = urlWeb + fileName;
                 media.size = formFile.Length;
+
+                if (filesImage != null)
+                {
+                    var dataReturnImg = new List<FileUpload>();
+                    var formFileImg = filesImage;
+                    var fileTypeImg = formFileImg.ContentType;
+                    var fileSizeImg = formFileImg.Length;
+                    DateTime nx1 = new DateTime(1970, 1, 1);
+                    TimeSpan ts1 = DateTime.UtcNow - nx1;
+                    var fileName1 = ((int)ts1.TotalSeconds).ToString() + ' ' + formFileImg.FileName;
+                    if (fileTypeImg.IndexOf("image") != -1 || fileTypeImg.IndexOf("video") != -1)
+                    {
+                        if (fileSizeImg < 50000000)
+                        {
+                            if (formFileImg.Length > 0)
+                            {
+                                using (var stream = new FileStream(Path.Combine(filePath, fileName1), FileMode.Create))
+                                {
+                                    await formFileImg.CopyToAsync(stream);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            return BadRequest("File lớn!");
+                        }
+
+                    }
+                    else
+                    {
+                        return BadRequest("Không đúng định dạng file!");
+                    }
+                    media.filesImage = urlWeb + fileName1;
+                }
+               
                 media.type = type;
                 if (is_publish != null)
                 {

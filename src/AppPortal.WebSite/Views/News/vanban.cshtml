@@ -96,20 +96,20 @@
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=1", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=1", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (data.model[i].Image != "") {
                     content += '<div class="newestItem firstNewsetItem">'
                     content += '<div class="newestItemTitle-Detail">'
-                    content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + '"  onclick="return goToDetail(' + data.model[i].Id+');" >'
+                    content += '<a title="' + data.model[i].Name + '" href="/news/detail?id=' + data.model[i].Id + '"  onclick="return goToDetail(' + data.model[i].Id+');" >'
                     content += data.model[i].Name
                     content += '</a>'
                     content += '</div>'
 
                     content += '<div class="content">'
                     content += '<p>'
-                    content += '<a title="' + data.model[i].Name + '" href=/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +');" >'
+                    content += '<a title="' + data.model[i].Name + '" href=/news/detail?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id + ');" >'
                     content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
                     content += '</a>'
                     content += '<span style="position:relative; top:5px;">' + data.model[i].Abstract + '</span>'
@@ -130,7 +130,7 @@
                 } else {
                     content += '<div class="newestItem firstNewsetItem">'
                     content += '<div class="newestItemTitle-Detail">'
-                    content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +');">'
+                    content += '<a title="' + data.model[i].Name + '" href="/news/detail?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +');">'
                     content += data.model[i].Name
                     content += '</a>'
                     content += '</div>'

@@ -251,27 +251,27 @@ $(function () {
         type: "GET",
         url: "http://171.244.21.99:5000/aqi/AIR_QUALITY/hour",
         success: function (response) {
-            var data = response.data;
-            var html = '';
-            data.forEach(function (item) {
-                var dateData = new Date(item.aqi.time);
-                var CO = (item.aqi.measure.CO) ? item.aqi.measure.CO : '';
-                var SO2 = (item.aqi.measure.SO2) ? item.aqi.measure.SO2 : '';
-                var O3 = (item.aqi.measure.SO2) ? item.aqi.measure.O3 : '';
-                var NO2 = (item.aqi.measure.NO2) ? item.aqi.measure.NO2 : '';
-                var AQI = (item.aqi.value);
-                html += '<div style="float:left;width: 100%;">';
-                html += '   <div style = "margin-bottom: 5px;">';
-                html += '        <b style="margin-bottom: 5px;color:red">' + item.name + '</b></div>';
-                html += '        <table id="myTable" cellpadding="3px" cellspacing="0" border="1" style="width: 100%;"><tbody>';
-                html += '        <tr style="font-weight:bold;height:30px;"><td style=" text-align:center">Thời gian</td><td style=" text-align:center">Chỉ số AQI</td></tr>';
-                html += '        <tr style="height:30px;"><td style="text-align:center">' + dateData.yyyymmdd() + '</td>';
-                html += '<td style="text-align:center;">' + AQI + '</td></tr>';
-                html += '        </tbody> </table> </div >';
+            //var data = response.data;
+            //var html = '';
+            //data.forEach(function (item) {
+            //    var dateData = new Date(item.aqi.time);
+            //    var CO = (item.aqi.measure.CO) ? item.aqi.measure.CO : '';
+            //    var SO2 = (item.aqi.measure.SO2) ? item.aqi.measure.SO2 : '';
+            //    var O3 = (item.aqi.measure.SO2) ? item.aqi.measure.O3 : '';
+            //    var NO2 = (item.aqi.measure.NO2) ? item.aqi.measure.NO2 : '';
+            //    var AQI = (item.aqi.value);
+            //    html += '<div style="float:left;width: 100%;">';
+            //    html += '   <div style = "margin-bottom: 5px;">';
+            //    html += '        <b style="margin-bottom: 5px;color:red">' + item.name + '</b></div>';
+            //    html += '        <table id="myTable" cellpadding="3px" cellspacing="0" border="1" style="width: 100%;"><tbody>';
+            //    html += '        <tr style="font-weight:bold;height:30px;"><td style=" text-align:center">Thời gian</td><td style=" text-align:center">Chỉ số AQI</td></tr>';
+            //    html += '        <tr style="height:30px;"><td style="text-align:center">' + dateData.yyyymmdd() + '</td>';
+            //    html += '<td style="text-align:center;">' + AQI + '</td></tr>';
+            //    html += '        </tbody> </table> </div >';
 
-            });
+            //});
 
-            $("#block_weather .content").html(html);
+            //$("#block_weather .content").html(html);
         }, error: function (er) {
 
         }

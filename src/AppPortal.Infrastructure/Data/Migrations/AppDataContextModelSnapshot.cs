@@ -286,6 +286,8 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.Property<string>("description")
                         .HasMaxLength(2000);
 
+                    b.Property<string>("filesImage");
+
                     b.Property<string>("name");
 
                     b.Property<long>("size");

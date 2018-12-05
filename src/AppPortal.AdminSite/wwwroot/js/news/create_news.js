@@ -129,7 +129,7 @@ function onCheck(e) {
     });
     console.log(dataItem.id);
     $('#CategoryId').val(dataItem.id);
-    if (dataItem.id === 3 || dataItem.id === 1 ) {
+    if ((dataItem.id === 3 || dataItem.id === 1) && dataItem.checked) {
         $("#fileVanban").show();
     } else {
         $("#fileVanban").hide();

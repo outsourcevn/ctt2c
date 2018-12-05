@@ -233,16 +233,6 @@
 		slideshowSpeed : 4000
 	});
 
-	$('#block_front_slides').flexslider({
-		animation : "slide",
-		controlNav : false,
-		directionNav : false,
-		animationLoop : false,
-		slideshow : false,
-		animationDuration : 1000,
-		sync : "#block_front_carousel"
-    });
-
     $('#block_front_slides_2').flexslider({
         animation: "slide",
         controlNav: false,
@@ -262,16 +252,6 @@
         animationDuration: 1000,
         asNavFor: '#block_front_slides_2'
     });
-
-	$('#block_front_carousel').flexslider({
-		animation : "slide",
-		controlNav : false,
-		directionNav : true,
-		itemWidth : 75,
-		itemMargin : 15,
-		animationDuration : 1000,
-		asNavFor : '#block_front_slides'
-	});
 
 	$('#block_editors_choice .carousel').flexslider({
 		animation : "slide",

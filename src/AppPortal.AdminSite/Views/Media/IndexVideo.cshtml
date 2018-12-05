@@ -20,6 +20,14 @@
                 <div class="modal-body">
                     <form method="post" id="uploadFileData">
                         <input name="files" id="files" type="file" aria-label="files" />
+                        <p style="color: red;">Chấp nhận file .mp4, .mpeg, .flv, .mkv, .avi, .webm</p>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ảnh giới thiệu</label>
+                            <input name="filesImage" id="filesImage" type="file" aria-label="files" />
+                            <p style="color: red;">Chấp nhận file .png , jpg, jpeg </p>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mô tả</label>
                             <input type="text" class="form-control" id="Description" name="Description" />
@@ -67,6 +75,13 @@
                     multiple: false,
                     validation: {
                         allowedExtensions: [".mp4", ".mpeg", ".flv", ".mkv", ".avi", ".webm"]
+                    }
+                });
+
+                $("#filesImage").kendoUpload({
+                    multiple: false,
+                    validation: {
+                        allowedExtensions: [".gif", ".jpg", ".png", "jpeg"]
                     }
                 });
 

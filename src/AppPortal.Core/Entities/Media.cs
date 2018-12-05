@@ -11,6 +11,7 @@ namespace AppPortal.Core.Entities
         public string type { get; set; }
         public string url { get; set; }
         public string description { get; set; }
+        public string filesImage { get; set; }
         public DateTime? OnCreated { get; set; }
         public DateTime? OnDeleted { get; set; }
         public DateTime? OnPublish { get; set; }

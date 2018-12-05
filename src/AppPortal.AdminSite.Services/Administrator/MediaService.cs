@@ -93,6 +93,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 media.OnCreated = DateTime.Now;
                 media.OnPublish = model.OnPublish;
                 media.url = model.url;
+                media.filesImage = model.filesImage;
                 _media.Add(media);
                 return media;
             }
