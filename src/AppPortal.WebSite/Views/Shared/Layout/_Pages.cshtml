@@ -1,4 +1,7 @@
-﻿<div id="right_sidebar" style="width: 100%; margin-top: 90px">
+﻿@{ 
+    var url = ViewData["map"];
+}
+<div id="right_sidebar" style="width: 100%; margin-top: 90px">
     <div class="region">
         <aside id="block_weather" class="block">
             <h3 class="block_title_black">Số liệu quan trắc</h3>
@@ -108,7 +111,7 @@
         <aside id="block_in_pictures" class="block">
             <h3 class="block_title">Bản đồ môi trường tổng hợp</h3>
             <div>
-                <iframe width="320" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Bản đồ môi trường tổng hợp 3" src="//arcgisportal.ceid.gov.vn/portal/apps/Embed/index.html?webmap=218f16cfe6ac4438b6f887cde946e046&extent=105.5493,20.6487,107.0133,21.3896&home=true&zoom=true&scale=true&search=true&searchextent=true&details=true&legend=true&active_panel=details&basemap_gallery=true&disable_scroll=true&theme=light"></iframe>
+                <iframe width="320" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Bản đồ môi trường tổng hợp 3" src="@url"></iframe>
             </div>
         </aside>
         @*<aside id="block_follow" class="block">

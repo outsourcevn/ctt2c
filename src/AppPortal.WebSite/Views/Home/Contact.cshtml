@@ -3,6 +3,7 @@
     ViewData["Title"] = "THÔNG TIN TRAO ĐỔI (GÓP Ý, PHẢN ÁNH, HỎI ĐÁP)";
     var formView = "frm_contact";
     var data = ViewData["data"];
+    var url = ViewData["map"];
 }
 
 @section Styles {
@@ -35,6 +36,11 @@
 
         #block_main_menu li span {
             height: 30px !important;
+        }
+
+        canvas {
+            /*prevent interaction with the canvas*/
+            pointer-events: none;
         }
     </style>
 
@@ -132,10 +138,18 @@
                                         <span asp-validation-for="Content" class="form-required"></span>
                                     </div>
                                 </div>
-                                <div id="botdetect-captcha" data-stylename="exampleCaptcha"></div>
 
-                                <div class="form-item">
-                                    <div class="g-recaptcha" data-sitekey="6LeC1HYUAAAAAKwSLhUFdKLggrlFy2QqIsLD1Evr" data-size="invisible" data-callback="onCompleted"></div>
+                                <div class="row" style=" padding: 0px 0px 0px 35px; display: flex; ">
+                                    <div id="captcha">
+                                    </div>
+                                    <span onclick="createCaptcha()" style=" font-size: 30px; font-weight: 900; color: red; padding: 0 10px;cursor: pointer " class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                    <br />
+
+                                </div>
+                                <div class="row"  style=" padding: 5px 0px 0px 20px; display: flex; ">
+                                    <div class="form-item col-sm-12">
+                                        <input type="text" style="width: 150px" class="form-control aui-text-placeholder" placeholder="Captcha" id="cpatchaTextBox" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-item">
@@ -277,14 +291,7 @@
     </script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            // DOM ready
 
-            var captcha = $('#botdetect-captcha').captcha({
-                captchaEndpoint: 'captcha-endpoint/BotDetectCaptcha.ashx'
-            });
-
-        });
                 $.ajax({
                     type: "GET",
                     url: appConfig.apiHostUrl + "/api/ProcessWorks/city",

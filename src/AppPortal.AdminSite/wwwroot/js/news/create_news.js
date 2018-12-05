@@ -123,7 +123,7 @@ function onCheck(e) {
     var rootNodes = $("#cat_treeview").getKendoTreeView().dataSource.data();
 
     traverse(rootNodes, function (node) {
-        if (node != dataItem) {
+        if (node !== dataItem) {
             node.set("checked", false);
         }
     });

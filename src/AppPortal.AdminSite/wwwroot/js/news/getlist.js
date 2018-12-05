@@ -502,6 +502,18 @@ function xemchitietNoiDung(news_id) {
                
                 editor.value(info.Content);
 
+                if (info.fileUpload) {
+                    var fileuploadSbt = info.fileUpload.split(",");
+                    var htmlAno = "";
+                    if (fileuploadSbt.length > 0) {
+                        for (var k = 0; k < fileuploadSbt.length; k++) {
+                            var fileItemAno = fileuploadSbt[k];
+                            htmlAno += '<a target="_blank" href="' + fileItemAno + '">' + fileItemAno + '</a></br>';
+                        }
+                        $(".item-from-file").html(htmlAno);
+                    }
+                }
+
                 //ttdl
                
                 editor2.value(ttdl.newsLog.Note);

@@ -213,7 +213,9 @@ namespace AppPortal.ApiHost.Controllers
                     var dataReturn = new List<FileUpload>();
                     foreach (var formFile in files)
                     {
-                        var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(formFile.FileName);
+                        var fileName2 = formFile.FileName;
+                        var timestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                        var fileName = timestamp.ToString() + " " + fileName2;
                         if (formFile.Length > 0)
                         {
                             using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))

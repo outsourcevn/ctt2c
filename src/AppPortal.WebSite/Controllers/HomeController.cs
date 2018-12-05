@@ -51,8 +51,10 @@ namespace AppPortal.WebSite.Controllers
 
         public IActionResult Contact()
         {
-           // ViewData["data"] = _newsService.GetNewsList();
-          //  @ViewData["activeContact"] = "active";
+            // ViewData["data"] = _newsService.GetNewsList();
+            //  @ViewData["activeContact"] = "active";
+            var data = _newsService.GetConfig("map");
+            ViewData["map"] = data.url;
             return View();
         }
 

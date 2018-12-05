@@ -450,9 +450,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 homeNews = homeNews.Take((int)number);
             }
             homeNews = homeNews.OrderByDescending(x => x.OnCreated);
-            if(id > 0){
-                homeNews = homeNews.Select(x => x.)
-            }
+
             var homeNewsLst = homeNews.ToList();
 
             foreach (var iem in homeNewsLst)
