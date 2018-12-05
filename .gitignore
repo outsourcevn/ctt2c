@@ -12,7 +12,8 @@
 **/obj
 
 **/bower_components
-**/wwwroot/adminLte3/plugins
+**/wwwroot/adminLte3
+**/wwwroot/uploads
 # file gitignore
 appsettings.Development.json
 PublishProfiles
