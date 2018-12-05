@@ -13,7 +13,7 @@ $(document).ready(function () {
             batch: true
         },
         validation: {
-            allowedExtensions: [".gif", ".jpg", ".png", ".img", ".bmp", ".jpg", ".tiff"]
+            allowedExtensions: [".gif", ".jpg", ".png", ".img", ".bmp", ".jpg", ".tiff", ".jpeg"]
         },
         success: function onSuccess(e) {
             if (e.response) {
@@ -21,6 +21,29 @@ $(document).ready(function () {
                 $('img#image_preview').attr('src', `${appConfig.apiCdnUrl}/${e.response.url}`);
             }
         },
+    });
+
+    $("#filesVanban").kendoUpload({
+        multiple: false,
+        async: {
+            chunkSize: 5 * 1024 * 1024, // bytes
+            saveUrl: `${appConfig.apiCdnUrl}/Upload/ChunkSave`,
+            removeUrl: `${appConfig.apiCdnUrl}/Upload/remove`,
+            autoUpload: true,
+            batch: true
+        },
+        validation: {
+            allowedExtensions: [".doc" , ".docx" , ".pdf" , ".xls" , ".xlsx"]
+        },
+        success: function onSuccess(e) {
+            if (e.response) {
+                $('input#MetaDescription').val(e.response.url);
+            }
+        },
+    });
+
+    $("#CategoryId").click(function () {
+        alert($(this).val());
     });
 
     $("textarea#Abstract").kendoEditor({
@@ -106,6 +129,11 @@ function onCheck(e) {
     });
     console.log(dataItem.id);
     $('#CategoryId').val(dataItem.id);
+    if (dataItem.id === 3 || dataItem.id === 1 ) {
+        $("#fileVanban").show();
+    } else {
+        $("#fileVanban").hide();
+    }
 }
 
 function preview() {
@@ -139,7 +167,7 @@ function preview() {
                     Sename: $("input[id='Sename']").val(),
                     MetaTitle: $("input[id='MetaTitle']").val(),
                     MetaKeywords: $("input[id='MetaKeywords']").val(),
-                    MetaDescription: $("textarea[id='MetaDescription']").val(),
+                    MetaDescription: $('input#MetaDescription').val(),
                     UserId: $("input[id='News_UserId']").val(),
                     UserName: $("input[id='News_UserName']").val(),
                     UserFullName: $("input[id='UserFullName']").val(),

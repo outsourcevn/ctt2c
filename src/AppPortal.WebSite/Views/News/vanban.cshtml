@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Tin tức";
+    ViewData["Title"] = "Văn bản chính sách";
 }
 <script src="https://code.jquery.com/jquery-2.2.4.js"
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -96,7 +96,7 @@
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=15", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=1", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (data.model[i].Image != "") {
@@ -225,7 +225,7 @@
                     content += '...</p>';
                     content += '</article>';
                 }
-                
+
             }
             $('#tin-moi-content').html(content);
         });

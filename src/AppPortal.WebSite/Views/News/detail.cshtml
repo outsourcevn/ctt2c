@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Tin tức";
+    ViewData["Title"] = "Chi tiết tin tức";
 }
 <script src="https://code.jquery.com/jquery-2.2.4.js"
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -53,12 +53,8 @@
 <link href="~/css/news.css" rel="stylesheet" />
 
 <div class="container">
-    <h1 style="padding: 15px;">@ViewData["Title"]</h1>
-    <div id="tat-ca-tin" class="col-md-8">
-        <div class="content">
-
-        </div>
-
+    <div id="detail-news" class="col-md-8">
+        <br />
     </div>
     <div class="col-md-4">
         <div class="col-md-12">
@@ -92,72 +88,36 @@
             </section>
         </div>
     </div>
+
 </div>
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=15", function (data, status) {
-            var content = '';
-            for (var i = 0; i < data.model.length; i++) {
-                if (data.model[i].Image != "") {
-                    content += '<div class="newestItem firstNewsetItem">'
-                    content += '<div class="newestItemTitle-Detail">'
-                    content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + '"  onclick="return goToDetail(' + data.model[i].Id+');" >'
-                    content += data.model[i].Name
-                    content += '</a>'
-                    content += '</div>'
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
 
-                    content += '<div class="content">'
-                    content += '<p>'
-                    content += '<a title="' + data.model[i].Name + '" href=/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +');" >'
-                    content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-                    content += '</a>'
-                    content += '<span style="position:relative; top:5px;">' + data.model[i].Abstract + '</span>'
-                    content += '</p>'
-                    content += '<div class="readMoreDetail">'
-                    content += '<a title="Đề xuất nâng tiêu chuẩn khí thải đối với ô tô để bảo vệ môi trường" href="/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +')" >'
-                    content += '<span id="ctl00_PlaceHolderTopColMiddle_g_5271cf1b_ba26_4ac5_99bc_7a7b243c3627_ctl00_rptintuc_ctl01_lblchitiet"> Chi Tiết</span>'
-                    content += '</a>'
-                    content += '</div>'
-                    content += '<p class="date">'
-                    content += '<time datetime="2013-01-21">'
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>'
-                    content += '<span class="comments_count"></span>'
-                    content += '</p>'
-                    content += '</div>'
-                    content += '</div>'
-                } else {
-                    content += '<div class="newestItem firstNewsetItem">'
-                    content += '<div class="newestItemTitle-Detail">'
-                    content += '<a title="' + data.model[i].Name + '" href="/home/detailnews?id=' + data.model[i].Id + '" onclick="return goToDetail(' + data.model[i].Id +');">'
-                    content += data.model[i].Name
-                    content += '</a>'
-                    content += '</div>'
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
 
-                    content += '<div class="content">'
-                    content += '<p>'
-                    content += '<span style="position:relative; top:5px;">' + data.model[i].Abstract + '</span>'
-                    content += '</p>'
-                    content += '<div class="readMoreDetail">'
-                    content += '<a title="Đề xuất nâng tiêu chuẩn khí thải đối với ô tô để bảo vệ môi trường" href="/home/detailnews?id=' + data.model[i].Id + '" onclick="goToDetail(' + data.model[i].Id +')">'
-                    content += '<span id="ctl00_PlaceHolderTopColMiddle_g_5271cf1b_ba26_4ac5_99bc_7a7b243c3627_ctl00_rptintuc_ctl01_lblchitiet"> Chi Tiết</span>'
-                    content += '</a>'
-                    content += '</div>'
-                    content += '<p class="date">'
-                    content += '<time datetime="2013-01-21">'
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>'
-                    content += '<span class="comments_count"></span>'
-                    content += '</p>'
-                    content += '</div>'
-                    content += '</div>'
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
                 }
             }
-            $('#tat-ca-tin').html(content);
+        };
+        $.get("http://apinode.eportal.today/api/News/getHomeNewsById?id=" + getUrlParameter('id'), function (data, status) {
+            var content = '';
+            content += '<h1><font color="red">' + data.model.Name + '</font></h1>'
+            content += new Date(data.model.OnCreated).format("dd/mm/yyyy HH:MM:ss");
+            content += '<br />';
+            content += '<br />';
+            content += data.model.Content;
+            $('#detail-news').html(content);
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {
+        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
@@ -193,7 +153,7 @@
             $('#tin-chuyen-muc-content').html(content);
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
+        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
@@ -225,12 +185,12 @@
                     content += '...</p>';
                     content += '</article>';
                 }
-                
+
             }
             $('#tin-moi-content').html(content);
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
+        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
@@ -245,7 +205,7 @@
                     content += '</p>';
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
-                    content += '</p>';
+                    content += '...</p>';
                     content += '</article>';
                 } else {
                     content += '<article>';
@@ -259,7 +219,7 @@
                     content += '</p>';
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
-                    content += '</p>';
+                    content += '...</p>';
                     content += '</article>';
                 }
             }

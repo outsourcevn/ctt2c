@@ -59,9 +59,9 @@ namespace AppPortal.ApiHost.Controllers
 
         [AllowAnonymous]
         [HttpGet("getNewsAno")]
-        public IActionResult ListNewsAno(string name = "" , string email= "" , string sdt = "")
+        public IActionResult ListNewsAno(string name = "" , string email= "" , string sdt = "" , int id = 0)
         {
-            var query = _newsService.GetLstNewsAno(name , email, sdt);
+            var query = _newsService.GetLstNewsAno(name , email, sdt, id);
             return Ok(query);
         }
 

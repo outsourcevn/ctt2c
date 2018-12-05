@@ -120,7 +120,7 @@ namespace AppPortal.AdminSite.Services.Extensions
             item.Sename = string.IsNullOrEmpty(item.Sename) ? $"/{ CommonHelper.UltilityHelper.FillterChar(item.Name)}" : model.Sename;
             item.MetaTitle = string.IsNullOrEmpty(model.MetaTitle) ? model.Name : model.MetaTitle;
             item.MetaKeywords = string.IsNullOrEmpty(model.MetaKeywords) ? model.Name : model.MetaKeywords;
-            item.MetaDescription = string.IsNullOrEmpty(model.MetaDescription) ? model.Name : model.MetaDescription;
+            item.MetaDescription = model.MetaDescription;
             item.AddressId = model.AddressId ?? null;
             item.UserName = model.UserName ?? null;
             item.UserId = model.UserId ?? null;

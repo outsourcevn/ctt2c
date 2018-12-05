@@ -450,6 +450,9 @@ namespace AppPortal.AdminSite.Services.Administrator
                 homeNews = homeNews.Take((int)number);
             }
             homeNews = homeNews.OrderByDescending(x => x.OnCreated);
+            if(id > 0){
+                homeNews = homeNews.Select(x => x.)
+            }
             var homeNewsLst = homeNews.ToList();
 
             foreach (var iem in homeNewsLst)
@@ -510,7 +513,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             return str2;
         }
 
-        public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt)
+        public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id)
         {
             var query = _news.Table.Select(x => new LstItemNews
             {
@@ -536,7 +539,7 @@ namespace AppPortal.AdminSite.Services.Administrator
 
             if (!string.IsNullOrEmpty(name))
             {
-                query = query.Where(x => ConvertToUnSign(x.UserFullName).ToLower().IndexOf(name.ToLower()) > 0);
+                query = query.Where(x => ConvertToUnSign(x.UserFullName).ToLower().IndexOf(name.ToLower()) > 0 || x.UserFullName.ToLower().Contains(name.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(sdt))
@@ -549,6 +552,11 @@ namespace AppPortal.AdminSite.Services.Administrator
                 query = query.Where(x => x.UserEmail.Contains(email));
             }
             query = query.Where(x => x.IsStatus == IsStatus.approved);
+
+            if(id > 0)
+            {
+                query = query.Where(x => x.Id == id);
+            }
             
             return query.ToList();
         }

@@ -25,6 +25,25 @@ $(document).ready(function () {
         },
     });
 
+    $("#filesVanban").kendoUpload({
+        multiple: false,
+        async: {
+            chunkSize: 5 * 1024 * 1024, // bytes
+            saveUrl: `${appConfig.apiCdnUrl}/Upload/ChunkSave`,
+            removeUrl: `${appConfig.apiCdnUrl}/Upload/remove`,
+            autoUpload: true,
+            batch: true
+        },
+        validation: {
+            allowedExtensions: [".doc", ".docx", ".pdf", ".xls", ".xlsx"]
+        },
+        success: function onSuccess(e) {
+            if (e.response) {
+                $('input#MetaDescription').val(e.response.url);
+            }
+        },
+    });
+
     $("textarea#Abstract").kendoEditor({
         tools: toolMinis
     });
@@ -145,6 +164,11 @@ function bindingModel(id) {
     traverse(rootNodes, function (node) {
         if (node.id === Id) {
             node.set("checked", true);
+            if (node.id === 3 || node.id === 1) {
+                $("#fileVanban").show();
+            } else {
+                $("#fileVanban").hide();
+            }
         }
     });
 }
@@ -160,6 +184,11 @@ function onCheck(e) {
     });
     //console.log(dataItem.id);
     $('#CategoryId').val(dataItem.id);
+    if (dataItem.id === 3 || dataItem.id === 1) {
+        $("#fileVanban").show();
+    } else {
+        $("#fileVanban").hide();
+    }
 }
 
 (function () {
