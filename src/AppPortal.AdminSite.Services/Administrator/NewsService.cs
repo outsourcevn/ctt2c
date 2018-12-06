@@ -52,6 +52,56 @@ namespace AppPortal.AdminSite.Services.Administrator
             _files = files;
         }
 
+        public IList<GetReport1> GetReport1(string startdate, string enddate)
+        {
+            var report = new List<GetReport1>();
+            var tiepnhan = _news.Table;
+            var dangxuly = _news.Table.Where(x => x.IsStatus == IsStatus.baocao);
+            var phancong = _news.Table.Where(x => x.IsStatus == IsStatus.phancong);
+            var approved = _news.Table.Where(x => x.IsStatus == IsStatus.approved);
+            if (!string.IsNullOrEmpty(startdate))
+            {
+                tiepnhan = tiepnhan.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+                phancong = phancong.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+                approved = approved.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+                dangxuly = dangxuly.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+            }
+
+            if (!string.IsNullOrEmpty(enddate))
+            {
+                tiepnhan = tiepnhan.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+                phancong = phancong.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+                approved = approved.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+                dangxuly = dangxuly.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+            }
+
+            report.Add(new GetReport1()
+            {
+                type = IsStatus.tiepnhan,
+                count = tiepnhan.Count()
+            });
+
+            report.Add(new GetReport1()
+            {
+                type = IsStatus.phancong,
+                count = phancong.Count()
+            });
+
+            report.Add(new GetReport1()
+            {
+                type = IsStatus.approved,
+                count = approved.Count()
+            });
+
+            report.Add(new GetReport1()
+            {
+                type = IsStatus.baocao,
+                count = dangxuly.Count()
+            });
+
+            return report;
+        }
+
         //Quy trình mới
         public void ChuyenLenLanhDao(string id ,string note)
         {

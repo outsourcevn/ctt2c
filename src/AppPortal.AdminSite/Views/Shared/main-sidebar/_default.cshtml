@@ -1,4 +1,5 @@
 ﻿@using AppPortal.Core.ClaimsIdentityExtension
+@using AppPortal.Core.ClaimsIdentityExtension
 @{
 
     var fullName = ((System.Security.Claims.ClaimsIdentity)User.Identity).GetSpecificClaim(System.Security.Claims.ClaimTypes.GivenName);
@@ -270,60 +271,17 @@
                             </ul>
                         </li>
                     </secure-content>
-                    @*<secure-content asp-controller="Topics">
-            <li id="Topics" class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fa fa-angle-double-right"></i>
-                    <p>
-                        Quản trị chủ đề góp ý
-                        <i class="fa fa-angle-left right"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-controller="Topics" asp-action="create" class="nav-link">
-                            <i class="fa fa-list-ul nav-icon"></i>
-                            <p>Tạo chủ đề mới</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Topics" asp-action="Index" class="nav-link">
-                            <i class="fa fa-list-ul nav-icon"></i>
-                            <p>Quản lý chủ đề</p>
-                            <span class="badge badge-info right"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </secure-content>*@
-                    @*<secure-content asp-controller="ProcessWorks">
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fa fa-angle-double-right"></i>
-                    <p>
-                        Tiếp nhận &amp; Xử lý
-                        <i class="fa fa-angle-left right"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-controller="ProcessWorks" asp-action="Index" class="nav-link">
-                            <i class="nav-icon fa fa-file"></i>
-                            <p>Tiếp nhận ý kiến</p>
-                        </a>
-                    </li>
 
-                    <li class="nav-item">
-                        <a asp-controller="ProcessWorks" asp-action="Step" class="nav-link">
-                            <i class="nav-icon fa fa-long-arrow-right"></i>
-                            <p>Xử lý hồ sơ</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </secure-content>*@
                     <secure-content asp-controller="Reports">
                         <li class="nav-header sysadmin tonghopbaocao">Tổng hợp báo cáo</li>
+                        <li class="nav-item sysadmin tonghopbaocao">
+                            <a asp-controller="Reports" asp-action="gopyphananh" class="nav-link">
+                                <i class="nav-icon fa fa-calendar"></i>
+                                <p>
+                                    Báo cáo góp ý, phản ánh
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item sysadmin tonghopbaocao">
                             <a asp-controller="Reports" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fa fa-calendar"></i>

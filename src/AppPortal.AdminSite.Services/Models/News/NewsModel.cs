@@ -50,6 +50,12 @@ namespace AppPortal.AdminSite.Services.Models.News
         public int doituong { get; set; }
     }
 
+    public class GetReport1
+    {
+        public IsStatus type { get; set; }
+        public int count { get; set; }
+    }
+
     public class NewsCategoryModel
     {
         public int Id { get; set; }

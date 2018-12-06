@@ -24,6 +24,7 @@ namespace AppPortal.ApiHost.Controllers
 {
 
     [Produces("application/json")]
+    [DisableRequestSizeLimit]
     public class MediaController : ApiBaseController<MediaController>
     {
         private readonly IMediaService _mediaService;

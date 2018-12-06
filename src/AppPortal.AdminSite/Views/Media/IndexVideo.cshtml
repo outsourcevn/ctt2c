@@ -20,12 +20,12 @@
                 <div class="modal-body">
                     <form method="post" id="uploadFileData">
                         <input name="files" id="files" type="file" aria-label="files" />
-                        <p style="color: red;">Chấp nhận file .mp4, .mpeg, .flv, .mkv, .avi, .webm</p>
+                        <p style="color: blue;">Chấp nhận file .mp4, .mpeg, .flv, .mkv, .avi, .webm</p>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Ảnh giới thiệu</label>
                             <input name="filesImage" id="filesImage" type="file" aria-label="files" />
-                            <p style="color: red;">Chấp nhận file .png , jpg, jpeg </p>
+                            <p style="color: blue;">Chấp nhận file .png , jpg, jpeg </p>
                         </div>
                         
                         <div class="form-group">
@@ -171,6 +171,7 @@
                     pageable: true,
                     height: 550,
                     columns: [
+                        { field: "Id", title: "ID", width: "100px" },
                         { field: "url", title: "Video", width: "200px", template: "#=templateimage(url)#" },
                         { field: "description", title: "Mô tả", width: "200px" },
                         { field: "OnCreated", title: "Ngày tạo", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },

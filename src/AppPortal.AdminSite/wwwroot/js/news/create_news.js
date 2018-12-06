@@ -153,6 +153,12 @@ function preview() {
             }
             form.classList.add('was-validated');
             event.preventDefault();
+            var publishDate = $("input[id='OnPublished']").val();
+            if (!publishDate) {
+                var dateCurrent = new Date();
+                publishDate = dateCurrent.toLocaleDateString();
+            }
+
             if ($form.valid()) {
                 var csrfToken = $("input[name='__RequestVerificationToken']").val();
                 var dataJson = {

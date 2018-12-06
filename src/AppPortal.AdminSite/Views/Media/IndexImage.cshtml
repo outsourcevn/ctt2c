@@ -20,7 +20,7 @@
                 <div class="modal-body">
                     <form method="post" id="uploadFileData">
                         <input name="files" id="files" type="file" aria-label="files" />
-                        <p style="color: red;">Chấp nhận file .png , jpg, jpeg </p>
+                        <p style="color: blue;">Chấp nhận file .png , jpg, jpeg </p>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mô tả</label>
                             <input type="text" class="form-control" id="Description" name="Description" />
@@ -158,6 +158,7 @@
                     pageable: true,
                     height: 550,
                     columns: [
+                        { field: "Id", title: "ID", width: "100px" },
                         { field: "url", title: "Ảnh", width: "200px", template: "#=templateimage(url)#" },
                         { field: "description", title: "Mô tả", width: "200px" },
                         { field: "OnCreated", title: "Ngày tạo", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },

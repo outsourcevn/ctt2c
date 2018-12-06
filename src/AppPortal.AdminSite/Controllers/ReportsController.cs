@@ -43,5 +43,13 @@ namespace AppPortal.AdminSite.Controllers
             // Theo các loại và năm
             return View();
         }
+
+        [DisplayName("Báo cáo thống kê bằng biểu đồ")]
+        [HttpGet("Reports/gopy-phananh")]
+        public IActionResult gopyphananh()
+        {
+            return View();
+        }
+        
     }
 }

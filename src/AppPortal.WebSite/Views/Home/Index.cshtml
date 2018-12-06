@@ -108,34 +108,10 @@
             <section class="block_business_news block">
                 <h3 class="block_title_black">VIDEO<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="content">
-                    <aside id="block_front_slider_video" class="block slider" style="height: 520px;padding-right: 28px;">
-                        <div class="flexslider slider video_home" id="block_front_slides_2" style="height: 450px;">
+                    <aside id="block_front_slides_v" class="block slider" style="height: 520px;padding-right: 28px;">
+                        <div class="flexslider slider video_home" id="block_front_slides_video" style="height: 450px;">
                             <ul class="slides" id="contentVideo">
-                                <li>
-                                    <video style="width: 100%" height="430" controls>
-                                        <source src="http://demo.eportal.today/video/v1.mp4">
-                                    </video>
-                                    <p class="flex-caption" style="width:620px">
-                                        Lào Cai: Vỡ đập bãi thải nhà máy DAP 2 gây hậu quả nghiêm trọng
-                                    </p>
-                                </li>
-
-                                <li>
-                                    <video style="width: 100%" height="430" controls>
-                                        <source src="http://demo.eportal.today/video/v2.mp4">
-                                    </video>
-                                    <p class="flex-caption" style="width:620px">
-                                        Nam Định Công ty Nhôm đúc Hoàng Anh hoạt động trái phép bất chấp lệnh cấm của chủ tịch UBND huyện
-                                    </p>
-                                </li>
-                                <li>
-                                    <video style="width: 100%" height="430" controls>
-                                        <source src="http://demo.eportal.today/video/v3.mp4">
-                                    </video>
-                                    <p class="flex-caption" style="width:620px">
-                                        Cuộc sống ác mộng của hàng trăm hộ dân gần bãi rác lộ thiên lớn nhất Trà Vinh
-                                    </p>
-                                </li>
+                                
                             </ul>
                         </div>
                         <div class="flexslider carousel" id="block_front_carousel_video">
@@ -379,12 +355,13 @@
             var preview = '';
             var slide = '';
             for (var i = 0; i < data.length; i++) {
-                preview += '<li> <video style="width: 100%" height="430" controls> <source src="' + data[i].url +'"> </video> <p class="flex-caption" style="width:620px">data[i].description</p> </li>';
+                preview += '<li> <video style="width: 100%" height="430" controls> <source src="' + data[i].url +'"> </video> <p class="flex-caption" style="width:620px">'+data[i].description+'</p> </li>';
 
                 slide += '<li>';
                 slide += '<img src="' + data[i].filesImage + '" />';
                 slide += '</li>';
             }
+            
             $('#contentVideo').html(preview);
             $('#contentImage').html(slide);
             $('#block_front_slides_video').flexslider({
