@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Chi tiết tin tức";
+    ViewData["Title"] = "Nội dung góp ý/phản ánh";
 }
 <script src="https://code.jquery.com/jquery-2.2.4.js"
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -50,11 +50,10 @@
         margin-bottom: -15px;
     }
 </style>
-<link href="~/css/news.css" rel="stylesheet" />
 
 <div class="container">
-    <div id="detail-news" class="col-md-8">
-        <br />
+    <div id="tra-cuu-detail" class="col-md-8">
+       
     </div>
     <div class="col-md-4">
         <div class="col-md-12">
@@ -107,14 +106,39 @@
                 }
             }
         };
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsById?id=" + getUrlParameter('id'), function (data, status) {
+
+        $.get("http://apinode.eportal.today/api/news/getNewsAno?id=" + getUrlParameter('id'), function (data, status) {
+
+            console.log(data);
             var content = '';
-            content += '<h1><font color="red">' + data.model.Name + '</font></h1>'
-            content += new Date(data.model.OnPublished).format("dd/mm/yyyy");
-            content += '<br />';
-            content += '<br />';
-            content += data.model.Content;
-            $('#detail-news').html(content);
+
+            content += '<h1><font color="#1f4f82">' + data[0].Name + '</font></h1>'
+            content += '<p style="font-size:15px;"><b>Người phản ánh:</b>' + data[0].UserFullName + '</p> <br />'
+            content += '<div>'
+            content += '<div>'
+            content += '<div >'
+            content += ' <div>'
+            content += '<b style="font-size:15px;">Nội dung kiến nghị:</b>'
+            content += ' <br />'
+            content += '<br />'
+            content += '<p style="font-size:15px;">'+data[0].Content +"</p>";
+            content += new Date(data[0].OnCreated).format("dd/mm/yyyy");
+            content += '<hr>'
+            content += '<p>'
+            content += '<i class="MR5 fa fa-file-text-o" aria-hidden="true">'
+            content += '</i>File đính kèm:<br>'
+            content += '</p>'
+            content += '<p>'
+
+            content += '</p>'
+            content += '</div>'
+            
+            content += '</div>'
+            
+            content += '</div>'
+            content += '</div>'
+
+            $('#tra-cuu-detail').html(content);
         });
 
         $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?number=3", function (data, status) {

@@ -82,5 +82,12 @@ namespace AppPortal.WebSite.Controllers
             // ViewData["activeTTQT"] = "active";
             return View();
         }
+
+        public IActionResult DetailTracuu()
+        {
+            // ViewData["activeTTQT"] = "active";
+            return View(nameof(DetailTracuu));
+        }
+        
     }
 }
