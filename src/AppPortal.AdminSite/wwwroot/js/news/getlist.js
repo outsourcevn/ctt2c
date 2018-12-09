@@ -93,6 +93,12 @@ var grid = $("#dataGrid").data("kendoGrid");
                 template: "#=templatePhanloai(is_type , id)#"
             };
             columnsData.push(objVPTC);
+
+            var objVPTC2 = {
+                field: "doituong", title: "Đối tượng", width: "100px",
+                template: "#=templateDoituong(doituong , id)#"
+            };
+            columnsData.push(objVPTC2);
         }
 
         if (GroupId == "ldtcmt") {
@@ -653,6 +659,25 @@ function templatePhanloai(istype, id) {
         html += '      <option value="8">Giải pháp, sáng kiến bảo vệ môi trường</option>';
     }
   
+    html += '    </select>';
+    return html;
+}
+
+function templateDoituong(istype, id) {
+    var html = '<div class="form-group">';
+    html += '<select class="form-control" onchange="phanloaiDoituong(this,' + id + ')" style="font-size: 12px; color: blue;height: 15px;width: 120px;" id="sel1">';
+    if (istype == "0") {
+        html += '<option value="0" selected>Người dân</option>';
+    } else {
+        html += '<option value="0">Người dân</option>';
+    }
+
+    if (istype == "1") {
+        html += '<option value="1" selected>Doanh nghiệp</option>';
+    } else {
+        html += '<option value="1">Doanh nghiệp</option>';
+    }
+    
     html += '    </select>';
     return html;
 }

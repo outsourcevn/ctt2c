@@ -38,5 +38,7 @@ namespace AppPortal.ApiHost.ViewModels.News
         public IsType IsType { get; set; }
         [JsonProperty("stt")]
         public int stt { get; set; }
+        [JsonProperty("doituong")]
+        public int doituong { get; set; }
     }
 }

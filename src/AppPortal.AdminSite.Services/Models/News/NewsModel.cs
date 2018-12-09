@@ -54,6 +54,7 @@ namespace AppPortal.AdminSite.Services.Models.News
     {
         public IsStatus type { get; set; }
         public int count { get; set; }
+        public string typeString { get; set; }
     }
 
     public class NewsCategoryModel

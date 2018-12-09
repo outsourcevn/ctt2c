@@ -78,25 +78,29 @@ namespace AppPortal.AdminSite.Services.Administrator
             report.Add(new GetReport1()
             {
                 type = IsStatus.tiepnhan,
-                count = tiepnhan.Count()
+                count = tiepnhan.Count(),
+                typeString = "Tiếp nhận"
             });
 
             report.Add(new GetReport1()
             {
                 type = IsStatus.phancong,
-                count = phancong.Count()
+                count = phancong.Count(),
+                typeString = "Phân công"
             });
 
             report.Add(new GetReport1()
             {
                 type = IsStatus.approved,
-                count = approved.Count()
+                count = approved.Count(),
+                typeString = "Công bố"
             });
 
             report.Add(new GetReport1()
             {
                 type = IsStatus.baocao,
-                count = dangxuly.Count()
+                count = dangxuly.Count(),
+                typeString = "Đang xử lý"
             });
 
             return report;
@@ -676,7 +680,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 Note = x.Note,
                 fileUpload = x.fileUpload,
                 IsType = x.IsType,
-                
+                doituong = x.doituong
 
             }).ToList();
             var index = skip + 1;
