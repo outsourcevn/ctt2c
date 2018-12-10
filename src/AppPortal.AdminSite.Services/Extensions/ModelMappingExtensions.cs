@@ -103,6 +103,7 @@ namespace AppPortal.AdminSite.Services.Extensions
             item.phuongxa = model.phuongxa;
             item.quanhuyen = model.quanhuyen;
             item.fileUpload = model.fileUpload;
+            item.doituong = model.doituong;
             return item;
         }
 

@@ -20,14 +20,15 @@ $(function () {
         //xhrFields: {withCredentials: true},
         url: `${appConfig.apiHostUrl}` + '/api/NewsLog/uploadAno',
         add: function (e, data) {
-            
             var uploadErrors = [];
             var acceptFileTypes = /\.(gif|jpg|jpeg|tiff|png|doc|docx|xls|xlsx|mp4|mpeg|wmv)$/i;
 
             if ($("#filebaocao tbody tr").length > 5) {
                 uploadErrors.push('Chỉ có thể upload 5 file');
             }
-            if (data.originalFiles[0]['type'].indexOf("image") == -1 && data.originalFiles[0]['type'].indexOf("officedocument") == -1 && data.originalFiles[0]['type'].indexOf("video") == -1 ) {
+
+            if (data.originalFiles[0]['type'].indexOf("image") == -1 && data.originalFiles[0]['type'].indexOf("officedocument") == -1
+                && data.originalFiles[0]['type'].indexOf("video") == -1 && data.originalFiles[0]['type'].indexOf("msword") == -1) {
                 uploadErrors.push('Chỉ chấp nhận ảnh video và tài liệu');
             }
 
@@ -45,6 +46,10 @@ $(function () {
         change: function (e, data) {
             
         }
+    });
+
+    $('#fileupload').on('fileuploaddestroy', function (e, data) {
+        $(data.context).remove();
     });
 
     // Enable iframe cross-domain access via redirect option:

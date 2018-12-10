@@ -737,6 +737,42 @@ namespace AppPortal.ApiHost.Controllers
         }
 
         [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpGet("doituong")]
+        // AddNewRelated
+        public IActionResult doituong(int? Id, int doituong)
+        {
+            string message = "";
+            try
+            {
+                if ((int)Id > 0)
+                {
+                    var entityModel = _newsService.GetNewsById((int)Id);
+                    if (Id.HasValue && Id > 0)
+                    {
+                        if(doituong >= 0)
+                        {
+                            entityModel.doituong = doituong;
+                            entityModel.OnUpdated = DateTime.Now;
+                        }
+                        
+                    }
+                    _newsService.AddOrUpdate(entityModel);
+                    message = "Phân loại đối tượng thành công.";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
+
+        [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("xemchitiet")]
         public IActionResult xemchitiet(int? Id)
         {

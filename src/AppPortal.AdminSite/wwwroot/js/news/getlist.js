@@ -579,6 +579,47 @@ function onChange(arg) {
 function onPaging(arg) {
 }
 
+function phanloaiDoituong(args, id) {
+    var istype = parseInt($(args).val());
+    var grid = $('#dataGrid').data('kendoGrid');
+    var url = `${appConfig.apiHostUrl}` + '/api/News/doituong?Id=' + id + '&doituong=' + istype;
+    callAjax(
+        url,
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (success) {
+            if (!success.did_error) {
+                messagerSuccess('Thông báo', success.model);
+            }
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
+        },
+        function (xhr, status, error) {
+            if (xhr.status === 400) {
+                var err = eval("(" + xhr.responseText + ")");
+                err.forEach(function (item) {
+                    messagerError(item.Code, item.Description);
+                });
+            } else {
+                messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+            }
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
+        },
+        function (complete) {
+            $(this).removeClass('disabled').removeAttr('disabled');
+        }
+    )
+}
+
 function phanloaiNews(args, id) {
     var istype = parseInt($(args).val());
     var grid = $('#dataGrid').data('kendoGrid');
