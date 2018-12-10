@@ -38,11 +38,8 @@ namespace AppPortal.Core.Entities
         public string Note { get; set; }
 
         public int? CategoryId { get; set; }
-        public Category Category { get; set; }
-        public virtual List<NewsCategory> NewsCategories { get; set; }
 
         public int? AddressId { get; set; }
-        public Address Address { get; set; }
 
         public string AddressString { get; set; }
         public string Lat { get; set; }

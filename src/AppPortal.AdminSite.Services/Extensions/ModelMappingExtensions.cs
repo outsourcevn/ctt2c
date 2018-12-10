@@ -193,6 +193,15 @@ namespace AppPortal.AdminSite.Services.Extensions
             item.phuongxa = model.phuongxa;
             item.quanhuyen = model.quanhuyen;
             item.fileUpload = model.fileUpload;
+            item.sovanban = model.sovanban;
+            item.tenvanban = model.tenvanban;
+            item.ngaybanhanh = model.ngaybanhanh;
+            item.loaivanban = model.loaivanban;
+            item.cqbanhanh = model.cqbanhanh;
+            item.ngayhieuluc = model.ngayhieuluc;
+            item.tinhtranghieuluc = model.tinhtranghieuluc;
+            item.nguoiky = model.nguoiky;
+            item.chucdanh = model.chucdanh;
             return item;
         }
 

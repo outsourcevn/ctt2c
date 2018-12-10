@@ -182,6 +182,15 @@ function preview() {
                     Note: $("textarea[id='Note']").val(),
                     IsStatus: 0,
                     OnPublished: $("input[id='OnPublished']").val(),
+                    sovanban: $("input[id='sovanban']").val(),
+                    tenvanban: $("input[id='tenvanban']").val(),
+                    ngaybanhanh: $("input[id='ngaybanhanh']").val(),
+                    loaivanban: $("input[id='loaivanban']").val(),
+                    cqbanhanh: $("input[id='cqbanhanh']").val(),
+                    ngayhieuluc: $("input[id='ngayhieuluc']").val(),
+                    tinhtranghieuluc: $("input[id='tinhtranghieuluc']").val(),
+                    nguoiky: $("input[id='nguoiky']").val(),
+                    chucdanh: $("input[id='chucdanh']").val(),
                 };
                 //console.log(dataJson);
                 callAjax(
@@ -203,6 +212,7 @@ function preview() {
                                 success.model +
                                 '</div>';
                             $('#result_message').append(html);
+                            location.reload();
                         }
                     },
                     function (xhr, status, error) {

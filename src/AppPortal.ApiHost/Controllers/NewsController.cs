@@ -222,7 +222,7 @@ namespace AppPortal.ApiHost.Controllers
         
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpPost("HomeNewsCreateOrUpdate")]
-        public IActionResult HomeNewsCreateOrUpdate(int? Id, [FromBody] NewsViewModel model)
+        public IActionResult HomeNewsCreateOrUpdate(int? Id, [FromBody] HomeNewsViewModel model)
         {
             //if (!ModelState.IsValid)
             //{
@@ -231,13 +231,13 @@ namespace AppPortal.ApiHost.Controllers
             string message = "Thêm tin tức thành công";
             try
             {
-                var entityModel = Mapper.Map<NewsViewModel, NewsModel>(model);
+                var entityModel = Mapper.Map<HomeNewsViewModel, HomeNews>(model);
                 if (Id.HasValue && Id > 0)
                 {
                     entityModel.Id = Id.Value;
                     message = "Cập nhật tin tức thành công";
                 }
-                _newsService.AddOrUpdateHome(entityModel);
+                _newsService.AddOrUpdateHomeNews(entityModel);
             }
             catch (System.Exception ex)
             {

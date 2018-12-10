@@ -391,7 +391,7 @@ function createCaptcha() {
     //clear the contents of captcha div first 
     document.getElementById('captcha').innerHTML = "";
     var charsArray =
-        "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@!#$%^&*";
+        "0123456789";
     var lengthOtp = 6;
     var captcha = [];
     for (var i = 0; i < lengthOtp; i++) {
