@@ -254,13 +254,31 @@ namespace AppPortal.Infrastructure.Data.Migrations
 
                     b.Property<string>("UserPhone");
 
+                    b.Property<string>("chucdanh");
+
+                    b.Property<string>("cqbanhanh");
+
                     b.Property<string>("fileUpload");
+
+                    b.Property<string>("loaivanban");
+
+                    b.Property<DateTime?>("ngaybanhanh");
+
+                    b.Property<string>("ngayhieuluc");
+
+                    b.Property<string>("nguoiky");
 
                     b.Property<string>("phuongxa");
 
                     b.Property<string>("quanhuyen");
 
+                    b.Property<string>("sovanban");
+
+                    b.Property<string>("tenvanban");
+
                     b.Property<string>("tinhthanhpho");
+
+                    b.Property<string>("tinhtranghieuluc");
 
                     b.HasKey("Id");
 

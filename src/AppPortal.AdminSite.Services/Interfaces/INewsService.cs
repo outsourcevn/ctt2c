@@ -17,6 +17,9 @@ namespace AppPortal.AdminSite.Services.Interfaces
         NewsModel GetNewsById(int id);
         HomeNews GetHomeNewsById(int id);
         IList<GetReport1> GetReport1(string startdate, string enddate);
+        IList<GetReport1> GetReport2(string startdate, string enddate);
+        IList<GetReport2> GetReport3(string startdate, string enddate);
+        IList<GetReport2> GetReport4(string startdate, string enddate);
         void Hoactac(int id);
         IList<HomeNews> GetHomeNewsByCate(int? id , int? number);
         IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "", int? categoryId = -1, int? status = -1, 

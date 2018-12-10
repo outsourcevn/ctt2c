@@ -1,4 +1,4 @@
-﻿@model NewsViewModel
+﻿@model HomeNewsViewModel
 @{
 
     ViewData["FeatureTitle"] = "Quản trị tin tức";
@@ -27,6 +27,7 @@
         .k-i-insert-video{
             background-image: url("../images/video.png");
         }
+
     </style>
 
     <style>
@@ -68,6 +69,10 @@
             bottom: 0;
             margin-bottom: -15px;
         }
+
+        .vanbanphapquy {
+            display: none;
+        }
     </style>
 }
 <div class="row">
@@ -102,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="form-group" id="fileVanban" style="display: none;">
+                                    <div class="form-group vanbanphapquy" id="fileVanban" style="display: none;">
                                         <label class="control-label">Tải lên văn bản chính sách</label>
                                         <div class="demo-section k-content">
                                             <input name="files" id="filesVanban" type="file" />
@@ -156,6 +161,64 @@
                                 <input asp-for="SourceNews" class="form-control" mav>
                                 <span asp-validation-for="SourceNews" class="invalid-feedback"></span>
                             </div>
+
+                            <!-- Văn bản pháp quy -->
+                            <div class="form-group vanbanphapquy">
+                                <label asp-for="sovanban" class="control-label"></label>
+                                <input asp-for="sovanban" class="form-control" mav>
+                                <span asp-validation-for="sovanban" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group vanbanphapquy">
+                                <label asp-for="tenvanban" class="control-label"></label>
+                                <input asp-for="tenvanban" class="form-control" mav>
+                                <span asp-validation-for="tenvanban" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group vanbanphapquy">
+                                <label asp-for="ngaybanhanh" class="control-label"></label>
+                                <input asp-for="ngaybanhanh" class="form-control" mav>
+                                <span asp-validation-for="ngaybanhanh" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group vanbanphapquy">
+                                <label asp-for="loaivanban" class="control-label"></label>
+                                <input asp-for="loaivanban" class="form-control" mav>
+                                <span asp-validation-for="loaivanban" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group vanbanphapquy">
+                                <label asp-for="cqbanhanh" class="control-label"></label>
+                                <input asp-for="cqbanhanh" class="form-control" mav>
+                                <span asp-validation-for="cqbanhanh" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group vanbanphapquy">
+                                <label asp-for="ngayhieuluc" class="control-label"></label>
+                                <input asp-for="ngayhieuluc" class="form-control" mav>
+                                <span asp-validation-for="ngayhieuluc" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group vanbanphapquy">
+                                <label asp-for="tinhtranghieuluc" class="control-label"></label>
+                                <input asp-for="tinhtranghieuluc" class="form-control" mav>
+                                <span asp-validation-for="tinhtranghieuluc" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group vanbanphapquy">
+                                <label asp-for="nguoiky" class="control-label"></label>
+                                <input asp-for="nguoiky" class="form-control" mav>
+                                <span asp-validation-for="nguoiky" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group vanbanphapquy">
+                                <label asp-for="chucdanh" class="control-label"></label>
+                                <input asp-for="chucdanh" class="form-control" mav>
+                                <span asp-validation-for="chucdanh" class="invalid-feedback"></span>
+                            </div>
+
+                            <!-- Văn bản pháp quy -->
+
                             <div class="form-group">
                                 <label asp-for="Note" class="control-label">Ghi chú</label>
                                 <textarea rows="5" asp-for="Note" class="form-control" mav></textarea>

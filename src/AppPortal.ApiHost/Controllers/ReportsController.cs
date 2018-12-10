@@ -46,5 +46,29 @@ namespace AppPortal.ApiHost.Controllers
             var query = _newsService.GetReport1(startdate, enddate);
             return Ok(query);
         }
+
+        [AllowAnonymous]
+        [HttpGet("getReport2")]
+        public IActionResult GetReport2(string startdate = "", string enddate = "")
+        {
+            var query = _newsService.GetReport2(startdate, enddate);
+            return Ok(query);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("getReport3")]
+        public IActionResult GetReport3(string startdate = "", string enddate = "")
+        {
+            var query = _newsService.GetReport3(startdate, enddate);
+            return Ok(query);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("getReport4")]
+        public IActionResult GetReport4(string startdate = "", string enddate = "")
+        {
+            var query = _newsService.GetReport4(startdate, enddate);
+            return Ok(query);
+        }
     }
 }

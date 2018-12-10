@@ -16,7 +16,7 @@ dotnet ef migrations add InitAppPortalModel --context AppDataContext -p ..\AppPo
 ### Add migrations
 ```
  Add-Migration "AddNewTable" -c AppDataContext -o Data/Migrations
- Update-Database -Migration <migration name> -c "AppDataContext" 
+ Update-Database -Migration EditTableVanBanPhapQuy -c "AppDataContext" 
  Update-Database -c "AppDataContext" 
 ```
 

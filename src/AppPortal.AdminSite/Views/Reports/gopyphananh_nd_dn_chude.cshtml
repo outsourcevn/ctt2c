@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewData["Title"] = "Thống kê số lượng câu hỏi của người dân và doanh nghiệp theo chủ đề";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            google.charts.load("current", { packages: ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
+        });
+
+        function drawChart(startdate, enddate) {
+            $.ajax({
+                url: appConfig.apiHostUrl + "/api/Reports/getReport3",
+                data: {
+                    startdate: startdate,
+                    enddate: enddate
+                },
+                success: function (result) {
+                    //var data = google.visualization.arrayToDataTable([
+                    //    ["Loại", "Số lượng", { role: "style" }],
+                    //    ["Tiếp nhận", result[0].count, "#b87333"],
+                    //    ["Phân công", result[1].count, "silver"],
+                    //    ["Đang xử lý", result[3].count, "gold"],
+                    //    ["Công bố", result[2].count, "color: #e5e4e2"]
+                    //]);
+
+                    //var view = new google.visualization.DataView(data);
+                    //view.setColumns([0, 1,
+                    //    {
+                    //        calc: "stringify",
+                    //        sourceColumn: 1,
+                    //        type: "string",
+                    //        role: "annotation"
+                    //    },
+                    //    2]);
+
+                    //var options = {
+                    //    title: "Thống kê số lượng câu hỏi của người dân và doanh nghiệp theo chủ đề",
+                    //    width: 800,
+                    //    height: 500,
+                    //    bar: { groupWidth: "80%" },
+                    //    legend: { position: "none" },
+                    //};
+                    //var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                    //chart.draw(view, options);
+
+                    $("#grid").kendoGrid({
+                        toolbar: ["excel"],
+                        excel: {
+                            fileName: "Thống kê số lượng câu hỏi của người dân và doanh nghiệp theo chủ đề.xlsx"
+                        },
+                        dataSource: {
+                            data: result
+                        },
+                        filterable: true,
+                        reorderable: true,
+                        columns: [
+                            {
+                                field: "typeString", title: "Phân loại", filterable:
+                                {
+                                    multi: true
+                                },
+                            },
+                            {
+                                field: "chudeString", title: "Chủ đề", filterable: 
+                                {
+                                    multi: true
+                                }
+                            },
+                            { field: "count", title: "Số lượng" },
+                        ]
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            function onChange() {
+
+            }
+
+            function onChangeStart(e) {
+                $("#datepicker").kendoDatePicker({
+                    min: new Date($("#datepickerStart").val()),
+                });
+            }
+
+            $("#datepicker").kendoDatePicker({
+                change: onChange
+            });
+
+            $("#datepickerStart").kendoDatePicker({
+                change: onChangeStart
+            });
+
+            $("#primaryTextButton").kendoButton({
+                click: function (e) {
+                    drawChart($("#datepickerStart").val(), $("#datepicker").val());
+                }
+            });
+
+        });
+    </script>
+}
+
+<div id="example" style="width: 800px; margin: 0 auto">
+    <div class="demo-section k-content" style="background-color: transparent; margin-bottom: 10px;width: 400px">
+        <h4 style="float: left">Từ ngày: </h4>
+        <input id="datepickerStart" style="width: 100%" />
+
+        <h4>Đến ngày</h4>
+        <input id="datepicker" style="width: 100%" />
+
+        <button id="primaryTextButton" class="k-primary" style="margin-top: 10px">Báo cáo</button>
+    </div>
+    <div id="columnchart_values" style="margin: 0 auto;"></div>
+
+    <div id="grid"></div>
+</div>
+
+
+

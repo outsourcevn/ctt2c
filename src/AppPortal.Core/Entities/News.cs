@@ -105,7 +105,10 @@ namespace AppPortal.Core.Entities
         topic,
         onhiemmoitruong,
         cochehanhchinh,
-        giaiphapsangkien
+        giaiphapsangkien,
+        onhiemmoitruong_nuocthai,
+        onhiemmoitruong_khithai,
+
     }
 
     public enum IsPosition : int

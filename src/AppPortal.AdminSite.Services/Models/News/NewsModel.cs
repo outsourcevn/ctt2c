@@ -55,6 +55,16 @@ namespace AppPortal.AdminSite.Services.Models.News
         public IsStatus type { get; set; }
         public int count { get; set; }
         public string typeString { get; set; }
+        public string khuvuc { get; set; }
+    }
+
+    public class GetReport2
+    {
+        public IsType type { get; set; }
+        public string typeString { get; set; }
+        public string chudeString { get; set; }
+        public int count { get; set; }
+        public string khuvuc { get; set; }
     }
 
     public class NewsCategoryModel

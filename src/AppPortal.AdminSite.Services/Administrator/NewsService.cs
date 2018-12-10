@@ -106,6 +106,129 @@ namespace AppPortal.AdminSite.Services.Administrator
             return report;
         }
 
+        public IList<GetReport1> GetReport2(string startdate, string enddate)
+        {
+            var report = new List<GetReport1>();
+            var nguoidan = _news.Table.Where(x => x.doituong == 0);
+            var doanhnghiep = _news.Table.Where(x => x.doituong == 1);
+            if (!string.IsNullOrEmpty(startdate))
+            {
+                nguoidan = nguoidan.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+                doanhnghiep = doanhnghiep.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+            }
+
+            if (!string.IsNullOrEmpty(enddate))
+            {
+                nguoidan = nguoidan.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+                doanhnghiep = doanhnghiep.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+            }
+
+            report.Add(new GetReport1()
+            {
+                count = nguoidan.Count(),
+                typeString = "Người dân"
+            });
+
+            report.Add(new GetReport1()
+            {
+                count = doanhnghiep.Count(),
+                typeString = "Doanh nghiệp"
+            });
+
+            return report;
+        }
+
+        public IList<GetReport2> GetReport3(string startdate, string enddate)
+        {
+            var report = new List<GetReport1>();
+            var nguoidan = _news.Table.Where(x => x.doituong == 0);
+            var doanhnghiep = _news.Table.Where(x => x.doituong == 1);
+            if (!string.IsNullOrEmpty(startdate))
+            {
+                nguoidan = nguoidan.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+                doanhnghiep = doanhnghiep.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+            }
+            
+            if (!string.IsNullOrEmpty(enddate))
+            {
+                nguoidan = nguoidan.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+                doanhnghiep = doanhnghiep.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+            }
+
+            var nguoidanGr = nguoidan.GroupBy(x => x.IsType).Select(group => new GetReport2
+            {
+                type = group.Key,
+                typeString = "Người dân",
+                count = group.Count(),
+                chudeString = convertChudeToString(group.Key)
+            }).ToList();
+
+            var doanhnghiepGr = doanhnghiep.GroupBy(x => x.IsType).Select(group => new GetReport2
+            {
+                type = group.Key,
+                typeString = "Doanh nghiệp",
+                count = group.Count(),
+                chudeString = convertChudeToString(group.Key)
+            }).ToList();
+
+            return doanhnghiepGr.Concat(nguoidanGr).ToList();
+        }
+
+        public IList<GetReport2> GetReport4(string startdate, string enddate)
+        {
+            var report = new List<GetReport1>();
+            var nguoidan = _news.Table.Where(x => x.doituong == 0);
+            var doanhnghiep = _news.Table.Where(x => x.doituong == 1);
+            if (!string.IsNullOrEmpty(startdate))
+            {
+                nguoidan = nguoidan.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+                doanhnghiep = doanhnghiep.Where(x => x.OnCreated >= DateTime.Parse(startdate));
+            }
+
+            if (!string.IsNullOrEmpty(enddate))
+            {
+                nguoidan = nguoidan.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+                doanhnghiep = doanhnghiep.Where(x => x.OnCreated <= DateTime.Parse(enddate));
+            }
+
+            var nguoidanGr = nguoidan.GroupBy(x => x.tinhthanhpho).Select(group => new GetReport2
+            {
+                khuvuc = group.Key,
+                typeString = "Người dân",
+                count = group.Count()
+            }).ToList();
+
+            var doanhnghiepGr = doanhnghiep.GroupBy(x => x.tinhthanhpho).Select(group => new GetReport2
+            {
+                khuvuc = group.Key,
+                typeString = "Doanh nghiệp",
+                count = group.Count()
+            }).ToList();
+
+            return doanhnghiepGr.Concat(nguoidanGr).ToList();
+        }
+
+        private string convertChudeToString(IsType type)
+        {
+            switch (type)
+            {
+                case IsType.onhiemmoitruong:
+                    return "Ô nhiễm môi trường - Ô nhiễm chất thải rắn";
+                case IsType.onhiemmoitruong_khithai:
+                    return "Ô nhiễm môi trường -  Ô nhiễm khí thải";
+                case IsType.onhiemmoitruong_nuocthai:
+                    return "Ô nhiễm môi trường - Ô nhiễm nước thải";
+                case IsType.giaiphapsangkien:
+                    return "Giải pháp, sáng kiến bảo vệ môi trường";
+                case IsType.cochehanhchinh:
+                    return "Cơ chế, chính sách, thủ tục hành chính";
+                case IsType.noType:
+                    return "Chưa phân loại";
+                default:
+                    return String.Empty;
+            }
+        }
+
         //Quy trình mới
         public void ChuyenLenLanhDao(string id ,string note)
         {

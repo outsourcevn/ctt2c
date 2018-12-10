@@ -50,6 +50,24 @@ namespace AppPortal.AdminSite.Controllers
         {
             return View();
         }
-        
+
+        [HttpGet("Reports/gopy-phananh-nguoidan-ngoanhnghiep")]
+        public IActionResult gopyphananh_nd_dn()
+        {
+            return View();
+        }
+
+        [HttpGet("Reports/gopy-phananh-nguoidan-ngoanhnghiep-chude")]
+        public IActionResult gopyphananh_nd_dn_chude()
+        {
+            return View();
+        }
+
+        [HttpGet("Reports/gopy-phananh-khuvuc-dialy")]
+        public IActionResult gopyphananh_khuvuc_dialy()
+        {
+            return View();
+        }
+
     }
 }
