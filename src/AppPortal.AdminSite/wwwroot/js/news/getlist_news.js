@@ -98,13 +98,9 @@ var grid = $("#dataGrid").data("kendoGrid");
                     field: "is_status", title: "Trạng thái", width: "150px",
                     template: "#=templateStatus(is_status)#"
                 },
-                //{
-                //    field: "note", title: "Góp ý", width: "150px",
-                //},
-                //{
-                //    field: "image", title: "Ảnh đại diện", width: "50px",
-                //    template: "#=templatefileupload(image)#"
-                //},        
+                {
+                    field: "category_id", title: "Chuyên đề", template: "#=templateCate(category_id)#", width: "90px"
+                },       
                 {
                     field: "on_created", title: "Ngày tạo", template: "#=templateDate(on_created)#", width: "90px"
                 },
@@ -548,9 +544,19 @@ function templateAction(news_id, status) {
         }
         return name;
     }
-   
+}
 
-    
+function templateCate(cate){
+var html = '';
+    switch (cate) {
+        case 1: html = ' <span class="label label-success">Văn bản chính sách</span>'; break;
+        case 3: html = ' <span class="label label-success">Văn bản chính sách</span>'; break;
+        case 4: html = ' <span class="label label-success">Phản ánh môi trường</span>'; break;
+        case 13: html = ' <span class="label label-success">Tin truyền thông</span>'; break;
+        case 14: html = ' <span class="label label-success">Giải pháp sáng kiến</span>'; break;
+    }
+
+    return html;
 }
 
 //name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="baocaoketqua(' + news_id + ')">Tổng hợp kết quả xử lý</button>';

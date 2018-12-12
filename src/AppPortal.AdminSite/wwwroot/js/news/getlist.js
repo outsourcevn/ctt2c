@@ -89,13 +89,13 @@ var grid = $("#dataGrid").data("kendoGrid");
 
         if (GroupId == "ttdl") {
             var objVPTC = {
-                field: "is_type", title: "Phân loại", width: "100px",
+                field: "is_type", title: "Phân loại", width: "150px",
                 template: "#=templatePhanloai(is_type , id)#"
             };
             columnsData.push(objVPTC);
 
             var objVPTC2 = {
-                field: "doituong", title: "Đối tượng", width: "100px",
+                field: "doituong", title: "Đối tượng", width: "90px",
                 template: "#=templateDoituong(doituong , id)#"
             };
             columnsData.push(objVPTC2);
@@ -663,31 +663,33 @@ function phanloaiNews(args, id) {
 
 function templatePhanloai(istype, id) {
     var html = '<div class="form-group">';
-    html += '<select class="form-control" onchange="phanloaiNews(this,'+id+')" style="font-size: 12px; color: blue;height: 15px;width: 120px;" id="sel1">';
-    if (istype != "6" && istype != "7" && istype != "8" ) {
+    html += '<select class="form-control" onchange="phanloaiNews(this,'+id+')" style="font-size: 12px; color: blue;height: 15px;width: 130px;" id="sel1">';
+
+    if (istype != "6" && istype != "7" && istype != "8" && istype != "9" && istype != "10" ) {
         html += '<option disabled selected>Chưa phân loại</option>';
     } else {
         html += '<option disabled>Chưa phân loại</option>';
     }
-
+    html += '<optgroup label="Ô nhiễm môi trường">';
     if (istype == "6") {
-        html += '<option value="6" selected>Ô nhiễm môi trường - Ô nhiễm chất thải rắn</option>';
+        html += '<option value="6" selected>Ô nhiễm chất thải rắn</option>';
     } else {
-        html += '<option value="6">Ô nhiễm môi trường - Ô nhiễm chất thải rắn</option>';
+        html += '<option value="6">Ô nhiễm chất thải rắn</option>';
     }
 
     if (istype == "9") {
-        html += '<option value="9" selected>Ô nhiễm môi trường - Ô nhiễm nước thải</option>';
+        html += '<option value="9" selected>Ô nhiễm nước thải</option>';
     } else {
-        html += '<option value="9">Ô nhiễm môi trường - Ô nhiễm nước thải</option>';
+        html += '<option value="9">Ô nhiễm nước thải</option>';
     }
 
     if (istype == "10") {
-        html += '<option value="10" selected>Ô nhiễm môi trường - Ô nhiễm khí thải</option>';
+        html += '<option value="10" selected>Ô nhiễm khí thải</option>';
     } else {
-        html += '<option value="10">Ô nhiễm môi trường -  Ô nhiễm khí thải</option>';
+        html += '<option value="10">Ô nhiễm khí thải</option>';
     }
 
+    html += '</optgroup>';
     if (istype == "7") {
         html += '      <option value="7" selected>Cơ chế, chính sách, thủ tục hành chính</option>';
     } else {
@@ -706,7 +708,7 @@ function templatePhanloai(istype, id) {
 
 function templateDoituong(istype, id) {
     var html = '<div class="form-group">';
-    html += '<select class="form-control" onchange="phanloaiDoituong(this,' + id + ')" style="font-size: 12px; color: blue;height: 15px;width: 120px;" id="sel1">';
+    html += '<select class="form-control" onchange="phanloaiDoituong(this,' + id + ')" style="font-size: 12px; color: blue;height: 15px;width: 95px;" id="sel1">';
     if (istype == "0") {
         html += '<option value="0" selected>Người dân</option>';
     } else {

@@ -63,7 +63,7 @@
     </script>
 
     @section Scripts{
-        <script>
+    <script>
             var jwtToken = getCookie("ACCESS-TOKEN");
             var windowTemplate = kendo.template($("#windowTemplate").html());
             function submit() {
@@ -151,6 +151,7 @@
                         model: {
                             id: "Id",
                             fields: {
+                                Id: { editable: false },
                                 url: { editable: false },
                                 description: { type: "string", validation: { required: true } },
                                 OnCreated: { type: "date", editable: false },
@@ -175,7 +176,7 @@
                         { field: "url", title: "Video", width: "200px", template: "#=templateimage(url)#" },
                         { field: "description", title: "Mô tả", width: "200px" },
                         { field: "OnCreated", title: "Ngày tạo", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },
-                        { field: "OnPublish", title: "Hiện thị trên trang chủ", width: "130px", template: "#=templateOnPublish(OnPublish)#" },
+                        { field: "OnPublish", title: "Hiện thị trên trang chủ", width: "130px" ,editor: customBoolEditor },
                         {
                             command: [
                                 { name: "edit" },
@@ -231,11 +232,18 @@
             }
 
             function templateOnPublish(OnPublish) {
+
                 if (OnPublish == null) {
                     return '<input type="checkbox" disabled>';
                 } else {
                     return '<input type="checkbox" checked disabled>';
                 }
+            }
+
+            function customBoolEditor(container, options) {
+                var guid = kendo.guid();
+                $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="OnPublish" data-type="boolean" data-bind="checked:OnPublish">').appendTo(container);
+                $('<label class="k-checkbox-label" for="' + guid + '">&#8203;</label>').appendTo(container);
             }
 
             function formatDate(date) {
@@ -250,7 +258,7 @@
             }
 
 
-        </script>
+    </script>
     }
 </div>
 

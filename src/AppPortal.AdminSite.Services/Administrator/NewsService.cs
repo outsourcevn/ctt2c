@@ -881,7 +881,8 @@ namespace AppPortal.AdminSite.Services.Administrator
                 status = x.IsStatus,
                 Note = x.Note,
                 fileUpload = x.fileUpload,
-                IsType = x.IsType
+                IsType = x.IsType,
+                Category_Id = x.CategoryId
             }).ToList();
             return dataRetun;
         }

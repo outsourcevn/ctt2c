@@ -56,7 +56,7 @@
     </script>
 
     @section Scripts{
-        <script>
+    <script>
             var jwtToken = getCookie("ACCESS-TOKEN");
             var windowTemplate = kendo.template($("#windowTemplate").html());
             function submit() {
@@ -138,6 +138,7 @@
                         model: {
                             id: "Id",
                             fields: {
+                                Id: { editable: false },
                                 url: { editable: false },
                                 description: { type: "string", validation: { required: true } },
                                 OnCreated: { type: "date", editable: false },
@@ -238,7 +239,7 @@
             }
 
 
-        </script>
+    </script>
     }
 </div>
 
