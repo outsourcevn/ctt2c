@@ -17,3 +17,5 @@
 # file gitignore
 appsettings.Development.json
 PublishProfiles
+
+src/AppPortal\.ApiHost/wwwroot/uploadsAno/
