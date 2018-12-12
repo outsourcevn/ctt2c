@@ -206,27 +206,27 @@
             $('#tin-moi-nhat-content').html(content);
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=13&number=4", function (data, status) {
-            var header = '';
-            header += '<p>';
-            header += '<img src="' + data.model[0].Image + '" alt="World News" />';
-            header += '</p>';
-            header += '<hgroup>';
-            header += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[0].Id + '">' + data.model[0].Name + '</a></h4>';
-            header += '</hgroup>';
-            header += '<p class="date">';
-            header += '<time datetime="2013-01-24">';
-            header += new Date(data.model[0].OnPublished).format("dd/mm/yyyy");
-            header += '</time>';
-            header += '</p>';
-            header += '<p>'
-            header += data.model[0].Abstract;
-            header += '</p>';
-            $("#truyen-thong-news-header").html(header);
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=13&number=3", function (data, status) {
+            //var header = '';
+            //header += '<p>';
+            //header += '<img src="' + data.model[0].Image + '" alt="World News" />';
+            //header += '</p>';
+            //header += '<hgroup>';
+            //header += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[0].Id + '">' + data.model[0].Name + '</a></h4>';
+            //header += '</hgroup>';
+            //header += '<p class="date">';
+            //header += '<time datetime="2013-01-24">';
+            //header += new Date(data.model[0].OnPublished).format("dd/mm/yyyy");
+            //header += '</time>';
+            //header += '</p>';
+            //header += '<p>'
+            //header += data.model[0].Abstract;
+            //header += '</p>';
+            //$("#truyen-thong-news-header").html(header);
 
 
             var news = '';
-            for (var i = 1; i < data.model.length; i++) {
+            for (var i = 0; i < data.model.length; i++) {
                 news += '<li >';
                 news += '<hgroup>';
                 news += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
@@ -267,7 +267,7 @@
             $('#van-ban-chinh-sach-from-second').html(content);
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=2&number=5", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 content += '<li class="first">';
@@ -386,7 +386,6 @@
         });
 
     </script>
-    <script src="~/js/jquery.flexslider-min.js"></script>
 
 }
 <!-- end right sidebar -->
