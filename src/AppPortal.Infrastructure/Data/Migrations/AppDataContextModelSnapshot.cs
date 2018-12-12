@@ -282,10 +282,6 @@ namespace AppPortal.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("HomeNews","AppPortal");
                 });
 
@@ -294,6 +290,8 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsPublish");
 
                     b.Property<DateTime?>("OnCreated");
 
@@ -438,13 +436,9 @@ namespace AppPortal.Infrastructure.Data.Migrations
 
                     b.Property<int?>("CategoryId");
 
-                    b.Property<int?>("HomeNewsId");
-
                     b.HasKey("NewsId", "CategoryId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("HomeNewsId");
 
                     b.ToTable("NewsCategories","AppPortal");
                 });
@@ -541,17 +535,6 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.ToTable("ReportNews","AppPortal");
                 });
 
-            modelBuilder.Entity("AppPortal.Core.Entities.HomeNews", b =>
-                {
-                    b.HasOne("AppPortal.Core.Entities.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
-                    b.HasOne("AppPortal.Core.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-                });
-
             modelBuilder.Entity("AppPortal.Core.Entities.News", b =>
                 {
                     b.HasOne("AppPortal.Core.Entities.Address", "Address")
@@ -571,10 +554,6 @@ namespace AppPortal.Infrastructure.Data.Migrations
                         .WithMany("NewsCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("AppPortal.Core.Entities.HomeNews")
-                        .WithMany("NewsCategories")
-                        .HasForeignKey("HomeNewsId");
 
                     b.HasOne("AppPortal.Core.Entities.News", "News")
                         .WithMany("NewsCategories")

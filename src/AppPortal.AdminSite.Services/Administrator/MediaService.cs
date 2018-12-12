@@ -49,11 +49,11 @@ namespace AppPortal.AdminSite.Services.Administrator
         {
             if (is_publish == 1)
             {
-                return _media.Table.Where(x => x.OnDeleted == null && x.OnPublish.HasValue && x.type == type).OrderByDescending(x => x.OnCreated).ToList();
+                return _media.Table.Where(x => x.OnDeleted == null && (x.IsPublish == true) && x.type == type).OrderByDescending(x => x.OnCreated).ToList();
             }
             else
             {
-                return _media.Table.Where(x => x.OnDeleted == null && x.type == type).OrderByDescending(x => x.OnCreated).ToList();
+                return _media.Table.Where(x => x.OnDeleted == null && (x.IsPublish == false) && x.type == type).OrderByDescending(x => x.OnCreated).ToList();
             }
            
         }
@@ -78,6 +78,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 {
                     media.description = model.description;
                     media.name = model.name;
+                    media.IsPublish = model.IsPublish;
                     media.OnPublish = model.OnPublish;
                     _media.Update(media);
                 }
@@ -92,6 +93,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 media.type = model.type;
                 media.OnCreated = DateTime.Now;
                 media.OnPublish = model.OnPublish;
+                media.IsPublish = model.IsPublish;
                 media.url = model.url;
                 media.filesImage = model.filesImage;
                 _media.Add(media);

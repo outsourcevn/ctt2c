@@ -165,9 +165,9 @@ function bindingModel(id) {
         if (node.id === Id) {
             node.set("checked", true);
             if (node.id === 3 || node.id === 1) {
-                $("#fileVanban").show();
+                $(".vanbanphapquy").show();
             } else {
-                $("#fileVanban").hide();
+                $(".vanbanphapquy").hide();
             }
         }
     });
@@ -185,9 +185,9 @@ function onCheck(e) {
     //console.log(dataItem.id);
     $('#CategoryId').val(dataItem.id);
     if (dataItem.id === 3 || dataItem.id === 1) {
-        $("#fileVanban").show();
+        $(".vanbanphapquy").show();
     } else {
-        $("#fileVanban").hide();
+        $(".vanbanphapquy").hide();
     }
 }
 

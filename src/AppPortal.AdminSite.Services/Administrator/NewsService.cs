@@ -412,7 +412,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             return entity;
         }
 
-        public void AddOrUpdateHome(NewsModel model)
+        public void AddOrUpdateHome(HomeNewsModel model)
         {
             HomeNews entity = null;
             if (model.Id > 0) entity = _homeNews.GetById(model.Id);

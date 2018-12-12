@@ -89,7 +89,7 @@ namespace AppPortal.AdminSite.Controllers
             {
                 return NotFound();
             }
-            var viewModel = Mapper.Map<HomeNews, NewsViewModel>(entity);
+            var viewModel = Mapper.Map<HomeNews, HomeNewsViewModel>(entity);
 
             List<SelectListItem> statusNews = new List<SelectListItem>() {
                 new SelectListItem() { Value =  ((int)IsStatus.approved).ToString(), Text = "Đã xác nhận" },

@@ -155,7 +155,7 @@
                                 url: { editable: false },
                                 description: { type: "string", validation: { required: true } },
                                 OnCreated: { type: "date", editable: false },
-                                OnPublish: { type: "boolean" }
+                                IsPublish: { type: "boolean" }
                             }
                         }
                     }
@@ -176,7 +176,7 @@
                         { field: "url", title: "Video", width: "200px", template: "#=templateimage(url)#" },
                         { field: "description", title: "Mô tả", width: "200px" },
                         { field: "OnCreated", title: "Ngày tạo", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },
-                        { field: "OnPublish", title: "Hiện thị trên trang chủ", width: "130px" ,editor: customBoolEditor },
+                        { field: "IsPublish", title: "Hiện thị trên trang chủ", width: "130px", template: "#=templateIsPublish(IsPublish)#"  ,editor: customBoolEditor },
                         {
                             command: [
                                 { name: "edit" },
@@ -231,18 +231,18 @@
                 return '<a href="'+url+'" target="_blank"><video src="' + url + '" alt="Smiley face" height="auto" width="200px"></video></a>';
             }
 
-            function templateOnPublish(OnPublish) {
-
-                if (OnPublish == null) {
+            function templateIsPublish(OnPublish) {
+                if (OnPublish == false) {
                     return '<input type="checkbox" disabled>';
                 } else {
                     return '<input type="checkbox" checked disabled>';
                 }
             }
 
+            
             function customBoolEditor(container, options) {
                 var guid = kendo.guid();
-                $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="OnPublish" data-type="boolean" data-bind="checked:OnPublish">').appendTo(container);
+                $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="IsPublish" data-type="boolean" data-bind="checked:IsPublish">').appendTo(container);
                 $('<label class="k-checkbox-label" for="' + guid + '">&#8203;</label>').appendTo(container);
             }
 

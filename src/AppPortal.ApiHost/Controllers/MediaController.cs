@@ -162,11 +162,14 @@ namespace AppPortal.ApiHost.Controllers
                 if (is_publish != null)
                 {
                     media.OnPublish = DateTime.Now;
+                    media.IsPublish = true;
                 }
                 else
                 {
                     media.OnPublish = null;
+                    media.IsPublish = false;
                 }
+
                 media.OnCreated = DateTime.Now;
                 _mediaService.AddOrEdit(media);
                 return Ok(new { success = "Tải lên thành công!" });
