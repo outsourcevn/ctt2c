@@ -10,7 +10,7 @@ namespace AppPortal.AdminSite.Services.Interfaces
     {
         News AddOrUpdateModel(NewsModel model);
         void AddOrUpdate(NewsModel model);
-        void AddOrUpdateHome(NewsModel model);
+        void AddOrUpdateHome(HomeNewsModel model);
         void AddOrUpdateHomeNews(HomeNews model);
         void Delete(int id);
         void DeleteHome(int id);
