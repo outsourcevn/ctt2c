@@ -87,16 +87,26 @@
                 </div>
             </li>*@
             <!-- Notifications Dropdown Menu -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" style="display: inherit;">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="fa fa-bell-o"></i>
                     <span class="badge badge-warning navbar-badge"><span id="countthongbao">0</span></span>
+
                 </a>
+                <form id="frm_logout" asp-area="administrator" asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit" class="dropdown-item"><i class="fa fa-sign-out"></i> Đăng xuất</button>
+                </form>
                 <div id="thongbaodata" class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <span class="dropdown-item dropdown-header">Thông báo</span>
                     <div class="dropdown-divider"></div>
-                    
+
                 </div>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <form id="frm_logout" asp-area="administrator" asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit" class="dropdown-item"><i class="fa fa-sign-out"></i> Đăng xuất</button>
+                    </form>
+                </div>
+
             </li>
             @*<li class="nav-item">
                 <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
