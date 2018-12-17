@@ -51,9 +51,13 @@ namespace AppPortal.AdminSite.Services.Administrator
             {
                 return _media.Table.Where(x => x.OnDeleted == null && (x.IsPublish == true) && x.type == type).OrderByDescending(x => x.OnCreated).ToList();
             }
-            else
+            else if(is_publish == 0)
             {
                 return _media.Table.Where(x => x.OnDeleted == null && (x.IsPublish == false) && x.type == type).OrderByDescending(x => x.OnCreated).ToList();
+            }
+            else
+            {
+                return _media.Table.Where(x => x.OnDeleted == null && x.type == type).OrderByDescending(x => x.OnCreated).ToList();
             }
            
         }
