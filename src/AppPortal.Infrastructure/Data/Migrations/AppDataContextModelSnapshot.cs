@@ -395,6 +395,10 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.Property<string>("SourceNews")
                         .HasMaxLength(255);
 
+                    b.Property<string>("TenCaNhanToChuc");
+
+                    b.Property<DateTime?>("Thoigianxayra");
+
                     b.Property<string>("UserAddress");
 
                     b.Property<string>("UserEmail")

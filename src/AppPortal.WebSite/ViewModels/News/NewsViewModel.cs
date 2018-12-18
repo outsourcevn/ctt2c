@@ -72,6 +72,8 @@ namespace AppPortal.WebSite.ViewModels.News
         public int? IsPosition { get; set; }
         public string UserAddress { get; set; }
         public string UserPhone { get; set; }
+        public DateTime? Thoigianxayra { get; set; }
+        public string TenCaNhanToChuc { get; set; }
     }
 
     public class ItemsNewWithCategoryViewModel

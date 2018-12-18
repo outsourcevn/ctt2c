@@ -117,3 +117,7 @@ h3.block_title_black{
     text-align: center;
     margin: 0 auto;
 }
+
+#block_weather .content p{
+    line-height: 15px;
+}

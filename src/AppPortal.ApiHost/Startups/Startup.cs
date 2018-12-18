@@ -190,7 +190,7 @@ namespace AppPortal.ApiHost
             services.Configure<ConfirmEmailDataProtectionTokenProviderOptions>(options =>
             {
                 options.Name = EmailConfirmationTokenProviderName;
-                options.TokenLifespan = TimeSpan.FromMinutes(15);
+                options.TokenLifespan = TimeSpan.FromDays(15);
             });
         }
 

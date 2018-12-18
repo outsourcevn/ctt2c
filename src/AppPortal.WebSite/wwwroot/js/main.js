@@ -23,12 +23,13 @@ $(function () {
             var uploadErrors = [];
             var acceptFileTypes = /\.(gif|jpg|jpeg|tiff|png|doc|docx|xls|xlsx|mp4|mpeg|wmv)$/i;
 
-            if ($("#filebaocao tbody tr").length > 5) {
+            if ($("#filebaocao tbody tr").length >= 5) {
                 uploadErrors.push('Chỉ có thể upload 5 file');
             }
 
             if (data.originalFiles[0]['type'].indexOf("image") == -1 && data.originalFiles[0]['type'].indexOf("officedocument") == -1
-                && data.originalFiles[0]['type'].indexOf("video") == -1 && data.originalFiles[0]['type'].indexOf("msword") == -1) {
+                && data.originalFiles[0]['type'].indexOf("video") == -1 && data.originalFiles[0]['type'].indexOf("msword") == -1
+                && data.originalFiles[0]['type'].indexOf("application/pdf") == -1) {
                 uploadErrors.push('Chỉ chấp nhận ảnh video và tài liệu');
             }
 
@@ -36,7 +37,6 @@ $(function () {
                 uploadErrors.push('File không được vượt quá 50mb');
             }
 
-            
             if (uploadErrors.length > 0) {
                 alert(uploadErrors.join("\n"));
             } else {

@@ -104,6 +104,8 @@ namespace AppPortal.AdminSite.Services.Extensions
             item.quanhuyen = model.quanhuyen;
             item.fileUpload = model.fileUpload;
             item.doituong = model.doituong;
+            item.Thoigianxayra = model.Thoigianxayra;
+            item.TenCaNhanToChuc = model.TenCaNhanToChuc;
             return item;
         }
 

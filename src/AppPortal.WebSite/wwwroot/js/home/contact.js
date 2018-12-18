@@ -145,6 +145,8 @@ function onCompleted() {
             tinhthanhpho: $("#thanhpho option:selected").text(),
             quanhuyen: $("#quantp option:selected").text(),
             phuongxa: $("#huyen option:selected").text(),
+            Thoigianxayra: $("#Thoigianxayra").val(),
+            TenCaNhanToChuc: $("#TenCaNhanToChuc").val(),
             fileUpload: fileupload,
             doituong: parseInt($("input[name=doituong]:checked").val())
         };

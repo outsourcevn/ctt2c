@@ -64,6 +64,8 @@ namespace AppPortal.ApiHost.ViewModels.News
         public string phuongxa { get; set; }
         public string fileUpload { get; set; }
         public int doituong { get; set; }
+        public DateTime? Thoigianxayra { get; set; }
+        public string TenCaNhanToChuc { get; set; }
     }
 
     public class HomeNewsViewModel

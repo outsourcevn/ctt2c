@@ -52,6 +52,8 @@ namespace AppPortal.Core.Entities
         public string phuongxa { get; set; }
         public string fileUpload { get; set; }
         public int doituong { get; set; }
+        public DateTime? Thoigianxayra { get; set; }
+        public string TenCaNhanToChuc { get; set; }
 
         //ISeoEntity implement
         public string MetaTitle { get; set; }
