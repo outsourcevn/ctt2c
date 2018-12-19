@@ -736,7 +736,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             return query.ToList();
         }
 
-        public IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "",
+        public IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15000, string keyword = "",
             int? categoryId = -1, int? status = -1, int? type = -1 , string username = "", string GroupId = "")
         {
             //var query = GetTables().Where(x => x.IsType == IsType.noType && x.IsType != IsType.topic);
@@ -803,8 +803,8 @@ namespace AppPortal.AdminSite.Services.Administrator
                 Note = x.Note,
                 fileUpload = x.fileUpload,
                 IsType = x.IsType,
-                doituong = x.doituong
-
+                doituong = x.doituong,
+                MaPakn = x.MaPakn
             }).ToList();
             var index = skip + 1;
             var dataNews = new List<ListItemNewsModel>();
