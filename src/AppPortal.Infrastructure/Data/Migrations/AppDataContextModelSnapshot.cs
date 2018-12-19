@@ -366,6 +366,8 @@ namespace AppPortal.Infrastructure.Data.Migrations
 
                     b.Property<string>("Lng");
 
+                    b.Property<string>("MaPakn");
+
                     b.Property<string>("MetaDescription")
                         .HasMaxLength(1000);
 
@@ -419,9 +421,13 @@ namespace AppPortal.Infrastructure.Data.Migrations
 
                     b.Property<string>("fileUpload");
 
+                    b.Property<DateTime>("ngayxuly");
+
                     b.Property<string>("phuongxa");
 
                     b.Property<string>("quanhuyen");
+
+                    b.Property<string>("thamquyenxuly");
 
                     b.Property<string>("tinhthanhpho");
 

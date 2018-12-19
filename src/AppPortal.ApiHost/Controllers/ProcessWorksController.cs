@@ -332,16 +332,18 @@ namespace AppPortal.ApiHost.Controllers
             {
                 return ToHttpBadRequest(AddErrors(ModelState));
             }
-            string message = "Ý kiến góp ý đã được gửi tới hệ thống.";
+
             try
             {
                 var entityModel = Mapper.Map<NewsViewModel, NewsModel>(model);
                 if (Id.HasValue && Id > 0)
                 {
                     entityModel.Id = Id.Value;
-                    message = "Góp ý đã được cập nhật.";
+                   
                 }
+                var currentDatetime = DateTime.Now;
                 entityModel.IsType = (int?)IsType.topic;
+                entityModel.MaPakn = currentDatetime.ToString("yyyyMMddHHmmssffff");
                 var newsData = _newsService.AddOrUpdateModel(entityModel);
 
                 //logs 
@@ -369,6 +371,7 @@ namespace AppPortal.ApiHost.Controllers
                 logs3.GroupNameTo = "anonymous";
                 logs3.OnCreated = DateTime.Now;
                 _newLog.AddOrUpdate(logs3);
+                return Ok(new { MaPakn = newsData.MaPakn, email = newsData.UserEmail });
             }
             catch (System.Exception ex)
             {
@@ -379,7 +382,7 @@ namespace AppPortal.ApiHost.Controllers
                     Description = ex.ToString(),
                 }));
             }
-            return ResponseInterceptor(message);
+           
         }
     }
 }

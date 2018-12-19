@@ -106,6 +106,9 @@ namespace AppPortal.AdminSite.Services.Extensions
             item.doituong = model.doituong;
             item.Thoigianxayra = model.Thoigianxayra;
             item.TenCaNhanToChuc = model.TenCaNhanToChuc;
+            item.MaPakn = model.MaPakn;
+            item.ngayxuly = model.ngayxuly;
+            item.thamquyenxuly = model.thamquyenxuly;
             return item;
         }
 

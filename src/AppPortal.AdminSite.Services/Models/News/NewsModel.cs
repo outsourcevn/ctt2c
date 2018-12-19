@@ -50,6 +50,9 @@ namespace AppPortal.AdminSite.Services.Models.News
         public int doituong { get; set; }
         public DateTime? Thoigianxayra { get; set; }
         public string TenCaNhanToChuc { get; set; }
+        public string MaPakn { get; set; }
+        public DateTime ngayxuly { get; set; }
+        public string thamquyenxuly { get; set; }
     }
 
     public class HomeNewsModel

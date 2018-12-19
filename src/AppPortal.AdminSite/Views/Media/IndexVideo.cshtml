@@ -88,7 +88,7 @@
                 dataSource = new kendo.data.DataSource({
                     transport: {
                         read: {
-                            url: appConfig.apiHostUrl + "/api/Media/getMedia?type=video",
+                            url: appConfig.apiHostUrl + "/api/Media/getMedia?type=video&is_publish=3",
                             beforeSend: function (req) {
                                 req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
                             },
