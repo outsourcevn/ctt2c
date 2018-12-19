@@ -92,12 +92,11 @@
                     <a href="/home/index2"><span class="bg">TRANG CHỦ</span></a>
                 </li>
                 <li class="@ViewData["activetintuc"] dropdown">
-                    <a href="/home/news"><span class="bg">TIN TỨC</span></a>
+                    <a href="/home/news"><span class="bg">TRUYỀN THÔNG</span></a>
                     <div class="dropdown-content">
-                        <a href="/home/news">Truyền thông môi trường</a>
-                        <a href="/home/news">Video</a>
-                        <a href="/home/news">Hình ảnh</a>
-                        <a href="/home/news">Thông tin trao đổi</a>
+                        <a href="/home/news">Tin tức truyền thông</a>
+                        <a href="/news/Images">Ảnh</a>
+                        <a href="/news/video">Video</a>
                     </div>
                 </li>
                 <li class="@ViewData["activeContact"]">
@@ -107,13 +106,18 @@
                     <a href="/home/tracuu"><span class="bg">TRA CỨU KẾT QUẢ</span></a>
                 </li>
                 <li class="@ViewData["activeTTQT"]">
-                    <a href="/home/ttquantrac"><span class="bg">THÔNG TIN QUAN TRẮC</span></a>
+                    <a href="/home/ttquantrac"><span class="bg">CHẤT LƯỢNG MÔI TRƯỜNG</span></a>
                 </li>
                 <li class="@ViewData["activeMap"]">
                     <a href="/home/map"><span class="bg">BẢN ĐỒ</span></a>
                 </li>
-                <li class="@ViewData["activeMap"]">
-                    <a href="/news/vanban"><span class="bg">VĂN BẢN QUY PHẠM</span></a>
+
+                <li class="@ViewData["activeMap"] dropdown">
+                    <a href="/news/vanban"><span class="bg">VĂN BẢN</span></a>
+                    <div class="dropdown-content">
+                        <a href="/news/vanban">Quy phạm pháp luật</a>
+                        <a href="/news/vanban">Quy chuẩn, tiêu chuẩn kỹ thuật</a>
+                    </div>
                 </li>
 
                 <li class="@ViewData["activeVBPL"]">
