@@ -53,6 +53,7 @@ namespace AppPortal.AdminSite.ViewModels.News
         public int? IsView { get; set; }
         public int? IsType { get; set; }
         public int? IsPosition { get; set; }
+        public string MaPakn { get; set; }
     }
 
     public class HomeNewsViewModel
