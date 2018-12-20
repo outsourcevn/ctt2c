@@ -161,7 +161,11 @@ function onCompleted() {
             },
             function (success) {
                 if (!success.did_error) {
-                    alert(success.model);
+                    if (success.MaPakn) {
+                        $("#maPakn").html(success.MaPakn);
+                        $("#buttonModel").click();
+                    }
+                    
                     $form.clearFormData();
                     $("#Content").data("kendoEditor").value('');
                     $("#filebaocao tbody").html("");

@@ -19,7 +19,7 @@ namespace AppPortal.AdminSite.Services
 
             messages.Body = new TextPart(TextFormat.Html)
             {
-                Text = $"<b>Hi {fullName}!</b> <br/>" +                
+                Text = $"" +                
                 $"{message}" +
                 $"<br/><br/><br/><br/> -- no-reply!"
             };

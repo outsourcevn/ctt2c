@@ -42,7 +42,7 @@ namespace AppPortal.ApiHost.Controllers
         // list new
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("getNews")]
-        public IActionResult ListNewsAsync(int? skip = 0, int? page = 1, int? take = 15, string keyword = "",
+        public IActionResult ListNewsAsync(int? skip = 0, int? page = 1, int? take = 15000, string keyword = "",
             int? categoryId = -1, int? status = -1, int? type = -1 , string username = "" ,string GroupId = "")
         {
             var query = _newsService.GetLstNewsPaging(out int rows, skip, take, keyword, categoryId, status, type , username , GroupId);

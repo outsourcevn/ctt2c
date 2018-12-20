@@ -28,6 +28,7 @@ namespace AppPortal.AdminSite.Services.Models.News
         public int stt { get; set; }
         public int doituong { get; set; }
         public int? Category_Id { get; set; }
+        public string MaPakn { get; set; }
     }
 
     public class LstItemNews

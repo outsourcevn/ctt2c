@@ -106,6 +106,9 @@ namespace AppPortal.AdminSite.Services.Extensions
             item.doituong = model.doituong;
             item.Thoigianxayra = model.Thoigianxayra;
             item.TenCaNhanToChuc = model.TenCaNhanToChuc;
+            item.MaPakn = model.MaPakn;
+            item.ngayxuly = model.ngayxuly;
+            item.thamquyenxuly = model.thamquyenxuly;
             return item;
         }
 
@@ -256,7 +259,8 @@ namespace AppPortal.AdminSite.Services.Extensions
                 IsPosition = (int)item.IsPosition,
                 IsType = (int)item.IsType,
                 IsView = (int)item.IsView,
-                fileUpload = item.fileUpload
+                fileUpload = item.fileUpload,
+                MaPakn = item.MaPakn
             };
         }
 

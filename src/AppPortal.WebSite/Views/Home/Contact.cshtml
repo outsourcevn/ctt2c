@@ -91,7 +91,7 @@
                                             <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc"> </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-sm-12" id="aui_3_4_0_1_495">
                                         <div class="form-group row">
                                             <select id="thanhpho" required class="col-sm-4">
@@ -160,7 +160,7 @@
                                     <br />
 
                                 </div>
-                                <div class="row"  style=" padding: 5px 0px 0px 20px; display: flex; ">
+                                <div class="row" style=" padding: 5px 0px 0px 20px; display: flex; ">
                                     <div class="form-item col-sm-12">
                                         <input type="text" style="width: 150px" class="form-control aui-text-placeholder" placeholder="Captcha" id="cpatchaTextBox" />
                                     </div>
@@ -217,6 +217,25 @@
     <!-- end content -->
 </div>
 <!-- right sidebar -->
+<button id="buttonModel" type="button" style="display:none" class="btn btn-primary" data-toggle="modal" data-target="#showMaPakn">
+    Launch demo modal
+</button>
+
+<div class="modal fade" id="showMaPakn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Thông báo</h1>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 14px;line-height: 20px">Góp ý, phản ánh mã số <span style="color:red" id="maPakn"></span> của anh/chị đã được gửi thành công. Anh/chị vui lòng lưu lại mã số để tra cứu kết quả giải quyết góp ý, phản ánh trên.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script src="~/js/home/Scripts.js" asp-append-version="true"></script>

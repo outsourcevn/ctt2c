@@ -28,6 +28,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppPortal.ApiHost", "src\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiver.Api.HttpClient", "src\Fiver.Api.HttpClient\Fiver.Api.HttpClient.csproj", "{101E2ABB-B242-4C46-A020-505D0E74A793}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPortal.WebAll", "src\AppPortal.WebAll\AppPortal.WebAll.csproj", "{0AA7BD54-5199-4FEB-8441-DEDDC2D9215F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{101E2ABB-B242-4C46-A020-505D0E74A793}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{101E2ABB-B242-4C46-A020-505D0E74A793}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{101E2ABB-B242-4C46-A020-505D0E74A793}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AA7BD54-5199-4FEB-8441-DEDDC2D9215F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AA7BD54-5199-4FEB-8441-DEDDC2D9215F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AA7BD54-5199-4FEB-8441-DEDDC2D9215F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AA7BD54-5199-4FEB-8441-DEDDC2D9215F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +90,7 @@ Global
 		{500B6A79-F573-4287-8D7D-0C18FFDA720E} = {D6F93E51-E49E-435C-AC72-6F94D2C05F88}
 		{D3763E6F-2A40-4F32-B92B-9442CC47A8EB} = {D6F93E51-E49E-435C-AC72-6F94D2C05F88}
 		{101E2ABB-B242-4C46-A020-505D0E74A793} = {D6F93E51-E49E-435C-AC72-6F94D2C05F88}
+		{0AA7BD54-5199-4FEB-8441-DEDDC2D9215F} = {D6F93E51-E49E-435C-AC72-6F94D2C05F88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {418A4B1E-3441-4251-B1F2-C232FF671E8E}

@@ -74,6 +74,17 @@
         width: 200px;
         display: block;
     }
+
+    .has-search .form-control-feedback {
+        right: initial;
+        left: 0;
+        color: #ccc;
+    }
+
+    .has-search .form-control {
+        padding-right: 12px;
+        padding-left: 34px;
+    }
 </style>
 <link rel="stylesheet" href="~/css/style.css">
 <!-- blueimp Gallery styles -->
@@ -123,11 +134,30 @@
                             <button type="button" class="btn btn-dark btn-flat" id="btn-xem-bao-cao-new"><i class="fa fa-plus"></i> Xem báo cáo</button>
                         </div>
                     </div>
-                    <div class="input-group mb-2 mr-sm-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    <div class="input-group mb-2 mr-sm-2 row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">
+                                    <span class="fa fa-search"></span>Tìm kiếm
+                                </label>
+                                <input id="txtName" type="text" placeholder="Nhập từ khóa cần tìm" class="form-control" />
+                            </div>
+                           
                         </div>
-                        <input id="txtName" type="text" placeholder="Nhập từ khóa cần tìm" class="form-control" />
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">
+                                    <span class="fa fa-filter"></span>Lọc theo trạng thái
+                                </label>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option selected value="-1">Lựa chọn bộ lọc</option>
+                                    <option value="5">Đã chuyển</option>
+                                    <option value="6">Đã xử lý</option>
+                                    <option value="3">Đã đăng tin</option>
+                                    <option value="9">Bị trả lại</option>
+                                </select>
+                            </div>
+                        </div>                        
                     </div>
                     <div id="dataGrid" class="mt-2"></div>
                 </div>

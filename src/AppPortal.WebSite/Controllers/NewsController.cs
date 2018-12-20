@@ -34,7 +34,23 @@ namespace AppPortal.WebSite.Controllers
             return View();
         }
 
+        public IActionResult vanbanquychuan()
+        {
+            
+            return View();
+        }
+
         public IActionResult detail()
+        {
+            return View();
+        }
+
+        public IActionResult Video()
+        {
+            return View();
+        }
+
+        public IActionResult Images()
         {
             return View();
         }

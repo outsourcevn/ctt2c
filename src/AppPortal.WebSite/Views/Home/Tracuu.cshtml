@@ -49,52 +49,141 @@
 
                                     <form class="form-horizontal" role="form" method="post" action="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_mvcPath=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;p_auth=xnYz6bfz">
                                         <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-3 control-label">Tên người gửi</label>
+                                            <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 10px;">Số PAKN</label>
+                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputEmail" placeholder="Nhập số PAKN" name="pakn" value=""> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 9px;">Tên người gửi</label>
                                             <div class="col-sm-9"> <input type="text" class="form-control" id="inputName" placeholder="Nhập tên công dân" name="tenNguoiGui" value=""> </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
-                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputEmail" placeholder="Nhập email" name="tenNguoiGui" value=""> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-3 control-label">Số điện thoại</label>
-                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputSdt" placeholder="Nhập số điện thoại" name="tenNguoiGui" value=""> </div>
+                                            <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 9px;">Thời gian công khai</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="thoigiancongkhai" id="thoigiancongkhai" required readonly>
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-sm-offset-3 col-sm-9"> <button type="button" onclick="getdata()" class="btn btn-danger"><i class="MR5 fa fa-search" aria-hidden="true"></i>Tìm kiếm</button> <button type="reset" class="btn btn-default">Nhập lại</button> </div>
                                         </div>
                                     </form>
+
                                 </div>
-                                <div id="lstGopy" class="row" style="padding: 10px;">
-                                    @*<div class="col-md-12">
-                                            <div class="thumbnail">
-                                                <div class="caption text-center row">
-                                                    <div class="col-md-2">
-                                                        <div class="position-relative">
-                                                            <img src="https://nguoidan.chinhphu.vn/apca-pakn-portlet/images/MediaObj_Placeholder.png" style="width:72px;height:72px;" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-10">
-                                                        <h4 class="thumbnail-label">Kiến nghị khắc phục ô nhiễm môi trường sông Đáy</h4>
-                                                        <p><i class="glyphicon glyphicon-user light-red lighter bigger-120"></i>&nbsp;Bà Nguyễn Thị Trang</p>
-                                                        <br />
-                                                        <time datetime="2013-01-21" style="float: left">
-                                                            22/10/2018 7:23:35 PM
-                                                        </time>
-                                                        <div class="thumbnail-description smaller">
-                                                            <p style="margin-top: 10px; float: left; font-size: 13px;">Rất nhiều người dân ở Chương Mỹ phản ánh, ô nhiễm môi trường sông Đáy rất nghiêm trọng, đề nghị thành phố sớm có giải pháp khắc phục để phục vụ đời sống, sản xuất của nhân dân.</p>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="caption card-footer text-center">
-                                                    <ul class="list-inline" style="height: 100px;"></ul>
+                                <div id="lstGopy">
+                                    <div class="MB20" style="font-size: 14px;">
+                                        <div class="media-object-default media-object-default1 boT">
+                                            <div class="media">
+                                                <div class="media-left"> <a href="#"><img class="media-object img-thumbnail img-circle" src="~/images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">
+                                                    <p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="#">trương ngọc thanh</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i>18/12/18</p> <h4 class="media-heading">
+                                                        <a href="#" class="tieu-de-pakn">Kiến nghị về việc: sai thông tin căn cước công dân</a>
+                                                    </h4>
+                                                    <p class="text-justify"><b>Nội dung kiến nghị:</b> Một tháng trước, tôi có xin cấp lại thẻ căn cước với lý do bị mất CMND. Tôi cư ngụ ở quận 8, công an quận 8 có hẹn tôi 11/4/2018 lên lấy căn cước mới. Nhưng thông tin giới tính sai lệch. Vấn đề này sơ xuất của cán bộ đánh máy, đánh thông tin sai lệch. Nhưng khi tôi có ý kiến thì cán bộ nữ tên Nguyễn...</p>
                                                 </div>
                                             </div>
-                                        </div>*@
+                                        </div>
+                                    </div>
+
+                                    <div class="MB20" style="font-size: 14px;">
+                                        <div class="media-object-default media-object-default1 boT">
+                                            <div class="media">
+                                                <div class="media-left"> <a href="#"><img class="media-object img-thumbnail img-circle" src="~/images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">
+                                                    <p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="#">trương ngọc thanh</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i>18/12/18</p> <h4 class="media-heading">
+                                                        <a href="#" class="tieu-de-pakn">Kiến nghị về việc: sai thông tin căn cước công dân</a>
+                                                    </h4>
+                                                    <p class="text-justify"><b>Nội dung kiến nghị:</b> Một tháng trước, tôi có xin cấp lại thẻ căn cước với lý do bị mất CMND. Tôi cư ngụ ở quận 8, công an quận 8 có hẹn tôi 11/4/2018 lên lấy căn cước mới. Nhưng thông tin giới tính sai lệch. Vấn đề này sơ xuất của cán bộ đánh máy, đánh thông tin sai lệch. Nhưng khi tôi có ý kiến thì cán bộ nữ tên Nguyễn...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="MB20" style="font-size: 14px;">
+                                        <div class="media-object-default media-object-default1 boT">
+                                            <div class="media">
+                                                <div class="media-left"> <a href="#"><img class="media-object img-thumbnail img-circle" src="~/images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">
+                                                    <p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="#">trương ngọc thanh</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i>18/12/18</p> <h4 class="media-heading">
+                                                        <a href="#" class="tieu-de-pakn">Kiến nghị về việc: sai thông tin căn cước công dân</a>
+                                                    </h4>
+                                                    <p class="text-justify"><b>Nội dung kiến nghị:</b> Một tháng trước, tôi có xin cấp lại thẻ căn cước với lý do bị mất CMND. Tôi cư ngụ ở quận 8, công an quận 8 có hẹn tôi 11/4/2018 lên lấy căn cước mới. Nhưng thông tin giới tính sai lệch. Vấn đề này sơ xuất của cán bộ đánh máy, đánh thông tin sai lệch. Nhưng khi tôi có ý kiến thì cán bộ nữ tên Nguyễn...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="MB20" style="font-size: 14px;">
+                                        <div class="media-object-default media-object-default1 boT">
+                                            <div class="media">
+                                                <div class="media-left"> <a href="#"><img class="media-object img-thumbnail img-circle" src="~/images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">
+                                                    <p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="#">trương ngọc thanh</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i>18/12/18</p> <h4 class="media-heading">
+                                                        <a href="#" class="tieu-de-pakn">Kiến nghị về việc: sai thông tin căn cước công dân</a>
+                                                    </h4>
+                                                    <p class="text-justify"><b>Nội dung kiến nghị:</b> Một tháng trước, tôi có xin cấp lại thẻ căn cước với lý do bị mất CMND. Tôi cư ngụ ở quận 8, công an quận 8 có hẹn tôi 11/4/2018 lên lấy căn cước mới. Nhưng thông tin giới tính sai lệch. Vấn đề này sơ xuất của cán bộ đánh máy, đánh thông tin sai lệch. Nhưng khi tôi có ý kiến thì cán bộ nữ tên Nguyễn...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="MB20" style="font-size: 14px;">
+                                        <div class="media-object-default media-object-default1 boT">
+                                            <div class="media">
+                                                <div class="media-left"> <a href="#"><img class="media-object img-thumbnail img-circle" src="~/images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">
+                                                    <p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="#">trương ngọc thanh</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i>18/12/18</p> <h4 class="media-heading">
+                                                        <a href="#" class="tieu-de-pakn">Kiến nghị về việc: sai thông tin căn cước công dân</a>
+                                                    </h4>
+                                                    <p class="text-justify"><b>Nội dung kiến nghị:</b> Một tháng trước, tôi có xin cấp lại thẻ căn cước với lý do bị mất CMND. Tôi cư ngụ ở quận 8, công an quận 8 có hẹn tôi 11/4/2018 lên lấy căn cước mới. Nhưng thông tin giới tính sai lệch. Vấn đề này sơ xuất của cán bộ đánh máy, đánh thông tin sai lệch. Nhưng khi tôi có ý kiến thì cán bộ nữ tên Nguyễn...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="MB20" style="font-size: 14px;">
+                                        <div class="media-object-default media-object-default1 boT">
+                                            <div class="media">
+                                                <div class="media-left"> <a href="#"><img class="media-object img-thumbnail img-circle" src="~/images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">
+                                                    <p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="#">trương ngọc thanh</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i>18/12/18</p> <h4 class="media-heading">
+                                                        <a href="#" class="tieu-de-pakn">Kiến nghị về việc: sai thông tin căn cước công dân</a>
+                                                    </h4>
+                                                    <p class="text-justify"><b>Nội dung kiến nghị:</b> Một tháng trước, tôi có xin cấp lại thẻ căn cước với lý do bị mất CMND. Tôi cư ngụ ở quận 8, công an quận 8 có hẹn tôi 11/4/2018 lên lấy căn cước mới. Nhưng thông tin giới tính sai lệch. Vấn đề này sơ xuất của cán bộ đánh máy, đánh thông tin sai lệch. Nhưng khi tôi có ý kiến thì cán bộ nữ tên Nguyễn...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="MB20" style="font-size: 14px;">
+                                        <div class="media-object-default media-object-default1 boT">
+                                            <div class="media">
+                                                <div class="media-left"> <a href="#"><img class="media-object img-thumbnail img-circle" src="~/images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">
+                                                    <p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="#">trương ngọc thanh</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i>18/12/18</p> <h4 class="media-heading">
+                                                        <a href="#" class="tieu-de-pakn">Kiến nghị về việc: sai thông tin căn cước công dân</a>
+                                                    </h4>
+                                                    <p class="text-justify"><b>Nội dung kiến nghị:</b> Một tháng trước, tôi có xin cấp lại thẻ căn cước với lý do bị mất CMND. Tôi cư ngụ ở quận 8, công an quận 8 có hẹn tôi 11/4/2018 lên lấy căn cước mới. Nhưng thông tin giới tính sai lệch. Vấn đề này sơ xuất của cán bộ đánh máy, đánh thông tin sai lệch. Nhưng khi tôi có ý kiến thì cán bộ nữ tên Nguyễn...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="page-control">
+                                    <nav class="text-right">
+                                        <ul class="pagination MT0" style="margin:0px;">
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=1&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai="><i class="fa fa-angle-double-left"></i></a></li>
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=2&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai="><i class="fa fa-angle-left"></i></a></li>
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=1&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai=">1</a></li>
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=2&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai=">2</a></li>
+                                            <li class="active"><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=3&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai=">3</a></li>
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=4&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai=">4</a></li>
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=5&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai=">5</a></li>
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=6&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai=">6</a></li>
+                                            <li><a href="#">...</a></li>
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=106&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai=">106</a></li>
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=4&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai="><i class="fa fa-angle-right"></i></a></li>
+                                            <li><a href="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_jspPage=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;_tracuupaknaction_WAR_apcapaknportlet_cur=106&amp;_tracuupaknaction_WAR_apcapaknportlet_soPakn=&amp;_tracuupaknaction_WAR_apcapaknportlet_tenNguoiGui=&amp;_tracuupaknaction_WAR_apcapaknportlet_thoiGianCongKhai="><i class="fa fa-angle-double-right"></i></a></li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
@@ -140,34 +229,45 @@
 @section Scripts {
     <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
     <script src="~/js/date.format.js"></script>
-    <script>
-        $(document).ready(function () {
-            getdata();
-        });
+    <script language="javascript" src="https://momentjs.com/downloads/moment.js"></script>
+    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 
-        function getdata() {
-            $.ajax({
-                url: appConfig.apiHostUrl + "/api/news/getNewsAno",
-                data: {
-                    name: $("#inputName").val(),
-                    email: $("#inputEmail").val(),
-                    sdt: $("#inputSdt").val(),
-                },
-                success: function (result) {
-                    var dataContainer = $("#lstGopy");
-                    $('#lstGopy').pagination({
-                        dataSource: result,
-                        pageSize: 5,
-                        showGoInput: true,
-                        showGoButton: true,
-                        callback: function (data, pagination) {
-                            var html = templateData(data);
-                            dataContainer.html(html);
-                        }
-                    })
-                }
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#thoigiancongkhai').datetimepicker({
+                format: 'L',
+                ignoreReadonly: true
             });
-        }
+        });
+    </script>
+    <script>
+        //$(document).ready(function () {
+        //    getdata();
+        //});
+
+        //function getdata() {
+        //    $.ajax({
+        //        url: appConfig.apiHostUrl + "/api/news/getNewsAno",
+        //        data: {
+        //            name: $("#inputName").val(),
+        //            email: $("#inputEmail").val(),
+        //            sdt: $("#inputSdt").val(),
+        //        },
+        //        success: function (result) {
+        //            var dataContainer = $("#lstGopy");
+        //            $('#lstGopy').pagination({
+        //                dataSource: result,
+        //                pageSize: 5,
+        //                showGoInput: true,
+        //                showGoButton: true,
+        //                callback: function (data, pagination) {
+        //                    var html = templateData(data);
+        //                    //dataContainer.html(html);
+        //                }
+        //            })
+        //        }
+        //    });
+        //}
         function templateData(data) {
             var html = '';
             for (var i = 0; i < data.length; i++) {

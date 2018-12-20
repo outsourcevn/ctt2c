@@ -42,5 +42,7 @@ namespace AppPortal.ApiHost.ViewModels.News
         public int doituong { get; set; }
         [JsonProperty("category_id")]
         public int? Category_Id { get; set; }
+        [JsonProperty("ma_pakn")]
+        public string MaPakn { get; set; }
     }
 }

@@ -1,17 +1,16 @@
 ﻿var currentData = [];
 var jwtToken = getCookie("ACCESS-TOKEN");
 var grid = $("#dataGrid").data("kendoGrid");
+var currentStatus = -1;
 (function ($) {
     'use strict';
     $(document).ready(function () {
         var jwtToken = getCookie("ACCESS-TOKEN");
 
         var dataSource = new kendo.data.DataSource({
-            serverPaging: true,
-            serverFiltering: true,
             batch: true,
             page: ngNews.pageNumber,
-            pageSize: ngNews.pageSize,
+            pageSize: 10,
             schema: {
                 data: function (result) {
                     console.log(result);
@@ -36,7 +35,7 @@ var grid = $("#dataGrid").data("kendoGrid");
                     data: {
                         keyword: ngNews.keyword,
                         categoryId: ngNews.categoryId,
-                        status: ngNews.status,
+                        status: currentStatus,
                         type: ngNews.type,
                         username: username,
                         GroupId: GroupId
@@ -64,7 +63,13 @@ var grid = $("#dataGrid").data("kendoGrid");
             { selectable: true, hidden: true },
             {
                 field: "stt",
-                title: "STT"
+                title: "STT",
+                width: "10px"
+            },
+            {
+                field: "ma_pakn",
+                title: "Mã PAKN",
+                width: "50px"
             },
             {
                 field: "name",
@@ -89,16 +94,16 @@ var grid = $("#dataGrid").data("kendoGrid");
 
         if (GroupId == "ttdl") {
             var objVPTC = {
-                field: "is_type", title: "Phân loại", width: "150px",
-                template: "#=templatePhanloai(is_type , id)#"
+                field: "is_type", title: "Phân loại/ Đối tượng", width: "150px",
+                template: "#=templatePhanloai(is_type , id , doituong)#"
             };
             columnsData.push(objVPTC);
 
-            var objVPTC2 = {
-                field: "doituong", title: "Đối tượng", width: "90px",
-                template: "#=templateDoituong(doituong , id)#"
-            };
-            columnsData.push(objVPTC2);
+            //var objVPTC2 = {
+            //    field: "doituong", title: "Đối tượng", width: "90px",
+            //    template: "#=templateDoituong(doituong , id)#"
+            //};
+            //columnsData.push(objVPTC2);
         }
 
         if (GroupId == "ldtcmt") {
@@ -144,6 +149,16 @@ var grid = $("#dataGrid").data("kendoGrid");
                     keyword: keyword
                 });
             }
+        });
+
+        $('#exampleFormControlSelect1').change(function (e) {
+            var grid = $('#dataGrid').data('kendoGrid');
+            var filter = $(this).val();
+            currentStatus = filter;
+            grid.dataSource.page(1);
+            grid.dataSource.read({
+                status: currentStatus
+            });
         });
 
         $("#dataGrid tbody").on("click", "tr", function (e) {
@@ -445,8 +460,8 @@ function templateAction(is_status, news_id) {
     var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
     // label-success label-danger label-info label-warning
     if (GroupId === "ttdl") {
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Phân công</button>';
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công khai</button>';
+        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Chuyển</button>';
+        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Đăng tin</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
         name = name + editbutton;
     }
@@ -661,7 +676,27 @@ function phanloaiNews(args, id) {
     )
 }
 
-function templatePhanloai(istype, id) {
+function templateDoituong(istype, id) {
+    var html = '<div class="form-group">';
+    html += '<select class="form-control" onchange="phanloaiDoituong(this,' + id + ')" style="font-size: 12px; color: blue;height: 15px;width: 95px;" id="sel1">';
+    if (istype == "0") {
+        html += '<option value="0" selected>Người dân</option>';
+    } else {
+        html += '<option value="0">Người dân</option>';
+    }
+
+    if (istype == "1") {
+        html += '<option value="1" selected>Doanh nghiệp</option>';
+    } else {
+        html += '<option value="1">Doanh nghiệp</option>';
+    }
+
+    html += '    </select>';
+    return html;
+}
+
+function templatePhanloai(istype, id, doituong) {
+
     var html = '<div class="form-group">';
     html += '<select class="form-control" onchange="phanloaiNews(this,'+id+')" style="font-size: 12px; color: blue;height: 15px;width: 130px;" id="sel1">';
 
@@ -703,26 +738,10 @@ function templatePhanloai(istype, id) {
     }
   
     html += '    </select>';
-    return html;
-}
 
-function templateDoituong(istype, id) {
-    var html = '<div class="form-group">';
-    html += '<select class="form-control" onchange="phanloaiDoituong(this,' + id + ')" style="font-size: 12px; color: blue;height: 15px;width: 95px;" id="sel1">';
-    if (istype == "0") {
-        html += '<option value="0" selected>Người dân</option>';
-    } else {
-        html += '<option value="0">Người dân</option>';
-    }
+    var template = templateDoituong(doituong, id);
 
-    if (istype == "1") {
-        html += '<option value="1" selected>Doanh nghiệp</option>';
-    } else {
-        html += '<option value="1">Doanh nghiệp</option>';
-    }
-    
-    html += '    </select>';
-    return html;
+    return 'Đối tượng: <br>' + html + '<br>Phân loại: <br>' + template;
 }
 
 function templatePhanloai2(istype) {
@@ -788,17 +807,17 @@ function templateSpecial(status , news_id) {
         case 0: name = '<label class="label label-warning">Đang chờ xử lý</label>'; break;
         case 1: name = '<label class="label label-danger label-primary">Đã duyệt</label>'; break;
         case 2: name = '<label class="label label-danger">Tin nháp</label>'; break;
-        case 3: name = '<label class="label label-success">Đã xác nhận đăng tin</label>'; break;
+        case 3: name = '<label class="label label-success">Đã đăng tin</label>'; break;
         case 4: name = '<label class="label label-danger">Đã xóa</label>'; break;
         case 5:
-            name = '<label class="label label-danger">Đã phân công</label> <br> <span id="phancong' + news_id + '"><span>';
+            name = '<label class="label label-danger">Đã chuyển</label> <br> <span id="phancong' + news_id + '"><span>';
             
             getDataPhanCong(news_id , GroupId);
             break;
-        case 6: name = '<label class="label label-danger">Đã báo cáo</label>'; break;
+        case 6: name = '<label class="label label-danger">Đã xử lý</label>'; break;
         case 7: name = '<label class="label label-danger">Tiếp nhận</label>'; break;
         case 8: name = '<label class="label label-danger">Đã xác minh</label>'; break;
-        case 9: name = '<label class="label label-danger">Từ chối</label>'; break;
+        case 9: name = '<label class="label label-danger">Bị trả lại</label>'; break;
         case 10: name = '<label class="label label-danger">Báo cáo lãnh đạo</label>'; break;
         default: name = '<label class="label label-warning">Đang chờ xử lý</label>'; break;
     }
