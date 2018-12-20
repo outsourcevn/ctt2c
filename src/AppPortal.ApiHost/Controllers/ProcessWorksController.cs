@@ -326,7 +326,7 @@ namespace AppPortal.ApiHost.Controllers
 
         [AllowAnonymous]
         [HttpPost("CreateOrUpdateAno")]
-        public IActionResult CreateOrUpdateTEST(int? Id, [FromBody] NewsViewModel model)
+        public async Task<IActionResult> CreateOrUpdateTESTAsync(int? Id, [FromBody] NewsViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -345,6 +345,7 @@ namespace AppPortal.ApiHost.Controllers
                 entityModel.IsType = (int?)IsType.topic;
                 entityModel.MaPakn = currentDatetime.ToString("yyyyMMddHHmmssffff");
                 var newsData = _newsService.AddOrUpdateModel(entityModel);
+
 
                 //logs 
                 var logs = new NewsLog();
@@ -371,6 +372,15 @@ namespace AppPortal.ApiHost.Controllers
                 logs3.GroupNameTo = "anonymous";
                 logs3.OnCreated = DateTime.Now;
                 _newLog.AddOrUpdate(logs3);
+
+                if (!string.IsNullOrEmpty(newsData.UserEmail))
+                {
+                    string subject = "Hệ thống thông tin tiếp nhận góp ý, phản ánh người dân";
+                    string body = "Kính gửi Ông/Bà: ABC<div>Nội dung: Góp ý, phản ánh mã số "+ newsData.MaPakn + " của Ông/Bà đã được văn phòng chính phủ tiếp nhận và sẽ trả lời theo quy định. Ông bà vui lòng lưu lại mã số này để theo dõi và tra cứu kết quả trả lời góp ý, phản ánh của mình.</div><div><br></div><div>Lưu ý:</div><div>- Mọi thông tin trong email này cần được bảo mật.</div><div>- Xin vui lòng không reply lại email này.</div><div>Trân trọng.</div><div>Hệ thống thông tin tiếp nhận, trả lời góp ý, phản ánh người dân.</div><div>Văn phòng chính phủ.</div>";
+                    await _emailSender.SendEmailAsync(newsData.UserEmail, subject, body , String.Empty ,
+                    apiSettings.EmailConfig.Email,
+                    apiSettings.EmailConfig.Password);
+                }
                 return Ok(new { MaPakn = newsData.MaPakn, email = newsData.UserEmail });
             }
             catch (System.Exception ex)
