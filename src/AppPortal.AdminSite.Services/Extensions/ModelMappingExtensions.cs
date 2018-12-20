@@ -259,7 +259,8 @@ namespace AppPortal.AdminSite.Services.Extensions
                 IsPosition = (int)item.IsPosition,
                 IsType = (int)item.IsType,
                 IsView = (int)item.IsView,
-                fileUpload = item.fileUpload
+                fileUpload = item.fileUpload,
+                MaPakn = item.MaPakn
             };
         }
 
