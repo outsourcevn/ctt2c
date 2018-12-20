@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewData["Title"] = "Văn bản chính sách";
+}
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link href="~/css/news.css" rel="stylesheet" />
+<style>
+    .firstNewsetItem {
+        display: grid !important;
+        font-size: 14px !important;
+        line-height: 30px !important;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08);
+        padding: 12px !important;
+        margin-top: 10px !important;
+    }
+</style>
+
+<style>
+    h1 {
+        font-size: 24px;
+        padding: 10px 10px 10px 0px;
+    }
+
+    #right_sidebar {
+        display: none !important;
+    }
+
+    .embed-container {
+        position: relative;
+        padding-bottom: 80%;
+        height: 0;
+        max-width: 100%;
+    }
+
+        .embed-container iframe, .embed-container object, .embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    small {
+        position: absolute;
+        z-index: 40;
+        bottom: 0;
+        margin-bottom: -15px;
+    }
+</style>
+<link href="~/css/news.css" rel="stylesheet" />
+
+<div class="container" style="margin-top:20px;">
+    <div class="result">
+        <table class="grid-vb" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                <tr class="vb-header"><td width="25px" align="center"><h4 style="font-weight:bold;">STT</h4></td><td width="110px" align="center"><h4 style="font-weight:bold;">Ký hiệu</h4></td><td width="400px" align="center"><h4 style="font-weight:bold;padding-left:4px;">Tên tiêu chuẩn</h4></td><td width="80px" align="center"><h4 style="font-weight:bold;">Ngày ban hành</h4></td><td width="110px" align="center"><h4 style="font-weight:bold;">Loại tiêu chuẩn</h4></td><td width="120px" align="center"><h4 style="font-weight:bold;">Cơ quan ban hành</h4></td></tr>
+                <tr class="vb-item1" style="background-color:#EDF2F6;">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">1</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 61-MT:2016/BTNMT</span><a target="_blank" title="Quy chuẩn kỹ thuật quốc gia về lò đốt chất thải rắn sinh hoạt" href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=825"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy chuẩn kỹ thuật quốc gia về lò đốt chất thải rắn sinh hoạt">Quy chuẩn kỹ thuật quốc gia về lò đốt chất thải rắn sinh hoạt </span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            10/03/2016&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Chất thải rắn</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+                <tr class="vb-item1">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">2</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 60-MT:2015/BTNMT</span><a target="_blank" title="Quy chuẩn kỹ thuật quốc gia về nước thải sản xuất cồn nhiên liệu" href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=823"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy chuẩn kỹ thuật quốc gia về nước thải sản xuất cồn nhiên liệu">Quy chuẩn kỹ thuật quốc gia về nước thải sản xuất cồn nhiên liệu </span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            31/12/2015&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Nước thải - Sản xuất cồn nhiên liệu</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+                <tr class="vb-item1" style="background-color:#EDF2F6;">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">3</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 11-MT:2015/BTNMT </span><a target="_blank" title="Quy chuẩn kỹ thuật quốc gia về nước thải chế biến thủy sản" href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=824"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy chuẩn kỹ thuật quốc gia về nước thải chế biến thủy sản">Quy chuẩn kỹ thuật quốc gia về nước thải chế biến thủy sản </span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            31/12/2015&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Nước thải chế biến thủy sản</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+                <tr class="vb-item1">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">4</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 09-MT:2015/BTNMT</span><a target="_blank" title="Quy chuẩn kỹ thuật quốc gia về chất lượng nước dưới đất" href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=819"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy chuẩn kỹ thuật quốc gia về chất lượng nước dưới đất">Quy chuẩn kỹ thuật quốc gia về chất lượng nước dưới đất </span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            21/12/2015&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Chất lượng nước</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+                <tr class="vb-item1" style="background-color:#EDF2F6;">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">5</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 08-MT:2015/BTNMT</span><a target="_blank" title="Quy chuẩn kỹ thuật quốc gia về chất lượng nước mặt" href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=820"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy chuẩn kỹ thuật quốc gia về chất lượng nước mặt">Quy chuẩn kỹ thuật quốc gia về chất lượng nước mặt </span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            21/12/2015&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Chất lượng nước</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+                <tr class="vb-item1">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">6</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 03-MT:2015/BTNMT</span><a target="_blank" title="Quy chuẩn kỹ thuật quốc gia về giới hạn cho phép của một số kim loại nặng trong đất" href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=821"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy chuẩn kỹ thuật quốc gia về giới hạn cho phép của một số kim loại nặng trong đất">Quy chuẩn kỹ thuật quốc gia về giới hạn cho phép của một số kim ...</span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            21/12/2015&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Chất lượng đất - Kim loại</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+                <tr class="vb-item1" style="background-color:#EDF2F6;">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">7</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 10-MT:2015/BTNMT </span><a target="_blank" title="Quy chuẩn kỹ thuật quốc gia về chất lượng nước biển " href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=822"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy chuẩn kỹ thuật quốc gia về chất lượng nước biển ">Quy chuẩn kỹ thuật quốc gia về chất lượng nước biển </span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            21/12/2015&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Chất lượng nước biển</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+                <tr class="vb-item1">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">8</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 57:2014/BTMT</span><a target="_blank" title="Tiêu chuẩn kỹ thuật quốc gia về phương pháp thăm dò điện" href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=816"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Tiêu chuẩn kỹ thuật quốc gia về phương pháp thăm dò điện">Tiêu chuẩn kỹ thuật quốc gia về phương pháp thăm dò điện </span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            10/06/2014&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Tiêu chuẩn kỹ thuật quốc gia</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+                <tr class="vb-item1" style="background-color:#EDF2F6;">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">9</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 58:2014/BTMT</span><a target="_blank" title="Tiêu chuẩn kỹ thuật quốc gia về phương pháp thăm dò từ mặt đất" href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=817"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Tiêu chuẩn kỹ thuật quốc gia về phương pháp thăm dò từ mặt đất">Tiêu chuẩn kỹ thuật quốc gia về phương pháp thăm dò từ mặt đất </span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            10/06/2014&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Tiêu chuẩn kỹ thuật quốc gia</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+                <tr class="vb-item1">
+                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">10</span></td>
+                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">QCVN 59:2014/BTMT</span><a target="_blank" title="Tiêu chuẩn kỹ thuật quốc gia về phương pháp thăm dò phóng xạ" href="http://cem.gov.vn/DesktopModules/eKGIS_CMS/TC/download.aspx?Id=818"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Tiêu chuẩn kỹ thuật quốc gia về phương pháp thăm dò phóng xạ">Tiêu chuẩn kỹ thuật quốc gia về phương pháp thăm dò phóng xạ </span></td>
+                    <td class="gbt-row-col-doc-4" align="center">
+                        <span class="col-doc">
+                            10/06/2014&nbsp;&nbsp;
+                        </span>
+                    </td>
+                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Tiêu chuẩn kỹ thuật quốc gia</span></td>
+                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="mod_listnews_paging">
+            <div class="paging_list">
+                <ul class="paging_list_ul">
+                    <li>
+                        <a href="vanban_vb.aspx?&amp;pg=1">
+                            Đầu
+                        </a>
+                    </li>
+                    <li><a class="paging_list_current" href="vanban_vb.aspx?&amp;pg=1">1</a></li>
+                    <li><a href="vanban_vb.aspx?&amp;pg=2">2</a></li>
+                    <li><a href="vanban_vb.aspx?&amp;pg=3">3</a></li>
+                    <li><a href="vanban_vb.aspx?&amp;pg=4">4</a></li>
+                    <li><a href="vanban_vb.aspx?&amp;pg=5">5</a></li>
+                    <li>
+                        <a href="vanban_vb.aspx?&amp;pg=2">
+                            &gt;&gt;
+                        </a>
+                    </li>
+                    <li>
+                        <a href="vanban_vb.aspx?&amp;pg=306">
+                            Cuối
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+   
+    <script>
+        
+    </script>
+}
