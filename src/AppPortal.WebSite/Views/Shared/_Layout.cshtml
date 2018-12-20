@@ -5,12 +5,16 @@
     <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!---*** End: JQuery 3.3.1 version. ***--->
+    <!---*** Start: Bootstrap 3.3.7 version files. ***--->
+    <script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
-    <link href="https://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.lfrs.sl/alloyui.com/combo/combo.php?../3.0.1/widget-base/assets/skins/sam/widget-base.css&../3.0.1/cssgrids/cssgrids-min.css&../3.0.1/calendar-base/assets/skins/sam/calendar-base.css&../3.0.1/calendarnavigator/assets/skins/sam/calendarnavigator.css&../3.0.1/calendar/assets/skins/sam/calendar.css&../3.0.1/cssbutton/cssbutton-min.css&../3.0.1/widget-modality/assets/skins/sam/widget-modality.css&../3.0.1/widget-stack/assets/skins/sam/widget-stack.css&../3.0.1/aui-button-core/assets/skins/sam/aui-button-core.css&../3.0.1/aui-popover/assets/skins/sam/aui-popover.css&../3.0.1/aui-datepicker/assets/skins/sam/aui-datepicker.css">
+    <!---*** End: Bootstrap 3.3.7 version files. ***--->
 
     <environment include="Development">
+
         <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
         <link href="~/css/common.css" rel="stylesheet" media="all" />
         <link href="~/css/flexslider.css" rel="stylesheet" media="all" />
@@ -34,10 +38,17 @@
 
     <style>
     </style>
+
     @RenderSection("Styles", required: false)
     <!--[if lt IE 9]>
     <script src="js/html5.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="~/css/tracuu.css">
+    <link rel="stylesheet" href="~/css/vanban.css">
+    <link rel="stylesheet" href="~/css/cms_vanban.css">
+   
 </head>
 <body class="right_sidebar blogs green">
     <!--[if lte IE 8]><div id="ie_message"><div class="wrapper"><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="images/banner_ie.png" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/></a></div></div><![endif]-->
@@ -102,7 +113,6 @@
 
     </environment>
 
-    <script src="https://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
     <script>
         const appConfig = {};
         appConfig.apiCdnUrl = "http://cdn.eportal.today";
