@@ -116,11 +116,6 @@ var newlogStatus = -1;
             };
             columnsData.push(objVPTC);
 
-            //var objVPTC2 = {
-            //    field: "doituong", title: "Đối tượng", width: "90px",
-            //    template: "#=templateDoituong(doituong , id)#"
-            //};
-            //columnsData.push(objVPTC2);
         }
 
         if (GroupId == "ldtcmt") {
