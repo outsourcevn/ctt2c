@@ -2,10 +2,19 @@
 var jwtToken = getCookie("ACCESS-TOKEN");
 var grid = $("#dataGrid").data("kendoGrid");
 var currentStatus = -1;
+var newlogStatus = -1;
 (function ($) {
     'use strict';
     $(document).ready(function () {
         var jwtToken = getCookie("ACCESS-TOKEN");
+
+        if (GroupId == "dvct") {
+            $("#exampleFormControlSelect1").hide();
+            $("#exampleFormControlSelect2").show();
+        } else {
+            $("#exampleFormControlSelect1").show();
+            $("#exampleFormControlSelect2").hide();
+        }
 
         var dataSource = new kendo.data.DataSource({
             batch: true,
@@ -36,6 +45,7 @@ var currentStatus = -1;
                         keyword: ngNews.keyword,
                         categoryId: ngNews.categoryId,
                         status: currentStatus,
+                        newlogStatus: newlogStatus,
                         type: ngNews.type,
                         username: username,
                         GroupId: GroupId
@@ -69,7 +79,7 @@ var currentStatus = -1;
             {
                 field: "ma_pakn",
                 title: "Mã PAKN",
-                width: "50px"
+                width: "40px"
             },
             {
                 field: "name",
@@ -90,6 +100,13 @@ var currentStatus = -1;
             };
 
             columnsData.push(objDVCT2);
+
+            var objDVCT3 = {
+                field: "news_log.TypeStatus", title: "Trạng thái", width: "200px",
+                template: "#=templatePhanloai3(news_log.TypeStatus , id)#"
+            };
+
+            columnsData.push(objDVCT3);
         }
 
         if (GroupId == "ttdl") {
@@ -115,10 +132,12 @@ var currentStatus = -1;
             columnsData.push(objDVCT6);
         }
 
-        columnsData.push({
-            field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDate(on_created)#", width: "90px"
-        });
-
+        if (GroupId == "") {
+            columnsData.push({
+                field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDate(on_created)#", width: "90px"
+            });
+        }
+        
         columnsData.push({
             field: "id", title: "Hành động", width: "100px",
             template: "#=templateAction(is_status , id)#"
@@ -161,6 +180,15 @@ var currentStatus = -1;
             });
         });
 
+        $('#exampleFormControlSelect2').change(function (e) {
+            var grid = $('#dataGrid').data('kendoGrid');
+            var filter = $(this).val();
+            newlogStatus = filter;
+            grid.dataSource.page(1);
+            grid.dataSource.read({
+                newlogStatus: newlogStatus
+            });
+        });
         $("#dataGrid tbody").on("click", "tr", function (e) {
 
             var rowElement = this;
@@ -750,6 +778,16 @@ function templatePhanloai2(istype) {
         case 6: html = ' <span class="label label-success">Ô nhiễm môi trường</span>'; break;
         case 7: html = ' <span class="label label-success">Cơ chế, chính sách, thủ tục hành chính</span>'; break;
         case 8: html = ' <span class="label label-success">Giải pháp, sáng kiến bảo vệ môi trường</span>'; break;
+    }
+
+    return html;
+}
+
+function templatePhanloai3(istype, id) {
+    var html = '';
+    switch (istype) {
+        case 5: html = ' <span class="label label-success">Hoàn thành xử lý</span>'; break;
+        case 6: html = ' <span class="label label-success">Mới tiếp nhận</span>'; break;
     }
 
     return html;

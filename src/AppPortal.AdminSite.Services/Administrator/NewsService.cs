@@ -737,7 +737,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         }
 
         public IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15000, string keyword = "",
-            int? categoryId = -1, int? status = -1, int? type = -1 , string username = "", string GroupId = "")
+            int? categoryId = -1, int? status = -1, int? type = -1 , string username = "", string GroupId = "", int? newlogStatus = -1)
         {
             //var query = GetTables().Where(x => x.IsType == IsType.noType && x.IsType != IsType.topic);
             var query = GetTables();
@@ -786,7 +786,7 @@ namespace AppPortal.AdminSite.Services.Administrator
 
             query = query.OrderByDescending(x => x.OnUpdated);
 
-            var dataRetun =  query.Select(x => new ListItemNewsModel
+            var query2 = query.GroupJoin(_newLog.Table, x => x.Id, b => b.NewsId, (x, b) => new ListItemNewsModelJoin
             {
                 Id = x.Id,
                 Name = x.Name ?? null,
@@ -804,7 +804,30 @@ namespace AppPortal.AdminSite.Services.Administrator
                 fileUpload = x.fileUpload,
                 IsType = x.IsType,
                 doituong = x.doituong,
-                MaPakn = x.MaPakn
+                MaPakn = x.MaPakn,
+                newsLog = b.Where(z => z.UserName == username).FirstOrDefault()
+            });
+            if (newlogStatus >= 0) query2 = query2.Where(z => z.newsLog.TypeStatus == (IsTypeStatus)newlogStatus);
+            var dataRetun = query2.Select(x => new ListItemNewsModel
+            {
+                Id = x.Id,
+                Name = x.Name ?? null,
+                Image = x.Image ?? null,
+                Sename = x.Sename ?? null,
+                Abstract = x.Abstract ?? null,
+                Content = x.Content ?? null,
+                IsShow = x.IsShow,
+                OnCreated = x.OnCreated,
+                OnDeleted = x.OnDeleted,
+                OnUpdated = x.OnUpdated,
+                OnPublished = x.OnPublished,
+                status = x.status,
+                Note = x.Note,
+                fileUpload = x.fileUpload,
+                IsType = x.IsType,
+                doituong = x.doituong,
+                MaPakn = x.MaPakn,
+                newsLog = x.newsLog
             }).ToList();
             var index = skip + 1;
             var dataNews = new List<ListItemNewsModel>();

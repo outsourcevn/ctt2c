@@ -35,7 +35,9 @@ namespace AppPortal.Core.Entities
         is_report,
         is_report_end,
         is_phancong,
-        is_chuyencongvan
+        is_chuyencongvan,
+        hoanthanhxuly,
+        moitiepnhan
     }
 
     public class FileUpload

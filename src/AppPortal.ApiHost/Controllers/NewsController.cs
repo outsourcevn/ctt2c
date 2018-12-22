@@ -43,9 +43,10 @@ namespace AppPortal.ApiHost.Controllers
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("getNews")]
         public IActionResult ListNewsAsync(int? skip = 0, int? page = 1, int? take = 15000, string keyword = "",
-            int? categoryId = -1, int? status = -1, int? type = -1 , string username = "" ,string GroupId = "")
+            int? categoryId = -1, int? status = -1, int? type = -1 , string username = "" ,string GroupId = "",
+            int? newlogStatus = -1)
         {
-            var query = _newsService.GetLstNewsPaging(out int rows, skip, take, keyword, categoryId, status, type , username , GroupId);
+            var query = _newsService.GetLstNewsPaging(out int rows, skip, take, keyword, categoryId, status, type , username , GroupId, newlogStatus);
             var vm = query.Select(n => Mapper.Map<ListItemNewsModel, ListItemNewsViewModel>(n));
             return ResponseInterceptor(vm, rows, new Paging()
             {
@@ -512,15 +513,8 @@ namespace AppPortal.ApiHost.Controllers
                                     {
                                         logs.GroupNameFrom = "ttdl";
                                         logs.GroupNameTo = "dvct";
-                                        logs.TypeStatus = IsTypeStatus.is_phancong;
-                                        logs.DetailTypeStatus = "Phân công";
+                                        logs.TypeStatus = IsTypeStatus.moitiepnhan;
                                     }
-                                    //else if (newView.type == 4)
-                                    //{
-                                    //    logs.GroupNameFrom = "dvct";
-                                    //    logs.TypeStatus = IsTypeStatus.is_chuyencongvan;
-                                    //    logs.DetailTypeStatus = "Chuyển công văn";
-                                    //}
 
                                     //logs.Note = note;
                                     logs.OnCreated = DateTime.Now;

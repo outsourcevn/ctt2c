@@ -29,6 +29,37 @@ namespace AppPortal.AdminSite.Services.Models.News
         public int doituong { get; set; }
         public int? Category_Id { get; set; }
         public string MaPakn { get; set; }
+
+        public NewsLog newsLog { get; set; }
+    }
+
+    public class ListItemNewsModelJoin
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Image { get; set; }
+        public string Sename { get; set; }
+
+        public string Abstract { get; set; }
+        public string Content { get; set; }
+        public string fileUpload { get; set; }
+        public IsType IsType { get; set; }
+        public bool? IsShow { get; set; }
+
+        public DateTime? OnCreated { get; set; }
+        public DateTime? OnUpdated { get; set; }
+        public DateTime? OnDeleted { get; set; }
+        public DateTime? OnPublished { get; set; }
+
+        public IsStatus status { get; set; }
+
+        public string Note { get; set; }
+        public int stt { get; set; }
+        public int doituong { get; set; }
+        public int? Category_Id { get; set; }
+        public string MaPakn { get; set; }
+
+        public NewsLog newsLog { get; set; }
     }
 
     public class LstItemNews

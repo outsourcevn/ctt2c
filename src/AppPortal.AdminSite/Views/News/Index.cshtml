@@ -142,22 +142,28 @@
                                 </label>
                                 <input id="txtName" type="text" placeholder="Nhập từ khóa cần tìm" class="form-control" />
                             </div>
-                           
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">
                                     <span class="fa fa-filter"></span>Lọc theo trạng thái
                                 </label>
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <select style="display: none;" class="form-control" id="exampleFormControlSelect1">
                                     <option selected value="-1">Lựa chọn bộ lọc</option>
                                     <option value="5">Đã chuyển</option>
                                     <option value="6">Đã xử lý</option>
                                     <option value="3">Đã đăng tin</option>
                                     <option value="9">Bị trả lại</option>
                                 </select>
+
+                                <select style="display: none;" class="form-control" id="exampleFormControlSelect2">
+                                    <option selected value="-1">Lựa chọn bộ lọc</option>
+                                    <option value="5">Hoàn thành xử lý</option>
+                                    <option value="6">Mới tiếp nhận</option>
+                                </select>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div id="dataGrid" class="mt-2"></div>
                 </div>
@@ -229,9 +235,9 @@
                                     <input type="file" name="files" multiple>
                                 </span>
                                 @*<button type="submit" class="btn btn-primary start">
-                                    <i class="glyphicon glyphicon-upload"></i>
-                                    <span>Bắt đầu upload</span>
-                                </button>*@
+                                        <i class="glyphicon glyphicon-upload"></i>
+                                        <span>Bắt đầu upload</span>
+                                    </button>*@
                                 <!-- The global file processing state -->
                                 <span class="fileupload-process"></span>
                             </div>
@@ -309,9 +315,9 @@
                                     <input type="file" name="files" multiple>
                                 </span>
                                 @*<button type="submit" class="btn btn-primary start">
-                                    <i class="glyphicon glyphicon-upload"></i>
-                                    <span>Bắt đầu upload</span>
-                                </button>*@
+                                        <i class="glyphicon glyphicon-upload"></i>
+                                        <span>Bắt đầu upload</span>
+                                    </button>*@
                                 @*<button type="reset" class="btn btn-warning cancel">
                                         <i class="glyphicon glyphicon-ban-circle"></i>
                                         <span>Cancel upload</span>
@@ -376,9 +382,9 @@
                                     <input type="file" name="files" multiple>
                                 </span>
                                 @*<button type="submit" class="btn btn-primary start">
-                                    <i class="glyphicon glyphicon-upload"></i>
-                                    <span>Bắt đầu upload</span>
-                                </button>*@
+                                        <i class="glyphicon glyphicon-upload"></i>
+                                        <span>Bắt đầu upload</span>
+                                    </button>*@
                                 @*<button type="reset" class="btn btn-warning cancel">
                                         <i class="glyphicon glyphicon-ban-circle"></i>
                                         <span>Cancel upload</span>
@@ -511,9 +517,9 @@
                                     <input type="file" name="files" multiple>
                                 </span>
                                 @*<button type="submit" class="btn btn-primary start">
-                                    <i class="glyphicon glyphicon-upload"></i>
-                                    <span>Bắt đầu upload</span>
-                                </button>*@
+                                        <i class="glyphicon glyphicon-upload"></i>
+                                        <span>Bắt đầu upload</span>
+                                    </button>*@
                                 <!-- The global file processing state -->
                                 <span class="fileupload-process"></span>
                             </div>
