@@ -78,7 +78,7 @@ namespace AppPortal.ApiHost.Controllers
         [HttpPost("PostReport")]
         public NewsLog PostReport([FromBody]NewViewReport2 data)
         {
-            return _newLog.AddOrUpdateReport(data.Id , data.Data);
+            return _newLog.AddOrUpdateReport(data.Id , data.Data, data.typeStatus);
         }
 
         // list Report 

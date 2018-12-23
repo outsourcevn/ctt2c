@@ -142,18 +142,26 @@ namespace AppPortal.AdminSite.Services.Administrator
                .ToList();
         }
 
-        public NewsLog AddOrUpdateReport(int id, string data)
+        public NewsLog AddOrUpdateReport(int id, string data, int? typeStatus = 0)
         {
             var item = _newslog.Table.Where(x => x.Id == id).FirstOrDefault();
             if(item != null)
             {
                 item.Data = data;
+                //khong phai la bao cao
+                if (typeStatus > 0) item.TypeStatus = (IsTypeStatus)typeStatus;
+
+                if (typeStatus == 0) item.OnXuly = DateTime.Now;
+                // = 0 la bao cao
                 _newslog.Update(item);
-                var news = _news.Table.Where(x => x.Id == item.NewsId).FirstOrDefault();
-                if(news != null)
+                if (typeStatus == 0)
                 {
-                    news.IsStatus = IsStatus.baocao;
-                    _news.Update(news);
+                    var news = _news.Table.Where(x => x.Id == item.NewsId).FirstOrDefault();
+                    if (news != null)
+                    {
+                        news.IsStatus = IsStatus.baocao;
+                        _news.Update(news);
+                    }
                 }
             }
             return item;

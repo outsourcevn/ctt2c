@@ -44,9 +44,9 @@ namespace AppPortal.ApiHost.Controllers
         [HttpGet("getNews")]
         public IActionResult ListNewsAsync(int? skip = 0, int? page = 1, int? take = 15000, string keyword = "",
             int? categoryId = -1, int? status = -1, int? type = -1 , string username = "" ,string GroupId = "",
-            int? newlogStatus = -1)
+            int? newlogStatus = -1, string mapakn = "")
         {
-            var query = _newsService.GetLstNewsPaging(out int rows, skip, take, keyword, categoryId, status, type , username , GroupId, newlogStatus);
+            var query = _newsService.GetLstNewsPaging(out int rows, skip, take, keyword, categoryId, status, type , username , GroupId, newlogStatus, mapakn);
             var vm = query.Select(n => Mapper.Map<ListItemNewsModel, ListItemNewsViewModel>(n));
             return ResponseInterceptor(vm, rows, new Paging()
             {
@@ -60,9 +60,9 @@ namespace AppPortal.ApiHost.Controllers
 
         [AllowAnonymous]
         [HttpGet("getNewsAno")]
-        public IActionResult ListNewsAno(string name = "" , string email= "" , string sdt = "" , int id = 0)
+        public IActionResult ListNewsAno(string name = "" , string email= "" , string sdt = "" , int id = 0, string mapakn = "")
         {
-            var query = _newsService.GetLstNewsAno(name , email, sdt, id);
+            var query = _newsService.GetLstNewsAno(name , email, sdt, id, mapakn);
             return Ok(query);
         }
 

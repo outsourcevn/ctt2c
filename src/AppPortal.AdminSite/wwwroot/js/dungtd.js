@@ -536,7 +536,8 @@ function nhapketquaxuly() {
         var idReport = $("#exampleModalNew_nhapketqua .IdReport").val();
         var data = {
             Id: parseInt(idReport),
-            Data: editor2.getData()
+            Data: editor2.getData(),
+            typeStatus: 5
         }
 
         kendo.confirm("Xác nhận báo cáo ?")
@@ -561,6 +562,58 @@ function nhapketquaxuly() {
                     },
                     function (xhr, status, error) {
                         
+                        if (xhr.status === 400) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            err.forEach(function (item) {
+                                messagerError(item.Code, item.Description);
+                            });
+                        } else {
+                            messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                        }
+                    },
+                    function (complete) {
+                        $(this).removeClass('disabled').removeAttr('disabled');
+                    }
+                )
+            })
+    } else {
+        messagerWarn('Thông báo', 'Vui lòng chọn tin.');
+    }
+}
+
+function submitTraLai() {
+    var grid = $('#dataGrid').data('kendoGrid');
+    if ($("#exampleModalNew_nhapketquatralai .IdReport").val() !== "") {
+        var idReport = $("#exampleModalNew_nhapketquatralai .IdReport").val();
+        var data = {
+            Id: parseInt(idReport),
+            Data: editorTralai.getData(),
+            typeStatus: 7
+        }
+
+        kendo.confirm("Xác nhận chuyển trả lại ?")
+            .done(function () {
+                callAjax(
+                    `${appConfig.apiHostUrl}` + '/api/NewsLog/PostReport',
+                    data,
+                    AjaxConst.PostRequest,
+                    function (xhr) {
+                        $(this).addClass('disabled').attr('disabled', true);
+                        xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                    },
+                    function (success) {
+
+                        if (!success.did_error) {
+                            messagerSuccess('Thông báo', 'Chuyển trả lại thành công!');
+                        }
+                        if (grid) {
+                            grid.clearSelection();
+                            grid.dataSource.read();
+                        }
+                        $("#exampleModalNew_nhapketquatralai").modal("hide");
+                    },
+                    function (xhr, status, error) {
+
                         if (xhr.status === 400) {
                             var err = eval("(" + xhr.responseText + ")");
                             err.forEach(function (item) {
@@ -704,6 +757,64 @@ function nhapketquagopy() {
     } else {
         messagerWarn('Thông báo', 'Vui lòng chọn tin.');
     }
+}
+
+function nhapketquatralai(news_id) {
+    callAjax(
+        `${appConfig.apiHostUrl}` + '/api/NewsLog/GetNewsLogByNewsIdNameFrom?NewsId=' + news_id + "&UserName=" + username,
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (success) {
+            try {
+
+                $("#exampleModalNew_nhapketquatralai .commentNews").val(success[0].Data);
+                if (success[0].Data) {
+                    editorTralai.setData(success[0].Data);
+                }
+
+                $("#exampleModalNew_nhapketquatralai .IdReport").val(success[0].Id);
+            } catch (e) {
+                $("#IdReport").val("0");
+            }
+            $("#exampleModalNew_nhapketquatralai").modal('show');
+            //$('#fileupload').addClass('fileupload-processing');
+            //$("#filebaocao tbody").empty();
+            //$.ajax({
+            //    // Uncomment the following to send cross-domain cookies:
+            //    //xhrFields: {withCredentials: true},
+            //    url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload/' + $("#exampleModalNew_nhapketqua .IdReport").val(),
+            //    beforeSend: function (xhr) {
+            //        xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie("ACCESS-TOKEN"));
+            //        xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew_nhapketqua .IdReport").val()));
+            //    },
+            //    dataType: 'json',
+            //    context: $('#fileupload')[0]
+            //}).always(function () {
+            //    $(this).removeClass('fileupload-processing');
+            //}).done(function (result) {
+            //    $(this).fileupload('option', 'done')
+            //        .call(this, $.Event('done'), { result: result });
+            //});
+        },
+        function (xhr, status, error) {
+
+            if (xhr.status === 400) {
+                var err = eval("(" + xhr.responseText + ")");
+                err.forEach(function (item) {
+                    messagerError(item.Code, item.Description);
+                });
+            } else {
+                messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+            }
+        },
+        function (complete) {
+            $(this).removeClass('disabled').removeAttr('disabled');
+        }
+    )
 }
 
 function nhapketqua(news_id) {

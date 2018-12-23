@@ -479,7 +479,11 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("ntext");
 
+                    b.Property<DateTime?>("OnChuyenTraLai");
+
                     b.Property<DateTime?>("OnCreated");
+
+                    b.Property<DateTime?>("OnXuly");
 
                     b.Property<int>("TypeStatus");
 

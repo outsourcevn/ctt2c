@@ -161,6 +161,7 @@
                                     <option selected value="-1">Lựa chọn bộ lọc</option>
                                     <option value="5">Hoàn thành xử lý</option>
                                     <option value="6">Mới tiếp nhận</option>
+                                    <option value="7">Chuyển trả lại</option>
                                 </select>
                             </div>
                         </div>
@@ -348,6 +349,30 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-primary" onclick="nhapketquaxuly()">Báo cáo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalNew_nhapketquatralai" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 600px;margin: 0 auto;max-width:900px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chuyển trả lại</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Lý do chuyển trả lại:</label>
+                    <textarea class="form-control commentNews" rows="10"></textarea>
+                    <input type="hidden" class="IdReport" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="submitTraLai()">Chuyển trả lại</button>
             </div>
         </div>
     </div>
@@ -797,25 +822,15 @@
                 console.error(error);
             });
 
-        //var editorGopy1;
-        //ClassicEditor
-        //    .create(document.querySelector("#exampleModalNew_xemchitiet2 .noidung-ldtcmt"))
-        //    .then(editor => {
-        //        editorGopy1 = editor;
-        //    })
-        //    .catch(error => {
-        //        console.error(error);
-        //    });
-
-        //var editorGopy2;
-        //ClassicEditor
-        //    .create(document.querySelector("#exampleModalNew_xemchitiet2 .noidung-ttdl"))
-        //    .then(editor => {
-        //        editorGopy2 = editor;
-        //    })
-        //    .catch(error => {
-        //        console.error(error);
-        //    });
+        var editorTralai;
+        ClassicEditor
+            .create(document.querySelector('#exampleModalNew_nhapketquatralai .commentNews'))
+            .then(editor => {
+                editorTralai = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
     <script src="~/js/news/getlist.js" asp-append-version="true"></script>

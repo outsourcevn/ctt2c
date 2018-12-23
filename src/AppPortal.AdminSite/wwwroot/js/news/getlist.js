@@ -127,9 +127,13 @@ var newlogStatus = -1;
             columnsData.push(objDVCT6);
         }
 
-        if (GroupId == "") {
+        if (GroupId !== "dvct") {
             columnsData.push({
                 field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDate(on_created)#", width: "90px"
+            });
+        } else {
+            columnsData.push({
+                field: "news_log.OnCreated", title: "Ngày chuyển/Hoành thành xử lý", template: "#=templateDate(news_log.OnCreated , news_log.OnXuly)#", width: "90px"
             });
         }
         
@@ -490,24 +494,15 @@ function templateAction(is_status, news_id) {
     }
 
     if (GroupId === "ldtcmt") {
-        //switch (is_status) {
-        //    case 10: name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công bố</button>'; break;
-        //    default:
-        //        name = '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Công bố</button>';
-        //        break;
-        //}
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem nội dung</button>';
+        //name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem nội dung</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="gopychidao(' + news_id + ')">Góp ý chỉ đạo</button>';
     }
 
     if (GroupId === "dvct") {
-        //switch (is_status) {
-        //    case 5: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
-        //    default: name = '<button type="button" class="btn btn-primary btn-xs" onclick="chuyencongvan(' + news_id + ')">Chuyển công văn</button>'; break;
-        //}
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Báo cáo kết quả xử lý</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem chi tiết</button>';
+        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketquatralai(' + news_id + ')">Chuyển trả lại</button>';
     }
 
     if (GroupId === "dvct_dp") {  
@@ -523,6 +518,7 @@ function xemchitietNoiDung(news_id) {
     var editor2 = element.find(".noidung-ttdl").data("kendoEditor");
     var editor3 = element.find(".noidung-ldtcmt").data("kendoEditor");
     $(".item-from-file-ttdl").html("");
+    element.find(".item-from-file").html("");
     element.find(".tieude").val("");
     editor.value("");
     editor.value("");
@@ -770,7 +766,9 @@ function templatePhanloai(istype, id, doituong) {
 function templatePhanloai2(istype) {
     var html = '';
     switch (istype) {
-        case 6: html = ' <span class="label label-success">Ô nhiễm môi trường</span>'; break;
+        case 6: html = ' <span class="label label-success">Ô nhiễm chất thải rắn</span>'; break;
+        case 9: html = ' <span class="label label-success">Ô nhiễm nước thải</span>'; break;
+        case 10: html = ' <span class="label label-success">Ô nhiễm khí thải</span>'; break;
         case 7: html = ' <span class="label label-success">Cơ chế, chính sách, thủ tục hành chính</span>'; break;
         case 8: html = ' <span class="label label-success">Giải pháp, sáng kiến bảo vệ môi trường</span>'; break;
     }
@@ -783,6 +781,7 @@ function templatePhanloai3(istype, id) {
     switch (istype) {
         case 5: html = ' <span class="label label-success">Hoàn thành xử lý</span>'; break;
         case 6: html = ' <span class="label label-success">Mới tiếp nhận</span>'; break;
+        case 7: html = ' <span class="label label-success">Chuyển trả lại</span>'; break;
     }
 
     return html;
@@ -797,13 +796,18 @@ function templateContent(content) {
 }
 
 
-function templateDate(date) {
+function templateDate(date , dateXuly) {
+    var html = "";
     if (date) {
-        return new Date(date).toLocaleString()
-    } else {
-        return "";
+        html += "- Ngày chuyển: ";
+        html += new Date(date).toLocaleString();
     }
-    
+
+    if (dateXuly) {
+        html += "<br>- Ngày hoàn thành xử lý: ";
+        html += new Date(dateXuly).toLocaleString();
+    }
+    return html;
 }
 
 function templatefileupload(fileupload) {

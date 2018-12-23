@@ -688,7 +688,16 @@ namespace AppPortal.AdminSite.Services.Administrator
             return str2;
         }
 
-        public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id)
+        private bool infoUser(IsType isType, string mapakn = "")
+        {
+            if(isType == IsType.cochehanhchinh || isType == IsType.giaiphapsangkien || !string.IsNullOrEmpty(mapakn))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id, string mapakn = "")
         {
             var query = _news.Table.Select(x => new LstItemNews
             {
@@ -699,10 +708,11 @@ namespace AppPortal.AdminSite.Services.Administrator
                 Abstract = x.Abstract,
                 Content = x.Content,
                 OnPublished = x.OnPublished,
-                UserFullName = x.UserFullName,
-                UserEmail = x.UserEmail,
-                UserPhone = x.UserPhone,
+                UserFullName = (infoUser(x.IsType , mapakn)) ? x.UserFullName : "Bạn giấu tên",
+                UserEmail = (infoUser(x.IsType , mapakn)) ? x.UserEmail : "",
+                UserPhone = (infoUser(x.IsType, mapakn)) ? x.UserPhone : "",
                 IsStatus = x.IsStatus,
+                MaPakn = x.MaPakn,
                 newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").GroupJoin(_files.Table, a => a.Id, b => b.NewsLogId, (a, b) => new NewsLogModel
                 {
                     Id = a.Id,
@@ -726,8 +736,16 @@ namespace AppPortal.AdminSite.Services.Administrator
             {
                 query = query.Where(x => x.UserEmail.Contains(email));
             }
-            query = query.Where(x => x.IsStatus == IsStatus.approved);
 
+            if (!string.IsNullOrEmpty(mapakn))
+            {
+                query = query.Where(x => x.MaPakn == mapakn);
+            }
+            else
+            {
+                query = query.Where(x => x.IsStatus == IsStatus.approved);
+            }
+            
             if(id > 0)
             {
                 query = query.Where(x => x.Id == id);
@@ -737,7 +755,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         }
 
         public IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15000, string keyword = "",
-            int? categoryId = -1, int? status = -1, int? type = -1 , string username = "", string GroupId = "", int? newlogStatus = -1)
+            int? categoryId = -1, int? status = -1, int? type = -1 , string username = "", string GroupId = "", int? newlogStatus = -1, string mapakn = "")
         {
             //var query = GetTables().Where(x => x.IsType == IsType.noType && x.IsType != IsType.topic);
             var query = GetTables();

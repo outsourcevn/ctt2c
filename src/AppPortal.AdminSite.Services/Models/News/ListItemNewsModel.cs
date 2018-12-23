@@ -83,6 +83,7 @@ namespace AppPortal.AdminSite.Services.Models.News
         public DateTime? OnDeleted { get; set; }
         public DateTime? OnPublished { get; set; }
         public IsStatus IsStatus { get; set; }
+        public string MaPakn { get; set; }
         public NewsLogModel newslog { get; set; }
 
     }

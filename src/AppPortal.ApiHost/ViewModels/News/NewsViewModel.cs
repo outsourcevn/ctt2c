@@ -208,6 +208,7 @@ namespace AppPortal.ApiHost.ViewModels.News
         public int Id { get; set; }
         [Required]
         public string Data { get; set; }
+        public int typeStatus { get; set; }
     }
 
 }

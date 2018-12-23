@@ -107,7 +107,7 @@
                 }
             }
         };
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsById?id=" + getUrlParameter('id'), function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsById?id=" + getUrlParameter('id'), function (data, status) {
             var content = '';
             content += '<h1><font color="red">' + data.model.Name + '</font></h1>'
             content += new Date(data.model.OnPublished).format("dd/mm/yyyy");
@@ -120,7 +120,7 @@
             $('#detail-news').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "api/News/getHomeNewsByCate?number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
@@ -156,7 +156,7 @@
             $('#tin-chuyen-muc-content').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
@@ -193,7 +193,7 @@
             $('#tin-moi-content').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {

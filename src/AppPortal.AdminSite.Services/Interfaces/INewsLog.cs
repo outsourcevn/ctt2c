@@ -13,7 +13,7 @@ namespace AppPortal.AdminSite.Services.Interfaces
         NewsLog GetNewsLogByNewsIdUser(int id , string username);
         IList<NewsLog> GetNewsLogByNewsIdGroupNameFrom(int NewsId, string GroupNameFrom , int type); 
         IList<NewsLog> GetNewsLogByNewsIdNameFrom(int NewsId, string UserName);
-        NewsLog AddOrUpdateReport(int id , string data);
+        NewsLog AddOrUpdateReport(int id , string data, int? typeStatus = 0);
         IList<NewLogUpLoad> GetReport(int NewsId);
         int AddtoFileTable(FileUpload fileUpload, string id);
         string DeleteFile(int id);

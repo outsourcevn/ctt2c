@@ -107,12 +107,17 @@
             }
         };
 
-        $.get("http://apinode.eportal.today/api/news/getNewsAno?id=" + getUrlParameter('id'), function (data, status) {
+        var url = appConfig.apiHostUrl + "/api/news/getNewsAno?id=" + getUrlParameter('id');
+        if (getUrlParameter("mapakn") != undefined) {
+            url += "&mapakn=" + getUrlParameter("mapakn");
+        }
 
-            console.log(data);
+        $.get(url   , function (data, status) {
             var content = '';
-
-            content += '<h1><font color="#1f4f82">' + data[0].Name + '</font></h1>'
+            if (getUrlParameter("mapakn") != undefined) {
+                content += '<button type="button" style="margin-top: 10px;" class="btn btn-success">Bổ sung thông tin</button>';
+            }
+            content += '<h1 style="line-height: 25px;"><font color="#1f4f82">' + data[0].Name + '</font></h1>'
             content += '<p style="font-size:15px;"><b>Người phản ánh:</b>' + data[0].UserFullName + '</p> <br />'
             content += '<div>'
             content += '<div>'
@@ -137,11 +142,11 @@
             
             content += '</div>'
             content += '</div>'
-
+            
             $('#tra-cuu-detail').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
@@ -177,7 +182,7 @@
             $('#tin-chuyen-muc-content').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl+ "/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
@@ -214,7 +219,7 @@
             $('#tin-moi-content').html(content);
         });
 
-        $.get("http://apinode.eportal.today/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl+"/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {

@@ -19,6 +19,8 @@ namespace AppPortal.Core.Entities
         public string DetailTypeStatus { get; set; }
         public string AttachFile { get; set; }
         public DateTime? OnCreated { get; set; }
+        public DateTime? OnChuyenTraLai { get; set; }
+        public DateTime? OnXuly { get; set; }
     }
 
     public class NewsLogModel
@@ -37,7 +39,8 @@ namespace AppPortal.Core.Entities
         is_phancong,
         is_chuyencongvan,
         hoanthanhxuly,
-        moitiepnhan
+        moitiepnhan,
+        chuyentralai
     }
 
     public class FileUpload
