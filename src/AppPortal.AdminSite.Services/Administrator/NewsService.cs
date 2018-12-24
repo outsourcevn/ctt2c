@@ -517,9 +517,18 @@ namespace AppPortal.AdminSite.Services.Administrator
             var entity = _homeNews.GetById(id);
             if (entity != null)
             {
-                entity.OnDeleted = DateTime.Now;
                 entity.IsShow = false;
                 entity.IsStatus = IsStatus.deleted;
+                _homeNews.Update(entity);
+            }
+        }
+
+        public void ShiftDeleteHome(int id)
+        {
+            var entity = _homeNews.GetById(id);
+            if (entity != null)
+            {
+                entity.OnDeleted = DateTime.Now;
                 _homeNews.Update(entity);
             }
         }
@@ -626,7 +635,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             {
                 homeNews = homeNews.Take((int)number);
             }
-            homeNews = homeNews.OrderByDescending(x => x.OnCreated);
+            homeNews = homeNews.OrderByDescending(x => x.OnPublished);
 
             var homeNewsLst = homeNews.ToList();
 
@@ -688,12 +697,19 @@ namespace AppPortal.AdminSite.Services.Administrator
             return str2;
         }
 
-        private bool infoUser(IsType isType, string mapakn = "")
+        private bool infoUser(IsType isType = 0, string mapakn = "")
         {
-            if(isType == IsType.cochehanhchinh || isType == IsType.giaiphapsangkien || !string.IsNullOrEmpty(mapakn))
+            try
             {
-                return true;
+                if (isType == IsType.cochehanhchinh || isType == IsType.giaiphapsangkien || !string.IsNullOrEmpty(mapakn))
+                {
+                    return true;
+                }
             }
+            catch (Exception)
+            {
+                return false;
+            }    
             return false;
         }
 
@@ -894,9 +910,10 @@ namespace AppPortal.AdminSite.Services.Administrator
             if (type > 0) query = query.Where(x => x.IsType == (IsType)type);
             if(status != 4)
             {
-                query = query.Where(x => x.IsStatus != IsStatus.deleted && !x.OnDeleted.HasValue);
+                query = query.Where(x => x.IsStatus != IsStatus.deleted);
             }
-            
+
+            query = query.Where(x => !x.OnDeleted.HasValue);
             rows = query.Count();
 
             if (skip > rows)
@@ -906,6 +923,8 @@ namespace AppPortal.AdminSite.Services.Administrator
                 query = query.OrderByDescending(x => x.Id).Skip(rows - take.Value).Take(take.Value);
             }
             else query = query.OrderByDescending(x => x.Id).Skip(skip.Value).Take(take.Value);
+
+            query = query.OrderByDescending(x => x.OnPublished);
 
             var dataRetun = query.Select(x => new ListItemNewsModel
             {

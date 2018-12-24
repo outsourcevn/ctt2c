@@ -20,3 +20,9 @@ body {
     -webkit-box-orient: vertical;
 }
 
+.tomtatTintuc {
+    font-size: 14px !important;
+    font-family: Arial !important;
+    font-style: italic;
+}
+

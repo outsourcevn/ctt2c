@@ -285,6 +285,37 @@ namespace AppPortal.ApiHost.Controllers
         }
 
         [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpPost("ShiftDeleteHome")]
+        public IActionResult ShiftDeleteHome(int? Id)
+        {
+            if (!Id.HasValue)
+            {
+                return ToHttpBadRequest("The Id is request");
+            }
+            var entity = _newsService.GetHomeNewsById(Id.Value);
+            if (entity == null)
+            {
+                return ToHttpBadRequest("Tin tức không tồn tại.");
+            }
+            string message = "";
+            try
+            {
+                _newsService.ShiftDeleteHome(Id.Value);
+                message = "Tin tức đã được xóa hoàn toàn.";
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
+
+        [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpPost("DeleteHome")]
         public IActionResult DeleteHome(int? Id)
         {

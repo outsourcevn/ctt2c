@@ -14,6 +14,7 @@ namespace AppPortal.AdminSite.Services.Interfaces
         void AddOrUpdateHomeNews(HomeNews model);
         void Delete(int id);
         void DeleteHome(int id);
+        void ShiftDeleteHome(int id);
         NewsModel GetNewsById(int id);
         HomeNews GetHomeNewsById(int id);
         IList<GetReport1> GetReport1(string startdate, string enddate);

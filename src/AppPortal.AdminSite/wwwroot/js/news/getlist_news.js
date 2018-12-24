@@ -340,6 +340,44 @@ function hoantac(id) {
         })
 }
 
+function xoavinhvien(id) {
+    var grid = $('#dataGrid').data('kendoGrid');
+    kendo.confirm("Xác nhận xóa vĩnh viễn tin này?")
+        .done(function () {
+            callAjax(
+                `${appConfig.apiHostUrl}` + '/api/News/ShiftDeleteHome?id=' + id,
+                null,
+                AjaxConst.PostRequest,
+                function (xhr) {
+                    $(this).addClass('disabled').attr('disabled', true);
+                    xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                },
+                function (success) {
+                    if (!success.did_error) {
+                        messagerSuccess('Thông báo', success.model);
+                    }
+                    if (grid) {
+                        grid.clearSelection();
+                        grid.dataSource.read();
+                    }
+                },
+                function (xhr, status, error) {
+                    if (xhr.status === 400) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        err.forEach(function (item) {
+                            messagerError(item.Code, item.Description);
+                        });
+                    } else {
+                        messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                    }
+                },
+                function (complete) {
+                    $(this).removeClass('disabled').removeAttr('disabled');
+                }
+            )
+        })
+}
+
 function deleteNewHome(id) {
     var grid = $('#dataGrid').data('kendoGrid');
     kendo.confirm("Xác nhận xóa?")
@@ -524,6 +562,7 @@ function xemchitiet(id) {
 function templateAction(news_id, status) {
     if (status === 4) {
         var name2 = '<button type="button" style="margin-right: 5px;" class="btn btn-primary btn-xs" onclick="hoantac(' + news_id + ')">Hoàn tác tin</button>';
+        name2 += '<button type="button" style="margin-right: 5px;" class="btn btn-danger btn-xs" onclick="xoavinhvien(' + news_id + ')">Xóa vĩnh viễn</button>';
         return name2;
     } else {
         var name = '<button type="button" style="margin-right: 5px;" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem chi tiết</button>';
@@ -541,6 +580,8 @@ function templateAction(news_id, status) {
             }
 
             name += '<button type="button" class="btn btn-primary btn-xs" onclick="gopy(' + news_id + ')">Góp ý</button>';
+            name += '<button type="button" onclick="previewData(' + news_id + ')" class="btn btn-primary btn-xs">Xem Trước</button >';
+            name += editbutton;
         }
         return name;
     }
@@ -739,3 +780,45 @@ function getDataPhanCong(news_id, group_name_from) {
         }
     )
 }
+
+function previewData(news_id) {
+    //var content = '';
+    //var headerData = $("#Name").val();
+    //var OnPublished = $("#OnPublished").val();
+    //var noidung = $("#Content").data("kendoEditor").value();
+    //var Abstract = $("#Abstract").data("kendoEditor").value();
+    //if (OnPublished == "") {
+    //    OnPublished = formatDate();
+    //}
+    //var image = $("#Image").val();
+    //content += '<h1><font color="red">' + headerData + '</font></h1>'
+    //content += OnPublished;
+    //content += '<br />';
+    //content += '<br />';
+    //if (image && image != "") {
+    //    content += '<img src="' + appConfig.apiCdnUrl + image + '">'
+    //}
+    //content += '<br><span class="tomtatTintuc">' + Abstract + '</span>';
+    //content += noidung;
+    //$('#detail-news').html('');
+    //$('#detail-news').html(content);
+
+    $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsById?id=" + news_id, function (data, status) {
+        var content = '';
+        content += '<h1 style="line-height: 28px;"><font color="black">' + data.model.Name + '</font></h1>'
+        content += formatDate(new Date(data.model.OnPublished));
+        content += '<br />';
+        content += '<br />';
+        if (data.model.Image) {
+            content += '<img src="' + appConfig.apiCdnUrl + data.model.Image + '">';
+        }
+        content += '<br><p class="tomtatTintuc">' + data.model.Abstract + '</p>';
+        content += data.model.Content;
+        content += '<br />';
+        content += '<br />';
+        content += '<p class="blockquote-footer" style="text-align:right;">' + data.model.SourceNews + ' / ' + data.model.UserFullName + '</p >';
+        $('#detail-news').html(content);
+        $("#previewModal").modal("show");
+    });
+}
+

@@ -226,7 +226,7 @@
 
                             <!-- Văn bản pháp quy -->
 
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 <label asp-for="Note" class="control-label">Ghi chú</label>
                                 <textarea rows="5" asp-for="Note" class="form-control" mav></textarea>
                                 <span asp-validation-for="Note" class="invalid-feedback"></span>
@@ -303,13 +303,19 @@
             var headerData = $("#Name").val();
             var OnPublished = $("#OnPublished").val();
             var noidung = $("#Content").data("kendoEditor").value();
+            var Abstract = $("#Abstract").data("kendoEditor").value();
             if (OnPublished == "") {
-                OnPublished = formatted_date();
+                OnPublished = formatDate();
             }
+            var image = $("#Image").val();
             content += '<h1><font color="red">' + headerData + '</font></h1>'
             content += OnPublished;
             content += '<br />';
             content += '<br />';
+            if (image && image != "") {
+                content += '<img src="' + appConfig.apiCdnUrl + image + '">'
+            }
+            content += '<br><span class="tomtatTintuc">' + Abstract + '</span>';
             content += noidung;
             $('#detail-news').html('');
             $('#detail-news').html(content);

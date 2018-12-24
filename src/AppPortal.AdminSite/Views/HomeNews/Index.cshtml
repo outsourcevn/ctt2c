@@ -33,6 +33,7 @@
     }
 }
 <style>
+
     .noteData {
         font-style: italic;
         color: red;
@@ -54,6 +55,7 @@
     .ck-content.ck-editor__editable {
         height: 250px;
     }
+
     .template-upload {
         background-color: #f9f9f9 !important;
         opacity: 1 !important;
@@ -71,12 +73,13 @@
     .atailieu {
         width: 200px;
         display: block;
-     }
+    }
 
     .anhdaidien {
         width: 200px;
         display: block;
     }
+
     .k-grid tr td, .k-pivot-layout .k-grid tr td {
         min-height: 66px;
         max-height: 80px;
@@ -89,7 +92,6 @@
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="~/css/jquery.fileupload.css">
 <link rel="stylesheet" href="~/css/jquery.fileupload-ui.css">
-
 <noscript><link rel="stylesheet" href="~/css/jquery.fileupload-noscript.css"></noscript>
 <noscript><link rel="stylesheet" href="~/css/jquery.fileupload-ui-noscript.css"></noscript>
 <div class="row">
@@ -106,43 +108,39 @@
             <!-- /.card-header -->
             <div>
                 <div class="card-body" style="display: block;    margin-top: 30px;">
-
                     <div class="form-inline">
                         <div class="input-group mb-2 mr-sm-2">
                             <a asp-controller="HomeNews" asp-action="Create" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tạo mới</a>
                         </div>
                         @*<div id="btn-save-publish" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-info btn-flat" id="btn-save-publish-new"><i class="fa fa-plus"></i>Xác nhận và chuyển lên lãnh đạo</button>
-                        </div>
-                        <div id="btn-save-process" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-primary btn-flat" id="btn-save-process-new"><i class="fa fa-plus"></i> Xác nhận đăng tin</button>
-                        </div>
-                        <div id="btn-save-dafts" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-dark btn-flat" id="btn-save-dafts-new"><i class="fa fa-plus"></i> Tin nháp</button>
-                        </div>
+                                <button type="button" class="btn btn-info btn-flat" id="btn-save-publish-new"><i class="fa fa-plus"></i>Xác nhận và chuyển lên lãnh đạo</button>
+                            </div>
+                            <div id="btn-save-process" class="input-group mb-2 mr-sm-2 newdata">
+                                <button type="button" class="btn btn-primary btn-flat" id="btn-save-process-new"><i class="fa fa-plus"></i> Xác nhận đăng tin</button>
+                            </div>
+                            <div id="btn-save-dafts" class="input-group mb-2 mr-sm-2 newdata">
+                                <button type="button" class="btn btn-dark btn-flat" id="btn-save-dafts-new"><i class="fa fa-plus"></i> Tin nháp</button>
+                            </div>
 
-                        <div id="btn-phan-cong" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-dark btn-flat" id="btn-phan-cong-new">Phân công</button>
-                        </div>
+                            <div id="btn-phan-cong" class="input-group mb-2 mr-sm-2 newdata">
+                                <button type="button" class="btn btn-dark btn-flat" id="btn-phan-cong-new">Phân công</button>
+                            </div>
 
-                        <div id="btn-bao-cao" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-primary btn-flat" id="btn-bao-cao-new">Báo cáo xử lý</button>
-                        </div>
+                            <div id="btn-bao-cao" class="input-group mb-2 mr-sm-2 newdata">
+                                <button type="button" class="btn btn-primary btn-flat" id="btn-bao-cao-new">Báo cáo xử lý</button>
+                            </div>
 
-                        <div id="btn-xem-bao-cao" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-dark btn-flat" id="btn-xem-bao-cao-new"><i class="fa fa-plus"></i> Xem báo cáo</button>
-                        </div>*@
+                            <div id="btn-xem-bao-cao" class="input-group mb-2 mr-sm-2 newdata">
+                                <button type="button" class="btn btn-dark btn-flat" id="btn-xem-bao-cao-new"><i class="fa fa-plus"></i> Xem báo cáo</button>
+                            </div>*@
                     </div>
-
                     <div class="input-group mb-2 mr-sm-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
                         <input id="txtName" type="text" placeholder="Nhập từ khóa cần tìm" class="form-control" />
                     </div>
-
                     <div id="dataGrid" class="mt-2"></div>
-
                 </div>
             </div>
             <!-- /.card-body -->
@@ -151,7 +149,6 @@
     <!-- /.col -->
 </div>
 <!-- /.row -->
-
 <div class="modal fade" id="exampleModalNew6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -166,14 +163,12 @@
                     <label for="recipient-name" class="col-form-label">Chuyển công văn yêu cầu xử lý cho:</label>
                     <select class="js-data-example-ajax-chuyencongvan" multiple="multiple"></select>
                 </div>
-
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Ghi chú:</label>
                     <textarea class="form-control ghichubaocao" rows="10"></textarea>
                     <input type="hidden" class="NewsId" />
                 </div>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-primary" id="clickChuyenConvan">Chuyển công văn</button>
@@ -181,7 +176,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="exampleModalNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -196,14 +190,12 @@
                     <label for="recipient-name" class="col-form-label">Phân công cho:</label>
                     <select class="js-data-example-ajax " multiple="multiple" id="phancongcho"></select>
                 </div>
-
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Ghi chú:</label>
                     <textarea class="form-control ghichubaocao" rows="10"></textarea>
                     <input type="hidden" class="NewsId" />
                 </div>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-primary" id="clickPhanCong">Phân công</button>
@@ -211,7 +203,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="exampleModalNew2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -235,7 +226,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="exampleModalNew_nhapketqua" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width: 600px;margin: 0 auto;max-width:900px" role="document">
         <div class="modal-content">
@@ -251,7 +241,6 @@
                     <textarea class="form-control commentNews" rows="10"></textarea>
                     <input type="hidden" class="IdReport" />
                 </div>
-
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Tài liệu đình kèm:</label>
                     <form id="fileupload" method="POST" enctype="multipart/form-data">
@@ -266,18 +255,18 @@
                                     <input type="file" name="files" multiple>
                                 </span>
                                 @*<button type="submit" class="btn btn-primary start">
-                                    <i class="glyphicon glyphicon-upload"></i>
-                                    <span>Bắt đầu upload</span>
-                                </button>*@
+                                        <i class="glyphicon glyphicon-upload"></i>
+                                        <span>Bắt đầu upload</span>
+                                    </button>*@
                                 @*<button type="reset" class="btn btn-warning cancel">
-                                    <i class="glyphicon glyphicon-ban-circle"></i>
-                                    <span>Cancel upload</span>
-                                </button>*@
+                                        <i class="glyphicon glyphicon-ban-circle"></i>
+                                        <span>Cancel upload</span>
+                                    </button>*@
                                 @*<button type="button" class="btn btn-danger delete">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                    <span>Xóa</span>
-                                </button>*@
-                               
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        <span>Xóa</span>
+                                    </button>*@
+
                                 <!-- The global file processing state -->
                                 <span class="fileupload-process"></span>
                             </div>
@@ -303,7 +292,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="exampleModalNew4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -327,7 +315,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="exampleModalNew3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -343,7 +330,6 @@
                         Báo cáo của : <span id="nameBaocao"></span>
                     </label>
                 </div>
-
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Nội dung báo cáo:</label>
                     <textarea disabled class="form-control" rows="10" id="commentNews3"></textarea>
@@ -357,7 +343,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="exampleModalNew5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -381,7 +366,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="exampleModalNew_xemchitiet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="width: 750px;">
@@ -413,7 +397,25 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="width: 1024px">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xem trước</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="detail-news" class="modal-body">
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script id="template-upload" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
@@ -487,7 +489,6 @@
     </tr>
     {% } %}
 </script>
-
 @section Scripts{
     <script src="~/js/news/Scripts.js" asp-append-version="true"></script>
     <script type="text/javascript">
@@ -514,9 +515,7 @@
             });
     </script>
 
-
     <script src="~/js/news/getlist_news.js" asp-append-version="true"></script>
-
     <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
     <script src="js/vendor/jquery.ui.widget.js"></script>
     <!-- The Templates plugin is included to render the upload/download listings -->
@@ -528,7 +527,6 @@
     <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
     <!-- blueimp Gallery script -->
     <script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-
 
     <script src="~/js/jquery.iframe-transport.js"></script>
     <!-- The basic File Upload plugin -->

@@ -121,7 +121,7 @@
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=15", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=100", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (data.model[i].Image != "") {

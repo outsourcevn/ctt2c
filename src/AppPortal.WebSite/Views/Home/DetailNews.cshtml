@@ -49,6 +49,12 @@
         bottom: 0;
         margin-bottom: -15px;
     }
+
+    .tomtatTintuc {
+        font-size: 14px !important;
+        font-family: Arial !important;
+        font-style: italic;
+    }
 </style>
 <link href="~/css/news.css" rel="stylesheet" />
 
@@ -93,6 +99,47 @@
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
+        function formatDate(date) {
+            var monthNames = [
+                "Tháng Một", "Tháng Hai", "Tháng Ba",
+                "Tháng Tư", "Tháng Năm", "Tháng Sáu", "Tháng Bảy",
+                "Tháng Tám", "Tháng Chín", "Tháng Mười",
+                "Tháng Mười Một", "Tháng Mười Hai"
+            ];
+
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var year = date.getFullYear();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var current_day = date.getDay();
+            var day_name = '';
+            switch (current_day) {
+                case 0:
+                    day_name = "Chủ nhật";
+                    break;
+                case 1:
+                    day_name = "Thứ hai";
+                    break;
+                case 2:
+                    day_name = "Thứ ba";
+                    break;
+                case 3:
+                    day_name = "Thứ tư";
+                    break;
+                case 4:
+                    day_name = "Thứ năm";
+                    break;
+                case 5:
+                    day_name = "Thứ sau";
+                    break;
+                case 6:
+                    day_name = "Thứ bảy";
+            }
+
+            return day_name + ' Ngày ' + day + ' ' + monthNames[monthIndex] + ' Năm ' + year + ' ' + hour + 'h: ' + minute + 'phút';
+        }
+
         var getUrlParameter = function getUrlParameter(sParam) {
             var sPageURL = window.location.search.substring(1),
                 sURLVariables = sPageURL.split('&'),
@@ -109,18 +156,22 @@
         };
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsById?id=" + getUrlParameter('id'), function (data, status) {
             var content = '';
-            content += '<h1><font color="red">' + data.model.Name + '</font></h1>'
-            content += new Date(data.model.OnPublished).format("dd/mm/yyyy");
+            content += '<h1 style="line-height: 28px;"><font color="black">' + data.model.Name + '</font></h1>'
+            content += formatDate(new Date(data.model.OnPublished));
             content += '<br />';
             content += '<br />';
+            if (data.model.Image) {
+                content += '<img src="' + appConfig.apiCdnUrl + data.model.Image + '">';
+            }
+            content += '<br><p class="tomtatTintuc">' + data.model.Abstract + '</p>';
             content += data.model.Content;
             content += '<br />';
             content += '<br />';
-            content += '<p class="blockquote-footer" style="text-align:right;">- ' + data.model.UserFullName + ' -</p >';
+            content += '<p class="blockquote-footer" style="text-align:right;">' + data.model.SourceNews +' / ' + data.model.UserFullName + '</p >';
             $('#detail-news').html(content);
         });
 
-        $.get(appConfig.apiHostUrl + "api/News/getHomeNewsByCate?number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
