@@ -810,7 +810,7 @@ function previewData(news_id) {
         content += '<br />';
         content += '<br />';
         if (data.model.Image) {
-            content += '<img src="' + appConfig.apiCdnUrl + data.model.Image + '">';
+            content += '<img class="imgStyle" src="' + appConfig.apiCdnUrl + data.model.Image + '">';
         }
         content += '<br><p class="tomtatTintuc">' + data.model.Abstract + '</p>';
         content += data.model.Content;
