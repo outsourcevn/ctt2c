@@ -75,19 +75,19 @@
                                     </div>
 
 
-                                    <label for="UserFullName" class="col-sm-3 control-label">Họ tên:</label>
+                                    <label for="UserFullName" class="col-sm-3 control-label">Họ tên*:</label>
                                     <div class="col-sm-12" id="aui_3_4_0_1_495">
                                         <span id="senderName_error"></span>
-                                        <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên">
+                                        <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName"  placeholder="Nhập đầy đủ họ và tên">
                                     </div>
 
                                     <div class="col-sm-12" style="padding: 0">
                                         <div class="col-md-6">
                                             <label for="UserAddress" class="control-label col-sm-3">Địa chỉ:</label>
-                                            <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" required placeholder="Địa chỉ"> </div>
+                                            <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" placeholder="Địa chỉ"> </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="UserEmail" class="control-label col-sm-3">Địa chỉ E-mail:</label>
+                                            <label for="UserEmail" class="control-label col-sm-3">Địa chỉ E-mail <span style="color: red">*</span>:</label>
                                             <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc"> </div>
                                         </div>
                                     </div>
@@ -97,16 +97,16 @@
                                             <select id="thanhpho" required class="col-sm-4">
                                                 <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
                                             </select>
-                                            <select id="quantp" required class="col-sm-4">
+                                            <select id="quantp" class="col-sm-4">
                                                 <option selected disabled>--- Lựa chọn quận/huyện ---</option>
                                             </select>
-                                            <select id="huyen" required class="col-sm-4">
+                                            <select id="huyen" class="col-sm-4">
                                                 <option selected disabled>--- Lựa chọn phường xã ---</option>
                                             </select>
                                         </div>
                                     </div>
 
-                                    <label for="UserEmail" class="control-label col-sm-3">Điện thoại:</label>
+                                    <label for="UserEmail" class="control-label col-sm-3">Điện thoại <span style="color: red">*</span>:</label>
                                     <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserPhone" required placeholder="Điện thoại"> </div>
                                 </div>
 
@@ -116,7 +116,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-item col-sm-12">
                                         <label asp-for="Name" class="control-label">Tiêu đề:</label>
-                                        <input asp-for="Name" class="form-control aui-text-placeholder" placeholder="Tiêu đề phản ánh" required />
+                                        <input asp-for="Name" class="form-control aui-text-placeholder" placeholder="Tiêu đề phản ánh" />
                                         <span asp-validation-for="Name" class="form-required"></span>
                                     </div>
 
@@ -131,13 +131,13 @@
 
                                     <div class="form-item col-sm-12">
                                         <label asp-for="TenCaNhanToChuc" class="control-label">Tên tổ chức, các nhân gây ô nhiễm:</label>
-                                        <input asp-for="TenCaNhanToChuc" class="form-control aui-text-placeholder" placeholder="Tên tổ chức, các nhân gây ô nhiễm" required />
+                                        <input asp-for="TenCaNhanToChuc" class="form-control aui-text-placeholder" placeholder="Tên tổ chức, các nhân gây ô nhiễm" />
                                         <span asp-validation-for="TenCaNhanToChuc" class="form-required"></span>
                                     </div>
 
                                     <div class="form-item col-sm-12">
                                         <label asp-for="Thoigianxayra" class="control-label">Thời gian xảy ra hoặc phát hiện ô nhiễm:</label>
-                                        <input asp-for="Thoigianxayra" type="date" class="form-control aui-text-placeholder" placeholder="Thời gian xảy ra hoặc phát hiện ô nhiễm" required />
+                                        <input asp-for="Thoigianxayra" type="date" class="form-control aui-text-placeholder" placeholder="Thời gian xảy ra hoặc phát hiện ô nhiễm" />
                                         <span asp-validation-for="Thoigianxayra" class="form-required"></span>
                                     </div>
 
@@ -147,8 +147,8 @@
                                     </div>
 
                                     <div class="form-item col-sm-12">
-                                        <label asp-for="Content" class="control-label">Nội dung trao đổi:</label>
-                                        <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text"></textarea>
+                                        <label asp-for="Content" class="control-label">Nội dung trao đổi <span style="color: red">*</span>:</label>
+                                        <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text" required></textarea>
                                         <span asp-validation-for="Content" class="form-required"></span>
                                     </div>
                                 </div>

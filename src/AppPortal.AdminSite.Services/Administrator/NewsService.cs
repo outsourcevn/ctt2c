@@ -713,6 +713,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 UserPhone = (infoUser(x.IsType, mapakn)) ? x.UserPhone : "",
                 IsStatus = x.IsStatus,
                 MaPakn = x.MaPakn,
+                fileUpload = x.fileUpload,
                 newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").GroupJoin(_files.Table, a => a.Id, b => b.NewsLogId, (a, b) => new NewsLogModel
                 {
                     Id = a.Id,
