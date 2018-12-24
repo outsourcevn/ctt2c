@@ -244,8 +244,6 @@ namespace AppPortal.AdminSite.Services.Administrator
             }
         }
 
-
-
         public IList<Notifications> GetNotifications(string username)
         {
             return _notifi.Table.Where(x => x.UserName == username).ToList();

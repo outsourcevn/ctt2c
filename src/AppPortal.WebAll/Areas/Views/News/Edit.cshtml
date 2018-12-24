@@ -1,0 +1,172 @@
+﻿@model NewsViewModel
+@{
+
+    ViewData["FeatureTitle"] = "Quản trị góp ý, phản ánh";
+    var title = "Sửa góp ý, phản ánh";
+
+    var formView = "frm_edit_news";
+
+    var StatusMessage = (string)TempData["StatusMessage"];
+
+    if (Model != null)
+    {
+        title += $" - Mã PAKN ({Model?.MaPakn})";
+    }
+    ViewData["Title"] = title;
+}
+
+@section Styles {
+    <style>
+        form#@formView label { font-weight: 700 !important; }
+    </style>
+}
+
+<div class="row">
+    <div class="col col-sm-12">
+        @await Html.PartialAsync("_StatusMessage", StatusMessage)
+        <div id="result_message"></div>
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">@ViewData["Title"]</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <form id="@formView" class="needs-validation" method="post">
+                <div class="card-body">
+                    <input type="hidden" readonly id="News_id" asp-for="Id" />
+                    <input type="hidden" readonly id="News_UserId" asp-for="UserId" />
+                    <input type="hidden" readonly id="News_UserEmail" asp-for="UserEmail" />
+                    <input type="hidden" readonly id="News_UserName" asp-for="UserName" />
+                    <input type="hidden" readonly id="News_UserFullName" asp-for="UserFullName" />
+                    <div class="row">
+                        <div class="col-sm-9">
+
+                            @*<div class="form-group">
+                                <label asp-for="CategoryId" class="control-label"></label>
+                                <input asp-for="CategoryId" required style="width: 0; border: 0; visibility: hidden;" class="form-control " />
+                                <span asp-validation-for="CategoryId" class="invalid-feedback"></span>
+
+                                <div class="demo-section k-content" style="height: 200px; overflow: auto;">
+                                    <div id="cat_treeview"></div>
+                                </div>
+                            </div>*@
+
+                            @*<div class="form-group">
+                               <label>
+                                    <input type="checkbox" checked="checked" /> Tự động đăng vào danh mục cha
+                                </label>
+                            </div>*@
+
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Abstract" class="control-label"></label>
+                                <textarea rows="5" asp-for="Abstract" class="form-control"></textarea>
+                                <span asp-validation-for="Abstract" class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Content" class="control-label"></label>
+                                <textarea rows="20" cols="30" asp-for="Content" class="form-control" style="width:100%; height:600px"></textarea>
+                                <span asp-validation-for="Content" class="invalid-feedback"></span>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3" style="border-left: 1px solid #dfdfdf">
+                            <div class="form-group">
+                                <label asp-for="Image" class="control-label"></label>
+                                <div class="demo-section k-content">
+                                    <input name="files" id="files" type="file" />
+                                </div>
+                                <input asp-for="Image" class="form-control" />
+                                <span asp-validation-for="Image" class="invalid-feedback"></span>
+                                <img id="image_preview" src="" style="width: 100px; height: 100px;" />
+                            </div>
+                            @*<div class="form-group">
+                                <label asp-for="Link" class="control-label"></label>
+                                <input asp-for="Link" class="form-control" />
+                                <span asp-validation-for="Link" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Sename" class="control-label"></label>
+                                <input asp-for="Sename" class="form-control" />
+                                <span asp-validation-for="Sename" class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MetaTitle" class="control-label"></label>
+                                <input asp-for="MetaTitle" class="form-control" />
+                                <span asp-validation-for="MetaTitle" class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MetaKeywords" class="control-label"></label>
+                                <input asp-for="MetaKeywords" class="form-control" />
+                                <span asp-validation-for="MetaKeywords" class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MetaDescription" class="control-label"></label>
+                                <textarea rows="5" asp-for="MetaDescription" class="form-control" mav></textarea>
+                                <span asp-validation-for="MetaDescription" class="invalid-feedback"></span>
+                            </div>*@
+                            <div class="form-group">
+                                <label asp-for="SourceNews" class="control-label">Nguồn tin</label>
+                                <input asp-for="SourceNews" class="form-control" mav>
+                                <span asp-validation-for="SourceNews" class="invalid-feedback"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Note" class="control-label">Ghi chú</label>
+                                <textarea rows="5" asp-for="Note" class="form-control" mav></textarea>
+                                <span asp-validation-for="Note" class="invalid-feedback"></span>
+                            </div>
+                            <input type="hidden" id="IsStatus"  asp-for="IsStatus"  />
+                            @*<div class="form-group">
+                                <label asp-for="IsStatus"></label>
+                                <select class="form-control" asp-for="IsStatus" asp-items="@ViewData["statusNews"] as IEnumerable<SelectListItem>"></select>
+                            </div>*@
+                            @*<div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input asp-for="IsShow" /> @Html.DisplayNameFor(model => model.IsShow)
+                                    </label>
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div asp-validation-summary="ModelOnly" class="invalid-feedback"></div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-default btn-flat"><i class="fa fa-fast-backward"></i> Quay lại danh sách</a>
+                        <button type="submit" class="btn btn-primary btn-flat">Cập nhật tin tức</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/news/scripts.js" asp-append-version="true"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript">
+        var ngNews = {
+            formName: '@formView'
+        };
+        ngNews.Image = '@Model.Image';
+        ngNews.CategoryId = '@Model.CategoryId';
+    </script>
+    <script src="~/js/news/edit.js" asp-append-version="true"></script>
+}

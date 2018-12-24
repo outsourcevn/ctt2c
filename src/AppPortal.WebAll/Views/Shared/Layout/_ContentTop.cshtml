@@ -1,0 +1,300 @@
+﻿@model NewsViewModel2
+@{
+    ViewData["Title"] = "THÔNG TIN TRAO ĐỔI (GÓP Ý, PHẢN ÁNH, HỎI ĐÁP)";
+    var formView = "frm_contact";
+    var data = ViewData["data"];
+}
+
+<!-- Core CSS  -->
+<link href="~/lib/kendo-ui/styles/kendo.common.min.css" rel="stylesheet" asp-append-version="true" />
+<link href="~/lib/kendo-ui/styles/kendo.default.min.css" rel="stylesheet" asp-append-version="true" />
+<!-- blueimp Gallery styles -->
+<link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css" crossorigin="anonymous">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="~/css/jquery.fileupload.css">
+<link rel="stylesheet" href="~/css/jquery.fileupload-ui.css">
+
+<style>
+
+    .k-editor .k-i-insert-video:before {
+        font-family: FontAwesome;
+        content: "\f167";
+        font-size: 16px;
+    }
+
+    .form-group select {
+        height: 30px;
+    }
+
+    .row {
+        margin: 0 !important;
+    }
+
+    #header {
+        height: 204px !important;
+    }
+
+    #block_main_menu li span {
+        height: 30px !important;
+    }
+
+    #block_main_menu .inner ul {
+        margin-bottom: 0 !important;
+    }
+
+    #block-search-form .form-text {
+        margin-top: 0 !important;
+    }
+
+    .col-md-8 .block {
+        width: 100% !important;
+    }
+</style>
+<!-- Modal -->
+<div id="myModal" class="modal fade content" role="dialog">
+    <div class="modal-dialog" style="max-width: 1000px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="display: flex;">
+                <div id="contact_form" class="row box-KN">
+                  
+                    <form id="frm_contact" class="needs-validation" method="post">
+                        <div class="row">
+                            <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
+                            <div float: left;" class="col-sm-12">
+                                <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                    <div class="radio">
+                                        <label><input type="radio" value="0" name="doituong" checked>Người dân</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" value="1" name="doituong">Doanh nghiệp</label>
+                                    </div>
+                                </div>
+
+
+                                <label for="UserFullName" class="col-sm-3 control-label">Họ tên:</label>
+                                <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                    <span id="senderName_error"></span>
+                                    <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên">
+                                </div>
+
+                                <label for="UserAddress" class="control-label col-sm-3">Địa chỉ:</label>
+                                <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" required placeholder="Địa chỉ"> </div>
+
+
+                                <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                    <div class="form-group row">
+                                        <select id="thanhpho" required class="col-sm-4">
+                                            <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
+                                        </select>
+                                        <select id="quantp" required class="col-sm-4">
+                                            <option selected disabled>--- Lựa chọn quận/huyện ---</option>
+                                        </select>
+                                        <select id="huyen" required class="col-sm-4">
+                                            <option selected disabled>--- Lựa chọn phường xã ---</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <label for="UserEmail" class="control-label col-sm-3">Điện thoại:</label>
+                                <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserPhone" required placeholder="Điện thoại"> </div>
+
+                                <label for="UserEmail" class="control-label col-sm-3">Địa chỉ E-mail:</label>
+                                <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc"> </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <p style="font-weight: 600;margin-top: 20px;">NỘI DUNG TRAO ĐỔI</p>
+                            <div class="col-sm-12">
+                                <div class="form-item col-sm-12">
+                                    <label asp-for="Name" class="control-label">Tiêu đề:</label>
+                                    <input asp-for="Name" class="form-control aui-text-placeholder" placeholder="Tiêu đề phản ánh" required />
+                                    <span asp-validation-for="Name" class="form-required"></span>
+                                </div>
+
+                                <div class="form-item col-sm-12">
+                                    <label asp-for="Link" class="control-label">Địa điểm:</label>
+                                    <input asp-for="Link" class="form-text" id="address_map" placeholder="Địa điểm diễn ra" />
+
+                                    <input type="hidden" id="lat" name="lat" />
+                                    <input type="hidden" id="lng" name="lng" />
+                                    <span asp-validation-for="Link" class="form-required"></span>
+                                </div>
+
+
+                                <div class="form-item col-sm-12" style="display: none;">
+                                    <label asp-for="Abstract" class="control-label">Tóm tắt:</label>
+                                    <textarea style="width:100%; height:150px" rows="10" asp-for="Abstract" class="form-text"></textarea>
+                                </div>
+
+                                <div class="form-item col-sm-12">
+                                    <label asp-for="Content" class="control-label">Nội dung trao đổi:</label>
+                                    <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text"></textarea>
+                                    <span asp-validation-for="Content" class="form-required"></span>
+                                </div>
+                            </div>
+                            <div class="row" style=" padding: 0px 0px 0px 35px; display: flex; ">
+                                <div id="captcha">
+                                </div>
+                                <span onclick="createCaptcha()" style=" font-size: 30px; font-weight: 900; color: red; padding: 0 10px;cursor: pointer " class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                <br />
+
+                            </div>
+                            <div class="row"  style=" padding: 5px 0px 0px 20px; display: flex; ">
+                                <div class="form-item col-sm-12">
+                                    <input type="text" style="width: 150px" class="form-control aui-text-placeholder" placeholder="Captcha" id="cpatchaTextBox" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <div asp-validation-summary="All" class="form-required"></div>
+                        </div>
+                    </form>
+                    <div class="form-group" style="width: 100%;">
+                        <label style="padding: 10px;" for="recipient-name" class="col-form-label">Tài liệu đình kèm:</label>
+
+
+                        <form id="fileupload" method="POST" enctype="multipart/form-data">
+                            <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                            <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                            <div class="row fileupload-buttonbar">
+                                <div class="col-lg-6">
+                                    <!-- The fileinput-button span is used to style the file input field as button -->
+                                    <span class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Thêm tệp tin...</span>
+                                        <input type="file" name="files" multiple>
+                                    </span>
+                                    <!-- The global file processing state -->
+                                    <span class="fileupload-process"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    Chỉ nhận file jpg, png, pdf, doc, docx, xls, xlsx (Tối đa 5 file)
+                                </div>
+                                <!-- The global progress state -->
+                                <div class="col-lg-5 fileupload-progress fade">
+                                    <!-- The global progress bar -->
+                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                    </div>
+                                    <!-- The extended global progress state -->
+                                    <div class="progress-extended">&nbsp;</div>
+                                </div>
+                            </div>
+                            <!-- The table listing the files available for upload/download -->
+                            <table id="filebaocao" role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                        </form>
+                    </div>
+
+
+                    <div class="form-group" style="margin-bottom:20px;"> <label for="inputEmail3" class="col-sm-3 control-label"></label> <div class="col-sm-9"> <button type="submit" onclick="onCompleted()" class="btn btn-primary"><i class="MR5 fa fa-paper-plane" aria-hidden="true"></i>Gửi phản ánh, kiến nghị</button> </div> </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="content_top" class="block container" style="padding-bottom: 10px">
+    <div class="region row">
+        <div class="col-md-8">
+                <h3 class="block_title_black">GÓP Y, PHẢN ÁNH</h3>
+                <div id="contact_form2" class="row box-KN" style="padding: 5px">
+                    <p style="font-weight: 600">&nbsp; THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
+                    <div class="row" style="margin-bottom: 10px !important">
+
+                        <label for="UserFullName" class="col-sm-3 control-label">Họ tên:</label>
+                        <div class="col-sm-12"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName" required placeholder="Nhập đầy đủ họ và tên"> </div>
+
+
+                        <label for="UserEmail" class="control-label col-sm-3">Điện thoại:</label>
+                        <div class="col-sm-12"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserPhone" required placeholder="Điện thoại"> </div>
+
+                        <label for="UserEmail" class="control-label col-sm-3">Địa chỉ E-mail:</label>
+                        <div class="col-sm-12"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc"> </div>
+
+                        <label for="UserAddress" class="control-label col-sm-3">Địa chỉ:</label>
+                        <div class="col-sm-12"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" required placeholder="Địa chỉ"> </div>
+
+                    </div>
+                    <p style="font-weight: 600">&nbsp; NỘI DUNG TRAO ĐỔI</p>
+                    <div class="row">
+
+                        <label for="UserEmail" class="control-label col-sm-3">Tiêu đề</label>
+                        <div class="col-sm-12"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Tiêu đề"> </div>
+
+                        <label for="UserAddress" class="control-label col-sm-3">Địa điểm diễn ra</label>
+                        <div class="col-sm-12"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" required placeholder="Địa điểm diễn ra"> 
+                        </div>
+                        
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-4">
+            <section class="block block_business_news">
+                <h3 class="block_title_black">TIN MỚI NHẤT<a href="#" class="view_all" style="opacity: 0.5;"><span><span>Tất cả tin</span></span></a></h3>
+                <div class="content">
+                    <div id="tin-moi-nhat-content" class="left">
+                       
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlLvJ9NzDhCd9z-urxEAe83JGCqv1G0TI&libraries=places&callback=googleInput2" async defer></script>
+@section Scripts {
+    <script src='https://www.google.com/recaptcha/api.js?render=6LcFE30UAAAAAF_MZdIbIC7TCh3oks7Hg_zKOeD2'></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LcFE30UAAAAAF_MZdIbIC7TCh3oks7Hg_zKOeD2', { action: 'action_name' })
+                .then(function (token) {
+                    // Verify the token on the server.
+                });
+        });
+    </script>
+    <script>
+        $(document).ready(
+            function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            }
+        );
+    </script>
+}
+<script>
+
+    function googleInput2() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -33.8688, lng: 151.2195 },
+            zoom: 13,
+            mapTypeId: 'roadmap'
+        });
+
+        var input = document.getElementById('address_map');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
+            if (places.length > 0) {
+                $("#lat").val(places[0].geometry.location.lat());
+                $("#lng").val(places[0].geometry.location.lng());
+                var address_map = $("#address_map").val();
+                var html = ' <div style="width: 100%"><iframe id="mapframe" height="280" src = "https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=' + encodeURI(address_map) + '&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder = "0" scrolling = "no" marginheight = "0" marginwidth = "0" > <a href="https://www.maps.ie/create-google-map/">Add map to website</a></iframe ></div > <br />';
+                $("#mapframe").html(html);
+            }
+        });
+    }
+
+</script>
+<style>
+    .pac-container {
+        z-index: 10000 !important;
+    }
+</style>

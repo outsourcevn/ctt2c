@@ -60,10 +60,9 @@ namespace AppPortal.ApiHost
 
             services.AddOptions();
             // Setting up CORS
-            var origins = new string[] {
-                Configuration.GetSection("AppSettings:CorsSites:AdminSite").Value,
-                Configuration.GetSection("AppSettings:CorsSites:PublishSite").Value
-            };
+            //var origins = new string[] {
+            //    Configuration.GetSection("AppSettings:CorsSites:PublishSite").Value
+            //};
             //services.AddCors(options =>
             //{
             //    options.AddPolicy("AllowSpecificOrigin",
@@ -204,7 +203,7 @@ namespace AppPortal.ApiHost
 
             app.UseStaticFiles();
             // Shows UseCors with named policy.
-            app.UseCors("AllowSpecificOrigin");
+            //app.UseCors("AllowSpecificOrigin");
             app.UseCors("corsGlobalPolicy");
             //app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseAuthentication();

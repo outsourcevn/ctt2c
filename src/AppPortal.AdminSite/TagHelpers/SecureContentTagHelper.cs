@@ -58,7 +58,7 @@ namespace AppPortal.AdminSite.TagHelpers
                 }
 
                 var actionId = $"{Area}:{Controller}:{Action}";
-
+                
                 foreach (var role in roles)
                 {
                     if (role.AccessPage == null)

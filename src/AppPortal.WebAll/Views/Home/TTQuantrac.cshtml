@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewData["Title"] = "Thông tin quan trắc";
+}
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<style>
+    h1 {
+        font-size: 24px;
+        padding: 10px 10px 10px 0px;
+    }
+
+    #right_sidebar {
+        display: none !important;
+    }
+
+    .embed-container {
+        position: relative;
+        padding-bottom: 80%;
+        height: 0;
+        max-width: 100%;
+    }
+
+        .embed-container iframe, .embed-container object, .embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    small {
+        position: absolute;
+        z-index: 40;
+        bottom: 0;
+        margin-bottom: -15px;
+    }
+</style>
+<h1>Thông tin quan trắc</h1>
+
+<div id="chart_div"></div>
+<div class="sc-iRbamj gRGzsx" style="position: relative;margin-left: 76px;"><div><span class="sc-jlyJG kgyyWB">Thang đo VN AQI</span></div><div style="flex: 1 1 0%; display: flex; flex-direction: row;"><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(0, 228, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">0 – 50</span><span class="sc-gipzik zJvnp" font-size="6"> (Tốt)</span></div></div><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 255, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">51 – 100</span><span class="sc-gipzik zJvnp" font-size="6"> (Trung bình)</span></div></div><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 126, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">101 – 200</span><span class="sc-gipzik zJvnp" font-size="6"> (Kém)</span></div></div><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 0, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">201 – 300</span><span class="sc-gipzik zJvnp" font-size="6"> (Xấu)</span></div></div><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(126, 0, 35);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">Trên 300</span><span class="sc-gipzik zJvnp" font-size="6"> (Nguy hại)</span></div></div></div></div>
+<script src="~/js/home/home.js" asp-append-version="true"></script>
+<script>
+    //google.charts.load('current', { packages: ['corechart', 'bar'] });
+    //$(document).ready(function () {
+    //    $.ajax({
+    //        headers: {
+    //            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmY4ZWU5NDJmZTAwMTE1M2JmYmQiLCJpYXQiOjE1MzYyMjk4MTl9.-uwH6C3Fe3Q7A2xyX0-SK_YREZiZPM5Osh0CBqH-Z0Y",
+    //        },
+    //        type: "GET",
+    //        url: "http://171.244.21.99:5000/aqi/AIR_QUALITY/hour",
+    //        success: function (response) {
+    //            var res = response.data;
+    //            var dataHeader = ['Element', 'Chỉ số AQI'];
+    //            var data = []; data2 = [];
+    //            data.push(dataHeader);
+    //            for (var i = 0; i < res.length; i++) {
+    //                //dataHeader.push(res[i].name);
+    //                var obj = [];
+    //                obj.push(res[i].name, res[i].aqi.value);
+    //                data.push(obj);
+
+    //                // get name and id tram
+    //                var obj2 = {
+    //                    name: res[i].name,
+    //                    id: res[i]._id
+    //                };
+    //                data2.push(obj2);
+    //            }
+    //            console.log(data2);
+    //            google.charts.setOnLoadCallback(drawMultSeries(data));
+
+    //            layradata(data2);
+
+    //        }, error: function (er) {
+    //            debugger
+    //        }
+    //    });
+
+    //});
+
+    //function drawMultSeries(data) {
+    //    var data = google.visualization.arrayToDataTable(data);
+    //    var options = {
+    //        title: 'Chỉ số AQI tại thời điểm hiện tại',
+    //    };
+    //    var chart = new google.visualization.ColumnChart(
+    //        document.getElementById('chart_div'));
+    //    chart.draw(data, options);
+    //}
+
+    //function drawMultSeries2(data, chart_div) {
+    //    var data = google.visualization.arrayToDataTable(data);
+    //    var options = {
+    //        title: 'Chỉ số AQI',
+    //    };
+    //    var chart = new google.visualization.ColumnChart(
+    //    document.getElementById(chart_div));
+    //    chart.draw(data, options);
+    //}
+
+    function layradata(data2) {
+        $.each(data2, function (idx, value) {
+            $.ajax({
+                headers: {
+                    Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmY4ZWU5NDJmZTAwMTE1M2JmYmQiLCJpYXQiOjE1MzYyMjk4MTl9.-uwH6C3Fe3Q7A2xyX0-SK_YREZiZPM5Osh0CBqH-Z0Y",
+                },
+                type: "GET",
+                url: "http://171.244.21.99:5000/aqi/"+ value.id +"/day?from=2018/10/25&to=2018/11/02",
+                success: function (response) {
+                    debugger
+                    //var res = response.data;
+                    //var dataHeader = ['Element', 'Chỉ số AQI'];
+                    //var data = []; data2 = [];
+                    //data.push(dataHeader);
+                    //for (var i = 0; i < res.length; i++) {
+                    //    //dataHeader.push(res[i].name);
+                    //    var obj = [];
+                    //    obj.push(res[i].name, res[i].aqi.value);
+                    //    data.push(obj);
+
+                    //    // get name and id tram
+                    //    var obj2 = {
+                    //        name: res[i].name,
+                    //        id: res[i]._id
+                    //    };
+                    //    data2.push(obj2);
+                    //}
+                    //console.log(data2);
+                    //google.charts.setOnLoadCallback(drawMultSeries(data));
+
+                    //layradata(data2);
+
+                }, error: function (er) {
+                    debugger
+                }
+            });
+        });
+    }
+</script>
