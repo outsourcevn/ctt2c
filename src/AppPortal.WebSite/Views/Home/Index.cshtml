@@ -10,32 +10,8 @@
     <div class="region row">
         <div class="col-md-8">
             <section class="block_business_news block">
-                <h3 class="block_title_black">Bản đồ môi trường</h3>
-                <div class="content">
-                    <style>
-                        .embed-container {
-                            position: relative;
-                            padding-bottom: 80%;
-                            height: 0;
-                            max-width: 100%;
-                        }
-
-                            .embed-container iframe, .embed-container object, .embed-container iframe {
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                            }
-
-                        small {
-                            position: absolute;
-                            z-index: 40;
-                            bottom: 0;
-                            margin-bottom: -15px;
-                        }
-                    </style><div class="embed-container"><small><a href="@url" style="color:#0000FF;text-align:left" target="_blank">View larger map</a></small><br><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Bản đồ môi trường tổng hợp" src="@url"></iframe></div>
-                </div>
+                <h3 class="block_title_black">Phản ánh kiến nghị</h3>
+               
             </section>
         </div>
         <div class="col-md-4">
@@ -186,6 +162,57 @@
     <script src="~/js/home/home.js" asp-append-version="true"></script>
     <script src="~/js/date.format.js"></script>
     <script>
+
+        $(document).ready(function () {
+            getdata();
+        });
+
+        function getdata() {
+            $.ajax({
+                url: appConfig.apiHostUrl + "/api/news/getNewsAno",
+                data: {
+                    name: $("#inputName").val(),
+                    mapakn: $("#inputEmail").val(),
+                    sdt: $("#inputSdt").val(),
+                },
+                success: function (result) {
+                    var dataContainer = $("#lstGopy");
+                    $('#lstGopy').pagination({
+                        dataSource: result,
+                        pageSize: 5,
+                        showGoInput: true,
+                        showGoButton: true,
+                        callback: function (data, pagination) {
+                            var html = templateData(data, $("#inputEmail").val());
+                            dataContainer.html(html);
+                        }
+                    })
+                }
+            });
+        }
+        function templateData(data, mapakn) {
+
+            var html = '';
+            for (var i = 0; i < data.length; i++) {
+                var noidung = '';
+                noidung = data[i].Name;
+                var linkDetail = appConfig.current + "/home/DetailTracuu?id=" + data[i].Id;
+                if (mapakn !== "" && mapakn !== undefined) {
+                    linkDetail += "&mapakn=" + mapakn;
+                }
+                var content = '<div class="MB20" style="font-size: 14px;">';
+                content += '<div class="media-object-default media-object-default1 boT">';
+                content += '<div class="media">';
+                content += '<div class="media-left"> <a href="' + linkDetail + '"><img class="media-object img-thumbnail img-circle" src="../../images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">';
+                content += '<p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="' + linkDetail + '">' + data[i].UserFullName + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i>18/12/18</p> <h4 class="media-heading">';
+                content += '<a href="' + linkDetail + '" class="tieu-de-pakn">Kiến nghị về việc: ' + data[i].Abstract + '</a></h4>';
+                content += '<p class="text-justify"><b>Nội dung kiến nghị:</b> ' + noidung + '</p>';
+                content += '</div></div></div></div>';
+                html += content;
+            }
+            return html;
+        }
+
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=2", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
