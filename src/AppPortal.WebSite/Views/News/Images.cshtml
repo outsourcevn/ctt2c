@@ -6,61 +6,30 @@
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<link href="~/css/news.css" rel="stylesheet" />
-<style>
-    .firstNewsetItem {
-        display: grid !important;
-        font-size: 14px !important;
-        line-height: 30px !important;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08);
-        padding: 12px !important;
-        margin-top: 10px !important;
-    }
-</style>
 
 <style>
-    h1 {
-        font-size: 24px;
-        padding: 10px 10px 10px 0px;
-    }
+
 
     #right_sidebar {
         display: none !important;
     }
 
-    .embed-container {
-        position: relative;
-        padding-bottom: 80%;
-        height: 0;
-        max-width: 100%;
+   
+    .flexslider .slides img {
+        max-height: 100%;
     }
 
-        .embed-container iframe, .embed-container object, .embed-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-    small {
-        position: absolute;
-        z-index: 40;
-        bottom: 0;
-        margin-bottom: -15px;
-    }
 </style>
-<link href="~/css/news.css" rel="stylesheet" />
 
-<div class="container">
+<div class="container-fluid">
     <h1 style="padding: 15px;">@ViewData["Title"]</h1>
     <div class="col-md-8">
         <section class="block_business_news block">
             <div class="content">
                 <div id="content_top2" style="padding-top: 14px;">
                     <div class="region">
-                        <aside id="block_front_slider" class="block slider" style="height: 520px;width: 100%;padding-right: 28px;">
-                            <div class="flexslider slider" id="block_front_slides" style="height: 450px;width: 100%;">
+                        <aside id="block_front_slider" class="block slider" style="height: auto;width: 100%; max-height:520px;">
+                            <div class="flexslider slider" id="block_front_slides" style="max-height: 450px;width: 100%;height: auto;" >
                                 <ul class="slides" id="home-image-preview"></ul>
                             </div>
                             <div class="flexslider carousel" id="block_front_carousel">
@@ -76,7 +45,7 @@
     <div class="col-md-4">
         <div class="col-md-12">
             <section class="block block_business_news">
-                <h3 class="block_title_black">CHUYÊN MỤC TIN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                <h3 class="titleBar">CHUYÊN MỤC TIN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="content">
                     <div class="right">
                         <ul id="tin-chuyen-muc-content"></ul>
@@ -86,7 +55,7 @@
         </div>
         <div class="col-md-12">
             <section class="block block_business_news">
-                <h3 class="block_title_black">TIN MỚI<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                <h3 class="titleBar">TIN MỚI<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="content">
                     <div class="right">
                         <ul id="tin-moi-content"></ul>
@@ -96,7 +65,7 @@
         </div>
         <div class="col-md-12">
             <section class="block block_business_news">
-                <h3 class="block_title_black">TIN XEM NHIỀU<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                <h2 class="titleBar">TIN XEM NHIỀU<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h2>
                 <div class="content">
                     <div class="right">
                         <ul id="tin-xem-nhieu-content"></ul>
@@ -115,7 +84,7 @@
             var slide = '';
             for (var i = 0; i < data.length; i++) {
                 preview += '<li>';
-                preview += '<img src="' + data[i].url + '" height="430" width = "100%"/>';
+                preview += '<img src="' + data[i].url + '" style="height: auto;width: 100%;max-height: 450px;" />';
                 preview += '<p class="flex-caption" style="width:100%">';
                 preview += data[i].description;
                 preview += '</p>';

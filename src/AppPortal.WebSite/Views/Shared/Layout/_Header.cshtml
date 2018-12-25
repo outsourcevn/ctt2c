@@ -2,6 +2,7 @@
     #myNavbar li span {
         font-weight: 600;
         font-size: 12px;
+        z-index: 99999;
     }
 
     /*Dropdown menu*/
@@ -11,6 +12,7 @@
         padding: 16px;
         font-size: 16px;
         border: none;
+        z-index: 99999;
     }
 
     .dropdown {
@@ -24,7 +26,7 @@
         background-color: #f1f1f1;
         min-width: 170px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
+        z-index: 100000;
     }
 
         .dropdown-content a {
@@ -32,6 +34,7 @@
             padding: 12px 16px;
             text-decoration: none;
             display: block;
+            
         }
 
             .dropdown-content a:hover {
@@ -44,14 +47,23 @@
 
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
+        z-index: 99999;
     }
     .navbar .navbar-nav {
         display: inline-block;
         float: none;
         vertical-align: top;
+        z-index: 1000000;
+        background-color: #f8f8f8;
     }
     .navbar .navbar-collapse {
         text-align: center;
+        z-index: 1000000;
+    }
+    .span-menu {
+        margin-top: 15px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 </style>
 <header>
@@ -92,7 +104,8 @@
                     <a href="/home/index2"><span class="bg">TRANG CHỦ</span></a>
                 </li>
                 <li class="@ViewData["activetintuc"] dropdown">
-                    <a href="/home/news"><span class="bg">TRUYỀN THÔNG</span></a>
+                    @*<span class="bg span-menu">TRUYỀN THÔNG</span>*@
+                    <span class="btn btn-light btn-block" style="margin-top:9px;">TRUYỀN THÔNG</span>
                     <div class="dropdown-content">
                         <a href="/home/news">Tin tức truyền thông</a>
                         <a href="/news/Images">Ảnh</a>
@@ -113,7 +126,7 @@
                 </li>
 
                 <li class="@ViewData["activeMap"] dropdown">
-                    <a href="/news/vanban"><span class="bg">VĂN BẢN</span></a>
+                    <span class="btn btn-light btn-block" style="margin-top:9px;">VĂN BẢN</span>
                     <div class="dropdown-content">
                         <a href="/news/vanban">Quy phạm pháp luật</a>
                         <a href="/news/vanbanquychuan">Quy chuẩn, tiêu chuẩn kỹ thuật</a>

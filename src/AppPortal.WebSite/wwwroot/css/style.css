@@ -236,7 +236,7 @@ ul.pager { padding: 10px 0; }
 
 
 
-#block_front_carousel .flex-viewport { z-index: 100; width: 415px; margin: 0 auto; }
+#block_front_carousel .flex-viewport { z-index: 100; width: 90%; margin: 0 auto; }
 #block_front_carousel li { background: none !important; margin-bottom: 0 !important; }
 #block_front_carousel .flex-direction-nav { clear: both; float: right; height: 19px; margin: 2px 0 0; position: absolute; top: 14px; z-index: 3; width: 100%; }
     #block_front_carousel .flex-direction-nav li { display: block; width: 15px !important; height: 19px !important; position: absolute; float: left; opacity: 1; margin: 0px 0px 0px 2px; }
