@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-4">
             <section class="block block_business_news">
-                <h3 class="block_title_black">VĂN BẢN CHÍNH SÁCH<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                <h3 class="block_title_black">VĂN BẢN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="content">
                     @*<div id="van-ban-chinh-sach-first" class="left">
                             <article class="border-dot">
@@ -84,8 +84,8 @@
             <section class="block_business_news block">
                 <h3 class="block_title_black">VIDEO<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="content">
-                    <aside id="block_front_slides_v" class="block slider" style="height: 520px;padding-right: 28px;">
-                        <div class="flexslider slider video_home" id="block_front_slides_video" style="height: 450px;">
+                    <aside id="block_front_slides_v" class="block slider" style="height: 100%;">
+                        <div class="flexslider slider video_home" id="block_front_slides_video" style="height: 100%;">
                             <ul class="slides" id="contentVideo">
                                 
                             </ul>
@@ -121,7 +121,7 @@
                 <div class="content">
                     <div id="content_top2" style="padding-top: 14px;">
                         <div class="region">
-                            <aside id="block_front_slider" class="block slider" style="height: 520px;width: 100%;padding-right: 28px;">
+                            <aside id="block_front_slider" class="block slider" style="height: 520px;width: 100%;">
                                 <div class="flexslider slider" id="block_front_slides" style="height: 450px;width: 100%;">
                                     <ul class="slides" id="home-image-preview">
                                         
@@ -382,7 +382,7 @@
             var preview = '';
             var slide = '';
             for (var i = 0; i < data.length; i++) {
-                preview += '<li> <video style="width: 100%" height="430" controls> <source src="' + data[i].url +'"> </video> <p class="flex-caption" style="width:100%;">'+data[i].description+'</p> </li>';
+                preview += '<li> <video style="width: 100%",height="100%" controls> <source src="' + data[i].url +'"> </video> <p class="flex-caption" style="width:100%;">'+data[i].description+'</p> </li>';
 
                 slide += '<li>';
                 slide += '<img src="' + data[i].filesImage + '" />';
@@ -406,7 +406,7 @@
                 controlNav: false,
                 directionNav: false,
                 itemWidth: 120,
-                itemMargin: 30,
+                itemMargin: 50,
                 animationDuration: 1000,
                 asNavFor: '#block_front_slides_video'
             });
