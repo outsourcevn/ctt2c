@@ -6,204 +6,154 @@
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<link href="~/css/news.css" rel="stylesheet" />
-<style>
-    .firstNewsetItem {
-        display: grid !important;
-        font-size: 14px !important;
-        line-height: 30px !important;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08);
-        padding: 12px !important;
-        margin-top: 10px !important;
-    }
-</style>
 
 <style>
-    h1 {
-        font-size: 24px;
-        padding: 10px 10px 10px 0px;
-    }
 
     #right_sidebar {
         display: none !important;
     }
-
-    .embed-container {
-        position: relative;
-        padding-bottom: 80%;
-        height: 0;
-        max-width: 100%;
-    }
-
-        .embed-container iframe, .embed-container object, .embed-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-    small {
-        position: absolute;
-        z-index: 40;
-        bottom: 0;
-        margin-bottom: -15px;
+    table,
+    thead,
+    tr,
+    tbody,
+    th,
+    td {
+        text-align: center;
     }
 </style>
-<link href="~/css/news.css" rel="stylesheet" />
 
-<div class="container" style="margin-top:20px;">
-    <div class="result">
-        <table class="grid-vb" cellpadding="0" cellspacing="0">
+<div style="margin-top:20px;">
+    <div class="table-responsive-xl">
+        <table class="table table-bordered table-striped ">
+            <thead class="">
+                <tr>
+                    <th>STT</th>
+                    <th>Số văn bản</th>
+                    <th>Tên văn bản</th>
+                    <th>Ngày ban hành</th>
+                    <th>Loại văn bản</th>
+                    <th>Cơ quan ban hành</th>
+
+                </tr>
+            </thead>
             <tbody>
-                <tr class="vb-header"><td width="25px" align="center"><h4 style="font-weight:bold;">STT</h4></td><td width="110px" align="center"><h4 style="font-weight:bold;">Số văn bản</h4></td><td width="400px" align="center"><h4 style="font-weight:bold;padding-left:4px;">Tên văn bản</h4></td><td width="80px" align="center"><h4 style="font-weight:bold;">Ngày ban hành</h4></td><td width="110px" align="center"><h4 style="font-weight:bold;">Loại văn bản</h4></td><td width="120px" align="center"><h4 style="font-weight:bold;">Cơ quan ban hành</h4></td></tr>
-                <tr class="vb-item1" style="background-color:#EDF2F6;">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">1</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">Thông tư số 11/2018/TT-BKHCN</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3069"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Thông tư số 11/2018/TT-BKHCN">Thông tư số 11/2018/TT-BKHCN </span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            06/08/2018&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Thông tư</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Khoa học và Công nghệ</span></td>
+                <tr>
+                    <td>1</td>
+                    <td>106/2018/TT-BTC<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3083"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td>Sửa đổi bổ sung thi hành một số điều của Luật thuế bảo vệ môi trường</td>
+                    <td>15/11/2018</td>
+                    <td>Thông tư</td>
+                    <td>Bộ Tài chính</td>
                 </tr>
-                <tr class="vb-item1">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">2</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">Dự thảo thông tư Quy định KTQT môi trường</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3066"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Dự thảo Thông tư Quy định kỹ thuật quan trắc môi trường (2017)">Dự thảo Thông tư Quy định kỹ thuật quan trắc môi trường (2017) </span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            11/08/2017&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Thông tư</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                <tr>
+                    <td>2</td>
+                    <td>14/2018/TT-BTNMT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3081"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td>Quy định kỹ thuật về quy trình công tác thông tin, dữ liệu khi tượng thủy văn</td>
+                    <td>18/10/2018</td>
+                    <td>Thông tư</td>
+                    <td>Bộ Tài nguyên và Môi trường</td>
+
                 </tr>
-                <tr class="vb-item1" style="background-color:#EDF2F6;">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">3</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">20/2017/TT-BTNMT</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3060"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Ban hành TT Định mức kinh tế - kỹ thuật hoạt động quan trắc môi trường">Ban hành TT Định mức kinh tế - kỹ thuật hoạt động quan trắc môi ...</span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            08/08/2017&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Thông tư</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                <tr>
+                    <td>3</td>
+                    <td>13/2018/TT-BTTTT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3081"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td>Quy định danh mục sản phẩm an toàn thông tin mạng nhập khẩu theo giấy phép</td>
+                    <td>15/10/2018</td>
+                    <td>Thông tư</td>
+                    <td>Bộ Thông tin và Truyền thông</td>
                 </tr>
-                <tr class="vb-item1">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">4</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">73/2017/NĐ-CP</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3059"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Về thu thập, quản lý, khai thác và sử dụng thông tin, dữ liệu tài nguyên và môi trường">Về thu thập, quản lý, khai thác và sử dụng thông tin, dữ liệu tài ...</span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            14/06/2017&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Nghị định</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Thủ tướng Chính phủ</span></td>
+                <tr>
+                    <td>4</td>
+                    <td>20/2018/QĐ-UBND<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3087"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td>Mức chi sự nghiệp bảo vệ môi trường tren địa bàn tỉnh</td>
+                    <td>05/10/2018</td>
+                    <td>Quyết định</td>
+                    <td>UBND tỉnh Lâm Đồng</td>
+
                 </tr>
-                <tr class="vb-item1" style="background-color:#EDF2F6;">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">5</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">Thông tư số 06/2017/TT-BKHCN</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3070"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Thông tư số 06/2017/TT-BKHCN">Thông tư số 06/2017/TT-BKHCN </span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            25/05/2017&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Thông tư</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Khoa học và Công nghệ</span></td>
+                <tr>
+                    <td>5</td>
+                    <td>136/2018/NĐ-CP<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3076"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td>Sửa đổi một số điều của các nghị định liên quan đến điều kiện đầu tư kinh doanh...</td>
+                    <td>05/10/2018</td>
+                    <td>Nghị định</td>
+                    <td>Chính phủ</td>
+
                 </tr>
-                <tr class="vb-item1">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">6</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">36/2017/NĐ-CP</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3056"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Nghị định quy định chức năng, nhiêm vụ, quyền hạn và cơ cấu tổ chức của Bộ Tài nguyên và Môi trường">Nghị định quy định chức năng, nhiêm vụ, quyền hạn và cơ cấu tổ chức ...</span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            04/04/2017&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Nghị định</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Chính phủ</span></td>
+                <tr>
+                    <td> 6</td>
+                    <td> 20/2018/QĐ-UBND<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3090"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td> Quy định một số mức chi sự nghiệp bảo vệ môi trường trên địa bàn tỉnh Lâm Đồng</td>
+                    <td> 05/10/2018</td>
+                    <td> Quyết định</td>
+                    <td> UBND tỉnh Lâm Đồng</td>
+
                 </tr>
-                <tr class="vb-item1" style="background-color:#EDF2F6;">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">7</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">04/2017/TT-BTNMT</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3057"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy định xây dựng định mức kinh tế  - kỹ thuật ngành tài nguyên và môi trường">Quy định xây dựng định mức kinh tế - kỹ thuật ngành tài nguyên và ...</span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            03/04/2017&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Thông tư</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                <tr>
+                    <td> 7</td>
+                    <td>579/2018/UBTVQH14<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3084"><img class="right" src="~/images/doc-download.png"></a> </td>
+                    <td>Biểu thế bảo vệ môi trường </td>
+                    <td> 26/09/2018</td>
+                    <td> Nghị quyết</td>
+                    <td> Uỷ ban Thường vụ Quốc hội</td>
+
                 </tr>
-                <tr class="vb-item1">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">8</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">03/2016/TT-BTNMT</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3048"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Ban hành Quy chuẩn kỹ thuật Quốc gia về môi trường">Ban hành Quy chuẩn kỹ thuật Quốc gia về môi trường </span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            10/03/2017&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Thông tư</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                <tr>
+                    <td>8</td>
+                    <td>09/2018/TT-BTNMT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3072"><img class="right" src="~/images/doc-download.png"></a> </td>
+                    <td>Quy chuẩn kỹ thuật quốc gia về môi trường </td>
+                    <td> 14/09/2018</td>
+                    <td> Thông tư</td>
+                    <td> Bộ Tài nguyên và Môi trường</td>
+
                 </tr>
-                <tr class="vb-item1" style="background-color:#EDF2F6;">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">9</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">02/2017TT-BTNMT</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3047"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy định định mức kỹ thuật và định mức kinh tế - kỹ thuật lập báo cáo hiện trạng môi trường">Quy định định mức kỹ thuật và định mức kinh tế - kỹ thuật lập ...</span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            07/03/2017&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Thông tư</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                <tr>
+                    <td> 9</td>
+                    <td> 08/2018/TT-BTNMT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3073"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td> Quy chuẩn kỹ thuật quốc gia về môi trường</td>
+                    <td> 14/09/2018</td>
+                    <td> Thông tư</td>
+                    <td> Bộ Tài nguyên và Môi trường</td>
+
                 </tr>
-                <tr class="vb-item1">
-                    <td class="gbt-row-col-doc-1" align="center"><span class="col-doc">10</span></td>
-                    <td class="gbt-row-col-doc-2" align="center"><span class="col-doc left" style="width:100px;">48/2016/TT-BTNMT</span><a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3046"><img class="right" src="~/images/doc-download.png"></a></td>
-                    <td class="gbt-row-col-doc-3" style="padding-left:4px;" align="left"><span class="col-doc" title="Quy định kỹ thuật cơ sở dữ liệu nền địa lý tỷ lệ 1: 250.000">Quy định kỹ thuật cơ sở dữ liệu nền địa lý tỷ lệ 1: 250.000 ...</span></td>
-                    <td class="gbt-row-col-doc-4" align="center">
-                        <span class="col-doc">
-                            28/12/2016&nbsp;&nbsp;
-                        </span>
-                    </td>
-                    <td class="gbt-row-col-doc-5" align="center"><span class="col-doc">Thông tư</span></td>
-                    <td class="gbt-row-col-doc-6" align="center"><span class="col-doc">Bộ Tài nguyên và Môi trường</span></td>
+                <tr>
+                    <td>10</td>
+                    <td> 03/2018/TT-BTNMT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3074"><img class="right" src="~/images/doc-download.png"></a></td>
+                    <td> Sửa đổi, bãi bổ một số quy đinh về thủ tục hành chính liên quan đến kiểm tra ...</td>
+                    <td> 14/08/2018</td>
+                    <td>Thông tư </td>
+                    <td>Bộ Tài nguyên và Môi trường </td>
+
                 </tr>
+
             </tbody>
         </table>
-        <div id="mod_listnews_paging">
-            <div class="paging_list">
-                <ul class="paging_list_ul">
-                    <li>
-                        <a href="vanban_vb.aspx?&amp;pg=1">
-                            Đầu
-                        </a>
-                    </li>
-                    <li><a class="paging_list_current" href="vanban_vb.aspx?&amp;pg=1">1</a></li>
-                    <li><a href="vanban_vb.aspx?&amp;pg=2">2</a></li>
-                    <li><a href="vanban_vb.aspx?&amp;pg=3">3</a></li>
-                    <li><a href="vanban_vb.aspx?&amp;pg=4">4</a></li>
-                    <li><a href="vanban_vb.aspx?&amp;pg=5">5</a></li>
-                    <li>
-                        <a href="vanban_vb.aspx?&amp;pg=2">
-                            &gt;&gt;
-                        </a>
-                    </li>
-                    <li>
-                        <a href="vanban_vb.aspx?&amp;pg=306">
-                            Cuối
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    </div>
+    
+    <div id="mod_listnews_paging">
+        <div class="paging_list">
+            <ul class="paging_list_ul">
+                <li>
+                    <a href="vanban_vb.aspx?&amp;pg=1">
+                        Đầu
+                    </a>
+                </li>
+                <li><a class="paging_list_current" href="vanban_vb.aspx?&amp;pg=1">1</a></li>
+                <li><a href="vanban_vb.aspx?&amp;pg=2">2</a></li>
+                <li><a href="vanban_vb.aspx?&amp;pg=3">3</a></li>
+                <li><a href="vanban_vb.aspx?&amp;pg=4">4</a></li>
+                <li><a href="vanban_vb.aspx?&amp;pg=5">5</a></li>
+                <li>
+                    <a href="vanban_vb.aspx?&amp;pg=2">
+                        &gt;&gt;
+                    </a>
+                </li>
+                <li>
+                    <a href="vanban_vb.aspx?&amp;pg=306">
+                        Cuối
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
