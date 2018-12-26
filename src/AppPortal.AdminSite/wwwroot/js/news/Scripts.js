@@ -28,6 +28,8 @@ const CATS_API = {
 function formatDate(date) {
     if (date == undefined) {
         date = new Date();
+    } else {
+        date = new Date(date);
     }
     var monthNames = [
         "Tháng Một", "Tháng Hai", "Tháng Ba",

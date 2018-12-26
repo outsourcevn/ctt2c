@@ -73,6 +73,10 @@
         .vanbanphapquy {
             display: none;
         }
+
+        .k-datetimepicker {
+            display: inline !important;
+        }
     </style>
 }
 <div class="row">
@@ -270,6 +274,14 @@
     <script src="~/js/news/scripts.js" asp-append-version="true"></script>
     @await Html.PartialAsync("_ValidationScriptsPartial")
     <script type="text/javascript">
+        $(document).ready(function () {
+            // create DateTimePicker from input HTML element
+            $("#OnPublished").kendoDateTimePicker({
+                value: new Date(),
+                dateInput: true
+            });
+        });
+
         var ngNews = {
             formName: '@formView'
         };
@@ -293,14 +305,23 @@
             var headerData = $("#Name").val();
             var OnPublished = $("#OnPublished").val();
             var noidung = $("#Content").data("kendoEditor").value();
+            var Abstract = $("#Abstract").data("kendoEditor").value();
             if (OnPublished == "") {
                 OnPublished = formatDate();
+            } else {
+                OnPublished = formatDate(OnPublished);
             }
+            var image = $("#Image").val();
             content += '<h1><font color="red">' + headerData + '</font></h1>'
             content += OnPublished;
             content += '<br />';
             content += '<br />';
+            if (image && image != "") {
+                content += '<img src="' + appConfig.apiCdnUrl + image + '">'
+            }
+            content += '<br><span class="tomtatTintuc">' + Abstract + '</span>';
             content += noidung;
+            content += '<p class="blockquote-footer" style="text-align:right;">' + $("#SourceNews").val() + ' / ' + $("#UserFullName").val() + '</p>';
             $('#detail-news').html('');
             $('#detail-news').html(content);
         }
