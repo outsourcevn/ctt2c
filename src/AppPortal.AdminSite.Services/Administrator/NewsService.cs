@@ -724,7 +724,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 Abstract = x.Abstract,
                 Content = x.Content,
                 OnPublished = x.OnPublished,
-                UserFullName = (infoUser(x.IsType , mapakn)) ? x.UserFullName : "Bạn giấu tên",
+                UserFullName = (infoUser(x.IsType , mapakn)) ? x.UserFullName : "Ẩn danh",
                 UserEmail = (infoUser(x.IsType , mapakn)) ? x.UserEmail : "",
                 UserPhone = (infoUser(x.IsType, mapakn)) ? x.UserPhone : "",
                 IsStatus = x.IsStatus,

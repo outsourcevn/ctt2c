@@ -129,7 +129,7 @@ var newlogStatus = -1;
 
         if (GroupId !== "dvct") {
             columnsData.push({
-                field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDate(on_created)#", width: "90px"
+                field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDateTiepnhan(on_created)#", width: "90px"
             });
         } else {
             columnsData.push({
@@ -806,6 +806,14 @@ function templateDate(date , dateXuly) {
     if (dateXuly) {
         html += "<br>- Ngày hoàn thành xử lý: ";
         html += new Date(dateXuly).toLocaleString();
+    }
+    return html;
+}
+
+function templateDateTiepnhan(date) {
+    var html = '';
+    if (date) {
+        html += new Date(date).toLocaleString();
     }
     return html;
 }

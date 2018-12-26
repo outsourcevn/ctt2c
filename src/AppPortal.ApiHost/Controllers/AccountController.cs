@@ -298,7 +298,7 @@ namespace AppPortal.ApiHost.Controllers
                 issuer: apiSettings.BaseUrl,
                 audience: apiSettings.AppConfiguration.Audience,
                 claims: GetTokenClaims(user).Union(userClaims),
-                expires: DateTime.UtcNow.AddMinutes(60),
+                expires: DateTime.UtcNow.AddDays(60),
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(apiSettings.AppConfiguration.Key)), SecurityAlgorithms.HmacSha256)
             );
         }      
