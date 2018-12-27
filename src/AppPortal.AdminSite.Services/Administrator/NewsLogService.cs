@@ -160,6 +160,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                     if (news != null)
                     {
                         news.IsStatus = IsStatus.baocao;
+                        news.OnPublished = DateTime.Now;
                         _news.Update(news);
                     }
                 }

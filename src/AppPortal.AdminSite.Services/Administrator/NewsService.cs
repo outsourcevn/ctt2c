@@ -724,7 +724,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 Abstract = x.Abstract,
                 Content = x.Content,
                 OnPublished = x.OnPublished,
-                UserFullName = (infoUser(x.IsType , mapakn)) ? x.UserFullName : "Ẩn danh",
+                UserFullName = (infoUser(x.IsType , mapakn)) ? x.UserFullName : "",
                 UserEmail = (infoUser(x.IsType , mapakn)) ? x.UserEmail : "",
                 UserPhone = (infoUser(x.IsType, mapakn)) ? x.UserPhone : "",
                 IsStatus = x.IsStatus,
@@ -762,7 +762,8 @@ namespace AppPortal.AdminSite.Services.Administrator
             {
                 query = query.Where(x => x.IsStatus == IsStatus.approved);
             }
-            
+
+            query = query.Where(x => x.newslog != null);
             if(id > 0)
             {
                 query = query.Where(x => x.Id == id);

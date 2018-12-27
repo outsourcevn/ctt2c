@@ -127,7 +127,7 @@
             content += ' <br />'
             content += '<br />'
             content += '<p style="font-size:15px;">'+data[0].Content +"</p>";
-            content += new Date(data[0].OnCreated).format("dd/mm/yyyy");
+            content += dateFormat(data[0].OnCreated, "dd/mm/yyyy");
             content += '<hr>'
             content += '<p>'
             content += '<i class="MR5 fa fa-file-text-o" aria-hidden="true">'
