@@ -11,7 +11,9 @@
         <div class="col-md-8">
             <section class="block_business_news block">
                 <h3 class="block_title_black">Phản ánh kiến nghị</h3>
-               
+                <div id="lstGopy">
+
+                </div>
             </section>
         </div>
         <div class="col-md-4">
@@ -200,12 +202,14 @@
                 if (mapakn !== "" && mapakn !== undefined) {
                     linkDetail += "&mapakn=" + mapakn;
                 }
+
+                var dateTime = dateFormat(data[i].OnPublished, "dd/mm/yyyy")
                 var content = '<div class="MB20" style="font-size: 14px;">';
                 content += '<div class="media-object-default media-object-default1 boT">';
                 content += '<div class="media">';
                 content += '<div class="media-left"> <a href="' + linkDetail + '"><img class="media-object img-thumbnail img-circle" src="../../images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">';
-                content += '<p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="' + linkDetail + '">' + data[i].UserFullName + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i>18/12/18</p> <h4 class="media-heading">';
-                content += '<a href="' + linkDetail + '" class="tieu-de-pakn">Kiến nghị về việc: ' + data[i].Abstract + '</a></h4>';
+                content += '<p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="' + linkDetail + '">' + data[i].UserFullName + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i> ' + dateTime + '</p> <h4 class="media-heading">';
+                content += '<a href="' + linkDetail + '" class="tieu-de-pakn">Kiến nghị về việc: ' + data[i].Name + '</a></h4>';
                 content += '<p class="text-justify"><b>Nội dung kiến nghị:</b> ' + noidung + '</p>';
                 content += '</div></div></div></div>';
                 html += content;

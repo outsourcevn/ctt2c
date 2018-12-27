@@ -34,7 +34,9 @@
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     </environment>
-
+    <link rel="stylesheet" href="~/css/tracuu.css">
+    <link rel="stylesheet" href="~/css/vanban.css">
+    <link rel="stylesheet" href="~/css/cms_vanban.css">
 
     <!--[if lt IE 9]>
     <script src="js/html5.js"></script>
@@ -68,8 +70,9 @@
         const appConfig = {};
         //appConfig.apiCdnUrl = "http://localhost:54145";
         //appConfig.apiHostUrl = "http://localhost:50642";
-       appConfig.apiCdnUrl = "http://cdn.eportal.today";
-      appConfig.apiHostUrl = "http://apinode.eportal.today";
+        appConfig.apiCdnUrl = "http://cdn.eportal.today";
+        appConfig.apiHostUrl = "http://apinode.eportal.today";
+        appConfig.current = "http://demo.eportal.today";
     </script>
 
 
@@ -87,6 +90,7 @@
     <script src="~/lib/lightbox2/dist/js/lightbox.min.js"></script>
     <script src="~/js/custom.js" asp-append-version="true"></script>
     <script src="~/js/script.js" asp-append-version="true"></script>
+    <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
     <script>
         $(document).ready(function () {
             $("#block_main_menu ul li").hover(
