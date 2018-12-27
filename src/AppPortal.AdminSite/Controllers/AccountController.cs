@@ -181,7 +181,7 @@ namespace AppPortal.AdminSite.Controllers
                 }
 
                 // save token to localstoged               
-                SetCookie("ACCESS-TOKEN", access_token, 60);
+                SetCookie("ACCESS-TOKEN", access_token, 6000);
                 return RedirectToLocal(returnUrl);
             }
             else

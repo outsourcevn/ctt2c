@@ -121,3 +121,12 @@ h3.block_title_black{
 #block_weather .content p{
     line-height: 15px;
 }
+
+@media (min-width: 1230px) and (max-width: 1000px) {
+    #myNavbar {
+        display: none !important;
+    }
+    .navbar-toggle {
+        display: inline-block !important;
+    }
+}

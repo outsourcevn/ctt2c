@@ -49,6 +49,9 @@
         bottom: 0;
         margin-bottom: -15px;
     }
+    #content-noidung p {
+        font-size: 13px !important;
+    }
 </style>
 
 <div class="container">
@@ -119,31 +122,32 @@
             }
             content += '<h1 style="line-height: 25px;"><font color="#1f4f82">' + data[0].Name + '</font></h1>'
             content += '<p style="font-size:15px;"><b>Người phản ánh:</b>' + data[0].UserFullName + '</p> <br />'
-            content += '<div>'
-            content += '<div>'
-            content += '<div >'
-            content += ' <div>'
+            content += '<p style="font-size:15px;"><b>Ngày phản ánh:</b>' + dateFormat(data[0].OnCreated, "dd/mm/yyyy") + '</p> <br/>';
+
+            content += ' <div id="content-noidung">'
             content += '<b style="font-size:15px;">Nội dung kiến nghị:</b>'
             content += ' <br />'
             content += '<br />'
             content += '<p style="font-size:15px;">'+data[0].Content +"</p>";
-            content += dateFormat(data[0].OnCreated, "dd/mm/yyyy");
-            content += '<hr>'
-            content += '<p>'
+     
+            content += '<p style="padding: 10px;">'
             content += '<i class="MR5 fa fa-file-text-o" aria-hidden="true">'
-            content += '</i>File đính kèm:<br>'
+            content += '</i> File đính kèm:<br>'
             content += '</p>'
             content += '<p>'
 
             content += '</p>'
             content += '</div>'
+
+            var ketqua = '<br><div class="MB20"> <div class="alert alert-info" role="alert"> <h4 class="text-TT">Trả lời kiến nghị:</h4> <p class="text-justify">' + data[0].newslog.Data + '</p><hr> <p> </p><p><i class="MR5 fa fa-file-text-o" aria-hidden="true"></i> File đính kèm: '
+            if (data[0].newslog.files.length > 0) {
+                for (var i = 0; i < data[0].newslog.files.length; i++) {
+                    ketqua += '<a href = "https://nguoidan.chinhphu.vn/documents/10701/0/14784CNQ12-%C4%90K_137241218140304.pdf" target="_blank" >' + data[0].newslog.files[i].name + '</a>';
+                }
+            }
             
-            content += '</div>'
-            
-            content += '</div>'
-            content += '</div>'
-            
-            $('#tra-cuu-detail').html(content);
+            ketqua += '</p ></div > </div > ';
+            $('#tra-cuu-detail').html(content + ketqua);
         });
 
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {

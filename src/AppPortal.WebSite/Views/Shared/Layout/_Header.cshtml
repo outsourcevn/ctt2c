@@ -34,7 +34,7 @@
             padding: 12px 16px;
             text-decoration: none;
             display: block;
-            
+
         }
 
             .dropdown-content a:hover {
@@ -53,7 +53,6 @@
         display: inline-block;
         float: none;
         vertical-align: top;
-        z-index: 1000000;
         background-color: #f8f8f8;
     }
     .navbar .navbar-collapse {
@@ -64,6 +63,10 @@
         margin-top: 15px;
         padding-top: 15px;
         padding-bottom: 15px;
+    }
+    .nav > li > a {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
     }
 </style>
 <header>
@@ -146,7 +149,12 @@
                 <li>
                     <input style="margin-top: 8px;" class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
                 </li>
+                <li>
+                    <a style="padding-top: 12px; padding-bottom: 12px" class="btn btn-outline-success my-2 my-sm-0">Đăng nhập</a>
+                </li>
             </ul>
+            
         </div>
+        
     </div>
 </nav>
