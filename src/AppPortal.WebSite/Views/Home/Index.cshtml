@@ -20,11 +20,9 @@
             <section class="block block_business_news">
                 <h3 class="block_title_black">TIN TRUYỀN THÔNG<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
 
-                <div class="content">
-                    <div class="left">
-                        <article id="truyen-thong-news-header" class="border-dot"></article>
-                    </div>
-                    <div class="right">
+                <div class="">
+                   
+                    <div class="">
                         <ul id="truyen-thong-news-content"></ul>
                     </div>
                 </div>
@@ -37,8 +35,8 @@
         <div class="col-sm-8">
             <section class="block_business_news block">
                 <h3 class="block_title_black">THÔNG TIN QUAN TRẮC</h3>
-                <div class="content">
-                    <div class="left">
+                <div class="">
+                    <div class="">
                         <aside id="block_weather" class="block">
                             <div class="content">
                                 <div id="chart_div"> </div>
@@ -52,27 +50,9 @@
         <div class="col-sm-4">
             <section class="block block_business_news">
                 <h3 class="block_title_black">VĂN BẢN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    @*<div id="van-ban-chinh-sach-first" class="left">
-                            <article class="border-dot">
-                                <p>
-                                    <img src="http://www.xaluan.com/images/news/Image/2018/11/04/15bdea11f4d72b.img.jpg" alt="World News" />
-                                </p>
-                                <hgroup>
-                                    <h4 class="title"><a href="#">Quy trình mới về kiểm tra phế liệu nhập khẩu: Doanh nghiệp lo thêm nhiều thủ tục.</a></h4>
-                                </hgroup>
-                                <p class="date">
-                                    <time datetime="2013-01-24">
-                                        27/7/2018 10:24:28 PM
-                                    </time>
-                                    <span class="comments_count"><a href="#">7</a></span>
-                                </p>
-                                <p>
-                                    ​Một số doanh nghiệp cho rằng, việc tổ chức thực hiện kiểm tra nhà nước về chất lượng phế liệu nhập khẩu làm nguyên liệu sản xuất theo Thông tư 08/2018/TT-BTNMT và Thông tư 09/2018/TT-BTNMT của Bộ Tài nguyên và Môi trường còn nhiều vấn đề chưa phù hợp với thực tế....
-                                </p>
-                            </article>
-                        </div>*@
-                    <div class="right">
+                <div class="">
+              
+                    <div class="">
                         <ul id="van-ban-chinh-sach-from-second"></ul>
                     </div>
                 </div>
@@ -85,7 +65,7 @@
         <div class="col-sm-8">
             <section class="block_business_news block">
                 <h3 class="block_title_black">VIDEO<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
+                <div class="">
                     <aside id="block_front_slides_v" class="block slider" style="height: 100%;">
                         <div class="flexslider slider video_home" id="block_front_slides_video" style="height: 100%;">
                             <ul class="slides" id="contentVideo">
@@ -105,9 +85,9 @@
         <div class="col-sm-4">
             <section class="block block_business_news">
                 <h3 class="block_title_black">PHẢN ÁNH MÔI TRƯỜNG<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
+                <div class="">
 
-                    <div class="right">
+                    <div class="">
                         <ul id="phan-anh-moi-truong-content"></ul>
                     </div>
                 </div>
@@ -120,7 +100,7 @@
         <div class="col-sm-8">
             <section class="block_business_news block">
                 <h3 class="block_title_black">HÌNH ẢNH<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
+                <div class="">
                     <div id="content_top2" style="padding-top: 14px;">
                         <div class="region">
                             <aside id="block_front_slider" class="block slider" style="height: 520px;width: 100%;">
@@ -143,8 +123,8 @@
         <div class="col-sm-4">
             <section class="block block_business_news">
                 <h3 class="block_title_black">GIẢI PHÁP SÁNG KIẾN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div class="right">
+                <div class="">
+                    <div class="">
                         <ul id="giai-phap-sang-kien-content"></ul>
                     </div>
                 </div>
@@ -237,25 +217,7 @@
             $('#tin-moi-nhat-content').html(content);
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=13&number=3", function (data, status) {
-            //var header = '';
-            //header += '<p>';
-            //header += '<img src="' + data.model[0].Image + '" alt="World News" />';
-            //header += '</p>';
-            //header += '<hgroup>';
-            //header += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[0].Id + '">' + data.model[0].Name + '</a></h4>';
-            //header += '</hgroup>';
-            //header += '<p class="date">';
-            //header += '<time datetime="2013-01-24">';
-            //header += new Date(data.model[0].OnPublished).format("dd/mm/yyyy");
-            //header += '</time>';
-            //header += '</p>';
-            //header += '<p>'
-            //header += data.model[0].Abstract;
-            //header += '</p>';
-            //$("#truyen-thong-news-header").html(header);
-
-
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=13&number=4", function (data, status) {
             var news = '';
             for (var i = 0; i < data.model.length; i++) {
                 news += '<li >';
