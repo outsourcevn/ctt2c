@@ -96,13 +96,13 @@
                                             <div class="col-sm-12" id="aui_3_4_0_1_495">
                                                 <div class="form-group row">
                                                     <select id="thanhpho" required class="col-sm-4">
-                                                        <option selected disabled>--- Lựa chọn tỉnh thành ---</option>
+                                                        <option selected disabled>- Tỉnh thành -</option>
                                                     </select>
                                                     <select id="quantp" class="col-sm-4">
-                                                        <option selected disabled>--- Lựa chọn quận/huyện ---</option>
+                                                        <option selected disabled>- Quận/huyện -</option>
                                                     </select>
                                                     <select id="huyen" class="col-sm-4">
-                                                        <option selected disabled>--- Lựa chọn phường xã ---</option>
+                                                        <option selected disabled>- Phường xã -</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -320,55 +320,75 @@
 
     <script type="text/javascript">
 
-                $.ajax({
-                    type: "GET",
-                    url: appConfig.apiHostUrl + "/api/ProcessWorks/city",
-                    success: function (response) {
-                        for (var i = 0; i < response.length; i++) {
-                            $("#thanhpho").append("<option value='" + response[i].id + "'>" + response[i].name+"</option>")
-                        }
-                    }, error: function (er) {
+        function loadHuyen() {
+            $("#quantp").empty();
+            $("#quantp").append("<option selected disabled style='text-align:center'>đang tải...</option>");
+            $("#huyen").empty();
+            $("#huyen").append("<option selected disabled>- Phường xã -</option>");
 
-                    }
-                });
-
-                $("#thanhpho").change(function () {
+            $.ajax({
+                type: "GET",
+                url: appConfig.apiHostUrl + "/api/ProcessWorks/quan/" + $(this).val(),
+                success: function (response) {
                     $("#quantp").empty();
-                    $("#quantp").append("<option selected disabled>--- Lựa chọn quận/huyện ---</option>");
+                    var districts = response[0].districts;
+                    for (var i = 0; i < districts.length; i++) {
+                        $("#quantp").append("<option value='" + districts[i].id + "'>" + districts[i].name + "</option>")
+                    }
+                    loadXa();
+                }, error: function (er) {
+
+                }
+            });
+        }
+
+        function loadXa() {
+            $("#huyen").empty();
+            $("#huyen").append("<option selected disabled style='text-align:center'>đang tải...</option>");
+
+            $.ajax({
+                type: "GET",
+                url: appConfig.apiHostUrl + "/api/ProcessWorks/phuong/" + $(this).val() + "/" + $("#thanhpho").val(),
+                success: function (response) {
                     $("#huyen").empty();
-                    $("#huyen").append("<option selected disabled>--- Lựa chọn phường xã ---</option>");
+                    var wards = response.wards;
+                    for (var i = 0; i < wards.length; i++) {
+                        $("#huyen").append("<option value='" + wards[i].id + "'>" + wards[i].name + "</option>")
+                    }
+                }, error: function (er) {
 
-                    $.ajax({
-                        type: "GET",
-                        url: appConfig.apiHostUrl + "/api/ProcessWorks/quan/" + $(this).val(),
-                        success: function (response) {
-                            var districts = response[0].districts;
-                            for (var i = 0; i < districts.length; i++) {
-                                $("#quantp").append("<option value='" + districts[i].id + "'>" + districts[i].name + "</option>")
-                            }
-                        }, error: function (er) {
+                }
+            });
+        }
 
-                        }
-                    });
-                })
+        function loadProvinces() {
+            $("#thanhpho").empty();
+            $("#thanhpho").append("<option selected disabled style='text-align:center'>đang tải...</option>");
+            $.ajax({
+                type: "GET",
+                url: appConfig.apiHostUrl + "/api/ProcessWorks/city",
+                success: function (response) {
+                    $("#thanhpho").empty();
+                    for (var i = 0; i < response.length; i++) {
+                        $("#thanhpho").append("<option value='" + response[i].id + "'>" + response[i].name + "</option>")
+                    }
+                    loadHuyen();
+                }, error: function (er) {
 
-                $("#quantp").change(function () {
-                    $("#huyen").empty();
-                    $("#huyen").append("<option selected disabled>--- Lựa chọn phường xã ---</option>");
+                }
+            });
+        }
 
-                    $.ajax({
-                        type: "GET",
-                        url: appConfig.apiHostUrl +"/api/ProcessWorks/phuong/" + $(this).val() + "/" + $("#thanhpho").val(),
-                        success: function (response) {
-                            var wards = response.wards;
-                            for (var i = 0; i < wards.length; i++) {
-                                $("#huyen").append("<option value='" + wards[i].id + "'>" + wards[i].name + "</option>")
-                            }
-                        }, error: function (er) {
+       
+        loadProvinces();
 
-                        }
-                    });
-                })
+        $("#thanhpho").change(function () {
+            loadHuyen();
+        });
+
+        $("#quantp").change(function () {
+            loadXa();
+        });
 
         var dataNews = @Html.Raw(Json.Serialize(@data));
         $.each(dataNews, function (item , vlue) {
