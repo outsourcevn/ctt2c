@@ -41,6 +41,12 @@ $(document).ready(function () {
         $("#btn-bao-cao").show();
     }
 
+    if (GroupId === 'dvct') {
+        $("#HomeNews").hide();
+        $("#AnhVideo").hide();
+        $('.sysconfig').hide();
+    }
+
 
     function templateDate(date) {
         if (date) {
