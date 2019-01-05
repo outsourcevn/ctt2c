@@ -6,26 +6,23 @@
                     <li class="first @ViewData["activeHome"]">
                         <a href="/home/index2"><span class="bg">TRANG CHỦ</span></a>
                     </li>
-                    <li class="@ViewData["activetintuc"]">
-                        <a href="/home/news"><span class="bg">TRUYỀN THÔNG</span></a>
-                    </li>
+
                     <li class="@ViewData["activeContact"]">
                         <a href="/home/contact"><span class="bg">GÓP Ý, PHẢN ÁNH</span></a>
                     </li>
                     <li class="@ViewData["activeTT"]">
-                        <a href="javascript:void(0)"><span class="bg">TRA CỨU KẾT QUẢ</span></a>
-                    </li>
-                    <li class="@ViewData["activeTTQT"]">
-                        <a href="/home/ttquantrac"><span class="bg">CHẤT LƯỢNG MÔI TRƯỜNG</span></a>
-                    </li>
-                    <li class="@ViewData["activeMap"]">
-                        <a href="/home/map"><span class="bg">BẢN ĐỒ</span></a>
-                    </li>
-                    <li class="@ViewData["activeMap"]">
-                        <a href="/home/news"><span class="bg">VĂN BẢN</span></a>
+                        <a href="/home/tracuu"><span class="bg">TRA CỨU KẾT QUẢ</span></a>
                     </li>
                     <li class="@ViewData["activeVBPL"]">
                         <a href="javascript:void(0)"><span class="bg">HƯỚNG DẪN</span></a>
+                    </li>
+                    <li class="@ViewData["activetintuc"] droptop">
+                        @*<span class="bg span-menu">TRUYỀN THÔNG</span>*@
+                        <a  href="/home/news">TRUYỀN THÔNG</a>
+                    </li>
+                    <li class="@ViewData["activeMap"] dropdown">
+                        <a  href="/news/vanban">VĂN BẢN PHÁP LUẬT</a>
+                        
                     </li>
                 </ul>
             </nav>

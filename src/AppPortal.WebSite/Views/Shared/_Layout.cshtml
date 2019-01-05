@@ -7,11 +7,13 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 
     <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script language="javascript" src="~/js/jquery.cookie.js"></script>
     <!---*** End: JQuery 3.3.1 version. ***--->
     <!---*** Start: Bootstrap 3.3.7 version files. ***--->
     <script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!---*** End: Bootstrap 3.3.7 version files. ***--->
+    <link rel="stylesheet" href="~/css/tracuu.css">
 
     <environment include="Development">
 
@@ -46,7 +48,17 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="~/css/tracuu.css">
-   
+
+    <script>
+        const appConfig = {};
+        appConfig.apiCdnUrl = "http://cdn.eportal.today";
+        appConfig.apiHostUrl = "http://apinode.eportal.today";
+        appConfig.current = "http://demo.eportal.today";
+
+                //appConfig.apiCdnUrl = "http://localhost:54145";
+                //appConfig.apiHostUrl = "http://localhost:50642";
+                //appConfig.current = "http://localhost:54167";
+    </script>
 </head>
 <body class="right_sidebar blogs green">
     <!--[if lte IE 8]><div id="ie_message"><div class="wrapper"><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="images/banner_ie.png" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/></a></div></div><![endif]-->
@@ -62,18 +74,15 @@
                         @RenderSection("Breadcrumb", required: false)
                         @RenderBody()
                     </div>
-                    <div class="col-md-4">
-                        @Html.Partial("Layout/_Pages.cshtml")
-                    </div>
+                    
                 </div>
-
 
                 <!-- right sidebar -->
                 <!-- end right sidebar -->
             </div>
         </div>
         <!-- end content top -->
-
+        
         <div id="scroll_to_top_wrapper">
             <div class="wrapper">
                 <a href="#" id="scroll_to_top">Lên đầu trang</a>
@@ -111,26 +120,8 @@
 
     </environment>
 
-    <script>
-        const appConfig = {};
-        appConfig.apiCdnUrl = "http://cdn.eportal.today";
-        appConfig.apiHostUrl = "http://apinode.eportal.today";
-        appConfig.current = "http://demo.eportal.today";
-
-        //appConfig.apiCdnUrl = "http://localhost:54145";
-        //appConfig.apiHostUrl = "http://localhost:50642";
-        //appConfig.current = "http://localhost:54167";
-    </script>
+    
     <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-@section Scripts {
-    <script>
-        var detailId = 0;
-        function goToDetail(id) {
-            detailId = id;
-            console.log("view detail news: " + detailId);
-        }
-    </script>
-}

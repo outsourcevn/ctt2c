@@ -1,6 +1,6 @@
 ﻿@model NewsViewModel2
 @{
-    ViewData["Title"] = "THÔNG TIN TRAO ĐỔI (GÓP Ý, PHẢN ÁNH, HỎI ĐÁP)";
+    ViewData["Title"] = "THÔNG TIN TRAO ĐỔI";
     var formView = "frm_contact";
     var data = ViewData["data"];
     var url = ViewData["map"];
@@ -42,89 +42,107 @@
             /*prevent interaction with the canvas*/
             pointer-events: none;
         }
+        .radio input[type=radio] {
+            margin-top: -0.3px;
+        }
     </style>
 
 }
 
 @*@section Breadcrumb {
-    <div id="breadcrumb">
-        <a href="/">Cổng thông tin bộ Tài Nguyên &amp; Môi trường</a>
-    </div>
+        <div id="breadcrumb">
+            <a href="/">Cổng thông tin bộ Tài Nguyên &amp; Môi trường</a>
+        </div>
 
-}*@
+    }*@
 
-    <div class="col-sm-8">
-        <div id="page" style="width:100%">
-            <!-- content -->
-            <div id="content" style="width: 100%">
-                <div class="region">
-                    <article class="node">
-                        <h2 style="margin-bottom: 20px;margin-top:20px;" class="title">@ViewData["Title"]</h2>
-                        <div class="content">
-                            <div id="contact_form" class="box-KN">
-                                <form id="@formView" class="needs-validation" method="post">
-                                    <div class="row">
-                                        <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
-                                        <div float: left;" class="col-sm-12">
-                                            <div class="col-sm-12" id="aui_3_4_0_1_495">
-                                                <div class="radio">
-                                                    <label><input type="radio" value="0" name="doituong" checked>Người dân</label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label><input type="radio" value="1" name="doituong">Doanh nghiệp</label>
-                                                </div>
+<div class="col-sm-8">
+    <div id="page" style="width:100%">
+        <!-- content -->
+        <div id="content" style="width: 100%">
+            <div class="region">
+                <article class="node">
+                    <h2 style="margin-bottom: 20px;margin-top:20px;" class="title">@ViewData["Title"]</h2>
+                    <div class="content">
+                        <div id="contact_form" class="box-KN">
+                            <form id="@formView" class="needs-validation" method="post">
+                                <div class="row">
+                                    <p style="font-weight: 600">THÔNG TIN TỔ CHỨC VÀ CÁ NHÂN</p>
+                                    <div float: left;" class="col-sm-12">
+                                        <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                            <div class="radio">
+                                                <label><input type="radio" value="0" name="doituong" checked>Cá nhân</label>
                                             </div>
-
-
-                                            <label for="UserFullName" class="col-sm-3 control-label">Họ tên*:</label>
-                                            <div class="col-sm-12" id="aui_3_4_0_1_495">
-                                                <span id="senderName_error"></span>
-                                                <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName" placeholder="Nhập đầy đủ họ và tên">
+                                            <div class="radio">
+                                                <label><input type="radio" value="1" name="doituong">Tổ chức</label>
                                             </div>
-
-                                            <div class="col-sm-12" style="padding: 0">
-                                                <div class="col-md-6">
-                                                    <label for="UserAddress" class="control-label col-sm-3">Địa chỉ:</label>
-                                                    <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" placeholder="Địa chỉ"> </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="UserEmail" class="control-label col-sm-3">Địa chỉ E-mail <span style="color: red">*</span>:</label>
-                                                    <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ E-mail liên lạc"> </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12" id="aui_3_4_0_1_495">
-                                                <div class="form-group row">
-                                                    <select id="thanhpho" required class="col-sm-4">
-                                                        <option selected disabled>- Tỉnh thành -</option>
-                                                    </select>
-                                                    <select id="quantp" class="col-sm-4">
-                                                        <option selected disabled>- Quận/huyện -</option>
-                                                    </select>
-                                                    <select id="huyen" class="col-sm-4">
-                                                        <option selected disabled>- Phường xã -</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <label for="UserEmail" class="control-label col-sm-3">Điện thoại <span style="color: red">*</span>:</label>
-                                            <div class="col-sm-12" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserPhone" required placeholder="Điện thoại"> </div>
                                         </div>
 
-                                    </div>
-                                    <div class="row">
-                                        <p style="font-weight: 600;margin-top: 20px;">NỘI DUNG TRAO ĐỔI</p>
-                                        <div class="col-sm-12">
-                                            <div class="form-item col-sm-12">
-                                                <label asp-for="Name" class="control-label">Tiêu đề:</label>
-                                                <input asp-for="Name" class="form-control aui-text-placeholder" placeholder="Tiêu đề phản ánh" />
-                                                <span asp-validation-for="Name" class="form-required"></span>
-                                            </div>
+                                        <label for="UserFullName" class="col-sm-3 control-label">Tên tổ chức, cá nhân <span style="color: red">*</span>:</label>
+                                        <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                            <span id="senderName_error"></span>
+                                            <input type="text" class="form-control aui-text-placeholder" asp-for="UserFullName" placeholder="Nhập tên tổ chức, cá nhân">
+                                        </div>
 
+                                        <div class="col-sm-12" style="padding: 0">
+                                            <div class="col-md-6">
+                                                <label for="UserAddress" class="control-label col-sm-3">Điện thoại <span style="color: red">*</span>:</label>
+                                                <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserPhone" required placeholder="Điện thoại"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="UserEmail" class="control-label col-sm-3">Thư điện tử <span style="color: red">*</span>:</label>
+                                                <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ hòm thư liên lạc"> </div>
+                                            </div>
+                                        </div>
+
+                                        <label for="UserAddress" class="control-label col-sm-3">Địa chỉ <span style="color: red">*</span>:</label>
+                                        <div class="col-sm-12" > <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserAddress" required placeholder="Địa chỉ"> </div>
+
+                                        <div class="col-sm-12" id="aui_3_4_0_1_495">
+                                            <div class="form-group row">
+                                                <select id="thanhpho" required class="col-sm-4">
+                                                    <option selected disabled>- Tỉnh thành -</option>
+                                                </select>
+                                                <select id="quantp" class="col-sm-4">
+                                                    <option selected disabled>- Quận/huyện -</option>
+                                                </select>
+                                                <select id="huyen" class="col-sm-4">
+                                                    <option selected disabled>- Phường xã -</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+                                    <p style="font-weight: 600;margin-top: 20px;">NỘI DUNG TRAO ĐỔI</p>
+
+                                    <div class="col-sm-12" style="margin-top:-20px;margin-left:16px;">
+                                        <div class="radio">
+                                            <label><input type="radio" value="0" name="phanloai" checked>Ô nhiễm môi trường</label>
+                                        </div>
+                                        <div class="radio">
+                                            <label><input type="radio" value="1" name="phanloai">Cơ chế chính sách</label>
+                                        </div>
+                                        <div class="radio">
+                                            <label><input type="radio" value="2" name="phanloai">Giải pháp sáng kiến BVMT</label>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div class="col-sm-12">
+                                        <div class="form-item col-sm-12">
+                                            <label asp-for="Name" class="control-label">Tiêu đề <span style="color: red">*</span>:</label>
+                                            <input asp-for="Name" class="form-control aui-text-placeholder" required placeholder="Nhập tiêu đề" />
+                                            <span asp-validation-for="Name" class="form-required"></span>
+                                        </div>
+                                        <div id="form-phan-loai">
                                             <div class="form-item col-sm-12">
-                                                <label asp-for="Link" class="control-label">Địa điểm:</label>
-                                                <input asp-for="Link" class="form-control aui-text-placeholder" id="address_map" placeholder="Địa điểm diễn ra" />
-                                                
+                                                <label asp-for="Link" class="control-label">Địa điểm <span style="color: red">*</span>:</label>
+                                                <input asp-for="Link" class="form-control aui-text-placeholder" id="address_map" required placeholder="Địa điểm diễn ra" />
+
 
                                                 <input type="hidden" id="lat" name="lat" />
                                                 <input type="hidden" id="lng" name="lng" />
@@ -142,84 +160,101 @@
                                                 <input asp-for="Thoigianxayra" type="date" class="form-control aui-text-placeholder" placeholder="Thời gian xảy ra hoặc phát hiện ô nhiễm" />
                                                 <span asp-validation-for="Thoigianxayra" class="form-required"></span>
                                             </div>
+                                        </div>
+                                        
 
-                                            <div class="form-item col-sm-12" style="display: none;">
-                                                <label asp-for="Abstract" class="control-label">Tóm tắt:</label>
-                                                <textarea style="width:100%; height:150px" rows="10" asp-for="Abstract" class="form-text"></textarea>
-                                            </div>
-
-                                            <div class="form-item col-sm-12">
-                                                <label asp-for="Content" class="control-label">Nội dung trao đổi <span style="color: red">*</span>:</label>
-                                                <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text" required></textarea>
-                                                <span asp-validation-for="Content" class="form-required"></span>
-                                            </div>
+                                        <div class="form-item col-sm-12" style="display: none;">
+                                            <label asp-for="Abstract" class="control-label">Tóm tắt:</label>
+                                            <textarea style="width:100%; height:150px" rows="10" asp-for="Abstract" class="form-text"></textarea>
                                         </div>
 
-                                        <div class="row" style="padding: 0px 0px 0px 35px; display: flex;">
-                                            <div id="captcha">
-                                            </div>
-                                            <span onclick="createCaptcha()" style=" font-size: 30px; font-weight: 900; color: red; padding: 0 10px;cursor: pointer " class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                            <br />
-                                        </div>
-                                        <div class="row" style=" padding: 5px 0px 0px 20px; display: flex; ">
-                                            <div class="form-item col-sm-12">
-                                                <label  class="control-label">Nhập mã bảo mật:</label>
-                                                <input type="text" style="width: 150px" class="form-control aui-text-placeholder" placeholder="Mã bảo mật" id="cpatchaTextBox" />
-                                            </div>
+                                        <div class="form-item col-sm-12">
+                                            <label asp-for="Content" class="control-label">Nội dung trao đổi <span style="color: red">*</span>:</label>
+                                            <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text" required></textarea>
+                                            <span asp-validation-for="Content" class="form-required"></span>
                                         </div>
                                     </div>
-                                    <div class="form-item">
-                                        <div asp-validation-summary="All" class="form-required"></div>
+
+                                    <div class="row" style="padding: 0px 0px 0px 35px; display: flex;">
+                                        <div id="captcha">
+                                        </div>
+                                        <span onclick="createCaptcha()" style=" font-size: 30px; font-weight: 900; color: red; padding: 0 10px;cursor: pointer " class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        <br />
                                     </div>
+                                    <div class="row" style=" padding: 5px 0px 0px 20px; display: flex; ">
+                                        <div class="form-item col-sm-12">
+                                            <label class="control-label">Nhập mã bảo mật <span style="color: red">*</span>:</label>
+                                            <input type="text" style="width: 150px" class="form-control aui-text-placeholder" placeholder="Mã bảo mật" id="cpatchaTextBox" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <div asp-validation-summary="All" class="form-required"></div>
+                                </div>
+                            </form>
+                            <div class="form-group col-sm-12">
+                                <label style="padding: 10px;" for="recipient-name" class="col-form-label">Tài liệu đình kèm:</label>
+                                <form id="fileupload" method="POST" enctype="multipart/form-data">
+                                    <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                                    <div class="row fileupload-buttonbar">
+                                        <div class="col-lg-6">
+                                            <!-- The fileinput-button span is used to style the file input field as button -->
+                                            <span class="btn btn-success fileinput-button">
+                                                <i class="glyphicon glyphicon-plus"></i>
+                                                <span>Thêm tệp tin...</span>
+                                                <input type="file" name="files" multiple>
+                                            </span>
+
+                                            <!-- The global file processing state -->
+                                            <span class="fileupload-process"></span>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            Chỉ nhận file mp4, mov, wmv, jpg, png, pdf, doc, docx, xls, xlsx (Tối đa 5 file)
+                                        </div>
+                                        <!-- The global progress state -->
+                                        <div class="col-lg-5 fileupload-progress fade">
+                                            <!-- The global progress bar -->
+                                            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                            </div>
+                                            <!-- The extended global progress state -->
+                                            <div class="progress-extended">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                    <!-- The table listing the files available for upload/download -->
+                                    <table id="filebaocao" role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
                                 </form>
-                                <div class="form-group col-sm-12">
-                                    <label style="padding: 10px;" for="recipient-name" class="col-form-label">Tài liệu đình kèm:</label>
-                                    <form id="fileupload" method="POST" enctype="multipart/form-data">
-                                        <!-- Redirect browsers with JavaScript disabled to the origin page -->
-                                        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                                        <div class="row fileupload-buttonbar">
-                                            <div class="col-lg-12">
-                                                <!-- The fileinput-button span is used to style the file input field as button -->
-                                                <span class="btn btn-success fileinput-button">
-                                                    <i class="glyphicon glyphicon-plus"></i>
-                                                    <span>Thêm tệp tin...</span>
-                                                    <input type="file" name="files" multiple>
-                                                </span>
-
-                                                <!-- The global file processing state -->
-                                                <span class="fileupload-process"></span>
-                                            </div>
-                                            <!-- The global progress state -->
-                                            <div class="col-lg-5 fileupload-progress fade">
-                                                <!-- The global progress bar -->
-                                                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                                                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                                                </div>
-                                                <!-- The extended global progress state -->
-                                                <div class="progress-extended">&nbsp;</div>
-                                            </div>
-                                        </div>
-                                        <!-- The table listing the files available for upload/download -->
-                                        <table id="filebaocao" role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-                                    </form>
-                                </div>
-
-                                <div class="form-item ">
-                                    <button type="submit" onclick="onCompleted()">
-                                        <span class="view_all_medium"><span><span>Gửi phản ánh kiến nghị</span></span></span>
-                                    </button>
-                                </div>
-
-
                             </div>
+
+                            <div class="form-item ">
+                                <button type="submit" onclick="onCompleted()" style="margin-left:20px;">
+                                    <span class="view_all_medium"><span><span>Gửi phản ánh kiến nghị</span></span></span>
+                                </button>
+                            </div>
+
+
                         </div>
-                    </article>
-                </div>
+                    </div>
+                </article>
             </div>
-            <!-- end content -->
+        </div>
+        <!-- end content -->
+    </div>
+</div>
+<div class="col-md-4">
+    <div id="right_sidebar" style="width: 100%; margin-top: 62px">
+        <div class="region">
+            <aside id="block_weather" class="block">
+                <h3 class="block_title_black">Lưu ý</h3>
+                <div class="content">
+                    <p style="line-height: 30px;font-size: 15px;"><b> 1. Hệ thống tiếp nhận g&oacute;p &yacute;, phản &aacute;nh về:</b><br />&bull; H&agrave;nh vi g&acirc;y &ocirc; nhiễm m&ocirc;i trường, vi phạm ph&aacute;p luật về bảo vệ m&ocirc;i trường, sự cố, vụ việc m&ocirc;i trường;<br />&bull; C&aacute;c cơ chế, ch&iacute;nh s&aacute;ch về m&ocirc;i trường;<br />&bull; Những giải ph&aacute;p, s&aacute;ng kiến bảo vệ m&ocirc;i trường.<br /><b>2. Hệ thống kh&ocirc;ng tiếp nhận đơn thư khiếu nại, tố c&aacute;o, hướng dẫn v&agrave; giải đ&aacute;p ph&aacute;p luật.</b></p>
+                </div>
+            </aside>
+
         </div>
     </div>
-
+</div>
 
 <!-- right sidebar -->
 <button id="buttonModel" type="button" style="display:none" class="btn btn-primary" data-toggle="modal" data-target="#showMaPakn">
@@ -233,7 +268,7 @@
                 <h1 class="modal-title" id="exampleModalLabel">Thông báo</h1>
             </div>
             <div class="modal-body">
-                <p style="font-size: 14px;line-height: 20px">Góp ý, phản ánh mã số <span style="color:red" id="maPakn"></span> của anh/chị đã được gửi thành công. Anh/chị vui lòng lưu lại mã số để tra cứu kết quả giải quyết góp ý, phản ánh trên.</p>
+                <p style="font-size: 14px;line-height: 20px">Góp ý, phản ánh mã số <span style="color:red" id="maPakn"></span> của anh/chị đã được gửi thành công.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
@@ -241,6 +276,7 @@
         </div>
     </div>
 </div>
+
 
 @section Scripts {
     <script src="~/js/home/Scripts.js" asp-append-version="true"></script>
@@ -253,7 +289,17 @@
 
     @await Html.PartialAsync("_ValidationScriptsPartial")
 
-
+    <script>
+        $('input[type=radio][name=phanloai]').change(function () {
+            console.log("radio phan loai change:" + this.value);
+            if (this.value != 0) {
+                $('#form-phan-loai').css('display', 'none');
+            } else {
+                $('#form-phan-loai').css('display', '');
+            }
+        });
+        
+    </script>
     <script id="template-upload" type="text/x-tmpl">
         {% for (var i=0, file; file=o.files[i]; i++) { %}
         <tr class="template-upload fade">
@@ -319,76 +365,72 @@
     </script>
 
     <script type="text/javascript">
+        var tinhs = null;
 
-        function loadHuyen() {
-            $("#quantp").empty();
-            $("#quantp").append("<option selected disabled style='text-align:center'>đang tải...</option>");
-            $("#huyen").empty();
-            $("#huyen").append("<option selected disabled>- Phường xã -</option>");
+            function loadHuyen() {
+                $("#huyen").empty();
 
-            $.ajax({
-                type: "GET",
-                url: appConfig.apiHostUrl + "/api/ProcessWorks/quan/" + $(this).val(),
-                success: function (response) {
-                    $("#quantp").empty();
-                    var districts = response[0].districts;
-                    for (var i = 0; i < districts.length; i++) {
-                        $("#quantp").append("<option value='" + districts[i].id + "'>" + districts[i].name + "</option>")
-                    }
-                    loadXa();
-                }, error: function (er) {
-
+                var wards = tinhs[$("#thanhpho").val() - 1].districts[$("#quantp").val() - tinhs[$("#thanhpho").val() - 1].districts[0].id].wards;
+                for (var i = 0; i < wards.length; i++) {
+                    $("#huyen").append("<option value='" + wards[i].id + "'>" + wards[i].name + "</option>")
                 }
-            });
-        }
 
-        function loadXa() {
-            $("#huyen").empty();
-            $("#huyen").append("<option selected disabled style='text-align:center'>đang tải...</option>");
+            }
 
-            $.ajax({
-                type: "GET",
-                url: appConfig.apiHostUrl + "/api/ProcessWorks/phuong/" + $(this).val() + "/" + $("#thanhpho").val(),
-                success: function (response) {
-                    $("#huyen").empty();
-                    var wards = response.wards;
-                    for (var i = 0; i < wards.length; i++) {
-                        $("#huyen").append("<option value='" + wards[i].id + "'>" + wards[i].name + "</option>")
-                    }
-                }, error: function (er) {
 
+            function loadThanhPho() {
+                $("#quantp").empty();
+                var districts = tinhs[$("#thanhpho").val() - 1].districts;
+                console.log("DATA thanh pho: " + tinhs[1].districts.length + "/" + $("#thanhpho").val());
+
+                for (var i = 0; i < districts.length; i++) {
+                    $("#quantp").append("<option value='" + districts[i].id + "'>" + districts[i].name + "</option>")
                 }
-            });
-        }
 
-        function loadProvinces() {
-            $("#thanhpho").empty();
-            $("#thanhpho").append("<option selected disabled style='text-align:center'>đang tải...</option>");
-            $.ajax({
-                type: "GET",
-                url: appConfig.apiHostUrl + "/api/ProcessWorks/city",
-                success: function (response) {
+                loadHuyen();
+            }
+        
+
+            function loadProvinces() {
+                $("#thanhpho").empty();
+                $("#thanhpho").append("<option selected disabled style='text-align:center'>Đang tải tỉnh thành...</option>");
+                if (tinhs != null) {
                     $("#thanhpho").empty();
-                    for (var i = 0; i < response.length; i++) {
-                        $("#thanhpho").append("<option value='" + response[i].id + "'>" + response[i].name + "</option>")
+                    for (var i = 0; i < tinhs.length; i++) {
+                        $("#thanhpho").append("<option id = '" + i + "' value='" + tinhs[i].id + "'>" + tinhs[i].name + "</option>")
                     }
-                    loadHuyen();
-                }, error: function (er) {
+                } else {
+                    
+                    $.ajax({
+                        type: "GET",
+                        url: appConfig.apiHostUrl + "/api/ProcessWorks/city",
+                        success: function (response) {
+                            $("#thanhpho").empty();
+                            for (var i = 0; i < response.length; i++) {
+                                $("#thanhpho").append("<option id = '" + i + "' value='" + response[i].id + "'>" + response[i].name + "</option>")
+                            }
+                            tinhs = response;
+                            loadThanhPho();
+                            console.log(tinhs[0]);
+                            console.log(tinhs[1]);
+                        }, error: function (er) {
 
+                        }
+                    });
                 }
+
+            }
+            loadProvinces();
+
+            $("#thanhpho").change(function () {
+
+                loadThanhPho();
             });
-        }
 
-       
-        loadProvinces();
+            $("#quantp").change(function () {
+                loadHuyen();
+            });
 
-        $("#thanhpho").change(function () {
-            loadHuyen();
-        });
-
-        $("#quantp").change(function () {
-            loadXa();
-        });
 
         var dataNews = @Html.Raw(Json.Serialize(@data));
         $.each(dataNews, function (item , vlue) {

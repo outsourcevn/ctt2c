@@ -7,9 +7,20 @@
 <head>
     <meta charset="utf-8">
     <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+    <script language="javascript" src="~/js/jquery.cookie.js"></script>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <!---*** End: JQuery 3.3.1 version. ***--->
+    <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!---*** Start: Bootstrap 3.3.7 version files. ***--->
+    <script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!---*** End: Bootstrap 3.3.7 version files. ***--->
 
     <environment include="Development">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
         <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
         <link href="~/css/common.css" rel="stylesheet" media="all" />
         <link href="~/css/flexslider.css" rel="stylesheet" media="all" />
@@ -34,16 +45,14 @@
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     </environment>
-    <link rel="stylesheet" href="~/css/tracuu.css">
-    <link rel="stylesheet" href="~/css/vanban.css">
-    <link rel="stylesheet" href="~/css/cms_vanban.css">
 
+    <link rel="stylesheet" href="~/css/tracuu.css">
     <!--[if lt IE 9]>
     <script src="js/html5.js"></script>
     <![endif]-->
 
     @RenderSection("Styles", required: false)
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <body class="two_sidebars green">
     <!--[if lte IE 8]><div id="ie_message"><div class="wrapper"><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="images/banner_ie.png" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/></a></div></div><![endif]-->

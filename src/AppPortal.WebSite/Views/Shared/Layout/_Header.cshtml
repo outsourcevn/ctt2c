@@ -65,8 +65,8 @@
         padding-bottom: 15px;
     }
     .nav > li > a {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
     }
 </style>
 <header>
@@ -113,44 +113,40 @@
                 <li class="first @ViewData["activeHome"]">
                     <a href="/home/index2"><span class="bg">TRANG CHỦ</span></a>
                 </li>
-                <li class="@ViewData["activetintuc"] dropdown">
-                    @*<span class="bg span-menu">TRUYỀN THÔNG</span>*@
-                    <span class="btn btn-light btn-block" style="margin-top:9px;">TRUYỀN THÔNG</span>
-                    <div class="dropdown-content">
-                        <a href="/home/news">Tin tức truyền thông</a>
-                        <a href="/news/Images">Ảnh</a>
-                        <a href="/news/video">Video</a>
-                    </div>
-                </li>
+
                 <li class="@ViewData["activeContact"]">
                     <a href="/home/contact"><span class="bg">GÓP Ý, PHẢN ÁNH</span></a>
                 </li>
                 <li class="@ViewData["activeTT"]">
                     <a href="/home/tracuu"><span class="bg">TRA CỨU KẾT QUẢ</span></a>
                 </li>
-                <li class="@ViewData["activeTTQT"]">
-                    <a href="/home/ttquantrac"><span class="bg">CHẤT LƯỢNG MÔI TRƯỜNG</span></a>
+                <li class="@ViewData["activeVBPL"]">
+                    <a href="javascript:void(0)"><span class="bg">HƯỚNG DẪN</span></a>
                 </li>
-                <li class="@ViewData["activeMap"]">
-                    <a href="/home/map" target="_blank"><span class="bg">BẢN ĐỒ</span></a>
+                <li class="@ViewData["activetintuc"] dropdown">
+                    @*<span class="bg span-menu">TRUYỀN THÔNG</span>*@
+                    <span class="btn btn-light btn-block" style="margin-top:9px;">THÔNG TIN MÔI TRƯỜNG</span>
+                    <div class="dropdown-content">
+                        <a href="/home/ttquantrac">Chất lượng môi trường</a>
+                        <a href="/home/map" target="_blank">Bản đồ môi trường</a>
+                        <a href="/home/news">Tin tức truyền thông</a>
+                        <a href="/news/Images">Ảnh</a>
+                        <a href="/news/video">Video</a>
+                    </div>
                 </li>
 
+
                 <li class="@ViewData["activeMap"] dropdown">
-                    <span class="btn btn-light btn-block" style="margin-top:9px;">VĂN BẢN</span>
+                    <span class="btn btn-light btn-block" style="margin-top:9px;">VĂN BẢN PHÁP LUẬT</span>
                     <div class="dropdown-content">
                         <a href="/news/vanban">Quy phạm pháp luật</a>
                         <a href="/news/vanbanquychuan">Quy chuẩn, tiêu chuẩn kỹ thuật</a>
                     </div>
                 </li>
 
-                <li class="@ViewData["activeVBPL"]">
-                    <a href="javascript:void(0)"><span class="bg">HƯỚNG DẪN</span></a>
-                </li>
+
                 <li>
                     <input style="margin-top: 8px;" class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                </li>
-                <li>
-                    <a href="http://cms.eportal.today" target="_blank" style="padding-top: 12px; padding-bottom: 12px" class="btn btn-outline-success my-2 my-sm-0">Đăng nhập</a>
                 </li>
             </ul>
             

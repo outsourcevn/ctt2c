@@ -31,6 +31,18 @@
         float: left;
         color: blue;
     }
+
+    .tracuu-filter {
+        margin-right: 10px;
+    }
+
+    #myInput {
+        padding: 20px;
+        margin-top: -6px;
+        border: 0;
+        border-radius: 0;
+        background: #f1f1f1;
+    }
 </style>
 
 <div class="portlet-column portlet-column-only container" id="column-1" style="margin-top: 20px;">
@@ -49,19 +61,19 @@
 
                                     <form class="form-horizontal" role="form" method="post" action="https://nguoidan.chinhphu.vn/web/quan-tri-he-thong/tra-cuu-ket-qua?p_p_id=tracuupaknaction_WAR_apcapaknportlet&amp;p_p_lifecycle=0&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_tracuupaknaction_WAR_apcapaknportlet_mvcPath=%2Fhtml%2Ftracuupaknaction%2Fview.jsp&amp;p_auth=xnYz6bfz">
                                         <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 10px;">Số PAKN</label>
-                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputEmail" placeholder="Nhập số PAKN" name="pakn" value=""> </div>
+                                            <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 10px;">Tiêu đề</label>
+                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputEmail" placeholder="Nhập tiêu đề" name="pakn" value=""> </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 9px;">Tên người gửi</label>
-                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputName" placeholder="Nhập tên công dân" name="tenNguoiGui" value=""> </div>
+                                            <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 9px;">Tên tổ chức, cá nhân</label>
+                                            <div class="col-sm-9"> <input type="text" class="form-control" id="inputName" placeholder="Nhập tên tổ chức, cá nhân" name="tenNguoiGui" value=""> </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 9px;">Thời gian công khai</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="thoigiancongkhai" id="thoigiancongkhai" required readonly>
-                                            </div>
-                                        </div>
+                                        @*<div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 9px;">Thời gian công khai</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="thoigiancongkhai" id="thoigiancongkhai" required readonly>
+                                                </div>
+                                            </div>*@
 
                                         <div class="form-group">
                                             <div class="col-sm-offset-3 col-sm-9"> <button type="button" onclick="getdata()" class="btn btn-danger"><i class="MR5 fa fa-search" aria-hidden="true"></i>Tìm kiếm</button> <button type="reset" class="btn btn-default">Nhập lại</button> </div>
@@ -69,8 +81,96 @@
                                     </form>
 
                                 </div>
-                                <div id="lstGopy">
-                                    
+                                <div class="dropdown tracuu-filter">
+                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+
+                                        <span id="tracuu-type">Tất cả nội dung</span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" style="max-height:250px;overflow:auto;">
+                                        <input class="form-control myInput" type="text" placeholder="Tìm kiếm...">
+                                        <li><a class="tracuu-type" href="#">Ô nhiễm môi trường</a></li>
+                                        <li><a class="tracuu-type" href="#">Cơ chế, chính sách</a></li>
+                                        <li><a class="tracuu-type" href="#">Giải pháp, sáng kiến</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown tracuu-filter">
+                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+
+                                        <span id="tracuu-localtion">Tất cả địa phương</span>
+                                        <span class="caret"></span>
+                                    </button>
+                                  
+                                    <ul class="dropdown-menu" id="tracuu-all-location" style="max-height:250px;overflow:auto;">
+                                        <input class="form-control myInput" type="text" placeholder="Tìm kiếm...">
+                                      
+                                        <li><a class="tracuu-localtion" href="#">Hồ Chí Minh</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Hà Nội</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Đà Nẵng</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bình Dương</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Đồng Nai</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Khánh Hòa</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Hải Phòng</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Long An</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Quảng Nam</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bà Rịa Vũng Tàu</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Đắk Lắk</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Cần Thơ</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bình Thuận  </a></li>
+                                        <li><a class="tracuu-localtion" href="#">Lâm Đồng</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Thừa Thiên Huế</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Kiên Giang</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bắc Ninh</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Quảng Ninh</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Thanh Hóa</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Nghệ An</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Hải Dương</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Gia Lai</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bình Phước</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Hưng Yên</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bình Định</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Tiền Giang</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Thái Bình</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bắc Giang</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Hòa Bình</a></li>
+                                        <li><a class="tracuu-localtion" href="#">An Giang</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Vĩnh Phúc</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Tây Ninh</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Thái Nguyên</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Lào Cai</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Nam Định</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Quảng Ngãi</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bến Tre</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Đắk Nông</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Cà Mau</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Vĩnh Long</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Ninh Bình</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Phú Thọ</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Ninh Thuận</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Phú Yên</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Hà Nam</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Hà Tĩnh</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Đồng Tháp</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Sóc Trăng</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Kon Tum</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Quảng Bình</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Quảng Trị</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Trà Vinh</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Hậu Giang</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Sơn La</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bạc Liêu</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Yên Bái</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Tuyên Quang</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Điện Biên</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Lai Châu</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Lạng Sơn</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Hà Giang</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bắc Kạn</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Cao Bằng</a></li>
+                                    </ul>
+                                </div>
+                                <div id="lstGopy" style="margin-top:20px;">
+
                                 </div>
                             </div>
                         </div>
@@ -113,20 +213,41 @@
     </div>
 
 </div>
+
+
+
 @section Scripts {
     <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
     <script src="~/js/date.format.js"></script>
     <script language="javascript" src="https://momentjs.com/downloads/moment.js"></script>
     <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
-
-    <script type="text/javascript">
+    @* Dropdown bộ lọc hiện thị theo cơ chế chính sách và địa phương *@
+    <script>
         $(document).ready(function () {
-            $('#thoigiancongkhai').datetimepicker({
-                format: 'L',
-                ignoreReadonly: true
+            $(".myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $(".dropdown-menu li").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            $(".tracuu-localtion").click(function () {
+                $('#tracuu-localtion').text($(this).text());
+                console.log($(this).text());
+            });
+            $(".tracuu-type").click(function () {
+                $('#tracuu-type').text($(this).text());
+                console.log($(this).text());
             });
         });
     </script>
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+                $('#thoigiancongkhai').datetimepicker({
+                    format: 'L',
+                    ignoreReadonly: true
+                });
+            });
+        </script>*@
     <script>
         $(document).ready(function () {
             getdata();
@@ -156,7 +277,7 @@
             });
         }
         function templateData(data, mapakn) {
-            
+
             var html = '';
             for (var i = 0; i < data.length; i++) {
                 var noidung = '';
@@ -170,10 +291,15 @@
                 var content = '<div class="MB20" style="font-size: 14px;">';
                 content += '<div class="media-object-default media-object-default1 boT">';
                 content += '<div class="media">';
-                content += '<div class="media-left"> <a href="' + linkDetail +'"><img class="media-object img-thumbnail img-circle" src="../../images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">';
-                content += '<p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="' + linkDetail + '">' + data[i].UserFullName + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i> ' + dateTime +'</p> <h4 class="media-heading">';
-                content += '<a href="' + linkDetail + '" class="tieu-de-pakn">Kiến nghị về việc: ' + data[i].Name +'</a></h4>';
-                content += '<p class="text-justify"><b>Nội dung kiến nghị:</b> ' + noidung +'</p>';
+                content += '<div class="media-left"> <a href="' + linkDetail + '"><img class="media-object img-thumbnail img-circle" src="../../images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">';
+                if (data[i].UserFullName == '') {
+                    content += '<p class="text-muted" style="margin-bottom:8px;margin-top: 8px;"><a style="color: blue;" href="' + linkDetail + '">' + "Ẩn danh" + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i> ' + dateTime + '</p> <h4 class="media-heading">';
+                } else {
+                    content += '<p class="text-muted" style="margin-bottom:8px;margin-top: 8px;"><a style="color: blue;" href="' + linkDetail + '">' + data[i].UserFullName + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i> ' + dateTime + '</p> <h4 class="media-heading">';
+                }
+
+                content += '<a href="' + linkDetail + '" class="tieu-de-pakn">Kiến nghị về việc: ' + data[i].Name + '</a></h4>';
+                content += '<p class="text-justify"><b>Nội dung kiến nghị:</b> ' + noidung + '</p>';
                 content += '</div></div></div></div>';
                 html += content;
             }
