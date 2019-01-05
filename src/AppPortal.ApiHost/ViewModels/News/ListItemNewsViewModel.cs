@@ -46,5 +46,7 @@ namespace AppPortal.ApiHost.ViewModels.News
         public string MaPakn { get; set; }
         [JsonProperty("news_log")]
         public NewsLog newsLog { get; set; }
+        [JsonProperty("user_id")]
+        public string UserId { get; set; }
     }
 }

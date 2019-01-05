@@ -41,6 +41,17 @@ namespace AppPortal.ApiHost.Controllers
             var data = query.ToList();
             return data;
         }
+
+        [Authorize(PolicyRole.ADMINISTRATOR_ONLY)]
+        [HttpGet("getUsersById")]
+        public string getUsersById(string id = "")
+        {
+            var query = _userManager.Users;
+            query = query.Where(z => z.Id == id);
+            var data = query.Select(x => x.FullName).FirstOrDefault();
+            return data;
+        }
+
         #region ' FOR ADMINISTRATOR '
         [Authorize(PolicyRole.ADMINISTRATOR_ONLY)]
         [HttpGet("getUsers")]

@@ -92,6 +92,14 @@ namespace AppPortal.ApiHost.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("getNewsPreviewById")]
+        public IActionResult getNewsPreviewById(int id)
+        {
+            var newsHome = _newsService.getNewsPreviewById(id);
+            return ResponseInterceptor(newsHome);
+        }
+
+        [AllowAnonymous]
         [HttpGet("getHomeNewsByCate")]
         public IActionResult ListHomeNewsAsyncByCate(int? id = 0 , int? number = 0)
         {
@@ -251,6 +259,34 @@ namespace AppPortal.ApiHost.Controllers
             }
             return ResponseInterceptor(message);
         }
+
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpPost("NewsPreviewCreateOrUpdate")]
+        public IActionResult NewsPreviewCreateOrUpdate(int? Id, [FromBody] HomeNewsViewModel model)
+        {
+            string message = "Thêm tin tức thành công";
+            try
+            {
+                var entityModel = Mapper.Map<HomeNewsViewModel, NewsPreview>(model);
+                if (Id.HasValue && Id > 0)
+                {
+                    entityModel.Id = Id.Value;
+                    message = "Cập nhật tin tức thành công";
+                }
+                var data = _newsService.AddOrUpdateNewsPreview(entityModel);
+                return ResponseInterceptor(data);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+        }
+        
 
         // create or update
         [Authorize(PolicyRole.EDIT_ONLY)]

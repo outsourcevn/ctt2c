@@ -12,11 +12,13 @@ namespace AppPortal.AdminSite.Services.Interfaces
         void AddOrUpdate(NewsModel model);
         void AddOrUpdateHome(HomeNewsModel model);
         void AddOrUpdateHomeNews(HomeNews model);
+        int AddOrUpdateNewsPreview(NewsPreview model);
         void Delete(int id);
         void DeleteHome(int id);
         void ShiftDeleteHome(int id);
         NewsModel GetNewsById(int id);
         HomeNews GetHomeNewsById(int id);
+        NewsPreview getNewsPreviewById(int id);
         IList<GetReport1> GetReport1(string startdate, string enddate);
         IList<GetReport1> GetReport2(string startdate, string enddate);
         IList<GetReport2> GetReport3(string startdate, string enddate);

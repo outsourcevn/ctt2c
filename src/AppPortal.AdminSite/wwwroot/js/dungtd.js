@@ -90,7 +90,6 @@ $(document).ready(function () {
         function (success) {
             $("#countthongbao").html(success.length);
             success.forEach(function (item) {
-                console.log(item);
                 var html = '<a href="#" class="dropdown-item"><i class="fa fa-envelope mr-2" ></i> ' + item.Notification + ' <span class="float-right text-muted text-sm" >' + templateDate(item.OnCreated)+' </span></a>';
                 html += '<div class="dropdown-divider"></div>';
                 html = $("<div />").html(html).html();
