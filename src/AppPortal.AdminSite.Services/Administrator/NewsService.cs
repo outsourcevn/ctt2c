@@ -24,6 +24,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         private readonly IRepository<Notifications , int> _notifi;
         private readonly IRepository<NewsLog , int> _newLog;
         private readonly IRepository<HomeNews , int> _homeNews;
+        private readonly IRepository<NewsPreview , int> _newsPreview;
         private readonly IRepository<Files, int> _files;
 
         public NewsService(
@@ -36,6 +37,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             IRepository<Notifications, int> notifi,
             IRepository<NewsLog, int> newLog,
             IRepository<HomeNews, int> homeNews,
+            IRepository<NewsPreview, int> newsPreview,
              IRepository<Files, int> files,
             IAppLogger<NewsService> appLogger)
         {
@@ -49,6 +51,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             _notifi = notifi;
             _newLog = newLog;
             _homeNews = homeNews;
+            _newsPreview = newsPreview;
             _files = files;
         }
 
@@ -456,6 +459,18 @@ namespace AppPortal.AdminSite.Services.Administrator
             }
         }
 
+        public int AddOrUpdateNewsPreview(NewsPreview model)
+        {
+            NewsPreview entity = null;
+            entity = model.ModelToEntityNewsPreview(entity);
+            var itemCat = _category.GetById(model.CategoryId.Value) ?? null;
+            entity.IsStatus = (IsStatus)model.IsStatus;
+            entity.OnCreated = DateTime.Now;
+            entity.CategoryId = model.CategoryId;
+            var modelAdd = _newsPreview.Add(entity);
+            return modelAdd.Id;
+        }
+
         public void AddOrUpdate(NewsModel model)
         {
             News entity = null;
@@ -621,6 +636,11 @@ namespace AppPortal.AdminSite.Services.Administrator
         public HomeNews GetHomeNewsById(int id)
         {
             return _homeNews.Table.SingleOrDefault(x => x.Id == id);
+        }
+
+        public NewsPreview getNewsPreviewById(int id)
+        {
+            return _newsPreview.Table.SingleOrDefault(x => x.Id == id);
         }
 
         public IList<HomeNews> GetHomeNewsByCate(int? id = 0 , int? number = 0)
@@ -944,7 +964,8 @@ namespace AppPortal.AdminSite.Services.Administrator
                 Note = x.Note,
                 fileUpload = x.fileUpload,
                 IsType = x.IsType,
-                Category_Id = x.CategoryId
+                Category_Id = x.CategoryId,
+                UserId = x.UserId 
             }).ToList();
             return dataRetun;
         }

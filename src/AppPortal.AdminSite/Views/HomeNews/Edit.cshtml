@@ -235,7 +235,7 @@
                                 <span asp-validation-for="Note" class="invalid-feedback"></span>
                             </div>
                             <div class="form-group">
-                                <button type="button" onclick="previewData()" class="btn btn-primary" data-toggle="modal" data-target="#previewModal">
+                                <button type="button" onclick="previewData()" class="btn btn-primary">
                                     Xem Trước
                                 </button>
                             </div>
@@ -305,33 +305,6 @@
                 " " + d.getHours() + ":" + d.getMinutes() + ":" +
                 d.getSeconds() + " " + d.getMilliseconds();
             return result;
-        }
-
-
-        function previewData() {
-            var content = '';
-            var headerData = $("#Name").val();
-            var OnPublished = $("#OnPublished").val();
-            var noidung = $("#Content").data("kendoEditor").value();
-            var Abstract = $("#Abstract").data("kendoEditor").value();
-            if (OnPublished == "") {
-                OnPublished = formatDate();
-            } else {
-                OnPublished = formatDate(OnPublished);
-            }
-            var image = $("#Image").val();
-            content += '<h1><font color="red">' + headerData + '</font></h1>'
-            content += OnPublished;
-            content += '<br />';
-            content += '<br />';
-            if (image && image != "") {
-                content += '<img src="' + appConfig.apiCdnUrl + image + '">'
-            }
-            content += '<br><span class="tomtatTintuc">' + Abstract + '</span>';
-            content += noidung;
-            content += '<p class="blockquote-footer" style="text-align:right;">' + $("#SourceNews").val() + ' / ' + $("#UserFullName").val() +'</p>';
-            $('#detail-news').html('');
-            $('#detail-news').html(content);
         }
     </script>
     @await Html.PartialAsync("_UploadFile")

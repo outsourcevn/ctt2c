@@ -70,3 +70,83 @@ function formatDate(date) {
 
     return day_name + ' Ngày ' + day + ' ' + monthNames[monthIndex] + ' Năm ' + year + ' ' + hour + 'h: ' + minute + 'phút';
 }
+
+function previewData(event) {
+    var form = document.getElementById(ngNews.formName);
+    var $form = $('form#' + ngNews.formName);
+    var jwtToken = getCookie("ACCESS-TOKEN");
+
+    form.classList.add('was-validated');
+
+    var publishDate = $("input[id='OnPublished']").val();
+    if (!publishDate) {
+        var dateCurrent = new Date();
+        publishDate = dateCurrent.toLocaleDateString();
+    }
+
+    if ($form.valid()) {
+        var csrfToken = $("input[name='__RequestVerificationToken']").val();
+        var dataJson = {
+            Id: $("input[id='News_id']").val(),
+            CategoryId: $("input[id='CategoryId']").val(),
+            Name: $("input[id='Name']").val(),
+            Abstract: $("#Abstract").data("kendoEditor").value(),
+            Content: $("#Content").data("kendoEditor").value(),
+            Image: $("input[id='Image']").val(),
+            Link: $("input[id='Link']").val(),
+            IsShow: $("input#IsShow:checked").val(),
+            Sename: $("input[id='Sename']").val(),
+            MetaTitle: $("input[id='MetaTitle']").val(),
+            MetaKeywords: $("input[id='MetaKeywords']").val(),
+            MetaDescription: $('input#MetaDescription').val(),
+            UserId: $("input[id='News_UserId']").val(),
+            UserName: $("input[id='News_UserName']").val(),
+            UserFullName: $("input[id='UserFullName']").val(),
+            UserEmail: $("input[id='News_UserEmail']").val(),
+            SourceNews: $("input[id='SourceNews']").val(),
+            Note: $("textarea[id='Note']").val(),
+            IsStatus: 0,
+            OnPublished: $("input[id='OnPublished']").val(),
+            sovanban: $("input[id='sovanban']").val(),
+            tenvanban: $("input[id='tenvanban']").val(),
+            ngaybanhanh: $("input[id='ngaybanhanh']").val(),
+            loaivanban: $("input[id='loaivanban']").val(),
+            cqbanhanh: $("input[id='cqbanhanh']").val(),
+            ngayhieuluc: $("input[id='ngayhieuluc']").val(),
+            tinhtranghieuluc: $("input[id='tinhtranghieuluc']").val(),
+            nguoiky: $("input[id='nguoiky']").val(),
+            chucdanh: $("input[id='chucdanh']").val(),
+        };
+        //console.log(dataJson);
+        callAjax(
+            `${appConfig.apiHostUrl}` + '/api/News/NewsPreviewCreateOrUpdate',
+            dataJson,
+            AjaxConst.PostRequest,
+            function (xhr) {
+                xhr.setRequestHeader('__RequestVerificationToken', csrfToken);
+                xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                $form.children('.card-footer').children('.form-group').find('button').addClass('disabled').attr('disabled', true);
+            },
+            function (success) {
+                //console.log('success ', success)
+                if (!success.did_error) {
+                    var url = urlTrangchu + 'News/previewTintuc?id=' + success.model;
+                    window.open(url, '_blank');
+                }
+            },
+            function (xhr, status, error) {
+                if (xhr.status === 400) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    err.forEach(function (item) {
+                        messagerError(item.Code, item.Description);
+                    });
+                } else {
+                    messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                }
+            },
+            function (complete) {
+
+            }
+        )
+    }
+}

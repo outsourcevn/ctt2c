@@ -54,5 +54,10 @@ namespace AppPortal.WebSite.Controllers
         {
             return View();
         }
+
+        public IActionResult previewTintuc()
+        {
+            return View();
+        }
     }
 }

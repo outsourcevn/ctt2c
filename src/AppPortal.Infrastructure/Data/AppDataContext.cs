@@ -25,6 +25,7 @@ namespace AppPortal.Infrastructure.App
             modelBuilder.Entity<NewsLog>(ConfigureNewsLog);
             modelBuilder.Entity<Files>(ConfigureFiles);
             modelBuilder.Entity<HomeNews>(ConfigureHomeNews);
+            modelBuilder.Entity<NewsPreview>(ConfigureNewsPreview);
             modelBuilder.Entity<Media>(ConfigureMedia);
             modelBuilder.Entity<Config>(ConfigureConfig);
         }
@@ -189,7 +190,35 @@ namespace AppPortal.Infrastructure.App
             b.Property(c => c.url).HasMaxLength(2000);
         }
 
-        
+        private void ConfigureNewsPreview(EntityTypeBuilder<NewsPreview> b)
+        {
+            b.ToTable("NewsPreview", "AppPortal");
+            b.Property(c => c.Id).UseSqlServerIdentityColumn().IsRequired();
+            b.Property(c => c.Name).HasMaxLength(2000);
+            b.Property(c => c.Abstract).HasMaxLength(2000);
+            b.Property(c => c.Content).HasColumnType("ntext");
+            b.Property(c => c.Link).HasMaxLength(500);
+            b.Property(c => c.Sename).HasMaxLength(500);
+
+            b.Property(c => c.MetaTitle).HasMaxLength(1000);
+            b.Property(c => c.MetaKeywords).HasMaxLength(1000);
+            b.Property(c => c.MetaDescription).HasMaxLength(1000);
+
+            b.Property(c => c.UserName).HasMaxLength(255);
+            b.Property(c => c.UserEmail).HasMaxLength(255);
+            b.Property(c => c.UserFullName).HasMaxLength(255);
+            b.Property(c => c.UserId).HasMaxLength(500);
+
+            b.Property(c => c.SourceNews).HasMaxLength(255);
+            b.Property(c => c.Note).HasMaxLength(1000);
+
+            b.Property(c => c.IsNew).HasColumnType("int");
+            b.Property(c => c.IsPosition).HasColumnType("int");
+            b.Property(c => c.IsShow).HasColumnType("bit");
+            b.Property(c => c.IsStatus).HasColumnType("int");
+            b.Property(c => c.IsType).HasColumnType("int");
+            b.Property(c => c.IsView).HasColumnType("int");
+        }
 
         #endregion
     }

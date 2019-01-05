@@ -496,6 +496,131 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.ToTable("NewsLog","AppPortal");
                 });
 
+            modelBuilder.Entity("AppPortal.Core.Entities.NewsPreview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abstract")
+                        .HasMaxLength(2000);
+
+                    b.Property<int?>("AddressId");
+
+                    b.Property<string>("AddressString");
+
+                    b.Property<int?>("CategoryId");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("ntext");
+
+                    b.Property<int?>("CountLike");
+
+                    b.Property<int?>("CountView");
+
+                    b.Property<string>("Image");
+
+                    b.Property<int>("IsNew")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsPosition")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsShow")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("IsStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsView")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Lat");
+
+                    b.Property<string>("Link")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("Lng");
+
+                    b.Property<string>("MetaDescription")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("MetaKeywords")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("MetaTitle")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(2000);
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(1000);
+
+                    b.Property<DateTime?>("OnCreated");
+
+                    b.Property<DateTime?>("OnDeleted");
+
+                    b.Property<DateTime?>("OnPublished");
+
+                    b.Property<DateTime?>("OnUpdated");
+
+                    b.Property<string>("Sename")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("SourceNews")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("UserAddress");
+
+                    b.Property<string>("UserEmail")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("UserFullName")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("UserId")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("UserPhone");
+
+                    b.Property<string>("chucdanh");
+
+                    b.Property<string>("cqbanhanh");
+
+                    b.Property<string>("fileUpload");
+
+                    b.Property<string>("loaivanban");
+
+                    b.Property<DateTime?>("ngaybanhanh");
+
+                    b.Property<string>("ngayhieuluc");
+
+                    b.Property<string>("nguoiky");
+
+                    b.Property<string>("phuongxa");
+
+                    b.Property<string>("quanhuyen");
+
+                    b.Property<string>("sovanban");
+
+                    b.Property<string>("tenvanban");
+
+                    b.Property<string>("tinhthanhpho");
+
+                    b.Property<string>("tinhtranghieuluc");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewsPreview","AppPortal");
+                });
+
             modelBuilder.Entity("AppPortal.Core.Entities.NewsRelated", b =>
                 {
                     b.Property<int>("NewsId1");

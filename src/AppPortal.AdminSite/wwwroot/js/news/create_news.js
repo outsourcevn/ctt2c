@@ -171,7 +171,7 @@ function preview() {
                     Link: $("input[id='Link']").val(),
                     IsShow: $("input#IsShow:checked").val(),
                     Sename: $("input[id='Sename']").val(),
-                    MetaTitle: $("input[id='MetaTitle']").val(),
+                    MetaTitle: $("input[id='News_UserFullName']").val(),
                     MetaKeywords: $("input[id='MetaKeywords']").val(),
                     MetaDescription: $('input#MetaDescription').val(),
                     UserId: $("input[id='News_UserId']").val(),
