@@ -153,15 +153,16 @@ namespace AppPortal.AdminSite.Controllers
                     // Get token
                     using (var client = new HttpClient())
                     {
-                        client.BaseAddress = new System.Uri(adminSetting.ApiHostUrl);
+
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                        var response = await client.PostAsJsonAsync("/api/account/token", new LoginViewModel
+                        var response = await client.PostAsJsonAsync(adminSetting.ApiHostUrl + "/api/account/token", new LoginViewModel
                         {
                             UserName = model.UserName,
                             Password = model.Password,
                             RememberMe = true
                         });
+
                         if (response.IsSuccessStatusCode && response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
                             var userLogined = JsonConvert.DeserializeObject<UserLoginedViewModel>(response.Content.ReadAsStringAsync().Result);
@@ -173,10 +174,12 @@ namespace AppPortal.AdminSite.Controllers
 
                             access_token = userLogined.AccessToken;
                         }
+                        SetCookie("Cache-Token", response.IsSuccessStatusCode.ToString() , 6000);
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    SetCookie("Cache-Token", ex.Message , 6000);
                     return RedirectToAction(nameof(Login), new { returnUrl = returnUrl });
                 }
 
