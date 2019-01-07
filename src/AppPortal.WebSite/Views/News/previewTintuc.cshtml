@@ -112,6 +112,7 @@
             var year = date.getFullYear();
             var hour = date.getHours();
             var minute = date.getMinutes();
+            var second = date.getSeconds();
             var current_day = date.getDay();
             var day_name = '';
             switch (current_day) {
@@ -137,7 +138,7 @@
                     day_name = "Thứ bảy";
             }
 
-            return day_name + ' Ngày ' + day + ' ' + monthNames[monthIndex] + ' Năm ' + year + ' ' + hour + 'h: ' + minute + 'phút';
+            return day_name + ' ' + day + ' ' + monthNames[monthIndex] + ' - ' + year + ' ' + (hour >= 10 ? hour : '0' + hour) + ':' + (minute >= 10 ? minute : '0' + minute) + ':' + (second >= 10 ? second : '0' + second); 
         }
 
         var getUrlParameter = function getUrlParameter(sParam) {
@@ -167,7 +168,7 @@
             content += data.model.Content;
             content += '<br />';
             content += '<br />';
-            content += '<p class="blockquote-footer" style="text-align:right;">' + data.model.SourceNews + ' / ' + data.model.UserFullName + '</p >';
+            content += '<p class="blockquote-footer" style="text-align:right;">' + data.model.SourceNews + '/' + data.model.UserFullName + '</p >';
             $('#detail-news').html(content);
         });
 

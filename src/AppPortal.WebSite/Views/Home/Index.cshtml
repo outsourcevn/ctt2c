@@ -3,6 +3,47 @@
     Layout = "_HomeLayout";
     var url = ViewData["map"];
 }
+
+@section Styles {
+    
+    <style>
+        .view_all {
+            color: #282828;
+            font-size: 12px;
+            text-transform: lowercase;
+            font-weight: normal;
+            text-decoration: none;
+            background: url(../images/bg_view_all.png) no-repeat 0 -48px;
+            padding-left: 11px;
+            display: inline-block;
+            zoom: 1;
+            *display: inline;
+        }
+
+            .view_all span {
+                background: url(../images/bg_view_all.png) no-repeat 100% -24px;
+                cursor: pointer;
+                padding-right: 11px;
+                display: inline-block;
+                zoom: 1;
+                *display: inline;
+            }
+
+                .view_all span span {
+                    background: url(../images/bg_view_all.png) repeat-x 0 0;
+                    height: 24px;
+                    line-height: 24px;
+                    padding: 0;
+                }
+
+        .block a {
+            color: #282828;
+            text-decoration: none;
+        }
+
+
+    </style>
+}
 <!-- left sidebar -->
 <!-- end left sidebar -->
 <!-- content -->
@@ -10,7 +51,8 @@
     <div class="region row">
         <div class="col-sm-8">
             <section class="block_business_news block">
-                <h3 class="block_title_black">Phản ánh kiến nghị</h3>
+                <h3 class="block_title_black">PHẢN ÁNH KIẾN NGHỊ<a href="/home/tracuu" class="view_all"><span><span>Tra cứu</span></span></a></h3>
+
                 <div id="lstGopy">
 
                 </div>
@@ -18,14 +60,11 @@
         </div>
         <div class="col-sm-4">
             <section class="block block_business_news">
-                <h3 class="block_title_black">TIN TRUYỀN THÔNG<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                <h3 class="block_title_black">TIN TRUYỀN THÔNG<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
 
-                <div class="">
-                   
-                    <div class="">
-                        <ul id="truyen-thong-news-content"></ul>
-                    </div>
-                </div>
+
+                <ul id="truyen-thong-news-content"></ul>
+
             </section>
         </div>
 
@@ -35,27 +74,24 @@
         <div class="col-sm-8">
             <section class="block_business_news block">
                 <h3 class="block_title_black">THÔNG TIN QUAN TRẮC</h3>
-                <div class="">
-                    <div class="">
-                        <aside id="block_weather" class="block">
-                            <div class="content">
-                                <div id="chart_div"> </div>
-                                <div class="sc-iRbamj gRGzsx" style="position: relative; top: 6px; right: 6px;"><div><span class="sc-jlyJG kgyyWB">Thang đo VN AQI</span></div><div style="flex: 1 1 0%; display: flex; flex-direction: row;"><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(0, 228, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">0 – 50</span><span class="sc-gipzik zJvnp" font-size="6"> (Tốt)</span></div></div><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 255, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">51 – 100</span><span class="sc-gipzik zJvnp" font-size="6"> (Trung bình)</span></div></div><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 126, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">101 – 200</span><span class="sc-gipzik zJvnp" font-size="6"> (Kém)</span></div></div><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 0, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">201 – 300</span><span class="sc-gipzik zJvnp" font-size="6"> (Xấu)</span></div></div><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(126, 0, 35);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">Trên 300</span><span class="sc-gipzik zJvnp" font-size="6"> (Nguy hại)</span></div></div></div></div>
-                            </div>
-                        </aside>
+
+                <aside id="block_weather" class="block">
+                    <div class="content">
+                        <div id="chart_div"> </div>
+                        <div class="sc-iRbamj gRGzsx" style="position: relative; top: 6px; right: 6px;"><div><span class="sc-jlyJG kgyyWB">Thang đo VN AQI</span></div><div style="flex: 1 1 0%; display: flex; flex-direction: row;"><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(0, 228, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">0 – 50</span><span class="sc-gipzik zJvnp" font-size="6"> (Tốt)</span></div></div><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 255, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">51 – 100</span><span class="sc-gipzik zJvnp" font-size="6"> (Trung bình)</span></div></div><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 126, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">101 – 200</span><span class="sc-gipzik zJvnp" font-size="6"> (Kém)</span></div></div><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 0, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">201 – 300</span><span class="sc-gipzik zJvnp" font-size="6"> (Xấu)</span></div></div><div style="width: 90px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(126, 0, 35);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">Trên 300</span><span class="sc-gipzik zJvnp" font-size="6"> (Nguy hại)</span></div></div></div></div>
                     </div>
-                </div>
+                </aside>
+
             </section>
         </div>
         <div class="col-sm-4">
             <section class="block block_business_news">
-                <h3 class="block_title_black">VĂN BẢN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="">
-              
-                    <div class="">
-                        <ul id="van-ban-chinh-sach-from-second"></ul>
-                    </div>
-                </div>
+                <h3 class="block_title_black">VĂN BẢN<a href="/news/vanban" class="view_all"><span><span>Tất cả văn bản</span></span></a></h3>
+
+
+                <ul id="van-ban-chinh-sach-from-second"></ul>
+
+
             </section>
         </div>
 
@@ -64,33 +100,29 @@
     <div class="region row" id="home_video">
         <div class="col-sm-8">
             <section class="block_business_news block">
-                <h3 class="block_title_black">VIDEO<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="">
-                    <aside id="block_front_slides_v" class="block slider" style="height: 100%;">
-                        <div class="flexslider slider video_home" id="block_front_slides_video" style="height: 100%;">
-                            <ul class="slides" id="contentVideo">
-                                
-                            </ul>
-                        </div>
-                        <div class="flexslider carousel" id="block_front_carousel_video">
-                            <ul class="slides" id="contentImage">
-                                
-                            </ul>
-                        </div>
-                    </aside>
-                </div>
+                <h3 class="block_title_black">VIDEO<a href="/news/video" class="view_all"><span><span>Tất cả video</span></span></a></h3>
+
+                <aside id="block_front_slides_v" class="block slider" style="height: 100%;">
+                    <div class="flexslider slider video_home" id="block_front_slides_video" style="height: 100%;">
+                        <ul class="slides" id="contentVideo"></ul>
+                    </div>
+                    <div class="flexslider carousel" id="block_front_carousel_video">
+                        <ul class="slides" id="contentImage"></ul>
+                    </div>
+                </aside>
+
             </section>
         </div>
 
         <div class="col-sm-4">
             <section class="block block_business_news">
-                <h3 class="block_title_black">PHẢN ÁNH MÔI TRƯỜNG<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="">
+                <h3 class="block_title_black">PHẢN ÁNH MÔI TRƯỜNG<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
 
-                    <div class="">
-                        <ul id="phan-anh-moi-truong-content"></ul>
-                    </div>
+
+                <div class="">
+                    <ul id="phan-anh-moi-truong-content"></ul>
                 </div>
+
             </section>
         </div>
 
@@ -99,30 +131,26 @@
     <div class="region row">
         <div class="col-sm-8">
             <section class="block_business_news block">
-                <h3 class="block_title_black">HÌNH ẢNH<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="">
-                    <div id="content_top2" style="padding-top: 14px;">
-                        <div class="region">
-                            <aside id="block_front_slider" class="block slider" style="height: 520px;width: 100%;">
-                                <div class="flexslider slider" id="block_front_slides" style="height: 450px;width: 100%;">
-                                    <ul class="slides" id="home-image-preview">
-                                        
-                                    </ul>
-                                </div>
-                                <div class="flexslider carousel" id="block_front_carousel">
-                                    <ul class="slides" id="home-image-slide">
-                                        
-                                    </ul>
-                                </div>
-                            </aside>
-                        </div>
+                <h3 class="block_title_black">HÌNH ẢNH<a href="/news/Images" class="view_all"><span><span>Tất cả hình ảnh</span></span></a></h3>
+
+                <div id="content_top2" style="padding-top: 14px;">
+                    <div class="region">
+                        <aside id="block_front_slider" class="block slider" style="height: 520px;width: 100%;">
+                            <div class="flexslider slider" id="block_front_slides" style="height: 450px;width: 100%;">
+                                <ul class="slides" id="home-image-preview"></ul>
+                            </div>
+                            <div class="flexslider carousel" id="block_front_carousel">
+                                <ul class="slides" id="home-image-slide"></ul>
+                            </div>
+                        </aside>
                     </div>
                 </div>
+
             </section>
         </div>
         <div class="col-sm-4">
             <section class="block block_business_news">
-                <h3 class="block_title_black">GIẢI PHÁP SÁNG KIẾN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+                <h3 class="block_title_black">GIẢI PHÁP SÁNG KIẾN<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                 <div class="">
                     <div class="">
                         <ul id="giai-phap-sang-kien-content"></ul>
@@ -140,6 +168,18 @@
 <!-- end content bottom -->
 <!-- right sidebar -->
 @section Scripts {
+    <script>
+        $('input[type=radio][name=phanloai]').change(function () {
+            console.log("radio phan loai change:" + this.value);
+            if (this.value != 0) {
+                $('#form-phan-loai').css('display', 'none');
+            } else {
+                $('#form-phan-loai').css('display', '');
+            }
+        });
+
+    </script>
+
     <script src="~/js/home/contact.js" asp-append-version="true"></script>
     <script src="~/js/home/home.js" asp-append-version="true"></script>
     <script src="~/js/date.format.js"></script>
@@ -188,7 +228,11 @@
                 content += '<div class="media-object-default media-object-default1 boT">';
                 content += '<div class="media">';
                 content += '<div class="media-left"> <a href="' + linkDetail + '"><img class="media-object img-thumbnail img-circle" src="../../images/MediaObj_Placeholder.png" width="80" alt="placeholder image"></a> </div> <div class="media-body">';
-                content += '<p class="text-muted" style="margin-bottom:8px;"><a style="color: blue;" href="' + linkDetail + '">' + data[i].UserFullName + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i> ' + dateTime + '</p> <h4 class="media-heading">';
+                if (data[i].UserFullName == '') {
+                    content += '<p class="text-muted" style="margin-bottom:8px;margin-top: 8px;"><a style="color: blue;" href="' + linkDetail + '">' + "Ẩn danh" + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i> ' + dateTime + '</p> <h4 class="media-heading">';
+                } else {
+                    content += '<p class="text-muted" style="margin-bottom:8px;margin-top: 8px;"><a style="color: blue;" href="' + linkDetail + '">' + data[i].UserFullName + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i> ' + dateTime + '</p> <h4 class="media-heading">';
+                }
                 content += '<a href="' + linkDetail + '" class="tieu-de-pakn">Kiến nghị về việc: ' + data[i].Name + '</a></h4>';
                 content += '<p class="text-justify"><b>Nội dung kiến nghị:</b> ' + noidung + '</p>';
                 content += '</div></div></div></div>';
@@ -197,7 +241,7 @@
             return html;
         }
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=2", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 content += '<article class="border-dot">';
@@ -348,13 +392,13 @@
             var preview = '';
             var slide = '';
             for (var i = 0; i < data.length; i++) {
-                preview += '<li> <video style="width: 100%",height="100%" controls> <source src="' + data[i].url +'"> </video> <p class="flex-caption" style="width:100%;">'+data[i].description+'</p> </li>';
+                preview += '<li> <video style="width: 100%",height="100%" controls> <source src="' + data[i].url + '"> </video> <p class="flex-caption" style="width:100%;">' + data[i].description + '</p> </li>';
 
                 slide += '<li>';
                 slide += '<img src="' + data[i].filesImage + '" />';
                 slide += '</li>';
             }
-            
+
             $('#contentVideo').html(preview);
             $('#contentImage').html(slide);
             $('#block_front_slides_video').flexslider({

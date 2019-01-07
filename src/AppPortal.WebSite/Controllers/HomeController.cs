@@ -22,15 +22,15 @@ namespace AppPortal.WebSite.Controllers
 
         public IActionResult Index()
         {
-            var data = _newsService.GetConfig("map");
-            ViewData["map"] = data.url;
+            //var data = _newsService.GetConfig("map");
+            //ViewData["map"] = data.url;
             return View();
         }
 
         public IActionResult index2()
         {
-            var data = _newsService.GetConfig("map");
-            ViewData["map"] = data.url;
+            //var data = _newsService.GetConfig("map");
+            //ViewData["map"] = data.url;
             return View(nameof(Index));
         }
 
@@ -53,8 +53,8 @@ namespace AppPortal.WebSite.Controllers
         {
             // ViewData["data"] = _newsService.GetNewsList();
             //  @ViewData["activeContact"] = "active";
-            var data = _newsService.GetConfig("map");
-            ViewData["map"] = data.url;
+            //var data = _newsService.GetConfig("map");
+            //ViewData["map"] = data.url;
             return View();
         }
 

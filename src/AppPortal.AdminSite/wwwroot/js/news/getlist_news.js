@@ -90,6 +90,9 @@ var grid = $("#dataGrid").data("kendoGrid");
                 {
                     field: "abstract", title: "Tóm tắt", width: "250px",
                     template: "#=templateNote(abstract)#",
+                    attributes: {
+                        "class": "line-clamp"
+                    }
                 },
                 {
                     field: "is_status", title: "Trạng thái", width: "120px",
@@ -803,6 +806,27 @@ function getDataPhanCong(news_id, group_name_from) {
 }
 
 function previewData(news_id) {
+    //var content = '';
+    //var headerData = $("#Name").val();
+    //var OnPublished = $("#OnPublished").val();
+    //var noidung = $("#Content").data("kendoEditor").value();
+    //var Abstract = $("#Abstract").data("kendoEditor").value();
+    //if (OnPublished == "") {
+    //    OnPublished = formatDate();
+    //}
+    //var image = $("#Image").val();
+    //content += '<h1><font color="red">' + headerData + '</font></h1>'
+    //content += OnPublished;
+    //content += '<br />';
+    //content += '<br />';
+    //if (image && image != "") {
+    //    content += '<img src="' + appConfig.apiCdnUrl + image + '">'
+    //}
+    //content += '<br><span class="tomtatTintuc">' + Abstract + '</span>';
+    //content += noidung;
+    //$('#detail-news').html('');
+    //$('#detail-news').html(content);
+
     $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsById?id=" + news_id, function (data, status) {
         var content = '';
         content += '<h1 style="line-height: 28px;"><font color="black">' + data.model.Name + '</font></h1>'
@@ -822,3 +846,44 @@ function previewData(news_id) {
     });
 }
 
+
+    $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsById?id=" + news_id, function (data, status) {
+        var content = '';
+        content += '<h1 style="line-height: 28px;"><font color="black">' + data.model.Name + '</font></h1>'
+        content += formatDate(new Date(data.model.OnPublished));
+        content += '<br />';
+        content += '<br />';
+        if (data.model.Image) {
+            content += '<img class="imgStyle" src="' + appConfig.apiCdnUrl + data.model.Image + '">';
+        }
+        content += '<br><p class="tomtatTintuc">' + data.model.Abstract + '</p>';
+        content += data.model.Content;
+        content += '<br />';
+        content += '<br />';
+        content += '<p class="blockquote-footer" style="text-align:right;">' + data.model.SourceNews + ' / ' + data.model.UserFullName + '</p >';
+        $('#detail-news').html(content);
+        $("#previewModal").modal("show");
+    });
+}
+
+
+function previewData(news_id) {
+    $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsById?id=" + news_id, function (data, status) {
+        var content = '';
+        content += '<h1 style="line-height: 28px;"><font color="black">' + data.model.Name + '</font></h1>'
+        content += formatDate(new Date(data.model.OnPublished));
+        content += '<br />';
+        content += '<br />';
+        if (data.model.Image) {
+            content += '<img class="imgStyle" src="' + appConfig.apiCdnUrl + data.model.Image + '">';
+        }
+        content += '<br><p class="tomtatTintuc">' + data.model.Abstract + '</p>';
+        content += data.model.Content;
+        content += '<br />';
+        content += '<br />';
+        content += '<p class="blockquote-footer" style="text-align:right;">' + data.model.SourceNews + ' / ' + data.model.UserFullName + '</p >';
+        $('#detail-news').html(content);
+        $("#previewModal").modal("show");
+    });
+}
+
