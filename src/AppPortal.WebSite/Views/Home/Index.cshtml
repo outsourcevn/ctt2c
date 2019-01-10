@@ -241,7 +241,7 @@
             return html;
         }
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=2", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 content += '<article class="border-dot">';
@@ -257,7 +257,7 @@
                     content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
                 }
-                content += '<p style="line-height: 15px;">';
+                content += '<p style="line-height: 20px; color:#333;">';
                 content += data.model[i].Abstract;
                 content += '</p>';
                 content += '</article>';
@@ -265,7 +265,7 @@
             $('#tin-moi-nhat-content').html(content);
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=13&number=4", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=13&number=3", function (data, status) {
             var news = '';
 
             for (var i = 0; i < data.model.length; i++) {
@@ -282,7 +282,7 @@
                     news += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
                 }
-                news += '<p>';
+                news += '<p style="line-height: 20px;">';
                 news += data.model[i].Abstract;
                 news += '</p>';
                 news += '</li >';
@@ -308,7 +308,7 @@
                     content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
                 }
-                content += '<p>';
+                content += '<p style="line-height: 20px;">';
                 content += data.model[i].Abstract;
                 content += '</p>';
                 content += '<a style="color: red;text-decoration: underline" href="http://demo.eportal.today/doc/235-qd-btnmt.pdf" target="_blank">Tải xuống Quyết định số 235/QĐ-BTNMT</a>';
@@ -335,7 +335,7 @@
                     content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
                 }
-                content += '<p>';
+                content += '<p style="line-height: 20px;">';
                 content += data.model[i].Abstract;
                 content += '</p>';
                 content += '</article>';
@@ -361,7 +361,7 @@
                     content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
                 }
-                content += '<p>';
+                content += '<p style="line-height: 20px;">';
                 content += data.model[i].Abstract;
                 content += '</p>';
                 content += '</article>';

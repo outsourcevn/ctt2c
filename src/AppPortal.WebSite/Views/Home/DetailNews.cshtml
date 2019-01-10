@@ -55,8 +55,6 @@
         font-family: Arial !important;
         font-style: italic;
     }
-
-
 </style>
 <link href="~/css/news.css" rel="stylesheet" />
 
@@ -140,7 +138,7 @@
                     day_name = "Thứ bảy";
             }
 
-            return day_name + ' ' + day + ' ' + monthNames[monthIndex] + ' - ' + year + ' ' + (hour >= 10 ? hour : '0' + hour) + ':' + (minute >= 10 ? minute : '0' + minute) + ':' + (second >= 10 ? second : '0' + second); 
+            return day_name + ' ' + day + ' ' + monthNames[monthIndex] + ' - ' + year + ' ' + (hour >= 10 ? hour : '0' + hour) + ':' + (minute >= 10 ? minute : '0' + minute) + ':' + (second >= 10 ? second : '0' + second);
         }
 
         var getUrlParameter = function getUrlParameter(sParam) {
@@ -159,7 +157,7 @@
         };
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsById?id=" + getUrlParameter('id'), function (data, status) {
             var content = '';
-            content += '<h1 style="line-height: 28px;"><font color="black">' + data.model.Name + '</font></h1>'
+            content += '<h1 style="line-height: 31px;"><font color="black">' + data.model.Name + '</font></h1>'
             content += formatDate(new Date(data.model.OnPublished));
             content += '<br />';
             content += '<br />';
@@ -168,11 +166,14 @@
             }
             content += '<br/><p class="tomtatTintuc">' + data.model.Abstract + '</p>';
             content += '<br />';
-            
+
             content += data.model.Content;
             content += '<br />';
             content += '<br />';
-            content += '<p class="blockquote-footer" style="text-align:right;">' + data.model.SourceNews +'/' + data.model.UserFullName + '</p >';
+            content += '<p  style="text-align:right;font-size:17px;font-family: Arial, Helvetica, sans-serif;"><b>' + data.model.SourceNews + '/' + data.model.UserFullName + '</b></p >';
+            content += '<style>';
+            content += 'p span span {margin-top:9px;}';
+            content += '</style>';  
             $('#detail-news').html(content);
         });
 
@@ -221,6 +222,7 @@
                     content += '</article>';
                 }
             }
+              
             $('#tin-chuyen-muc-content').html(content);
         });
 
