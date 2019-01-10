@@ -184,28 +184,40 @@
                     content += '<hgroup>';
                     content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '" >' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
+
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+
+                    }
+
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
-                    content += '...</p>';
+                    content += '</p>';
+
+
                     content += '</article>';
                 } else {
                     content += '<article>';
                     content += '<hgroup>';
                     content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+
+                    }
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
-                    content += '...</p>';
+                    content += '</p>';
                     content += '</article>';
                 }
             }
@@ -220,11 +232,15 @@
                     content += '<hgroup>';
                     content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+
+                    }
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
                     content += '...</p>';
@@ -234,11 +250,15 @@
                     content += '<hgroup>';
                     content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+
+                    }
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
                     content += '...</p>';
@@ -257,28 +277,36 @@
                     content += '<hgroup>';
                     content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+
+                    }
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
-                    content += '...</p>';
+                    content += '</p>';
                     content += '</article>';
                 } else {
                     content += '<article>';
                     content += '<hgroup>';
                     content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+
+                    }
                     content += '<p style="line-height: 15px;">';
                     content += data.model[i].Abstract;
-                    content += '...</p>';
+                    content += '</p>';
                     content += '</article>';
                 }
             }
