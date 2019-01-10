@@ -125,7 +125,6 @@ function previewData(event) {
             function (xhr) {
                 xhr.setRequestHeader('__RequestVerificationToken', csrfToken);
                 xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
-                $form.children('.card-footer').children('.form-group').find('button').addClass('disabled').attr('disabled', true);
             },
             function (success) {
                 //console.log('success ', success)
