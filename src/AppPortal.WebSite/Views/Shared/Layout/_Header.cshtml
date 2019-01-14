@@ -24,7 +24,7 @@
         display: none;
         position: absolute;
         background-color: #f1f1f1;
-        min-width: 170px;
+        width: 100%;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1000;
     }
@@ -34,7 +34,6 @@
             padding: 12px 16px;
             text-decoration: none;
             display: block;
-
         }
 
             .dropdown-content a:hover {
@@ -49,31 +48,139 @@
         background-color: #3e8e41;
         z-index: 999;
     }
+
     .navbar .navbar-nav {
         display: inline-block;
         float: none;
         vertical-align: top;
         background-color: #f8f8f8;
     }
+
     .navbar .navbar-collapse {
         text-align: center;
         z-index: 1000;
     }
-    .span-menu {
-        margin-top: 15px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-    .nav > li > a {
-        padding-left: 15px !important;
-        padding-right: 15px !important;
-    }
-.navbar-nav>li>a {
-    padding-top: 15px;
-    padding-bottom: 12px;
-}
 
+    .span-menu {
+        margin-top: 7px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    .nav > li > a {
+        padding-left: 7px !important;
+        padding-right: 7px !important;
+    }
+
+    .btn {
+        padding-left: 7px !important;
+        padding-right: 7px !important;
+    }
+
+    .navbar-nav > li > a {
+        padding-top: 15px;
+        padding-bottom: 12px;
+    }
+
+    .navbar {
+        margin-bottom: 20px;
+    }
+
+
+
+    .undernav {
+        /*background: url(../images/bottom-nav-bg.gif) repeat-x scroll;*/
+        /*clear: both;*/
+        /*padding-top: 10px;
+        padding-bottom:5px;*/
+        margin-top: 50px;
+        position: absolute;
+        background-color: #f1f1f1;
+        width: 96%;
+        z-index: 999;
+    }
+
+    .my-time {
+        padding-top: 3.5px;
+        padding-left: 5px;
+        float: left;
+    }
+
+    .my-search {
+        width: 22%;
+        min-width:170px;
+    }
 </style>
+
+<script>
+
+    function checkTime(i) {
+        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+        return i;
+    }
+
+    function getTimeDes() {
+        var date = new Date();
+        var day = date.getDate();
+        var monthIndex = checkTime( date.getMonth() + 1);
+        var year = date.getFullYear();
+        var current_day = date.getDay();
+        var day_name = '';
+        switch (current_day) {
+            case 0:
+                day_name = "Chủ nhật";
+                break;
+            case 1:
+                day_name = "Thứ hai";
+                break;
+            case 2:
+                day_name = "Thứ ba";
+                break;
+            case 3:
+                day_name = "Thứ tư";
+                break;
+            case 4:
+                day_name = "Thứ năm";
+                break;
+            case 5:
+                day_name = "Thứ sáu";
+                break;
+            case 6:
+                day_name = "Thứ bảy";
+        }
+
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+
+        return day_name + ', ' + day + '/' + monthIndex + '/' + year + ', ' + h + ":" + m + ":" + s;
+    }
+
+    startTime();
+    function startTime() {
+        
+        
+        $('#mytime').text(getTimeDes());
+        var t = setTimeout(startTime, 500);
+    }
+
+    var flash_images = ['1.jpg', '2.jpg', '3.jpg'];
+    var indexFlash = 0;
+
+    startFlash();
+    function startFlash() {
+        indexFlash += 1;
+        if (indexFlash >= flash_images.length) {
+            indexFlash = 0;
+        }
+        $('#anh-flash').attr("src", '/images/flash/' + flash_images[indexFlash]);
+        
+        var t2 = setTimeout(startFlash, 3000);
+    }
+
+</script>
 <header>
     @*<div id="header">
             <div class="wrapper">
@@ -84,9 +191,9 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            
+
             @*<li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>*@
+                <li data-target="#myCarousel" data-slide-to="2"></li>*@
         </ol>
 
         <!-- Wrapper for slides -->
@@ -98,14 +205,16 @@
                     </a>
                 </div>
                 <div style="height: 0px;">
-                    <img style="width: 24%" src="~/images/banner/1-Flash.gif" alt="Flash">
+                    <img id="anh-flash" style="width: 24%" src="~/images/flash/1.jpg" alt="Flash">
                 </div>
             </div>
-    </div>
+        </div>
+
+
 </header>
 
 <nav class="navbar navbar-default">
-    <div class="container-fluid container" style="width: 100%">
+    <div class="container-fluid container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
@@ -130,7 +239,7 @@
                 </li>
                 <li class="@ViewData["activetintuc"] dropdown">
                     @*<span class="bg span-menu">TRUYỀN THÔNG</span>*@
-                    <span class="btn btn-light btn-block" style="margin-top:9px;">THÔNG TIN MÔI TRƯỜNG</span>
+                    <span class="btn btn-light btn-block" style="padding-top: 15px;padding-bottom: 12px;">THÔNG TIN MÔI TRƯỜNG</span>
                     <div class="dropdown-content">
                         <a href="/home/ttquantrac">Chất lượng môi trường</a>
                         <a href="/home/map" target="_blank">Bản đồ môi trường</a>
@@ -142,7 +251,7 @@
 
 
                 <li class="@ViewData["activeMap"] dropdown">
-                    <span class="btn btn-light btn-block" style="margin-top:9px;">VĂN BẢN PHÁP LUẬT</span>
+                    <span class="btn btn-light btn-block" style="padding-top: 15px;padding-bottom: 12px;">VĂN BẢN PHÁP LUẬT</span>
                     <div class="dropdown-content">
                         <a href="/news/vanban">Quy phạm pháp luật</a>
                         <a href="/news/vanbanquychuan">Quy chuẩn, tiêu chuẩn kỹ thuật</a>
@@ -150,12 +259,18 @@
                 </li>
 
 
-                <li>
+                @*<li>
                     <input style="margin-top: 8px;" class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                </li>
+                </li>*@
+
+                <div class="undernav">
+                    <time class="my-time" id="mytime">Thứ 6 1/11/2019 01:53</time>
+                    <div class="right" style="text-align:right"> <input class="my-search" type="search" placeholder="Tìm kiếm" aria-label="Search"></div>
+
+                </div>
             </ul>
-            
+
         </div>
-        
+
     </div>
 </nav>

@@ -86,11 +86,11 @@
 
                                         <div class="col-sm-12" style="padding: 0">
                                             <div class="col-md-6">
-                                                <label for="UserAddress" class="control-label col-sm-3">Điện thoại <span style="color: red">*</span>:</label>
+                                                <label for="UserAddress" class="control-label col-sm-3" style="padding-left:0px;">Điện thoại <span style="color: red">*</span>:</label>
                                                 <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserPhone" required placeholder="Điện thoại"> </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="UserEmail" class="control-label col-sm-3">Thư điện tử <span style="color: red">*</span>:</label>
+                                                <label for="UserEmail" class="control-label col-sm-3"  style="padding-left:0px;">Thư điện tử <span style="color: red">*</span>:</label>
                                                 <div class="col-sm-12" style="padding: 0" id="aui_3_4_0_1_495"> <span id="senderName_error"></span> <input type="text" class="form-control aui-text-placeholder" asp-for="UserEmail" required placeholder="Địa chỉ hòm thư liên lạc"> </div>
                                             </div>
                                         </div>
@@ -118,7 +118,7 @@
 
                                     <p style="font-weight: 600;margin-top: 20px;">NỘI DUNG TRAO ĐỔI</p>
 
-                                    <div class="col-sm-12" style="margin-top:-20px;margin-left:16px;">
+                                    @*<div class="col-sm-12" style="margin-top:-20px;margin-left:16px;">
                                         <div class="radio">
                                             <label><input type="radio" value="0" name="phanloai" checked>Ô nhiễm môi trường</label>
                                         </div>
@@ -128,9 +128,28 @@
                                         <div class="radio">
                                             <label><input type="radio" value="2" name="phanloai">Giải pháp sáng kiến BVMT</label>
                                         </div>
+                                    </div>*@
+                                    <div class="form-check" style="margin-left:30px; margin-top:-15px; margin-bottom:3px;">
+                                        <input class="form-check-input" style="margin-top:0px;" type="radio" name="phanloai" id="exampleRadios0" value="0" checked>
+                                        <label class="form-check-label" style="width:90%;float:inherit;" for="exampleRadios0">
+                                            Ô nhiễm môi trường
+                                        </label>
                                     </div>
 
-                                    
+                                    <div class="form-check" style="margin-left:30px;margin-bottom:3px;">
+                                        <input class="form-check-input" style="margin-top:0px;" type="radio" name="phanloai" id="exampleRadios1" value="1">
+                                        <label class="form-check-label" style="width:90%;float:inherit;" for="exampleRadios1">
+                                            Cơ chế chính sách
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check" style="margin-left:30px;margin-bottom:3px;">
+                                        <input class="form-check-input" style="margin-top:0px;" type="radio" name="phanloai" id="exampleRadios2" value="2">
+                                        <label class="form-check-label" style="width:90%;float:inherit;" for="exampleRadios2">
+                                            Giải pháp sáng kiến BVMT
+                                        </label>
+                                    </div>
+
 
                                     <div class="col-sm-12">
                                         <div class="form-item col-sm-12">
@@ -161,7 +180,7 @@
                                                 <span asp-validation-for="Thoigianxayra" class="form-required"></span>
                                             </div>
                                         </div>
-                                        
+
 
                                         <div class="form-item col-sm-12" style="display: none;">
                                             <label asp-for="Abstract" class="control-label">Tóm tắt:</label>
