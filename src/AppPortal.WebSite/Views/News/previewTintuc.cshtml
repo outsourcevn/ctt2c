@@ -24,10 +24,6 @@
         padding: 10px 10px 10px 0px;
     }
 
-    #right_sidebar {
-        display: none !important;
-    }
-
     .embed-container {
         position: relative;
         padding-bottom: 80%;
@@ -132,7 +128,7 @@
                     day_name = "Thứ năm";
                     break;
                 case 5:
-                    day_name = "Thứ sau";
+                    day_name = "Thứ sáu";
                     break;
                 case 6:
                     day_name = "Thứ bảy";
@@ -162,7 +158,7 @@
             content += '<br />';
             content += '<br />';
             if (data.model.Image) {
-                content += '<img src="' + appConfig.apiCdnUrl + data.model.Image + '">';
+                content += '<img src="' + appConfig.apiCdnUrl + data.model.Image + '" class="anhdaidien">';
             }
             content += '<br><p class="tomtatTintuc">' + data.model.Abstract + '</p>';
             content += data.model.Content;
