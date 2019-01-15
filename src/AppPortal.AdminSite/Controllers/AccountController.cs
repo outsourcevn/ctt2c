@@ -156,7 +156,7 @@ namespace AppPortal.AdminSite.Controllers
 
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                        var response = await client.PostAsJsonAsync("http://localhost:8080/" + "/api/account/token", new LoginViewModel
+                        var response = await client.PostAsJsonAsync(adminSetting.ApiHostUrl + "/api/account/token", new LoginViewModel
                         {
                             UserName = model.UserName,
                             Password = model.Password,
