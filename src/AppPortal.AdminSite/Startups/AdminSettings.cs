@@ -13,6 +13,7 @@ namespace AppPortal.AdminSite
         public Folder Folder { get; set; }
         public string DefaultFilterImage { get; set; }
         public string DefaultFilterFile { get; set; }
+        public string LoginURL { get; set; }
     }
 
     public class Folder

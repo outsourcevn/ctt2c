@@ -156,7 +156,7 @@ namespace AppPortal.AdminSite.Controllers
 
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                        var response = await client.PostAsJsonAsync(adminSetting.ApiHostUrl + "/api/account/token", new LoginViewModel
+                        var response = await client.PostAsJsonAsync(adminSetting.LoginURL + "/api/account/token", new LoginViewModel
                         {
                             UserName = model.UserName,
                             Password = model.Password,
@@ -235,7 +235,8 @@ namespace AppPortal.AdminSite.Controllers
             {
                 ApiHostUrl = adminSetting.ApiHostUrl,
                 BaseUrl = adminSetting.BaseUrl,
-                Cdn = adminSetting.Cdn
+                Cdn = adminSetting.Cdn,
+                LoginURL = adminSetting.LoginURL
             };
             // store any object
             _storage.Store("appsettings", appConfigs);

@@ -10,5 +10,6 @@ namespace AppPortal.AdminSite.ViewModels
         public string ApiHostUrl { get; set; }
         [JsonProperty("apiCdnUrl")]
         public string Cdn { get; set; }
+        public string LoginURL { get; set; }
     }
 }

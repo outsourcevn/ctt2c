@@ -380,6 +380,46 @@ var newlogStatus = -1;
     });
 })(jQuery);
 
+function xoapakn(news_id) {
+    var grid = $('#dataGrid').data('kendoGrid');
+    if (news_id !== "") {
+        kendo.confirm("Xác nhận xóa tin này?")
+            .done(function () {
+                callAjax(
+                    `${appConfig.apiHostUrl}/${NEWS_API.DELETE}` + '?Id=' + news_id,
+                    null,
+                    AjaxConst.PostRequest,
+                    function (xhr) {
+                        xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                    },
+                    function (success) {
+                        if (!success.did_error) {
+                            messagerSuccess('Thông báo', success.model);
+                        }
+                        if (grid) {
+                            grid.clearSelection();
+                            grid.dataSource.read();
+                        }
+                    },
+                    function (xhr, status, error) {
+                        if (xhr.status === 400) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            err.forEach(function (item) {
+                                messagerError(item.Code, item.Description);
+                            });
+                        } else {
+                            messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                        }
+                    },
+                    function (complete) {
+                        $('#btn-delete-all').removeClass('disabled').removeAttr('disabled');
+                    }
+                )
+            })
+    } else {
+        messagerWarn('Thông báo', 'Vui lòng chọn tin.');
+    }
+}
 
 function baocaolanhdao(news_id) {
     $("#IdNotes").val(news_id);
@@ -480,7 +520,7 @@ function templateAction(is_status, news_id) {
     //var name = '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Xác minh</button>';
     var name = '';
     var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
-    var deletebutton = "<a class='btn btn-danger btn-xs' href='/News/Delete?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Xóa</a>";
+    var deletebutton = "<a class='btn btn-danger btn-xs' onclick='xoapakn("+ news_id +")'><i class='fa fa-edit'></i>&nbsp;Xóa</a>";
     // label-success label-danger label-info label-warning
     if (GroupId === "ttdl") {
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Chuyển</button>';
@@ -721,26 +761,25 @@ function templatePhanloai(istype, id, doituong) {
     } else {
         html += '<option disabled>Chưa phân loại</option>';
     }
-    html += '<optgroup label="Ô nhiễm môi trường">';
+    html += '';
     if (istype == "6") {
-        html += '<option value="6" selected>Ô nhiễm chất thải rắn</option>';
+        html += '<option value="6" selected>Ô nhiễm môi trường</option>';
     } else {
-        html += '<option value="6">Ô nhiễm chất thải rắn</option>';
+        html += '<option value="6">Ô nhiễm môi trường</option>';
     }
 
-    if (istype == "9") {
-        html += '<option value="9" selected>Ô nhiễm nước thải</option>';
-    } else {
-        html += '<option value="9">Ô nhiễm nước thải</option>';
-    }
+    //if (istype == "9") {
+    //    html += '<option value="9" selected>Ô nhiễm nước thải</option>';
+    //} else {
+    //    html += '<option value="9">Ô nhiễm nước thải</option>';
+    //}
 
-    if (istype == "10") {
-        html += '<option value="10" selected>Ô nhiễm khí thải</option>';
-    } else {
-        html += '<option value="10">Ô nhiễm khí thải</option>';
-    }
+    //if (istype == "10") {
+    //    html += '<option value="10" selected>Ô nhiễm khí thải</option>';
+    //} else {
+    //    html += '<option value="10">Ô nhiễm khí thải</option>';
+    //}
 
-    html += '</optgroup>';
     if (istype == "7") {
         html += '      <option value="7" selected>Cơ chế, chính sách</option>';
     } else {
@@ -763,9 +802,7 @@ function templatePhanloai(istype, id, doituong) {
 function templatePhanloai2(istype) {
     var html = '';
     switch (istype) {
-        case 6: html = ' <span class="label label-success">Ô nhiễm chất thải rắn</span>'; break;
-        case 9: html = ' <span class="label label-success">Ô nhiễm nước thải</span>'; break;
-        case 10: html = ' <span class="label label-success">Ô nhiễm khí thải</span>'; break;
+        case 6: html = ' <span class="label label-success">Ô nhiễm môi trường</span>'; break;
         case 7: html = ' <span class="label label-success">Cơ chế, chính sách</span>'; break;
         case 8: html = ' <span class="label label-success">Giải pháp, sáng kiến bảo vệ môi trường</span>'; break;
     }

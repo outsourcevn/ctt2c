@@ -830,6 +830,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             if (categoryId > 0) query = query.Where(x => x.CategoryId == categoryId);
             if (status >= 0) query = query.Where(x => x.IsStatus == (IsStatus)status);
             if (type > 0) query = query.Where(x => x.IsType == (IsType)type);
+            query = query.Where(x => x.OnDeleted.HasValue == false);
             rows = query.Count();
 
             if (skip > rows)
