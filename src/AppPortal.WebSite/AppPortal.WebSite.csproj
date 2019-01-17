@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\flash\" />
+    <Folder Include="wwwroot\images\banner-home\" />
   </ItemGroup>
 
 </Project>
