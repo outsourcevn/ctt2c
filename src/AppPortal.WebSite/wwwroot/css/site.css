@@ -39,7 +39,7 @@
 
 .border-dot {
     border-bottom: 1px dotted;
-    padding: 1px 10px 10px 0px;
+    padding: 1px 0px 10px 0px;
 }
 
 @media only screen and (min-width: 600px) {
