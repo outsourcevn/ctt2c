@@ -75,7 +75,11 @@ namespace AppPortal.AdminSite.Services.Administrator
             }
         }
 
-        
+        public NewsLog GetNewLogPhanCong(int NewsId)
+        {
+            return _newslog.Table.Where(x => x.NewsId == NewsId).Where(z => z.GroupNameTo == "dvct").FirstOrDefault();
+        }
+
         public NewsLog GetNewsLogByNewsIdUser(int NewsId , string username)
         {
             return _newslog.Table.Where(x => x.NewsId == NewsId).Where(z => z.UserName == username).FirstOrDefault();
@@ -139,6 +143,8 @@ namespace AppPortal.AdminSite.Services.Administrator
         {
             return _newslog.Table.Where(x => x.NewsId == news_id)
                .Where(z => z.GroupNameFrom == group)
+               .OrderByDescending(z => z.OnCreated)
+               .Take(1)
                .ToList();
         }
 

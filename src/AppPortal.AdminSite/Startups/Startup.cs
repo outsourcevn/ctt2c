@@ -75,7 +75,9 @@ namespace AppPortal.AdminSite
                 options.DefaultPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser().Build();
             });
-            services.AddSession();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromDays(7);
+            });
             //Configure Automapper
             AutoMapperConfiguration.Configure();
             // Configure mvc

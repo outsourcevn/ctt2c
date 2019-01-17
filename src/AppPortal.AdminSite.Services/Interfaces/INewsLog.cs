@@ -11,6 +11,7 @@ namespace AppPortal.AdminSite.Services.Interfaces
         void AddOrUpdate(NewsLog model);
         void Delete(int id);
         NewsLog GetNewsLogByNewsIdUser(int id , string username);
+        NewsLog GetNewLogPhanCong(int id);
         IList<NewsLog> GetNewsLogByNewsIdGroupNameFrom(int NewsId, string GroupNameFrom , int type); 
         IList<NewsLog> GetNewsLogByNewsIdNameFrom(int NewsId, string UserName);
         NewsLog AddOrUpdateReport(int id , string data, int? typeStatus = 0);

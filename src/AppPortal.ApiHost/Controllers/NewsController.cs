@@ -565,32 +565,35 @@ namespace AppPortal.ApiHost.Controllers
 
                     if (!string.IsNullOrEmpty(username))
                     {
-                        var lstUserName = username.Split(",");
-                        foreach(var usernameData in lstUserName)
+                        var userFrom = queryUser.Where(x => x.UserName == username).FirstOrDefault();
+                        if (userFrom != null)
                         {
-                            var userFrom = queryUser.Where(x => x.UserName == usernameData).FirstOrDefault();
-                            if (userFrom != null)
-                            {
-                                var newlogEx = _newLog.GetNewsLogByNewsIdNameFrom(item.Id, usernameData);
-                                if (newlogEx.Count == 0) {
-                                    var logs = new NewsLog();
-                                    logs.NewsId = item.Id;
-                                    logs.UserName = usernameData;
-                                    if (newView.type == 3)
-                                    {
-                                        logs.GroupNameFrom = "ttdl";
-                                        logs.GroupNameTo = "dvct";
-                                        logs.TypeStatus = IsTypeStatus.moitiepnhan;
-                                    }
-
-                                    //logs.Note = note;
-                                    logs.OnCreated = DateTime.Now;
-                                    logs.FullUserName = userFrom.FullName;
-                                    _newLog.AddOrUpdate(logs);
+                            var newlogEx = _newLog.GetNewLogPhanCong(item.Id);
+                            if (newlogEx == null) {
+                                var logs = new NewsLog();
+                                logs.NewsId = item.Id;
+                                logs.UserName = username;
+                                if (newView.type == 3)
+                                {
+                                    logs.GroupNameFrom = "ttdl";
+                                    logs.GroupNameTo = "dvct";
+                                    logs.TypeStatus = IsTypeStatus.moitiepnhan;
                                 }
-                                
+
+                                //logs.Note = note;
+                                logs.OnCreated = DateTime.Now;
+                                logs.FullUserName = userFrom.FullName;
+                                _newLog.AddOrUpdate(logs);
                             }
-                        }
+                            else
+                            {
+                                newlogEx.UserName = username;
+                                newlogEx.OnCreated = DateTime.Now;
+                                newlogEx.FullUserName = userFrom.FullName;
+                                newlogEx.TypeStatus = IsTypeStatus.moitiepnhan;
+                                _newLog.AddOrUpdate(newlogEx);
+                            }
+                        }  
                     }
                 }
                 message = $"Đã phân công!";

@@ -224,7 +224,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 case IsType.giaiphapsangkien:
                     return "Giải pháp, sáng kiến bảo vệ môi trường";
                 case IsType.cochehanhchinh:
-                    return "Cơ chế, chính sách, thủ tục hành chính";
+                    return "Cơ chế, chính sách";
                 case IsType.noType:
                     return "Chưa phân loại";
                 default:

@@ -157,9 +157,9 @@ $(document).ready(function () {
 
     $('#clickPhanCong').on('click', function (e) {
         var grid = $('#dataGrid').data('kendoGrid');
-        if ($("#phancongcho").val().join(",") !== "") {
+        if ($("#phancongcho").val() !== "") {
             var data = {
-                username: $("#phancongcho").val().join(","),
+                username: $("#phancongcho").val(),
                 ids: $("#exampleModalNew .NewsId").val(),
                 note: $("#exampleModalNew .ghichubaocao").val(),
                 type: 3
@@ -1027,6 +1027,8 @@ function congkhai2(news_id) {
 }
 
 function congkhai(news_id) {
+    editorCongkhai.setData("");
+    $("#exampleModalNew_congkhai .IdReport").val("0");
     $("#exampleModalNew_congkhai .NewsId").val(news_id);
     callAjax(
         `${appConfig.apiHostUrl}` + '/api/NewsLog/GetNewsLogByNewsIdNameFrom?NewsId=' + news_id + "&UserName=anonymous",

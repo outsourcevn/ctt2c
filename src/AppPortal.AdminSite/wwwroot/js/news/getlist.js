@@ -77,11 +77,6 @@ var newlogStatus = -1;
                 width: "10px"
             },
             {
-                field: "ma_pakn",
-                title: "Mã PAKN",
-                width: "40px"
-            },
-            {
                 field: "name",
                 title: "Tiêu đề"
             },
@@ -485,12 +480,14 @@ function templateAction(is_status, news_id) {
     //var name = '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Xác minh</button>';
     var name = '';
     var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
+    var deletebutton = "<a class='btn btn-danger btn-xs' href='/News/Delete?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Xóa</a>";
     // label-success label-danger label-info label-warning
     if (GroupId === "ttdl") {
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Chuyển</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Đăng tin</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
-        name = name + editbutton;
+        name = name + deletebutton;
+
     }
 
     if (GroupId === "ldtcmt") {
@@ -699,15 +696,15 @@ function templateDoituong(istype, id) {
     var html = '<div class="form-group">';
     html += '<select class="form-control" onchange="phanloaiDoituong(this,' + id + ')" style="font-size: 12px; color: blue;height: 15px;width: 95px;" id="sel1">';
     if (istype == "0") {
-        html += '<option value="0" selected>Người dân</option>';
+        html += '<option value="0" selected>Cá nhân</option>';
     } else {
-        html += '<option value="0">Người dân</option>';
+        html += '<option value="0">Cá nhân</option>';
     }
 
     if (istype == "1") {
-        html += '<option value="1" selected>Doanh nghiệp</option>';
+        html += '<option value="1" selected>Tổ chức</option>';
     } else {
-        html += '<option value="1">Doanh nghiệp</option>';
+        html += '<option value="1">Tổ chức</option>';
     }
 
     html += '    </select>';
@@ -745,9 +742,9 @@ function templatePhanloai(istype, id, doituong) {
 
     html += '</optgroup>';
     if (istype == "7") {
-        html += '      <option value="7" selected>Cơ chế, chính sách, thủ tục hành chính</option>';
+        html += '      <option value="7" selected>Cơ chế, chính sách</option>';
     } else {
-        html += '      <option value="7">Cơ chế, chính sách, thủ tục hành chính</option>';
+        html += '      <option value="7">Cơ chế, chính sách</option>';
     }
 
     if (istype == "8") {
@@ -760,7 +757,7 @@ function templatePhanloai(istype, id, doituong) {
 
     var template = templateDoituong(doituong, id);
 
-    return 'Đối tượng: <br>' + html + '<br>Phân loại: <br>' + template;
+    return 'Phân loại: <br>' + html + '<br>Đối tượng: <br>' + template;
 }
 
 function templatePhanloai2(istype) {
@@ -769,7 +766,7 @@ function templatePhanloai2(istype) {
         case 6: html = ' <span class="label label-success">Ô nhiễm chất thải rắn</span>'; break;
         case 9: html = ' <span class="label label-success">Ô nhiễm nước thải</span>'; break;
         case 10: html = ' <span class="label label-success">Ô nhiễm khí thải</span>'; break;
-        case 7: html = ' <span class="label label-success">Cơ chế, chính sách, thủ tục hành chính</span>'; break;
+        case 7: html = ' <span class="label label-success">Cơ chế, chính sách</span>'; break;
         case 8: html = ' <span class="label label-success">Giải pháp, sáng kiến bảo vệ môi trường</span>'; break;
     }
 
