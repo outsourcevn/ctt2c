@@ -179,17 +179,8 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="col-md-12">
-                <section class="block block_business_news">
-                    <h3 class="block_title_black">CHUYÊN MỤC TIN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                    <div class="content">
-                        <div class="right">
-                            <ul id="tra-cuu-tin-chuyen-muc-content"></ul>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-md-12">
+          
+            
                 <section class="block block_business_news">
                     <h3 class="block_title_black">TIN MỚI<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                     <div class="content">
@@ -198,8 +189,7 @@
                         </div>
                     </div>
                 </section>
-            </div>
-            <div class="col-md-12">
+           
                 <section class="block block_business_news">
                     <h3 class="block_title_black">TIN XEM NHIỀU<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                     <div class="content">
@@ -208,7 +198,7 @@
                         </div>
                     </div>
                 </section>
-            </div>
+       
         </div>
     </div>
 
@@ -306,35 +296,15 @@
             return html;
         }
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {
+  
+
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
                     content += '<article class="border-dot">';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '" >' + data.model[i].Name + '</a></h4>';
-                    content += '</hgroup>';
-
-                    content += '<p class="date" style="text-align:left;">'
-                    content += '<time datetime="2013-01-21">'
-                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
-                    content += '</time>'
-                    content += '</p>'
-                    if (data.model[i].Image != '') {
-                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-
-                    }
-
-                    content += '<p style="line-height: 15px;">';
-                    content += data.model[i].Abstract;
-                    content += '</p>';
-
-
-                    content += '</article>';
-                } else {
-                    content += '<article>';
-                    content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
                     content += '<p class="date" style="text-align:left;">'
                     content += '<time datetime="2013-01-21">'
@@ -345,33 +315,7 @@
                         content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
                     }
-                    content += '<p style="line-height: 15px;">';
-                    content += data.model[i].Abstract;
-                    content += '</p>';
-                    content += '</article>';
-                }
-            }
-            $('#tra-cuu-tin-chuyen-muc-content').html(content);
-        });
-
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
-            var content = '';
-            for (var i = 0; i < data.model.length; i++) {
-                if (i != data.model.length - 1) {
-                    content += '<article class="border-dot">';
-                    content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
-                    content += '</hgroup>';
-                    content += '<p class="date" style="text-align:left;">'
-                    content += '<time datetime="2013-01-21">'
-                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
-                    content += '</time>'
-                    content += '</p>'
-                    if (data.model[i].Image != '') {
-                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-
-                    }
-                    content += '<p style="line-height: 15px;">';
+                    content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
                     content += '...</p>';
                     content += '</article>';
@@ -389,23 +333,25 @@
                         content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
                     }
-                    content += '<p style="line-height: 15px;">';
+                    content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
                     content += '...</p>';
                     content += '</article>';
                 }
 
             }
+            
             $('#tra-cuu-tin-moi-content').html(content);
+            $('.tom-tat-news span').css({ 'font-size': '14px' });
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
                     content += '<article class="border-dot">';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
                     content += '<p class="date" style="text-align:left;">'
                     content += '<time datetime="2013-01-21">'
@@ -416,9 +362,9 @@
                         content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
                     }
-                    content += '<p style="line-height: 15px;">';
+                    content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
-                    content += '</p>';
+                    content += '...</p>';
                     content += '</article>';
                 } else {
                     content += '<article>';
@@ -434,13 +380,14 @@
                         content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
                     }
-                    content += '<p style="line-height: 15px;">';
+                    content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
-                    content += '</p>';
+                    content += '...</p>';
                     content += '</article>';
                 }
             }
             $('#tra-cuu-tin-xem-nhieu-content').html(content);
+            $('.tom-tat-news span').css({ 'font-size': '14px' });
         });
 
     </script>

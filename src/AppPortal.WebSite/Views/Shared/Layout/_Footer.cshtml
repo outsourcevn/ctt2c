@@ -1,52 +1,148 @@
 ﻿<style>
+    #myFooter li span {
+        font-weight: 600;
+        font-size: 12px;
+        z-index: 999;
+    }
+
+    
+    footer li {
+        border-left: 1px solid rgba(0, 0, 0, 0.00);
+    }
     nav > ul > li > a {
         line-height:20px;
     }
-</style>
-<footer>
-    <div class="region">
-        <div id="block_footer_menu" class="block">
-            <nav>
-                <ul>
-                    <li class="first @ViewData["activeHome"]">
-                        <a href="/home/index2"><span class="bg">TRANG CHỦ</span></a>
-                    </li>
 
-                    <li class="@ViewData["activeContact"]">
-                        <a href="/home/contact"><span class="bg">GÓP Ý, PHẢN ÁNH</span></a>
-                    </li>
-                    <li class="@ViewData["activeTT"]">
-                        <a href="/home/tracuu"><span class="bg">TRA CỨU KẾT QUẢ</span></a>
-                    </li>
-                    <li class="@ViewData["activeVBPL"]">
-                        <a href="javascript:void(0)"><span class="bg">HƯỚNG DẪN</span></a>
-                    </li>
-                    <li class="@ViewData["activetintuc"] droptop">
-                        @*<span class="bg span-menu">TRUYỀN THÔNG</span>*@
-                        <a  href="/home/news">THÔNG TIN MÔI TRƯỜNG</a>
-                    </li>
-                    <li class="@ViewData["activeMap"] dropdown">
-                        <a  href="/news/vanban">VĂN BẢN PHÁP LUẬT</a>
-                        
-                    </li>
-                </ul>
+    .dropbtn {
+        background-color: #3498DB;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+    }
+
+    /* The container <div> - needed to position the dropup content */
+    .dropup {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropup content (Hidden by Default) */
+    .dropup-content {
+        display: none;
+        position: absolute;
+        bottom: 50px;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 999;
+        margin-bottom:-3px;
+    }
+
+        /* Links inside the dropup */
+        .dropup-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropup links on hover */
+            .dropup-content a:hover {
+                background-color: #ddd
+            }
+
+    /* Show the dropup menu on hover */
+    .dropup:hover .dropup-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropup button when the dropup content is shown */
+    .dropup:hover .dropbtn {
+        background-color: #2980B9;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: black;
+    }
+</style>
+<footer style="padding:0px;color: black;">
+        <div id="block_footer_menu" class="block">
+            <nav class="navbar navbar-default" style="margin-bottom: 5px;">
+                <div class="container-fluid container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myFooter">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myFooter" style="text-align:left;margin-left:-15px;">
+                        <ul class="nav navbar-nav">
+                            <li class="first @ViewData["activeHome"]">
+                                <a href="/home/index2"><span class="bg">TRANG CHỦ</span></a>
+                            </li>
+
+                            <li class="@ViewData["activeContact"]">
+                                <a href="/home/contact"><span class="bg">GÓP Ý, PHẢN ÁNH</span></a>
+                            </li>
+                            <li class="@ViewData["activeTT"]">
+                                <a href="/home/tracuu"><span class="bg">TRA CỨU KẾT QUẢ</span></a>
+                            </li>
+                            <li class="@ViewData["activeVBPL"]">
+                                <a href="javascript:void(0)"><span class="bg">HƯỚNG DẪN</span></a>
+                            </li>
+                            <li class="@ViewData["activetintuc"] dropup">
+                                @*<span class="bg span-menu">TRUYỀN THÔNG</span>*@
+                                <span class="btn btn-light btn-block" style="padding-top: 15px;padding-bottom: 12px;">THÔNG TIN MÔI TRƯỜNG</span>
+                                <div class="dropup-content">
+                                    <a href="/home/ttquantrac">Chất lượng môi trường</a>
+                                    <a href="/home/map" target="_blank">Bản đồ môi trường</a>
+                                    <a href="/home/news">Tin tức truyền thông</a>
+                                    <a href="/news/Images">Ảnh</a>
+                                    <a href="/news/video">Video</a>
+                                </div>
+                            </li>
+
+                            <li class="@ViewData["activeMap"] dropup">
+                                <span class="btn btn-light btn-block" style="padding-top: 15px;padding-bottom: 12px;">VĂN BẢN PHÁP LUẬT</span>
+                                <div class="dropup-content">
+                                    <a href="/news/vanban">Quy phạm pháp luật</a>
+                                    <a href="/news/vanbanquychuan">Quy chuẩn, tiêu chuẩn kỹ thuật</a>
+                                </div>
+                            </li>
+                            
+                        </ul>
+
+                    </div>
+
+                </div>
             </nav>
+            <div class="wrapper">
+                <div class="container">
+                    <div id="block_copyright" class="block">
+                        <p>Copyright &copy; 2018 - Cổng Thông tin phản ánh và kiến nghị</p>
+
+                        <p>
+                            Cơ quan chủ quản: TỔNG CỤC MÔI TRƯỜNG
+                        </p>
+
+                        <p>
+                            Giấy phép số: 153/GP-TTĐT do Bộ Thông tin và Truyền thông cấp ngày 26 tháng 10 năm 2015
+                        </p>
+
+                        <p>
+                            Người chịu trách nhiệm chính: TS. Nguyễn Văn Tài - Tổng cục trưởng Tổng cục Môi trường
+                        </p>
+
+                        <p>
+                            Địa Chỉ: Số 10, Tôn Thất Thuyết, Nam Từ Liêm, Hà Nội. Tel: (024) 39424581   Fax: (024) 38223189
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
         </div>
-        <div id="block_copyright" class="block">
-            <p>Copyright &copy; 2018 - Cổng Thông tin phản ánh và kiến nghị</p>
-          
-            <p>
-                Cơ quan chủ quản: TỔNG CỤC MÔI TRƯỜNG</p>
-             
-            <p>
-                Giấy phép số: 153/GP-TTĐT do Bộ Thông tin và Truyền thông cấp ngày 26 tháng 10 năm 2015</p>
-         
-            <p>
-                Người chịu trách nhiệm chính: TS. Nguyễn Văn Tài - Tổng cục trưởng Tổng cục Môi trường</p>
         
-            <p>
-                Địa Chỉ: Số 10, Tôn Thất Thuyết, Nam Từ Liêm, Hà Nội. Tel: (024) 39424581   Fax: (024) 38223189
-            </p>
-        </div>
-    </div>
+
 </footer>

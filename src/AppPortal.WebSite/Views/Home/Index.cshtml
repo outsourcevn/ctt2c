@@ -669,12 +669,13 @@
             return html;
         }
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=13&number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {
             var content = '';
+        
             for (var i = 0; i < data.model.length; i++) {
                 content += '<article class="border-dot">';
                 content += '<hgroup>';
-                content += '<h4 class="title"><a  href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
+                content += '<h4 class="title" ><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                 content += '</hgroup>';
                 content += '<p class="date" style="text-align:left;">'
                 content += '<time datetime="2013-01-21">'
@@ -683,70 +684,18 @@
                 content += '</p>'
                 if (data.model[i].Image != '') {
                     content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-
                 }
-                content += '<p style="line-height: 20px; color:#333;text-align:justify;">';
+                content += '<p class="tom-tat-news" style="line-height: 20px; color:#333;text-align:justify;">';
                 content += data.model[i].Abstract;
                 content += '</p>';
                 content += '</article>';
+
             }
             $('#truyen-thong-news-content').html(content);
+            $('.tom-tat-news span').css({ 'font-size': '14px' });
         });
 
-        //$.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=13&number=3", function (data, status) {
-        //    var news = '';
-
-        //    for (var i = 0; i < data.model.length; i++) {
-        //        news += '<li >';
-        //        news += '<hgroup>';
-        //        news += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
-        //        news += '</hgroup>';
-        //        news += '<p class="date" style="text-align:left;">'
-        //        news += '<time datetime="2013-01-21">'
-        //        news += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
-        //        news += '</time>'
-        //        news += '</p>'
-        //        if (data.model[i].Image != '') {
-        //            news += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-
-        //        }
-        //        news += '<p style="line-height: 20px;">';
-        //        news += data.model[i].Abstract;
-        //        news += '</p>';
-        //        news += '</li >';
-
-        //    }
-        //    $("#truyen-thong-news-content").html(news);
-        //});
-
-        //$.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?id=1&number=2", function (data, status) {
-        //    var content = '';
-        //    for (var i = 0; i < data.model.length; i++) {
-        //        content += '<li class="first">';
-        //        content += '<article>';
-        //        content += '<hgroup>';
-        //        content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
-        //        content += '</hgroup>';
-        //        content += '<p class="date" style="text-align:left;">'
-        //        content += '<time datetime="2013-01-21">'
-        //        content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
-        //        content += '</time>'
-        //        content += '</p>'
-        //        if (data.model[i].Image != '') {
-        //            content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-
-        //        }
-        //        content += '<p style="line-height: 20px;">';
-        //        content += data.model[i].Abstract;
-        //        content += '</p>';
-        //        content += '<a style="color: red;text-decoration: underline" href="http://103.9.86.36/doc/235-qd-btnmt.pdf" target="_blank">Tải xuống Quyết định số 235/QĐ-BTNMT</a>';
-        //        content += '</article>';
-        //        content += '</li>';
-        //    }
-        //    $('#van-ban-chinh-sach-from-second').html(content);
-        //});
-
-
+    
         //album anhr
         $.get(appConfig.apiHostUrl + "/api/Media/getMedia?type=image&is_publish=1", function (data, status) {
             var preview = '';
