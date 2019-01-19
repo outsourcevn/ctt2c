@@ -2,118 +2,242 @@
 @{
     ViewData["Title"] = "Chất lượng môi trường";
 }
-<script src="https://code.jquery.com/jquery-2.2.4.js"
-        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-        crossorigin="anonymous"></script>
+
+<link href="~/css/chatluong.css" rel="stylesheet" />
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<style>
-    h1 {
-        font-size: 24px;
-        padding: 10px 10px 10px 15px;
-    }
+<div class="row">
+    <div class="col-md-12">
+        <!-- Nav tabs --><div class="card">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Chất lượng khí</a></li>
+                <li role="presentation"><a href="#wqi" aria-controls="profile" role="tab" data-toggle="tab">Chất lượng nước</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Trạm</label>
+                                <select class="form-control" id="listTram"></select>
 
-    #right_sidebar {
-        display: none !important;
-    }
+                                <div id="chart_div"></div>
 
-    .embed-container {
-        position: relative;
-        padding-bottom: 80%;
-        height: 0;
-        max-width: 100%;
-    }
+                                <table id="aqitable" style="text-align:left;padding:0px;padding-top:3px;padding-bottom:8px;margin:0px;border-spacing:0px;border:0px solid black;width:100%;;">
+                                    <tbody></tbody>
+                                </table>
+                                
+                                <div id="thangchiso" style="margin-top: 10px"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <iframe src="https://www.google.com/maps/d/embed?mid=1FdNr6bLh9TprldYQspGmrtk00UM" width="640" height="800"></iframe>
+                        </div>
+                    </div>
+                   
+                    <div class="row">
+                        <div id="aqi_full" class="col-md-12"></div>
+                    </div>
+                </div>
+                
+                <div role="tabpanel" class="tab-pane" id="wqi">
+                    @*<div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Trạm</label>
+                                <select class="form-control" id="listTramWQI"></select>
 
-        .embed-container iframe, .embed-container object, .embed-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+                                <div id="chart_div"></div>
 
-    small {
-        position: absolute;
-        z-index: 40;
-        bottom: 0;
-        margin-bottom: -15px;
-    }
-</style>
-<h1>Thông tin quan trắc</h1>
+                                <table id="aqitable" style="text-align:left;padding:0px;padding-top:3px;padding-bottom:8px;margin:0px;border-spacing:0px;border:0px solid black;width:100%;;">
+                                    <tbody></tbody>
+                                </table>
 
-<div id="chart_div" style="padding-left:15px;padding-right:15px;"></div>
-<div class="sc-iRbamj gRGzsx" style="position: relative;margin-left: 76px;"><div><span class="sc-jlyJG kgyyWB">Thang đo VN AQI</span></div><div style="flex: 1 1 0%; display: flex; flex-direction: row;"><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(0, 228, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">0 – 50</span><span class="sc-gipzik zJvnp" font-size="6"> (Tốt)</span></div></div><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 255, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">51 – 100</span><span class="sc-gipzik zJvnp" font-size="6"> (Trung bình)</span></div></div><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 126, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">101 – 200</span><span class="sc-gipzik zJvnp" font-size="6"> (Kém)</span></div></div><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(255, 0, 0);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">201 – 300</span><span class="sc-gipzik zJvnp" font-size="6"> (Xấu)</span></div></div><div style="width: 135px; display: flex; flex-direction: column;"><div style="height: 5px; background: rgb(126, 0, 35);"></div><div style="color: rgb(51, 51, 51); font-weight: 550; justify-content: center; align-items: center; text-align: center;"><span class="sc-gipzik kVTgJc" style="margin-right: 2px;">Trên 300</span><span class="sc-gipzik zJvnp" font-size="6"> (Nguy hại)</span></div></div></div></div>
-<script src="~/js/home/home.js" asp-append-version="true"></script>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <iframe src="https://www.google.com/maps/d/embed?mid=1FdNr6bLh9TprldYQspGmrtk00UM" width="640" height="800"></iframe>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
-    $(document).ready(function () {
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawAxisTickColors);
+    google.charts.setOnLoadCallback(drawWQI);
+    function drawAxisTickColors() {
         $.ajax({
-            type: "GET",
-            url: "https://202.60.104.121/eos/services/call/json/get_qi_stations",
-            success: function (response) {
-                debugger
-
-            }, error: function (er) {
-                debugger
+            method: "GET",
+            url: "http://202.60.104.121/eos/services/call/json/get_stations?qi_type=aqi",
+            success: function (data, status) {
+                if (data.success == true) {
+                    var dulieu = data.stations;
+                    $("#listTram").html("");
+                    var idFirst = 0;
+                    var lstId = [['Trạm', 'Giá trị AQI', { role: 'annotation' }]];
+                    for (var i = 0; i < dulieu.length; i++) {
+                        if (dulieu[i].qi > 0) {
+                            if (idFirst == 0) {
+                                idFirst = dulieu[i].id;
+                            }
+                            lstId.push([dulieu[i].station_name, Math.round(dulieu[i].qi), Math.round(dulieu[i].qi)]);
+                            $("#listTram").append("<option value='" + dulieu[i].id + "'>" + dulieu[i].station_name + "</option>");
+                        }
+                    }
+                    vechart(idFirst);
+                    vechart2(lstId);
+                    vechart3();
+                } else {
+                    alert("Lỗi API. Xin vui lòng kiểm tra lại!");
+                }
+            },
+            error: function () {
+                alert("Lỗi API. Xin vui lòng kiểm tra lại!");
             }
         });
-    });
+    }
 
-    //function drawMultSeries(data) {
-    //    var data = google.visualization.arrayToDataTable(data);
-    //    var options = {
-    //        title: 'Chỉ số AQI tại thời điểm hiện tại',
-    //    };
-    //    var chart = new google.visualization.ColumnChart(
-    //        document.getElementById('chart_div'));
-    //    chart.draw(data, options);
-    //}
+    function vechart3() {
+        $.ajax({
+            method: "GET",
+            url: "http://202.60.104.121/eos/services/call/json/get_common_settings",
+            success: function (data, status) {
+                if (data.success == true) {
+                    var qi_colors = data.qi_colors;
+                    
+                    var html = '';
+                    $("#thangchiso").html("");
+                    for (var i = 0; i < qi_colors.length; i++) {
+                        html += '<div style="padding:5px;display: inline-block;margin: 3px;background-color: ' + qi_colors[i].color + '">' + qi_colors[i].name + '</div >';
+                    }
 
-    //function drawMultSeries2(data, chart_div) {
-    //    var data = google.visualization.arrayToDataTable(data);
-    //    var options = {
-    //        title: 'Chỉ số AQI',
-    //    };
-    //    var chart = new google.visualization.ColumnChart(
-    //    document.getElementById(chart_div));
-    //    chart.draw(data, options);
-    //}
-
-    function layradata(data2) {
-        $.each(data2, function (idx, value) {
-            $.ajax({
-                headers: {
-                    Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmY4ZWU5NDJmZTAwMTE1M2JmYmQiLCJpYXQiOjE1MzYyMjk4MTl9.-uwH6C3Fe3Q7A2xyX0-SK_YREZiZPM5Osh0CBqH-Z0Y",
-                },
-                type: "GET",
-                url: "http://171.244.21.99:5000/aqi/"+ value.id +"/day?from=2018/10/25&to=2018/11/02",
-                success: function (response) {
-                    debugger
-                    //var res = response.data;
-                    //var dataHeader = ['Element', 'Chỉ số AQI'];
-                    //var data = []; data2 = [];
-                    //data.push(dataHeader);
-                    //for (var i = 0; i < res.length; i++) {
-                    //    //dataHeader.push(res[i].name);
-                    //    var obj = [];
-                    //    obj.push(res[i].name, res[i].aqi.value);
-                    //    data.push(obj);
-
-                    //    // get name and id tram
-                    //    var obj2 = {
-                    //        name: res[i].name,
-                    //        id: res[i]._id
-                    //    };
-                    //    data2.push(obj2);
-                    //}
-                    //console.log(data2);
-                    //google.charts.setOnLoadCallback(drawMultSeries(data));
-
-                    //layradata(data2);
-
-                }, error: function (er) {
-                    debugger
+                    $("#thangchiso").html(html);
+                } else {
+                    alert("Lỗi API. Xin vui lòng kiểm tra lại!");
                 }
-            });
+            },
+            error: function () {
+                alert("Lỗi API. Xin vui lòng kiểm tra lại!");
+            }
         });
     }
+
+    function vechart(id) {
+        $.ajax({
+            method: "GET",
+            url: "http://202.60.104.121/eos/services/call/json/qi_detail?station_id=" + id,
+            success: function (data, status) {
+                if (data.success == true) {
+                    var dataColumn = [
+                        ['Khí', 'Giá trị min', { role: 'annotation' }, 'Giá trị max', { role: 'annotation' }],
+                        ['CO', data.res.CO.min, data.res.CO.min, data.res.CO.max, data.res.CO.max],
+                        ['NOx', data.res.NOx.min, data.res.NOx.min, data.res.NOx.max, data.res.NOx.max],
+                        ['O3', data.res.O3.min, data.res.O3.min, data.res.O3.max, data.res.O3.max],
+                        ['SO2', data.res.SO2.min, data.res.SO2.min, data.res.SO2.max, data.res.SO2.max],
+                    ];
+
+                    var dataGoogle = google.visualization.arrayToDataTable(dataColumn);
+                    var options = {
+                        title: data.station_name,
+                        height: 350,
+                        bar: { groupWidth: '55%' },
+                        legend: {
+                            position: 'top',
+                            alignment: 'start'
+                        },
+                        annotations: {
+                            textStyle: {
+                                fontSize: 15,
+                            },
+                            alwaysOutside: true
+                        }
+                    };
+
+                    var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+                    chart.draw(dataGoogle, options);
+
+                    //
+
+                    var html = '   <tr>  ' +
+                        '  <td class="aqiwgt-table-aqicell" style="padding-right:5px;"><div class="aqivalue" id="aqiwgtvalue" style="font-size: 80px; background-color: ' + data.qi_detail_info.bgColor + '; color: ' + data.qi_detail_info.color + '; text-shadow: rgb(255, 255, 255) 1px 0px 1px;" title="Unhealthy for Sensitive Groups">' + data.qi_value + '</div></td>  ' +
+                        ' <td style="width:50%;vertical-align: middle" nowrap="true" class="aqiwgt-table-aqiinfo">  ' +
+                        '  <div id="aqiwgtinfo" style="text-shadow: rgb(0, 0, 0) 1px 0px 1px; color: rgb(255, 153, 51);"><span style="font-size:16px;white-space: pre-wrap;line-height: 25px;">' + data.qi_detail_info.description +'</span></div><div style="font-size:16px;font-weight:light;;">  ' +
+                        ' </div><div style="font-size:12px;"></div><div style="font-size: 12px; padding-top: 5px; display: block;" id="aqiwgtxtrainfo">Thời gian: <span>' + data.qi_time_2 + '</span></div>  ' +
+                        '   </td>  ' +
+                        '   </tr>  ';
+
+                    $("#aqitable tbody").html(html);
+                } else {
+                    alert("Lỗi API. Xin vui lòng kiểm tra lại!");
+                }
+            },
+            error: function () {
+                alert("Lỗi API. Xin vui lòng kiểm tra lại!");
+            }
+        });
+    }
+
+    function vechart2(lstId) {
+        var dataGoogle = google.visualization.arrayToDataTable(lstId);
+        var options = {
+            title: 'Biểu đồ giá trị AQI của các trạm',
+            height: 450,
+            bar: { groupWidth: '65%' },
+            legend: {
+                alignment: 'center',
+                position: 'top'
+            },
+            annotations: {
+                textStyle: {
+                    fontSize: 15,
+                },
+                alwaysOutside: true
+            }
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('aqi_full'));
+        chart.draw(dataGoogle, options);
+    }
+
+    function drawWQI() {
+        $.ajax({
+            method: "GET",
+            url: "http://202.60.104.121/eos/services/call/json/get_stations?qi_type=wqi",
+            success: function (data, status) {
+                if (data.success == true) {
+                    var dulieu = data.stations;
+                    $("#listTramWQI").html("");
+                    var idFirst = 0;
+                    var lstId = [['Trạm', 'Giá trị AQI', { role: 'annotation' }]];
+                    for (var i = 0; i < dulieu.length; i++) {
+                        if (dulieu[i].qi > 0) {
+                            if (idFirst == 0) {
+                                idFirst = dulieu[i].id;
+                            }
+                            lstId.push([dulieu[i].station_name, Math.round(dulieu[i].qi), Math.round(dulieu[i].qi)]);
+                            $("#listTramWQI").append("<option value='" + dulieu[i].id + "'>" + dulieu[i].station_name + "</option>");
+                        }
+                    }
+                    
+                } else {
+                    alert("Lỗi API. Xin vui lòng kiểm tra lại!");
+                }
+            },
+            error: function () {
+                alert("Lỗi API. Xin vui lòng kiểm tra lại!");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $("#listTram").change(function () {
+            vechart($(this).val());
+        })
+    })
 </script>
