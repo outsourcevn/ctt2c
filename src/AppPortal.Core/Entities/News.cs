@@ -80,7 +80,8 @@ namespace AppPortal.Core.Entities
         tiepnhan,
         xacminh,
         tuchoi,
-        baocaoldtc
+        baocaoldtc,
+        chuyentralai
     }
 
     public enum IsNew : int

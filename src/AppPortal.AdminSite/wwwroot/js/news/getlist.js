@@ -77,6 +77,11 @@ var newlogStatus = -1;
                 width: "10px"
             },
             {
+                field: "id",
+                title: "ID",
+                width: "10px"
+            },
+            {
                 field: "name",
                 title: "Tiêu đề"
             },
@@ -137,8 +142,6 @@ var newlogStatus = -1;
             template: "#=templateAction(is_status , id)#"
         });
 
-        
-        
         $("#dataGrid").kendoGrid({
             dataSource: dataSource,
             pageable: {
@@ -218,7 +221,7 @@ var newlogStatus = -1;
         $('#btn-delete-all').on('click', function (e) {
             var grid = $('#dataGrid').data('kendoGrid');
             if (ngNews.lstNewsId.length > 0) {
-                kendo.confirm("Xác nhận xóa tin này?")
+                kendo.confirm("Bạn có xác nhận muốn xóa?")
                     .done(function () {
                         callAjax(
                             `${appConfig.apiHostUrl}/${NEWS_API.DELETE_ALL_NEW}`,
@@ -383,7 +386,7 @@ var newlogStatus = -1;
 function xoapakn(news_id) {
     var grid = $('#dataGrid').data('kendoGrid');
     if (news_id !== "") {
-        kendo.confirm("Xác nhận xóa tin này?")
+        kendo.confirm("Bạn có xác nhận muốn xóa?")
             .done(function () {
                 callAjax(
                     `${appConfig.apiHostUrl}/${NEWS_API.DELETE}` + '?Id=' + news_id,
@@ -898,6 +901,7 @@ function templateSpecial(status , news_id) {
         case 8: name = '<label class="label label-danger">Đã xác minh</label>'; break;
         case 9: name = '<label class="label label-danger">Bị trả lại</label>'; break;
         case 10: name = '<label class="label label-danger">Báo cáo lãnh đạo</label>'; break;
+        case 11: name = '<label class="label label-danger">Bị trả lại</label>'; break;
         default: name = '<label class="label label-warning">Đang chờ xử lý</label>'; break;
     }
     return name;

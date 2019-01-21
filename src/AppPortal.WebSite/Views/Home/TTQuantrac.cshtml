@@ -146,12 +146,13 @@
             url: "http://202.60.104.121/eos/services/call/json/qi_detail?station_id=" + id,
             success: function (data, status) {
                 if (data.success == true) {
+                    debugger
                     var dataColumn = [
-                        ['Khí', 'Giá trị min', { role: 'annotation' }, 'Giá trị max', { role: 'annotation' }],
-                        ['CO', data.res.CO.min, data.res.CO.min, data.res.CO.max, data.res.CO.max],
-                        ['NOx', data.res.NOx.min, data.res.NOx.min, data.res.NOx.max, data.res.NOx.max],
-                        ['O3', data.res.O3.min, data.res.O3.min, data.res.O3.max, data.res.O3.max],
-                        ['SO2', data.res.SO2.min, data.res.SO2.min, data.res.SO2.max, data.res.SO2.max],
+                        ['Khí', 'Giá trị', { role: 'annotation' }, { role: 'style' }],
+                        ['CO', data.res.CO.max, data.res.CO.max],
+                        ['NOx', data.res.NOx.max, data.res.NOx.max],
+                        ['O3', data.res.O3.max, data.res.O3.max],
+                        ['SO2', data.res.SO2.max, data.res.SO2.max],
                     ];
 
                     var dataGoogle = google.visualization.arrayToDataTable(dataColumn);
@@ -232,9 +233,9 @@
                     ////
 
                     var html = '   <tr>  ' +
-                        '  <td class="aqiwgt-table-aqicell" style="padding-right:5px;"><div class="aqivalue" id="aqiwgtvalue" style="font-size: 80px; background-color: ' + data.qi_detail_info.bgColor + '; color: ' + data.qi_detail_info.color + '; text-shadow: rgb(255, 255, 255) 1px 0px 1px;" title="Unhealthy for Sensitive Groups">' + data.qi_detail_info.from + ' - ' + data.qi_detail_info.to + '</div></td>  ' +
+                        '  <td class="aqiwgt-table-aqicell" style="padding-right:5px;"><div class="aqivalue" id="aqiwgtvalue" style="font-size: 60px; background-color:#ff9933; color: ' + data.qi_detail_info.color + ';opacity: 0.8;text-align: center;" title="Unhealthy for Sensitive Groups">---</div></td>  ' +
                         ' <td style="width:50%;vertical-align: middle" nowrap="true" class="aqiwgt-table-aqiinfo">  ' +
-                        '  <div id="aqiwgtinfo" style="text-shadow: rgb(0, 0, 0) 1px 0px 1px; color: rgb(255, 153, 51);"><span style="font-size:16px;white-space: pre-wrap;line-height: 25px;">' + data.qi_detail_info.description + '</span></div><div style="font-size:16px;font-weight:light;;">  ' +
+                        '  <div id="aqiwgtinfo" style="text-shadow: rgb(0, 0, 0) 1px 0px 1px; color: rgb(255, 153, 51);"><span style="font-size:16px;white-space: pre-wrap;line-height: 25px;"></span></div><div style="font-size:16px;font-weight:light;;">  ' +
                         ' </div><div style="font-size:12px;"></div><div style="font-size: 12px; padding-top: 5px; display: block;" id="aqiwgtxtrainfo">Thời gian: <span>' + data.qi_time_2 + '</span></div>  ' +
                         '   </td>  ' +
                         '   </tr>  ';
