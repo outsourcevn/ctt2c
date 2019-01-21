@@ -776,7 +776,7 @@ namespace AppPortal.AdminSite.Services.Administrator
 
             if (!string.IsNullOrEmpty(mapakn))
             {
-                query = query.Where(x => x.MaPakn == mapakn);
+                query = query.Where(x => x.Name.Contains(mapakn));
             }
             else
             {

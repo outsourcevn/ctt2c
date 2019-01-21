@@ -342,7 +342,7 @@ namespace AppPortal.ApiHost.Controllers
                    
                 }
                 var currentDatetime = DateTime.Now;
-                entityModel.IsType = (int?)IsType.topic;
+                entityModel.IsType = model.IsType;
                 entityModel.MaPakn = currentDatetime.ToString("yyyyMMddHHmmssffff");
                 var newsData = _newsService.AddOrUpdateModel(entityModel);
 

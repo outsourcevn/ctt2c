@@ -10,8 +10,8 @@
     <div class="col-md-12">
         <!-- Nav tabs --><div class="card">
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Chất lượng khí</a></li>
-                <li role="presentation"><a href="#wqi" aria-controls="profile" role="tab" data-toggle="tab">Chất lượng nước</a></li>
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Chất lượng không khí</a></li>
+                <li role="presentation"><a href="#wqi" aria-controls="profile" role="tab" data-toggle="tab">Chất lượng nước mặt</a></li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -27,12 +27,12 @@
                                 <table id="aqitable" style="text-align:left;padding:0px;padding-top:3px;padding-bottom:8px;margin:0px;border-spacing:0px;border:0px solid black;width:100%;;">
                                     <tbody></tbody>
                                 </table>
-                                
+
                                 <div id="thangchiso" style="margin-top: 10px"></div>
                             </div>
                         </div>
                         <div class="col-md-7">
-                            <iframe src="https://www.google.com/maps/d/embed?mid=1FdNr6bLh9TprldYQspGmrtk00UM" width="640" height="800"></iframe>
+                            <iframe src="//arcgisportal.ceid.gov.vn/portal/apps/Embed/index.html?webmap=5d2bfa67ff5c4719acf1dcc760ff0d2e&extent=101.0548,17.0821,113.9967,23.4069&home=true&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light" width="640" height="800"></iframe>
                         </div>
                     </div>
                    
@@ -42,7 +42,28 @@
                 </div>
                 
                 <div role="tabpanel" class="tab-pane" id="wqi">
-                    
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Trạm</label>
+                                <select class="form-control" id="listTramWQI"></select>
+
+                                <div id="chart_div_wqi"></div>
+
+                                <table id="aqitable_wqi" style="text-align:left;padding:0px;margin-top:15px;border-spacing:0px;border:0px solid black;width:100%;;">
+                                    <tbody></tbody>
+                                </table>
+                                <div id="thangchiso_wqi" style="margin-top: 10px"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <iframe src="//arcgisportal.ceid.gov.vn/portal/apps/Embed/index.html?webmap=5d2bfa67ff5c4719acf1dcc760ff0d2e&extent=101.0548,17.0821,113.9967,23.4069&home=true&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light" width="640" height="800"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="wqi_full" class="col-md-12"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,15 +113,23 @@
             url: "http://202.60.104.121/eos/services/call/json/get_common_settings",
             success: function (data, status) {
                 if (data.success == true) {
-                    var qi_colors = data.qi_colors;
+                    var qi_colors = data.aqi_colors;
+                    var wqi_colors = data.wqi_colors;
                     
                     var html = '';
+                    var htmlwqi = '';
                     $("#thangchiso").html("");
+                    $("#thangchiso_wqi").html("");
                     for (var i = 0; i < qi_colors.length; i++) {
                         html += '<div style="padding:5px;display: inline-block;margin: 3px;background-color: ' + qi_colors[i].color + '">' + qi_colors[i].name + '</div >';
                     }
 
+                    for (var j = 0; j < wqi_colors.length; j++) {
+                        htmlwqi += '<div style="padding:5px;display: inline-block;margin: 3px;background-color: ' + wqi_colors[j].color + '">' + wqi_colors[j].name + '</div >';
+                    }
+
                     $("#thangchiso").html(html);
+                    $("#thangchiso_wqi").html(htmlwqi);
                 } else {
                     alert("Lỗi API. Xin vui lòng kiểm tra lại!");
                 }
@@ -166,6 +195,61 @@
         });
     }
 
+    function vechartWQI(id) {
+        $.ajax({
+            method: "GET",
+            url: "http://202.60.104.121/eos/services/call/json/qi_detail?station_id=" + id,
+            success: function (data, status) {
+                if (data.success == true) {
+                    //var dataColumn = [
+                    //    ['Khí', 'Giá trị min', { role: 'annotation' }, 'Giá trị max', { role: 'annotation' }],
+                    //    ['CO', data.res.CO.min, data.res.CO.min, data.res.CO.max, data.res.CO.max],
+                    //    ['NOx', data.res.NOx.min, data.res.NOx.min, data.res.NOx.max, data.res.NOx.max],
+                    //    ['O3', data.res.O3.min, data.res.O3.min, data.res.O3.max, data.res.O3.max],
+                    //    ['SO2', data.res.SO2.min, data.res.SO2.min, data.res.SO2.max, data.res.SO2.max],
+                    //];
+
+                    //var dataGoogle = google.visualization.arrayToDataTable(dataColumn);
+                    //var options = {
+                    //    title: data.station_name,
+                    //    height: 350,
+                    //    bar: { groupWidth: '55%' },
+                    //    legend: {
+                    //        position: 'top',
+                    //        alignment: 'start'
+                    //    },
+                    //    annotations: {
+                    //        textStyle: {
+                    //            fontSize: 15,
+                    //        },
+                    //        alwaysOutside: true
+                    //    }
+                    //};
+
+                    //var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+                    //chart.draw(dataGoogle, options);
+
+                    ////
+
+                    var html = '   <tr>  ' +
+                        '  <td class="aqiwgt-table-aqicell" style="padding-right:5px;"><div class="aqivalue" id="aqiwgtvalue" style="font-size: 80px; background-color: ' + data.qi_detail_info.bgColor + '; color: ' + data.qi_detail_info.color + '; text-shadow: rgb(255, 255, 255) 1px 0px 1px;" title="Unhealthy for Sensitive Groups">' + data.qi_detail_info.from + ' - ' + data.qi_detail_info.to + '</div></td>  ' +
+                        ' <td style="width:50%;vertical-align: middle" nowrap="true" class="aqiwgt-table-aqiinfo">  ' +
+                        '  <div id="aqiwgtinfo" style="text-shadow: rgb(0, 0, 0) 1px 0px 1px; color: rgb(255, 153, 51);"><span style="font-size:16px;white-space: pre-wrap;line-height: 25px;">' + data.qi_detail_info.description + '</span></div><div style="font-size:16px;font-weight:light;;">  ' +
+                        ' </div><div style="font-size:12px;"></div><div style="font-size: 12px; padding-top: 5px; display: block;" id="aqiwgtxtrainfo">Thời gian: <span>' + data.qi_time_2 + '</span></div>  ' +
+                        '   </td>  ' +
+                        '   </tr>  ';
+
+                    $("#aqitable_wqi tbody").html(html);
+                } else {
+                    alert("Lỗi API. Xin vui lòng kiểm tra lại!");
+                }
+            },
+            error: function () {
+                alert("Lỗi API. Xin vui lòng kiểm tra lại!");
+            }
+        });
+    }
+
     function vechart2(lstId) {
         var dataGoogle = google.visualization.arrayToDataTable(lstId);
         var options = {
@@ -191,23 +275,22 @@
     function drawWQI() {
         $.ajax({
             method: "GET",
-            url: "http://202.60.104.121/eos/services/call/json/get_stations?qi_type=wqi",
+            url: "http://202.60.104.121/eos/services/call/json/get_stations?qi_type=wqi&station_type=1",
             success: function (data, status) {
                 if (data.success == true) {
                     var dulieu = data.stations;
                     $("#listTramWQI").html("");
                     var idFirst = 0;
-                    var lstId = [['Trạm', 'Giá trị AQI', { role: 'annotation' }]];
+                    var lstId = [['Trạm', 'Giá trị WQI', { role: 'annotation' }]];
                     for (var i = 0; i < dulieu.length; i++) {
-                        if (dulieu[i].qi > 0) {
-                            if (idFirst == 0) {
-                                idFirst = dulieu[i].id;
-                            }
-                            lstId.push([dulieu[i].station_name, Math.round(dulieu[i].qi), Math.round(dulieu[i].qi)]);
-                            $("#listTramWQI").append("<option value='" + dulieu[i].id + "'>" + dulieu[i].station_name + "</option>");
+                        if (idFirst == 0) {
+                            idFirst = dulieu[i].id;
                         }
+                        lstId.push([dulieu[i].station_name, Math.round(dulieu[i].qi), Math.round(dulieu[i].qi)]);
+                        $("#listTramWQI").append("<option value='" + dulieu[i].id + "'>" + dulieu[i].station_name + "</option>");
                     }
-                    
+                    vechartWQI(idFirst);
+                                        
                 } else {
                     alert("Lỗi API. Xin vui lòng kiểm tra lại!");
                 }
@@ -221,6 +304,10 @@
     $(document).ready(function () {
         $("#listTram").change(function () {
             vechart($(this).val());
+        });
+
+        $("#listTramWQI").change(function () {
+            vechartWQI($(this).val());
         })
     })
 </script>

@@ -174,3 +174,7 @@ div.anythingSlider { display: block; overflow: visible !important; position: rel
     .ui-tabs-nav li.ui-state-active .bg { background: url(../images/bg_tabs_li.png) repeat-x 0 0; }
     .ui-tabs-nav li a { font-size: 14px; color: #282828; }
     .ui-tabs-nav li.ui-state-active a { font-weight: bold; }
+
+.sc-iRbamj {
+    display: none !important;
+}

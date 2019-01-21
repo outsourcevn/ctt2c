@@ -46,7 +46,7 @@ a {
 }
 
 .tab-content {
-    display: inline-block;
+    display: grid;
     padding: 10px;
 }
 

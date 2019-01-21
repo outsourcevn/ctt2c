@@ -148,7 +148,8 @@ function onCompleted() {
             Thoigianxayra: $("#Thoigianxayra").val(),
             TenCaNhanToChuc: $("#TenCaNhanToChuc").val(),
             fileUpload: fileupload,
-            doituong: parseInt($("input[name=doituong]:checked").val())
+            doituong: parseInt($("input[name=doituong]:checked").val()),
+            IsType: parseInt($("input[name=phanloai]:checked").val())
         };
         //console.log(dataJson);
         callAjax(
