@@ -594,7 +594,7 @@ function submitTraLai() {
             Id: parseInt(idReport),
             Data: editorTralai.getData(),
             typeStatus: 7
-        }
+        };
 
         kendo.confirm("Xác nhận chuyển trả lại ?")
             .done(function () {
@@ -786,24 +786,6 @@ function nhapketquatralai(news_id) {
                 $("#IdReport").val("0");
             }
             $("#exampleModalNew_nhapketquatralai").modal('show');
-            //$('#fileupload').addClass('fileupload-processing');
-            //$("#filebaocao tbody").empty();
-            //$.ajax({
-            //    // Uncomment the following to send cross-domain cookies:
-            //    //xhrFields: {withCredentials: true},
-            //    url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload/' + $("#exampleModalNew_nhapketqua .IdReport").val(),
-            //    beforeSend: function (xhr) {
-            //        xhr.setRequestHeader('Authorization', 'Bearer ' + getCookie("ACCESS-TOKEN"));
-            //        xhr.setRequestHeader('IdReprot', parseInt($("#exampleModalNew_nhapketqua .IdReport").val()));
-            //    },
-            //    dataType: 'json',
-            //    context: $('#fileupload')[0]
-            //}).always(function () {
-            //    $(this).removeClass('fileupload-processing');
-            //}).done(function (result) {
-            //    $(this).fileupload('option', 'done')
-            //        .call(this, $.Event('done'), { result: result });
-            //});
         },
         function (xhr, status, error) {
 

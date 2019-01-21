@@ -165,7 +165,25 @@ namespace AppPortal.AdminSite.Services.Administrator
                     var news = _news.Table.Where(x => x.Id == item.NewsId).FirstOrDefault();
                     if (news != null)
                     {
-                        news.IsStatus = IsStatus.baocao;
+                        if ((IsTypeStatus)typeStatus == IsTypeStatus.chuyentralai)
+                        {
+                            news.IsStatus = IsStatus.chuyentralai;
+                        }
+                        else
+                        {
+                            news.IsStatus = IsStatus.baocao;
+                        }
+                        
+                        news.OnPublished = DateTime.Now;
+                        _news.Update(news);
+                    }
+                }
+                if(typeStatus == 7)
+                {
+                    var news = _news.Table.Where(x => x.Id == item.NewsId).FirstOrDefault();
+                    if (news != null)
+                    {
+                        news.IsStatus = IsStatus.chuyentralai;
                         news.OnPublished = DateTime.Now;
                         _news.Update(news);
                     }

@@ -155,7 +155,7 @@
                                     <option value="5">Đã chuyển</option>
                                     <option value="6">Đã xử lý</option>
                                     <option value="3">Đã đăng tin</option>
-                                    <option value="9">Bị trả lại</option>
+                                    <option value="11">Bị trả lại</option>
                                 </select>
 
                                 <select style="display: none;" class="form-control" id="exampleFormControlSelect2">
@@ -316,18 +316,6 @@
                                     <span>Thêm tệp tin...</span>
                                     <input type="file" name="files" multiple>
                                 </span>
-                                @*<button type="submit" class="btn btn-primary start">
-                                        <i class="glyphicon glyphicon-upload"></i>
-                                        <span>Bắt đầu upload</span>
-                                    </button>*@
-                                @*<button type="reset" class="btn btn-warning cancel">
-                                        <i class="glyphicon glyphicon-ban-circle"></i>
-                                        <span>Cancel upload</span>
-                                    </button>*@
-                                @*<button type="button" class="btn btn-danger delete">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                        <span>Xóa</span>
-                                    </button>*@
 
                                 <!-- The global file processing state -->
                                 <span class="fileupload-process"></span>
@@ -727,13 +715,7 @@
 <script id="template-download" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-download fade">
-        <td>
-            <span class="preview">
-                {% if (file.thumbnailUrl) { %}
-                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img style="width: 200px" src="{%=file.thumbnailUrl%}"></a>
-                {% } %}
-            </span>
-        </td>
+       
         <td>
             <p class="name">
                 {% if (file.url) { %}
