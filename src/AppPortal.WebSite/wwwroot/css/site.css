@@ -40,6 +40,11 @@
 .border-dot {
     border-bottom: 1px dotted;
     padding: 1px 0px 10px 0px;
+    float:left;
+}
+
+.title {
+    text-align:justify;
 }
 
 @media only screen and (min-width: 600px) {

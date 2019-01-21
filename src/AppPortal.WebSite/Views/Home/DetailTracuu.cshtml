@@ -53,45 +53,30 @@
         font-size: 13px !important;
     }
 </style>
-
-<div class="container">
-    <div id="tra-cuu-detail" class="col-md-8">
+    <div id="tra-cuu-detail" class="col-md-8" style="margin-top:20px;">
        
     </div>
-    <div class="col-md-4">
-        <div class="col-md-12">
-            <section class="block block_business_news">
-                <h3 class="block_title_black">CHUYÊN MỤC TIN<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div class="right">
-                        <ul id="tin-chuyen-muc-content"></ul>
-                    </div>
+    <div class="col-md-4" style="margin-top:20px;">
+        <section class="block block_business_news">
+            <h3 class="block_title_black">TIN MỚI<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+            <div class="content">
+                <div class="right">
+                    <ul id="tin-moi-content"></ul>
                 </div>
-            </section>
-        </div>
-        <div class="col-md-12">
-            <section class="block block_business_news">
-                <h3 class="block_title_black">TIN MỚI<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div class="right">
-                        <ul id="tin-moi-content"></ul>
-                    </div>
+            </div>
+        </section>
+
+        <section class="block block_business_news">
+            <h3 class="block_title_black">TIN XEM NHIỀU<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+            <div class="content">
+                <div class="right">
+                    <ul id="tin-xem-nhieu-content"></ul>
                 </div>
-            </section>
-        </div>
-        <div class="col-md-12">
-            <section class="block block_business_news">
-                <h3 class="block_title_black">TIN XEM NHIỀU<a href="#" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div class="right">
-                        <ul id="tin-xem-nhieu-content"></ul>
-                    </div>
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </div>
 
-</div>
+
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
@@ -115,7 +100,7 @@
             url += "&mapakn=" + getUrlParameter("mapakn");
         }
 
-        $.get(url   , function (data, status) {
+        $.get(url, function (data, status) {
             var content = '';
             if (getUrlParameter("mapakn") != undefined) {
                 content += '<button type="button" style="margin-top: 10px;" class="btn btn-success">Bổ sung thông tin</button>';
@@ -124,14 +109,13 @@
             content += '<p style="font-size:15px;"><b>Người phản ánh:</b>' + data[0].UserFullName + '</p> <br />'
             content += '<p style="font-size:15px;"><b>Ngày phản ánh:</b>' + dateFormat(data[0].OnCreated, "dd/mm/yyyy") + '</p> <br/>';
 
-            content += ' <div id="content-noidung">'
-            content += '<b style="font-size:15px;">Nội dung kiến nghị:</b>'
-            content += ' <br />'
-            content += '<br />'
-            content += '<p style="font-size:15px;">'+data[0].Content +"</p>";
-     
-            content += '<p style="padding: 10px;">'
-            content += '<i class="MR5 fa fa-file-text-o" aria-hidden="true">'
+            content += ' <div id="content-noidung">';
+            content += '<b style="font-size:15px;">Nội dung kiến nghị:</b>';
+            content += ' <br />';
+            content += '<br />';
+            content += data[0].Content;
+            content += '<p style="padding: 10px;">';
+            content += '<i class="MR5 fa fa-file-text-o" aria-hidden="true">';
             content += '</i> File đính kèm:<br>'
             content += '</p>'
             content += '<p>'
@@ -145,118 +129,103 @@
                     ketqua += '<a href = "https://nguoidan.chinhphu.vn/documents/10701/0/14784CNQ12-%C4%90K_137241218140304.pdf" target="_blank" >' + data[0].newslog.files[i].name + '</a>';
                 }
             }
-            
+
             ketqua += '</p ></div > </div > ';
             $('#tra-cuu-detail').html(content + ketqua);
+            $('#content-noidung p span').css({ 'font-size': '14px' });
+            $('#content-noidung p span').css({ 'line-height': '18px' });
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
                     content += '<article class="border-dot">';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '" >' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
-                    content += '<p style="line-height: 15px;">';
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+
+                    }
+                    content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
                     content += '...</p>';
                     content += '</article>';
                 } else {
                     content += '<article>';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
-                    content += '<p style="line-height: 15px;">';
-                    content += data.model[i].Abstract;
-                    content += '...</p>';
-                    content += '</article>';
-                }
-            }
-            $('#tin-chuyen-muc-content').html(content);
-        });
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
 
-        $.get(appConfig.apiHostUrl+ "/api/News/getHomeNewsByCate?id=2&number=3", function (data, status) {
-            var content = '';
-            for (var i = 0; i < data.model.length; i++) {
-                if (i != data.model.length - 1) {
-                    content += '<article class="border-dot">';
-                    content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
-                    content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
-                    content += '<p style="line-height: 15px;">';
-                    content += data.model[i].Abstract;
-                    content += '...</p>';
-                    content += '</article>';
-                } else {
-                    content += '<article>';
-                    content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
-                    content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
-                    content += '<p style="line-height: 15px;">';
+                    }
+                    content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
                     content += '...</p>';
                     content += '</article>';
                 }
 
             }
+
             $('#tin-moi-content').html(content);
+            $('.tom-tat-news span').css({ 'font-size': '14px' });
         });
 
-        $.get(appConfig.apiHostUrl+"/api/News/getHomeNewsByCate?id=14&number=3", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
                     content += '<article class="border-dot">';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
-                    content += '<p style="line-height: 15px;">';
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+
+                    }
+                    content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
                     content += '...</p>';
                     content += '</article>';
                 } else {
                     content += '<article>';
                     content += '<hgroup>';
-                    content += '<h4 class="title"><a href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
+                    content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date">';
-                    content += '<time>';
-                    content += new Date(data.model[i].OnPublished ).format("dd/mm/yyyy");
-                    content += '</time>';
-                    content += '</p>';
-                    content += '<p style="line-height: 15px;">';
+                    content += '<p class="date" style="text-align:left;">'
+                    content += '<time datetime="2013-01-21">'
+                    content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
+                    content += '</time>'
+                    content += '</p>'
+                    if (data.model[i].Image != '') {
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
+
+                    }
+                    content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
                     content += '...</p>';
                     content += '</article>';
                 }
             }
             $('#tin-xem-nhieu-content').html(content);
+            $('.tom-tat-news span').css({ 'font-size': '14px' });
         });
     </script>
 }
