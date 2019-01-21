@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppPortal.ApiHost", "src\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiver.Api.HttpClient", "src\Fiver.Api.HttpClient\Fiver.Api.HttpClient.csproj", "{101E2ABB-B242-4C46-A020-505D0E74A793}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppPortal.WebAll", "src\AppPortal.WebAll\AppPortal.WebAll.csproj", "{0AA7BD54-5199-4FEB-8441-DEDDC2D9215F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppPortal.WebAll", "src\AppPortal.WebAll\AppPortal.WebAll.csproj", "{0AA7BD54-5199-4FEB-8441-DEDDC2D9215F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
