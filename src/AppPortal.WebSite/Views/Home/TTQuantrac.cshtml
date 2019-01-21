@@ -146,9 +146,9 @@
             url: "http://202.60.104.121/eos/services/call/json/qi_detail?station_id=" + id,
             success: function (data, status) {
                 if (data.success == true) {
-                    debugger
+
                     var dataColumn = [
-                        ['Khí', 'Giá trị', { role: 'annotation' }, { role: 'style' }],
+                        ['Khí', 'Giá trị', { role: 'annotation' }],
                         ['CO', data.res.CO.max, data.res.CO.max],
                         ['NOx', data.res.NOx.max, data.res.NOx.max],
                         ['O3', data.res.O3.max, data.res.O3.max],
