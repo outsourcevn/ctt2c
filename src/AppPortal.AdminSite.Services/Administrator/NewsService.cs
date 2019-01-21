@@ -646,7 +646,9 @@ namespace AppPortal.AdminSite.Services.Administrator
         public IList<HomeNews> GetHomeNewsByCate(int? id = 0 , int? number = 0)
         {
             var homeNews = _homeNews.Table.Where(x => x.IsStatus != IsStatus.deleted && !x.OnDeleted.HasValue);
+         
             homeNews = homeNews.Where(z => z.IsStatus == IsStatus.publish);
+            homeNews = homeNews.OrderByDescending(x => x.OnPublished);
             if (id != 0)
             {
                 homeNews = homeNews.Where(x => x.CategoryId == id);
@@ -655,7 +657,6 @@ namespace AppPortal.AdminSite.Services.Administrator
             {
                 homeNews = homeNews.Take((int)number);
             }
-            homeNews = homeNews.OrderByDescending(x => x.OnPublished);
 
             var homeNewsLst = homeNews.ToList();
 

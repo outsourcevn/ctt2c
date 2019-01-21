@@ -59,5 +59,9 @@ namespace AppPortal.WebSite.Controllers
         {
             return View();
         }
+        public IActionResult guideFeedback()
+        {
+            return View();
+        }
     }
 }
