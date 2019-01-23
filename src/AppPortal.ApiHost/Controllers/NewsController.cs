@@ -107,6 +107,14 @@ namespace AppPortal.ApiHost.Controllers
             return ResponseInterceptor(newsHome);
         }
 
+        [AllowAnonymous]
+        [HttpGet("getHomeNewsBySearch")]
+        public IActionResult ListHomeNewsAsyncBySearch(string value = "")
+        {
+            var newsHome = _newsService.GetHomeNewsBySearch(value);
+            return ResponseInterceptor(newsHome);
+        }
+
         // get notifi
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("GetNotifi")]

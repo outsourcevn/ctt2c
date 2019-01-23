@@ -667,6 +667,35 @@ namespace AppPortal.AdminSite.Services.Administrator
             return homeNewsLst;
         }
 
+        public IList<HomeNews> GetHomeNewsBySearch(string value)
+        {
+            var homeNews = _homeNews.Table.Where(x => x.IsStatus != IsStatus.deleted && !x.OnDeleted.HasValue);
+
+            homeNews = homeNews.Where(z => z.IsStatus == IsStatus.publish);
+            homeNews = homeNews.Where(z => z.Name.Contains(value) || z.Abstract.Contains(value) || z.Content.Contains(value));
+            homeNews = homeNews.OrderByDescending(x => x.OnPublished);
+
+            //if (id != 0)
+            //{
+            //    homeNews = homeNews.Where(x => x.CategoryId == id);
+            //}
+            //if (number != 0)
+            //{
+            //    homeNews = homeNews.Take((int)number);
+            //}
+
+            var homeNewsLst = homeNews.ToList();
+
+            foreach (var iem in homeNewsLst)
+            {
+                if (!string.IsNullOrEmpty(iem.Image))
+                {
+                    iem.Image = "http://103.9.86.36:8081" + iem.Image;
+                }
+            }
+            return homeNewsLst;
+        }
+
         public void UpdateStatus(string id, IsStatus status)
         {
             var data = _news.GetById(Int32.Parse(id));
