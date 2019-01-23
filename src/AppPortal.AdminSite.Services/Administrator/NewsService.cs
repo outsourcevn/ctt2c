@@ -520,10 +520,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             var entity = _news.GetById(id);
             if(entity != null)
             {
-                entity.OnDeleted = DateTime.Now;
-                entity.IsShow = false;
-                entity.IsStatus = IsStatus.deleted;
-                _news.Update(entity);
+                _news.Delete(entity);
             }
         }
 
