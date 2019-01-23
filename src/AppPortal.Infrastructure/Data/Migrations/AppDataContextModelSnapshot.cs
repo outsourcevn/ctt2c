@@ -674,6 +674,37 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.ToTable("ReportNews","AppPortal");
                 });
 
+            modelBuilder.Entity("AppPortal.Core.Entities.Vanban", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsPublish");
+
+                    b.Property<DateTime?>("OnCreated");
+
+                    b.Property<DateTime?>("OnDeleted");
+
+                    b.Property<DateTime?>("OnPublish");
+
+                    b.Property<string>("coquanbanhanh");
+
+                    b.Property<string>("loaivanban");
+
+                    b.Property<DateTime>("ngaybanhanh");
+
+                    b.Property<string>("sovanban");
+
+                    b.Property<string>("tenvanban");
+
+                    b.Property<string>("url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vanban","AppPortal");
+                });
+
             modelBuilder.Entity("AppPortal.Core.Entities.News", b =>
                 {
                     b.HasOne("AppPortal.Core.Entities.Address", "Address")

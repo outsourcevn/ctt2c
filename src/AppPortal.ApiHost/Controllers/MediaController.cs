@@ -193,7 +193,8 @@ namespace AppPortal.ApiHost.Controllers
         [HttpGet("getVanban")]
         public IActionResult GetVanban(string type)
         {
-           // return Ok(_mediaService.GetVanban(type));
+            return Ok();
+           //return Ok(_mediaService.GetVanban(type));
         }
     }
 }
