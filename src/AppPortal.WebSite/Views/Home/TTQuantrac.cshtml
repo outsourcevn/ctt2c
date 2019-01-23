@@ -84,13 +84,13 @@
                     var dulieu = data.stations;
                     $("#listTram").html("");
                     var idFirst = 0;
-                    var lstId = [['Trạm', 'Giá trị AQI', { role: 'annotation' }]];
+                    var lstId = [['Trạm', 'Giá trị AQI', { role: 'annotation' }, { role: 'style' }]];
                     for (var i = 0; i < dulieu.length; i++) {
                         if (dulieu[i].qi > 0) {
                             if (idFirst == 0) {
                                 idFirst = dulieu[i].id;
                             }
-                            lstId.push([dulieu[i].station_name, Math.round(dulieu[i].qi), Math.round(dulieu[i].qi)]);
+                            lstId.push([dulieu[i].station_name, Math.round(dulieu[i].qi), Math.round(dulieu[i].qi), getColor(Math.round(dulieu[i].qi))]);
                             $("#listTram").append("<option value='" + dulieu[i].id + "'>" + dulieu[i].station_name + "</option>");
                         }
                     }
@@ -140,19 +140,36 @@
         });
     }
 
+    function getColor(number) {
+        if (number < 50) {
+            return '#008000';
+        } else if (number < 100) {
+            return '#ffff00';
+        } else if (number < 200) {
+            return '#099099';
+        } else if (number < 300) {
+            return '#ff0000';
+        } else {
+            return '#800080';
+        }
+    }
+
     function vechart(id) {
         $.ajax({
             method: "GET",
             url: "http://202.60.104.121/eos/services/call/json/qi_detail?station_id=" + id,
             success: function (data, status) {
                 if (data.success == true) {
-
+                    var colorCo = getColor(data.res.CO.max);
+                    var colorno = getColor(data.res.NOx.max);
+                    var coloro3 = getColor(data.res.O3.max);
+                    var colorso2 = getColor(data.res.SO2.max);
                     var dataColumn = [
-                        ['Khí', 'Giá trị', { role: 'annotation' }],
-                        ['CO', data.res.CO.max, data.res.CO.max],
-                        ['NOx', data.res.NOx.max, data.res.NOx.max],
-                        ['O3', data.res.O3.max, data.res.O3.max],
-                        ['SO2', data.res.SO2.max, data.res.SO2.max],
+                        ['Khí', 'Giá trị', { role: 'annotation' }, { role: 'style' }],
+                        ['CO', data.res.CO.max, data.res.CO.max, colorCo],
+                        ['NOx', data.res.NOx.max, data.res.NOx.max, colorno],
+                        ['O3', data.res.O3.max, data.res.O3.max, coloro3],
+                        ['SO2', data.res.SO2.max, data.res.SO2.max, colorso2],
                     ];
 
                     var dataGoogle = google.visualization.arrayToDataTable(dataColumn);

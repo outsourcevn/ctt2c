@@ -524,12 +524,14 @@ function templateAction(is_status, news_id) {
     var name = '';
     var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
     var deletebutton = "<a class='btn btn-danger btn-xs' onclick='xoapakn("+ news_id +")'><i class='fa fa-edit'></i>&nbsp;Xóa</a>";
+    var tuchoibutton = "<a class='btn btn-danger btn-xs' onclick='tuchoitiepnhan(" + news_id + ")'><i class='fa fa-edit'></i>Từ chối tiếp nhận</a>";
     // label-success label-danger label-info label-warning
     if (GroupId === "ttdl") {
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Chuyển</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Đăng tin</button>';
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
         name = name + deletebutton;
+        name = name + tuchoibutton;
 
     }
 
