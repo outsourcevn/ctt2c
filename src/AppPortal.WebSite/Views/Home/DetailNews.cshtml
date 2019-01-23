@@ -157,6 +157,7 @@
 
             $('#detail-news').html(content);
             $('p span span').css({ 'line-height': '20px' });
+            $('p span').css({ 'line-height': '20px' });
         });
 
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
