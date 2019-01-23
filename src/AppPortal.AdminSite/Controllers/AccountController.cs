@@ -174,7 +174,7 @@ namespace AppPortal.AdminSite.Controllers
 
                             access_token = userLogined.AccessToken;
                         }
-                        SetCookie("Cache-Token", response.IsSuccessStatusCode.ToString() , 6000);
+                        //SetCookie("Cache-Token", response.IsSuccessStatusCode.ToString() , 6000);
                     }
                 }
                 catch(Exception ex)
