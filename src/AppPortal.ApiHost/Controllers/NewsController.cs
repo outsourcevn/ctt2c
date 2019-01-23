@@ -24,11 +24,13 @@ namespace AppPortal.ApiHost.Controllers
     public class NewsController : ApiBaseController<NewsController>
     {
         private readonly INewsService _newsService;
+        private readonly IEmailSender _emailSender;
         private readonly INewsLog _newLog;
         private readonly UserManager<ApplicationUser> _userManager;
         public NewsController(
             IConfiguration configuration, 
             IAppLogger<NewsController> logger,
+             IEmailSender emailSender,
             UserManager<ApplicationUser> userManager,
             INewsService newsService,
             INewsLog newLog
@@ -37,6 +39,7 @@ namespace AppPortal.ApiHost.Controllers
             _newsService = newsService;
             _newLog = newLog;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         // list new
@@ -609,6 +612,47 @@ namespace AppPortal.ApiHost.Controllers
             }
             return ResponseInterceptor(message);
         }
+
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpPost("tuchoitiepnhan")]
+        // save all to Publishs
+        public async Task<IActionResult> tuchoitiepnhan([FromBody] NewVewTuchoi newView)
+        {
+            var news_id = newView.news_id;
+            var note = newView.note;
+          
+            if (news_id == 0 || note == null)
+            {
+                return ToHttpBadRequest("The news_id is required.");
+            }
+            string message = "";
+            try
+            {
+                var newsData = _newsService.GetNewsById(news_id);
+                if (!string.IsNullOrEmpty(newsData.UserEmail)){
+                    string subject = "Hệ thống thông tin tiếp nhận góp ý, phản ánh người dân";
+                    string body = "Kính gửi Ông/Bà: "+ newsData.UserFullName +"<div>Nội dung Góp ý, phản ánh của Ông/Bà đã được Tổng cục môi trường từ chối tiếp nhận.</div><br><div>Với lý do: "+ note +"</div><div><br></div><div>Lưu ý:</div><div>- Mọi thông tin trong email này cần được bảo mật.</div><div>- Xin vui lòng không reply lại email này.</div><div>Trân trọng !</div><div>Cổng thông tin phản ánh và kiến nghị.</div><div>Tổng cục Môi trường.</div>";
+                    await _emailSender.SendEmailAsync(newsData.UserEmail, subject, body, String.Empty,
+                    apiSettings.EmailConfig.Email,
+                    apiSettings.EmailConfig.Password);
+                }
+
+                _newsService.Delete(newsData.Id);
+
+                message = $"Đã từ chối tiếp nhận!";
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogWarning(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
+
 
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpPost("save-publish-new-note")]

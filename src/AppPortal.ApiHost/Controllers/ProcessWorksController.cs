@@ -376,7 +376,7 @@ namespace AppPortal.ApiHost.Controllers
                 if (!string.IsNullOrEmpty(newsData.UserEmail))
                 {
                     string subject = "Hệ thống thông tin tiếp nhận góp ý, phản ánh người dân";
-                    string body = "Kính gửi Ông/Bà: ABC<div>Nội dung: Góp ý, phản ánh mã số "+ newsData.MaPakn + " của Ông/Bà đã được văn phòng chính phủ tiếp nhận và sẽ trả lời theo quy định. Ông bà vui lòng lưu lại mã số này để theo dõi và tra cứu kết quả trả lời góp ý, phản ánh của mình.</div><div><br></div><div>Lưu ý:</div><div>- Mọi thông tin trong email này cần được bảo mật.</div><div>- Xin vui lòng không reply lại email này.</div><div>Trân trọng.</div><div>Hệ thống thông tin tiếp nhận, trả lời góp ý, phản ánh người dân.</div><div>Văn phòng chính phủ.</div>";
+                    string body = "Kính gửi Ông/Bà: " + newsData.UserFullName + "<div>Nội dung Góp ý, phản ánh của Ông/Bà đã được Tổng cục môi trường tiếp nhận và sẽ trả lời theo quy định. Ông bà vui lòng tra cứu kết quả trả lời trên hệ thống.</div><div><br></div><div>Lưu ý:</div><div>- Mọi thông tin trong email này cần được bảo mật.</div><div>- Xin vui lòng không reply lại email này.</div><div>Trân trọng !</div><div>Cổng thông tin phản ánh và kiến nghị.</div><div>Tổng cục Môi trường.</div>";
                     await _emailSender.SendEmailAsync(newsData.UserEmail, subject, body , String.Empty ,
                     apiSettings.EmailConfig.Email,
                     apiSettings.EmailConfig.Password);

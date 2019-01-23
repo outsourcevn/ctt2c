@@ -28,6 +28,7 @@ namespace AppPortal.Infrastructure.App
             modelBuilder.Entity<NewsPreview>(ConfigureNewsPreview);
             modelBuilder.Entity<Media>(ConfigureMedia);
             modelBuilder.Entity<Config>(ConfigureConfig);
+            modelBuilder.Entity<Vanban>(ConfigureVanban);
         }
 
         #region Mapping
@@ -218,6 +219,12 @@ namespace AppPortal.Infrastructure.App
             b.Property(c => c.IsStatus).HasColumnType("int");
             b.Property(c => c.IsType).HasColumnType("int");
             b.Property(c => c.IsView).HasColumnType("int");
+        }
+
+        
+        private void ConfigureVanban(EntityTypeBuilder<Vanban> b)
+        {
+            b.ToTable("Vanban", "AppPortal");
         }
 
         #endregion

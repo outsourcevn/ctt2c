@@ -43,36 +43,6 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                     <li class="nav-header">Chức năng hệ thống</li>
-                    @*<secure-content asp-controller="Roles">
-            <li class="nav-item has-treeview sysadmin">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fa fa-angle-double-right"></i>
-                    <p>
-                        Quản trị hệ thống
-                        <i class="fa fa-angle-left right"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-controller="Roles" asp-action="Create" class="nav-link">
-                            <i class="nav-icon fa fa-plus"></i>
-                            <p>
-                                Tạo mới quyền
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Roles" asp-action="Index" class="nav-link">
-                            <i class="nav-icon fa fa-users"></i>
-                            <p>
-                                Quản lý phân quyền
-                                <span class="badge badge-info right">2</span>
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </secure-content>*@
                     <li class="nav-item has-treeview sysadmin">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa fa-angle-double-right"></i>
@@ -174,13 +144,7 @@
                                         <span class="badge badge-info right">20</span>
                                     </a>
                                 </li>
-                                @*<li class="nav-item">
-                        <a href="/news?status=8" class="nav-link">
-                            <i class="fa fa-warning nav-icon"></i>
-                            <p>Tin đã xác minh</p>
-                            <span class="badge badge-info right"></span>
-                        </a>
-                    </li>*@
+
                                 <li class="nav-item">
                                     <a href="/news?status=3" class="nav-link">
                                         <i class="fa fa-check nav-icon"></i>
@@ -195,20 +159,7 @@
                                         <span class="badge badge-info right"></span>
                                     </a>
                                 </li>
-                                @*<li class="nav-item">
-                        <a href="/news?status=3" class="nav-link">
-                            <i class="fa fa-check nav-icon"></i>
-                            <p>Góp ý/ Phản ánh đã xác nhận</p>
-                            <span class="badge badge-info right"></span>
-                        </a>
-                    </li>*@
-                                @*<li class="nav-item">
-                        <a href="/news?status=9" class="nav-link">
-                            <i class="fa fa-remove nav-icon"></i>
-                            <p>Tin tức bị từ chối</p>
-                            <span class="badge badge-info right"></span>
-                        </a>
-                    </li>*@
+
                             </ul>
                         </li>
                     </secure-content>
@@ -280,6 +231,33 @@
                                     <a href="/media/IndexVideo" class="nav-link">
                                         <i class="fa fa-list-ul nav-icon"></i>
                                         <p>Album video</p>
+                                        <span class="badge badge-info right"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </secure-content>
+
+                    <secure-content asp-controller="Vanban">
+                        <li id="AnhVideo" class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-angle-double-right"></i>
+                                <p>
+                                    Văn bản
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/vanban/quypham" class="nav-link">
+                                        <i class="fa fa-list-ul nav-icon"></i>
+                                        <p>Văn bản quy phạm</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/vanban/quychuan" class="nav-link">
+                                        <i class="fa fa-list-ul nav-icon"></i>
+                                        <p>Quy chuẩn, tiêu chuẩn</p>
                                         <span class="badge badge-info right"></span>
                                     </a>
                                 </li>
