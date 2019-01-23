@@ -266,8 +266,8 @@
 
 
                 <div class="undernav">
-                    <time class="my-time" id="mytime">Thứ 6 1/11/2019 01:53</time>
-                    <div class="right" style="text-align:right;"> <input class="my-search" type="search" placeholder="Tìm kiếm" aria-label="Search"> <a style="color:black;font-size:10px;margin:0px 10px 0px 10px;" href="http://athongtinhaichieu.vea.gov.vn" target="_blank">ĐĂNG NHẬP</a> </div>
+                    <time class="my-time" id="mytime">Thứ hai 1/11/2019 01:53</time>
+                    <div class="right" style="text-align:right;"> <input id="search-input" class="my-search" type="search" placeholder="Tìm kiếm" aria-label="Search"> <a style="color:black;font-size:10px;margin:0px 10px 0px 10px;" href="http://athongtinhaichieu.vea.gov.vn" target="_blank">ĐĂNG NHẬP</a> </div>
                 </div>
             </ul>
 
@@ -275,3 +275,34 @@
 
     </div>
 </nav>
+<script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+    var searchValue = getUrlParameter('search');
+    if (searchValue) {
+        $("#search-input").val(searchValue);
+    }
+    
+
+    $("#search-input").keyup(function (e) {
+        var code = e.which; // recommended to use e.which, it's normalized across browsers
+        if (code == 13) {
+            console.log($("#search-input").val());
+            window.location.href = "/home/news?search=" + $("#search-input").val();
+            
+        } // missing closing if brace
+    });
+    
+</script>

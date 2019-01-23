@@ -105,9 +105,13 @@
             if (getUrlParameter("mapakn") != undefined) {
                 content += '<button type="button" style="margin-top: 10px;" class="btn btn-success">Bổ sung thông tin</button>';
             }
-            content += '<h1 style="line-height: 25px;"><font color="#1f4f82">' + data[0].Name + '</font></h1>'
-            content += '<p style="font-size:15px;"><b>Người phản ánh:</b>' + data[0].UserFullName + '</p> <br />'
-            content += '<p style="font-size:15px;"><b>Ngày phản ánh:</b>' + dateFormat(data[0].OnCreated, "dd/mm/yyyy") + '</p> <br/>';
+            content += '<h1 style="line-height: 25px;"><font color="#1f4f82"> ' + data[0].Name + '</font></h1>'
+            if (data[0].UserFullName == '') {
+                content += '<p style="font-size:15px;"><b>Người phản ánh:</b> ' + "Ẩn danh" + '</p> <br />';
+            } else {
+                content += '<p style="font-size:15px;"><b>Người phản ánh:</b> ' + data[0].UserFullName + '</p> <br />';
+            }
+            content += '<p style="font-size:15px;"><b>Ngày phản ánh:</b> ' + dateFormat(data[0].OnCreated, "dd/mm/yyyy") + '</p> <br/>';
 
             content += ' <div id="content-noidung">';
             content += '<b style="font-size:15px;">Nội dung kiến nghị:</b>';
