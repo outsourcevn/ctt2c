@@ -748,7 +748,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         {
             try
             {
-                if (isType == IsType.cochehanhchinh || isType == IsType.giaiphapsangkien || !string.IsNullOrEmpty(mapakn))
+                if (isType == IsType.cochehanhchinh || isType == IsType.giaiphapsangkien)
                 {
                     return true;
                 }
