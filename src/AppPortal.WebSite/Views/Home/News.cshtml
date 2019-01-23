@@ -85,7 +85,14 @@
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3000", function (data, status) {
+        
+
+        var urlListNews = appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3000";
+        if (searchValue) {
+            urlListNews = appConfig.apiHostUrl + '/api/News/getHomeNewsBySearch?value=' + searchValue;
+        }
+        console.log("Search value:" + searchValue);
+        $.get(urlListNews, function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (data.model[i].Image != "") {

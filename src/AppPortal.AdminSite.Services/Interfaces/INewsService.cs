@@ -25,6 +25,7 @@ namespace AppPortal.AdminSite.Services.Interfaces
         IList<GetReport2> GetReport4(string startdate, string enddate);
         void Hoactac(int id);
         IList<HomeNews> GetHomeNewsByCate(int? id , int? number);
+        IList<HomeNews> GetHomeNewsBySearch(string value = "");
         IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "", int? categoryId = -1, int? status = -1, 
             int? type = -1 , string username = "" , string GroupId = "", int? newlogStatus = -1, string mapakn = "");
         IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id, string mapakn = "");
