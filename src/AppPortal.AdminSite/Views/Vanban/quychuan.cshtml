@@ -1,0 +1,265 @@
+﻿
+@{
+    ViewData["Title"] = "Văn bản quy phạm";
+}
+
+<div id="example">
+    <button type="button" style="margin: 10px 0px" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Thêm video
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm album video</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="uploadFileData">
+                        <input name="files" id="files" type="file" aria-label="files" />
+                        <p style="color: blue;">Chấp nhận file .mp4, .mpeg, .flv, .mkv, .avi, .webm</p>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ảnh giới thiệu</label>
+                            <input name="filesImage" id="filesImage" type="file" aria-label="files" />
+                            <p style="color: blue;">Chấp nhận file .png , jpg, jpeg </p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mô tả</label>
+                            <input type="text" class="form-control" id="Description" name="Description" />
+                            <small id="emailHelp" class="form-text text-muted">Mô tả được để bên dưới ảnh ở trang chủ.</small>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" name="is_publish" class="form-check-input" id="is_publish">
+                            <label class="form-check-label" for="exampleCheck1">Hiện thị trên trang chủ</label>
+                        </div>
+                        <input type="hidden" name="type" value="video" />
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" onclick="submit()" class="btn btn-primary">Tải lên</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="grid"></div>
+
+    <div id="window"></div>
+
+    <script type="text/x-kendo-template" id="windowTemplate">
+        <strong>#= description # ?</strong>
+        <div style="margin-top: 70px;text-align: center;">
+            <button class="k-button" id="yesButton">Xóa</button>
+            <button class="k-button" id="noButton"> Không</button>
+        </div>
+
+    </script>
+
+    @section Scripts{
+        <script>
+            var jwtToken = getCookie("ACCESS-TOKEN");
+            var windowTemplate = kendo.template($("#windowTemplate").html());
+            function submit() {
+                $("#uploadFileData").submit();
+            }
+            $(document).ready(function () {
+                $("#uploadFileData").attr("action", `${appConfig.apiHostUrl}` + '/api/Media/GetVanban?type=0');
+                $("#files").kendoUpload({
+                    multiple: false,
+                    validation: {
+                        allowedExtensions: [".mp4", ".mpeg", ".flv", ".mkv", ".avi", ".webm"]
+                    }
+                });
+
+                $("#filesImage").kendoUpload({
+                    multiple: false,
+                    validation: {
+                        allowedExtensions: [".gif", ".jpg", ".png", "jpeg"]
+                    }
+                });
+
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: appConfig.apiHostUrl + "/api/Media/getMedia?type=video&is_publish=3",
+                            beforeSend: function (req) {
+                                req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                            },
+                            dataType: "json"
+                        },
+                        update: {
+                            url: appConfig.apiHostUrl + "/api/Media/AddOrEdit",
+                            type: "post",
+                            dataType: "json",
+                            beforeSend: function (req) {
+                                req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                            }
+                        },
+                        destroy: {
+                            url: appConfig.apiHostUrl + "/api/Media/delete",
+                            dataType: "json",
+                            beforeSend: function (req) {
+                                req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                            }
+
+                        },
+                        create: {
+                            url: appConfig.apiHostUrl + "/api/Media/AddOrEdit",
+                            dataType: "json",
+                            beforeSend: function (req) {
+                                req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                            }
+                        },
+                        parameterMap: function (options, operation) {
+                            if (operation == "update") {
+                                var data = options;
+                                if (data.OnPublish) {
+                                    data.OnPublish = formatDate(new Date());
+                                } else {
+                                    data.OnPublish = null;
+                                }
+                                return data;
+                            } else if (operation == "destroy" && options) {
+
+                                var data = options;
+                                return {
+                                    id: data.Id
+                                }
+                            } else if (operation !== "read" && options) {
+                                return {
+                                    models: kendo.stringify(options)
+                                };
+                            }
+                        }
+
+                    },
+                    requestEnd: function (e) {
+                        if (e.type == "update") {
+                            messagerSuccess("Sửa thành công!");
+                        }
+                    },
+                    batch: false,
+                    pageSize: 20,
+                    schema: {
+                        model: {
+                            id: "Id",
+                            fields: {
+                                Id: { editable: false },
+                                url: { editable: false },
+                                description: { type: "string", validation: { required: true } },
+                                OnCreated: { type: "date", editable: false },
+                                IsPublish: { type: "boolean" }
+                            }
+                        }
+                    }
+                });
+                var window = $("#window").kendoWindow({
+                    title: "Xác nhận xóa",
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "300px",
+                    height: "150px",
+                }).data("kendoWindow");
+
+                var grid = $("#grid").kendoGrid({
+                    dataSource: dataSource,
+                    pageable: true,
+                    height: 550,
+                    columns: [
+                        { field: "Id", title: "ID", width: "100px" },
+                        { field: "url", title: "Video", width: "200px", template: "#=templateimage(url)#" },
+                        { field: "description", title: "Mô tả", width: "200px" },
+                        { field: "OnCreated", title: "Ngày tạo", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },
+                        { field: "IsPublish", title: "Hiện thị trên trang chủ", width: "130px", template: "#=templateIsPublish(IsPublish)#"  ,editor: customBoolEditor },
+                        {
+                            command: [
+                                { name: "edit" },
+                                {
+                                    name: "Xóa",
+                                    click: function (e) {  //add a click event listener on the delete button
+                                        e.preventDefault(); //prevent page scroll reset
+                                        var tr = $(e.target).closest("tr"); //get the row for deletion
+                                        var data = this.dataItem(tr); //get the row data so it can be referred later
+                                        window.content(windowTemplate(data)); //send the row data object to the template and render it
+                                        window.center().open();
+
+                                        $("#yesButton").click(function () {
+                                            grid.dataSource.remove(data)  //prepare a "destroy" request
+                                            grid.dataSource.sync()  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
+                                            window.close();
+                                            messagerSuccess("Xóa thành công!");
+                                        })
+                                        $("#noButton").click(function () {
+                                            window.close();
+                                        })
+                                    }
+                                }
+                            ], width: "150px"
+                        }
+                    ],
+                    editable: "inline"
+
+                }).data("kendoGrid");;
+
+                $("form#uploadFileData").submit(function (e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        type: 'POST',
+                        data: formData,
+                        success: function (data) {
+                            messagerSuccess('Thông báo', data.success);
+                            $("#grid").data("kendoGrid").dataSource.read();
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });
+
+                });
+            });
+
+            function templateimage(url) {
+                return '<a href="'+url+'" target="_blank"><video src="' + url + '" alt="Smiley face" height="auto" width="200px"></video></a>';
+            }
+
+            function templateIsPublish(OnPublish) {
+                if (OnPublish == false) {
+                    return '<input type="checkbox" disabled>';
+                } else {
+                    return '<input type="checkbox" checked disabled>';
+                }
+            }
+
+
+            function customBoolEditor(container, options) {
+                var guid = kendo.guid();
+                $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="IsPublish" data-type="boolean" data-bind="checked:IsPublish">').appendTo(container);
+                $('<label class="k-checkbox-label" for="' + guid + '">&#8203;</label>').appendTo(container);
+            }
+
+            function formatDate(date) {
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var ampm = hours >= 12 ? 'pm' : 'am';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                var strTime = hours + ':' + minutes;
+                return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+            }
+
+
+        </script>
+    }
+</div>
+
+

@@ -188,5 +188,13 @@ namespace AppPortal.ApiHost.Controllers
             _mediaService.delete(id);
             return Ok();
         }
+
+        [AllowAnonymous]
+        [HttpGet("getVanban")]
+        public IActionResult GetVanban(string type)
+        {
+            return Ok();
+           //return Ok(_mediaService.GetVanban(type));
+        }
     }
 }
