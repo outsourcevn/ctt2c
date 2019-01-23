@@ -66,11 +66,83 @@ namespace AppPortal.ApiHost.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("getVanban")]
+        public IActionResult getVanban(string type)
+        {
+            return Ok(_mediaService.GetVanban(type));
+        }
+
+        [AllowAnonymous]
         [HttpPost("AddOrEdit")]
         public IActionResult AddOrEdit(Media models)
         {
             var media = _mediaService.AddOrEdit(models);
             return Ok(media);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("AddOrEditVanBan")]
+        public IActionResult AddOrEditVanBan(Vanban models)
+        {
+            var media = _mediaService.AddOrEditVanban(models);
+            return Ok(media);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("upLoadFileVanban")]
+        public virtual async Task<IActionResult> upLoadFile(IFormFile files, string tenvanban, string IsPublish, string coquanbanhanh, string ngaybanhanh, string loaivanban,
+            string sovanban)
+        {
+            try
+            {
+                var urlWeb = apiSettings.BaseUrl + "/uploads/vanban/" + DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day + "/";
+                long size = files.Length;
+                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "uploads/vanban/" + DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day + "/");
+
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+
+                var dataReturn = new List<FileUpload>();
+                var formFile = files;
+                var fileType = formFile.ContentType;
+                var fileSize = formFile.Length;
+                DateTime nx = new DateTime(1970, 1, 1);
+                TimeSpan ts = DateTime.UtcNow - nx;
+                var fileName = ((int)ts.TotalSeconds).ToString() + ' ' + formFile.FileName;
+
+                if (fileSize < 50000000)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        using (var stream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
+                    }
+                }
+                else
+                {
+                    return BadRequest("File lớn!");
+                }
+
+                var media = new Vanban();
+                media.sovanban = sovanban;
+                media.tenvanban = tenvanban;
+                media.coquanbanhanh = coquanbanhanh;
+                media.url = urlWeb + fileName;
+                media.ngaybanhanh = DateTime.Parse(ngaybanhanh);
+                media.loaivanban = loaivanban;
+                media.IsPublish = IsPublish == "1";
+                media.OnCreated = DateTime.Now;
+                _mediaService.AddOrEditVanban(media);
+                return Ok(new { success = "Tải lên thành công!" });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { err = e.Message });
+            }
         }
 
         [AllowAnonymous]
@@ -189,12 +261,12 @@ namespace AppPortal.ApiHost.Controllers
             return Ok();
         }
 
-        [AllowAnonymous]
-        [HttpGet("getVanban")]
-        public IActionResult GetVanban(string type)
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpGet("deleteVanban")]
+        public IActionResult deleteVanban(int id)
         {
+            _mediaService.deleteVanban(id);
             return Ok();
-           //return Ok(_mediaService.GetVanban(type));
         }
     }
 }

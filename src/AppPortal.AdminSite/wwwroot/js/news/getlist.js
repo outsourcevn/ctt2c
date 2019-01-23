@@ -380,6 +380,10 @@ var newlogStatus = -1;
         $("#exampleModalNew_xemchitiet2 .noidung-ldtcmt").kendoEditor({
             tools: []
         });
+
+        $("#exampleModalNew_congkhai .noidung").kendoEditor({
+            tools: []
+        });
     });
 })(jQuery);
 

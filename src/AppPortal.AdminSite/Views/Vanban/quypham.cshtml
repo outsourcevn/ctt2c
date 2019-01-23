@@ -5,14 +5,14 @@
 
 <div id="example">
     <button type="button" style="margin: 10px 0px" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Thêm video
+        Thêm @ViewData["Title"]
     </button>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thêm album video</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm @ViewData["Title"]</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -20,25 +20,34 @@
                 <div class="modal-body">
                     <form method="post" id="uploadFileData">
                         <input name="files" id="files" type="file" aria-label="files" />
-                        <p style="color: blue;">Chấp nhận file .mp4, .mpeg, .flv, .mkv, .avi, .webm</p>
+                        <p style="color: blue;">Chấp nhận file .doc, .docx, .pdf , .xls, .xlsx</p>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Ảnh giới thiệu</label>
-                            <input name="filesImage" id="filesImage" type="file" aria-label="files" />
-                            <p style="color: blue;">Chấp nhận file .png , jpg, jpeg </p>
+                            <label for="exampleInputEmail1">Số văn bản:</label>
+                            <input type="text" class="form-control" name="sovanban" />
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Mô tả</label>
-                            <input type="text" class="form-control" id="Description" name="Description" />
-                            <small id="emailHelp" class="form-text text-muted">Mô tả được để bên dưới ảnh ở trang chủ.</small>
+                            <label> Tên văn bản:</label>
+                            <input type="text" class="form-control" id="tenvanban" name="tenvanban" />
                         </div>
 
-                        <div class="form-check">
-                            <input type="checkbox" name="is_publish" class="form-check-input" id="is_publish">
-                            <label class="form-check-label" for="exampleCheck1">Hiện thị trên trang chủ</label>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Loại văn bản</label>
+                            <input type="text" class="form-control" id="Description" name="loaivanban" />
                         </div>
-                        <input type="hidden" name="type" value="video" />
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ngày ban hành</label>
+                            <input type="date" class="form-control" name="ngaybanhanh" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Cơ quan ban hành</label>
+                            <input type="text" class="form-control" name="coquanbanhanh" />
+                        </div>
+
+                        <input type="hidden" name="IsPublish" value="1" />
                     </form>
 
                 </div>
@@ -54,7 +63,7 @@
     <div id="window"></div>
 
     <script type="text/x-kendo-template" id="windowTemplate">
-        <strong>#= description # ?</strong>
+        <strong>#= tenvanban # ?</strong>
         <div style="margin-top: 70px;text-align: center;">
             <button class="k-button" id="yesButton">Xóa</button>
             <button class="k-button" id="noButton"> Không</button>
@@ -70,32 +79,25 @@
                 $("#uploadFileData").submit();
             }
             $(document).ready(function () {
-                $("#uploadFileData").attr("action", `${appConfig.apiHostUrl}` + '/api/Media/GetVanban?type=1');
+                $("#uploadFileData").attr("action", `${appConfig.apiHostUrl}` + '/api/Media/upLoadFileVanban');
                 $("#files").kendoUpload({
                     multiple: false,
                     validation: {
-                        allowedExtensions: [".mp4", ".mpeg", ".flv", ".mkv", ".avi", ".webm"]
-                    }
-                });
-
-                $("#filesImage").kendoUpload({
-                    multiple: false,
-                    validation: {
-                        allowedExtensions: [".gif", ".jpg", ".png", "jpeg"]
+                        allowedExtensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt"]
                     }
                 });
 
                 dataSource = new kendo.data.DataSource({
                     transport: {
                         read: {
-                            url: appConfig.apiHostUrl + "/api/Media/getMedia?type=video&is_publish=3",
+                            url: appConfig.apiHostUrl + "/api/Media/GetVanban?type=1",
                             beforeSend: function (req) {
                                 req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
                             },
                             dataType: "json"
                         },
                         update: {
-                            url: appConfig.apiHostUrl + "/api/Media/AddOrEdit",
+                            url: appConfig.apiHostUrl + "/api/Media/AddOrEditVanBan",
                             type: "post",
                             dataType: "json",
                             beforeSend: function (req) {
@@ -103,7 +105,7 @@
                             }
                         },
                         destroy: {
-                            url: appConfig.apiHostUrl + "/api/Media/delete",
+                            url: appConfig.apiHostUrl + "/api/Media/deleteVanban",
                             dataType: "json",
                             beforeSend: function (req) {
                                 req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
@@ -111,7 +113,7 @@
 
                         },
                         create: {
-                            url: appConfig.apiHostUrl + "/api/Media/AddOrEdit",
+                            url: appConfig.apiHostUrl + "/api/Media/AddOrEditVanBan",
                             dataType: "json",
                             beforeSend: function (req) {
                                 req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
@@ -120,10 +122,10 @@
                         parameterMap: function (options, operation) {
                             if (operation == "update") {
                                 var data = options;
-                                if (data.OnPublish) {
-                                    data.OnPublish = formatDate(new Date());
+                                if (data.ngaybanhanh) {
+                                    data.ngaybanhanh = formatDate(new Date(data.ngaybanhanh));
                                 } else {
-                                    data.OnPublish = null;
+                                    data.OnPublish = formatDate(new Date());
                                 }
                                 return data;
                             } else if (operation == "destroy" && options) {
@@ -153,9 +155,12 @@
                             fields: {
                                 Id: { editable: false },
                                 url: { editable: false },
-                                description: { type: "string", validation: { required: true } },
-                                OnCreated: { type: "date", editable: false },
-                                IsPublish: { type: "boolean" }
+                                sovanban: { type: "string", validation: { required: true } },
+                                tenvanban: { type: "string", validation: { required: true } },
+                                ngaybanhanh: { type: "date", validation: { required: true } },
+                                loaivanban: { type: "string", validation: { required: true } },
+                                coquanbanhanh: { type: "string", validation: { required: true } },
+                                OnCreated: { type: "date", editable: false }
                             }
                         }
                     }
@@ -172,11 +177,13 @@
                     pageable: true,
                     height: 550,
                     columns: [
-                        { field: "Id", title: "ID", width: "100px" },
-                        { field: "url", title: "Video", width: "200px", template: "#=templateimage(url)#" },
-                        { field: "description", title: "Mô tả", width: "200px" },
-                        { field: "OnCreated", title: "Ngày tạo", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },
-                        { field: "IsPublish", title: "Hiện thị trên trang chủ", width: "130px", template: "#=templateIsPublish(IsPublish)#"  ,editor: customBoolEditor },
+                        { field: "Id", title: "ID", width: "50px" },
+                        { field: "url", title: "Tải xuống", width: "100px", template: "#=templateimage(url)#" },
+                        { field: "sovanban", title: "Số văn bản", width: "200px" },
+                        { field: "tenvanban", title: "Tên văn bản", width: "200px" },
+                        { field: "ngaybanhanh", title: "Ngày ban hành", format: "{0:MM/dd/yyyy}", width: "150px" },
+                        { field: "loaivanban", title: "Loại văn bản", width: "200px" },
+                        { field: "coquanbanhanh", title: "Cơ quan ban hành", width: "200px" },
                         {
                             command: [
                                 { name: "edit" },
@@ -200,7 +207,7 @@
                                         })
                                     }
                                 }
-                            ], width: "150px"
+                            ], width: "100px"
                         }
                     ],
                     editable: "inline"
@@ -218,6 +225,21 @@
                         success: function (data) {
                             messagerSuccess('Thông báo', data.success);
                             $("#grid").data("kendoGrid").dataSource.read();
+                            $("form#uploadFileData").find(':input').each(function () {
+                                switch (this.type) {
+                                    case 'password':
+                                    case 'select-multiple':
+                                    case 'select-one':
+                                    case 'text':
+                                    case 'date':
+                                    case 'textarea':
+                                        $(this).val('');
+                                        break;
+                                    case 'checkbox':
+                                    case 'radio':
+                                        this.checked = false;
+                                }
+                            });
                         },
                         cache: false,
                         contentType: false,
@@ -228,7 +250,7 @@
             });
 
             function templateimage(url) {
-                return '<a href="'+url+'" target="_blank"><video src="' + url + '" alt="Smiley face" height="auto" width="200px"></video></a>';
+                return '<a href="' + url +'" target="_blank"><i class="fa fa-download"></i></a>';
             }
 
             function templateIsPublish(OnPublish) {
