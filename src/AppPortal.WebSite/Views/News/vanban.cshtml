@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Văn bản";
 }
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.common-material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.material.mobile.min.css" />
 
 <style>
 
@@ -17,10 +20,11 @@
     .left-vanban {
         text-align: left;
     }
+
+    .k-filter-row th, .k-grid-header th.k-header {
+        text-align: center;
+    }
 </style>
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.common-material.min.css" />
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.material.min.css" />
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.material.mobile.min.css" />
 
 <h1 id="result-search" style="padding: 15px;font-size: 20px">Quy phạm pháp luật</h1>
 <div id="grid"></div>
@@ -38,7 +42,8 @@
                         dataType: "json"
                     },
                     parameterMap: function (options, operation) {
-                       if (operation !== "read" && options) {
+
+                        if (operation !== "read" && options) {
                             return {
                                 models: kendo.stringify(options)
                             };
@@ -52,12 +57,11 @@
                     }
                 },
                 batch: false,
-                pageSize: 20,
+                pageSize: 10,
                 schema: {
                     model: {
                         id: "Id",
                         fields: {
-                            Id: { editable: false },
                             url: { editable: false },
                             sovanban: { type: "string", validation: { required: true } },
                             tenvanban: { type: "string", validation: { required: true } },
@@ -69,16 +73,19 @@
                     }
                 }
             });
+            window.stt = 0;
             $("#grid").kendoGrid({
                 dataSource: dataSource,
                 pageable: true,
                 height: 550,
+                dataBinding: function () {
+                    stt = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+                },
                 columns: [
-                    { field: "Id", title: "ID", width: "50px" },
-                    { field: "url", title: "Tải xuống", width: "100px", template: "#=templateimage(url)#" },
-                    { field: "sovanban", title: "Số văn bản", width: "200px" },
-                    { field: "tenvanban", title: "Tên văn bản", width: "200px" },
-                    { field: "ngaybanhanh", title: "Ngày ban hành", format: "{0:MM/dd/yyyy}", width: "150px" },
+                    { title: "STT", width: "40px", template: "#= ++stt #" },
+                    { title: "Số văn bản", width: "200px", template: "#=templateSovanban(sovanban,url)#" },
+                    { field: "tenvanban", title: "Tên văn bản", width: "350px" },
+                    { field: "ngaybanhanh", title: "Ngày ban hành", format: "{0:MM/dd/yyyy}", width: "120px" },
                     { field: "loaivanban", title: "Loại văn bản", width: "200px" },
                     { field: "coquanbanhanh", title: "Cơ quan ban hành", width: "200px" },
                 ]
@@ -86,9 +93,9 @@
             }).data("kendoGrid");
         });
 
-        function templateimage(url) {
-            return '<a href="' + url + '" target="_blank"><i class="fa fa-download"></i></a>';
+        function templateSovanban(sovanban, url) {
+            return '<a style="color:black;" href="' + url + '" target="_blank">' + sovanban + ' <i class="fa fa-download"></i></a>';
         }
-       
+
     </script>
 }
