@@ -67,9 +67,9 @@ namespace AppPortal.ApiHost.Controllers
 
         [AllowAnonymous]
         [HttpGet("getVanban")]
-        public IActionResult getVanban(string type)
+        public IActionResult getVanban(string type, string searchValue = "")
         {
-            return Ok(_mediaService.GetVanban(type));
+            return Ok(_mediaService.GetVanban(type, searchValue));
         }
 
         [AllowAnonymous]
