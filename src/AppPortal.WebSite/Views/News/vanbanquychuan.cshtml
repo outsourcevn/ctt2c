@@ -36,7 +36,7 @@
             dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: appConfig.apiHostUrl + "/api/Media/GetVanban?type=0",
+                        url: appConfig.apiHostUrl + "/api/Media/GetVanban?type=0&searchValue=" + searchValue,
                         beforeSend: function (req) {
                             //req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
                         },
@@ -74,6 +74,7 @@
                     }
                 }
             });
+            dataSource.sort({ field: "Id", dir: "asc" });
             window.stt = 0;
             $("#grid").kendoGrid({
                 dataSource: dataSource,

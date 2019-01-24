@@ -31,18 +31,20 @@
 
 @section Scripts {
     <script>
+        
         $(document).ready(function () {
+
             dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: appConfig.apiHostUrl + "/api/Media/GetVanban?type=1",
+                        url: appConfig.apiHostUrl + "/api/Media/GetVanban?type=1&searchValue=" + searchValue,
                         beforeSend: function (req) {
                             //req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
                         },
                         dataType: "json"
                     },
                     parameterMap: function (options, operation) {
-
+                        
                         if (operation !== "read" && options) {
                             return {
                                 models: kendo.stringify(options)
@@ -62,6 +64,7 @@
                     model: {
                         id: "Id",
                         fields: {
+                            Id: { editable: false },
                             url: { editable: false },
                             sovanban: { type: "string", validation: { required: true } },
                             tenvanban: { type: "string", validation: { required: true } },
@@ -73,6 +76,9 @@
                     }
                 }
             });
+            dataSource.sort({ field: "Id", dir: "asc" });
+            console.log(dataSource.total());
+            
             window.stt = 0;
             $("#grid").kendoGrid({
                 dataSource: dataSource,
@@ -91,6 +97,7 @@
                 ]
 
             }).data("kendoGrid");
+            
         });
 
         function templateSovanban(sovanban, url) {

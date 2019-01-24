@@ -15,7 +15,7 @@ namespace AppPortal.AdminSite.Services.Interfaces
         Config AddOrEditConfig(string type, string url);
 
         Vanban AddOrEditVanban(Vanban model);
-        IList<Vanban> GetVanban(string type);
+        IList<Vanban> GetVanban(string type, string searchValue = "");
         void deleteVanban(int id);
     }
 }
