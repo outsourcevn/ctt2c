@@ -183,6 +183,14 @@ namespace AppPortal.ApiHost.ViewModels.News
         public int type { get; set; }
     }
 
+    public class NewVewTuchoi
+    {
+        [Required]
+        public int news_id { get; set; }
+        [Required]
+        public string note { get; set; }
+    }
+
     public class NewVew3
     {
         [Required]

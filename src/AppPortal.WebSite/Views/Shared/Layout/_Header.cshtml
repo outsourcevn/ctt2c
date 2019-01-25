@@ -259,11 +259,9 @@
                     <span class="btn btn-light btn-block" style="padding-top: 15px;padding-bottom: 12px;">VĂN BẢN PHÁP LUẬT</span>
                     <div class="dropdown-content">
                         <a href="/news/vanban">Quy phạm pháp luật</a>
-                        <a href="/news/vanbanquychuan">Quy chuẩn, tiêu chuẩn</a>
+                        <a href="/news/vanbanquychuan" style="line-height:18px;">Quy chuẩn, tiêu chuẩn</a>
                     </div>
                 </li>
-
-
 
                 <div class="undernav">
                     <time class="my-time" id="mytime">Thứ hai 1/11/2019 01:53</time>
@@ -281,6 +279,7 @@
             sURLVariables = sPageURL.split('&'),
             sParameterName,
             i;
+       
 
         for (i = 0; i < sURLVariables.length; i++) {
             sParameterName = sURLVariables[i].split('=');
@@ -290,9 +289,14 @@
             }
         }
     };
+    var isVanban = (window.location + '').includes('vanban');
+    var isVanbanquychuan = (window.location + '').includes('vanbanquychuan');
+    console.log(isVanban + ' : ' + isVanbanquychuan + ' ');
     var searchValue = getUrlParameter('search');
     if (searchValue) {
         $("#search-input").val(searchValue);
+    } else {
+        searchValue = '';
     }
     
 
@@ -300,7 +304,14 @@
         var code = e.which; // recommended to use e.which, it's normalized across browsers
         if (code == 13) {
             console.log($("#search-input").val());
-            window.location.href = "/home/news?search=" + $("#search-input").val();
+            if (isVanbanquychuan) {
+                window.location.href = "/news/vanbanquychuan?search=" + $("#search-input").val();
+            } else if (isVanban) {
+                window.location.href = "/news/vanban?search=" + $("#search-input").val();
+            } else {
+                window.location.href = "/home/news?search=" + $("#search-input").val();
+            }
+            
             
         } // missing closing if brace
     });

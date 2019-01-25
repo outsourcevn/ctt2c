@@ -662,6 +662,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 if (!string.IsNullOrEmpty(iem.Image))
                 {
                     iem.Image = "http://103.9.86.36:8081" + iem.Image;
+                    iem.Content = "";
                 }
             }
             return homeNewsLst;
@@ -691,6 +692,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 if (!string.IsNullOrEmpty(iem.Image))
                 {
                     iem.Image = "http://103.9.86.36:8081" + iem.Image;
+                    iem.Content = "";
                 }
             }
             return homeNewsLst;
@@ -748,7 +750,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         {
             try
             {
-                if (isType == IsType.cochehanhchinh || isType == IsType.giaiphapsangkien || !string.IsNullOrEmpty(mapakn))
+                if (isType == IsType.cochehanhchinh || isType == IsType.giaiphapsangkien)
                 {
                     return true;
                 }

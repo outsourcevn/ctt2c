@@ -1,0 +1,287 @@
+﻿
+@{
+    ViewData["Title"] = "Văn bản quy phạm";
+}
+
+<div id="example">
+    <button type="button" style="margin: 10px 0px" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Thêm @ViewData["Title"]
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm @ViewData["Title"]</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="uploadFileData">
+                        <input name="files" id="files" type="file" aria-label="files" />
+                        <p style="color: blue;">Chấp nhận file .doc, .docx, .pdf , .xls, .xlsx</p>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Số văn bản:</label>
+                            <input type="text" class="form-control" name="sovanban" />
+                        </div>
+
+                        <div class="form-group">
+                            <label> Tên văn bản:</label>
+                            <input type="text" class="form-control" id="tenvanban" name="tenvanban" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Loại văn bản</label>
+                            <input type="text" class="form-control" id="Description" name="loaivanban" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ngày ban hành</label>
+                            <input type="date" class="form-control" name="ngaybanhanh" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Cơ quan ban hành</label>
+                            <input type="text" class="form-control" name="coquanbanhanh" />
+                        </div>
+
+                        <input type="hidden" name="IsPublish" value="1" />
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" onclick="submit()" class="btn btn-primary">Tải lên</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="grid"></div>
+
+    <div id="window"></div>
+
+    <script type="text/x-kendo-template" id="windowTemplate">
+        <strong>#= tenvanban # ?</strong>
+        <div style="margin-top: 70px;text-align: center;">
+            <button class="k-button" id="yesButton">Xóa</button>
+            <button class="k-button" id="noButton"> Không</button>
+        </div>
+
+    </script>
+
+    @section Scripts{
+        <script>
+            var jwtToken = getCookie("ACCESS-TOKEN");
+            var windowTemplate = kendo.template($("#windowTemplate").html());
+            function submit() {
+                $("#uploadFileData").submit();
+            }
+            $(document).ready(function () {
+                $("#uploadFileData").attr("action", `${appConfig.apiHostUrl}` + '/api/Media/upLoadFileVanban');
+                $("#files").kendoUpload({
+                    multiple: false,
+                    validation: {
+                        allowedExtensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt"]
+                    }
+                });
+
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: appConfig.apiHostUrl + "/api/Media/GetVanban?type=1",
+                            beforeSend: function (req) {
+                                req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                            },
+                            dataType: "json"
+                        },
+                        update: {
+                            url: appConfig.apiHostUrl + "/api/Media/AddOrEditVanBan",
+                            type: "post",
+                            dataType: "json",
+                            beforeSend: function (req) {
+                                req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                            }
+                        },
+                        destroy: {
+                            url: appConfig.apiHostUrl + "/api/Media/deleteVanban",
+                            dataType: "json",
+                            beforeSend: function (req) {
+                                req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                            }
+
+                        },
+                        create: {
+                            url: appConfig.apiHostUrl + "/api/Media/AddOrEditVanBan",
+                            dataType: "json",
+                            beforeSend: function (req) {
+                                req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                            }
+                        },
+                        parameterMap: function (options, operation) {
+                            if (operation == "update") {
+                                var data = options;
+                                if (data.ngaybanhanh) {
+                                    data.ngaybanhanh = formatDate(new Date(data.ngaybanhanh));
+                                } else {
+                                    data.OnPublish = formatDate(new Date());
+                                }
+                                return data;
+                            } else if (operation == "destroy" && options) {
+
+                                var data = options;
+                                return {
+                                    id: data.Id
+                                }
+                            } else if (operation !== "read" && options) {
+                                return {
+                                    models: kendo.stringify(options)
+                                };
+                            }
+                        }
+
+                    },
+                    requestEnd: function (e) {
+                        if (e.type == "update") {
+                            messagerSuccess("Sửa thành công!");
+                        }
+                    },
+                    batch: false,
+                    pageSize: 20,
+                    schema: {
+                        model: {
+                            id: "Id",
+                            fields: {
+                                Id: { editable: false },
+                                url: { editable: false },
+                                sovanban: { type: "string", validation: { required: true } },
+                                tenvanban: { type: "string", validation: { required: true } },
+                                ngaybanhanh: { type: "date", validation: { required: true } },
+                                loaivanban: { type: "string", validation: { required: true } },
+                                coquanbanhanh: { type: "string", validation: { required: true } },
+                                OnCreated: { type: "date", editable: false }
+                            }
+                        }
+                    }
+                });
+                var window = $("#window").kendoWindow({
+                    title: "Xác nhận xóa",
+                    visible: false, //the window will not appear before its .open method is called
+                    width: "300px",
+                    height: "150px",
+                }).data("kendoWindow");
+
+                var grid = $("#grid").kendoGrid({
+                    dataSource: dataSource,
+                    pageable: true,
+                    height: 550,
+                    columns: [
+                        { field: "Id", title: "ID", width: "50px" },
+                        { field: "url", title: "Tải xuống", width: "100px", template: "#=templateimage(url)#" },
+                        { field: "sovanban", title: "Số văn bản", width: "200px" },
+                        { field: "tenvanban", title: "Tên văn bản", width: "200px" },
+                        { field: "ngaybanhanh", title: "Ngày ban hành", format: "{0:MM/dd/yyyy}", width: "150px" },
+                        { field: "loaivanban", title: "Loại văn bản", width: "200px" },
+                        { field: "coquanbanhanh", title: "Cơ quan ban hành", width: "200px" },
+                        {
+                            command: [
+                                { name: "edit" },
+                                {
+                                    name: "Xóa",
+                                    click: function (e) {  //add a click event listener on the delete button
+                                        e.preventDefault(); //prevent page scroll reset
+                                        var tr = $(e.target).closest("tr"); //get the row for deletion
+                                        var data = this.dataItem(tr); //get the row data so it can be referred later
+                                        window.content(windowTemplate(data)); //send the row data object to the template and render it
+                                        window.center().open();
+
+                                        $("#yesButton").click(function () {
+                                            grid.dataSource.remove(data)  //prepare a "destroy" request
+                                            grid.dataSource.sync()  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
+                                            window.close();
+                                            messagerSuccess("Xóa thành công!");
+                                        })
+                                        $("#noButton").click(function () {
+                                            window.close();
+                                        })
+                                    }
+                                }
+                            ], width: "100px"
+                        }
+                    ],
+                    editable: "inline"
+
+                }).data("kendoGrid");;
+
+                $("form#uploadFileData").submit(function (e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        type: 'POST',
+                        data: formData,
+                        success: function (data) {
+                            messagerSuccess('Thông báo', data.success);
+                            $("#grid").data("kendoGrid").dataSource.read();
+                            $("form#uploadFileData").find(':input').each(function () {
+                                switch (this.type) {
+                                    case 'password':
+                                    case 'select-multiple':
+                                    case 'select-one':
+                                    case 'text':
+                                    case 'date':
+                                    case 'textarea':
+                                        $(this).val('');
+                                        break;
+                                    case 'checkbox':
+                                    case 'radio':
+                                        this.checked = false;
+                                }
+                            });
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });
+
+                });
+            });
+
+            function templateimage(url) {
+                return '<a href="' + url +'" target="_blank"><i class="fa fa-download"></i></a>';
+            }
+
+            function templateIsPublish(OnPublish) {
+                if (OnPublish == false) {
+                    return '<input type="checkbox" disabled>';
+                } else {
+                    return '<input type="checkbox" checked disabled>';
+                }
+            }
+
+
+            function customBoolEditor(container, options) {
+                var guid = kendo.guid();
+                $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="IsPublish" data-type="boolean" data-bind="checked:IsPublish">').appendTo(container);
+                $('<label class="k-checkbox-label" for="' + guid + '">&#8203;</label>').appendTo(container);
+            }
+
+            function formatDate(date) {
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var ampm = hours >= 12 ? 'pm' : 'am';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                var strTime = hours + ':' + minutes;
+                return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+            }
+
+
+        </script>
+    }
+</div>
+
+

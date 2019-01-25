@@ -380,6 +380,10 @@ var newlogStatus = -1;
         $("#exampleModalNew_xemchitiet2 .noidung-ldtcmt").kendoEditor({
             tools: []
         });
+
+        $("#exampleModalNew_congkhai .noidung").kendoEditor({
+            tools: []
+        });
     });
 })(jQuery);
 
@@ -523,8 +527,8 @@ function templateAction(is_status, news_id) {
     //var name = '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Xác minh</button>';
     var name = '';
     var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
-    var deletebutton = "<a class='btn btn-danger btn-xs' onclick='xoapakn("+ news_id +")'><i class='fa fa-edit'></i>&nbsp;Xóa</a>";
-    var tuchoibutton = "<a class='btn btn-danger btn-xs' onclick='tuchoitiepnhan(" + news_id + ")'><i class='fa fa-edit'></i>Từ chối tiếp nhận</a>";
+    var deletebutton = "<a class='btn btn-danger btn-xs' style='color: white' onclick='xoapakn("+ news_id +")'><i class='fa fa-edit'></i>&nbsp;Xóa</a>";
+    var tuchoibutton = "<a class='btn btn-danger btn-xs' style='color: white' onclick='tuchoitiepnhan(" + news_id + ")'><i class='fa fa-edit'></i>Từ chối tiếp nhận</a>";
     // label-success label-danger label-info label-warning
     if (GroupId === "ttdl") {
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Chuyển</button>';
@@ -942,22 +946,33 @@ function getDataPhanCong(news_id, group_name_from) {
     )
 }
 
-function getDataPhanCong(news_id, group_name_from) {
+function tuchoitiepnhan(news_id) {
+    $("#exampleModalNew_tuchoitiepnhan .news_id").val(news_id);
+    $("#exampleModalNew_tuchoitiepnhan").modal("show");
+}
+
+function submitTuchoiTiepnhan() {
+    var grid = $('#dataGrid').data('kendoGrid');
     callAjax(
-        `${appConfig.apiHostUrl}` + '/api/NewsLog/GetNewsLogByNewsIdGroupNameFrom?NewsId=' + news_id + "&GroupNameFrom=" + group_name_from + "&type=3",
-        null,
-        AjaxConst.GetRequest,
+        `${appConfig.apiHostUrl}` + '/api/News/tuchoitiepnhan',
+        {
+            news_id: $("#exampleModalNew_tuchoitiepnhan .news_id").val(),
+            note: $("#exampleModalNew_tuchoitiepnhan .ghichubaocao").val()
+        },
+        AjaxConst.PostRequest,
         function (xhr) {
             $(this).addClass('disabled').attr('disabled', true);
             xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
         },
         function (success) {
-            var returnText = "";
-            for (var i = 0; i < success.length; i++) {
-                returnText += success[i].FullUserName + "<br>";
+            $("#exampleModalNew_tuchoitiepnhan").modal("hide");
+            if (!success.did_error) {
+                messagerSuccess('Thông báo', success.model);
             }
-            
-            $("#phancong" + news_id).html(returnText);
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
         },
         function (xhr, status, error) {
             if (xhr.status === 400) {

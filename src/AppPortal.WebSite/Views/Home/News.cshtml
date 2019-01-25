@@ -53,7 +53,7 @@
 <link href="~/css/news.css" rel="stylesheet" />
 
 <div class="">
-    <h1 style="padding: 15px;">@ViewData["Title"]</h1>
+    <h1 id="result-search" style="padding: 15px;">@ViewData["Title"]</h1>
     <div class="col-md-8">
         <div id="tat-ca-tin" style="margin-bottom:5px;">
 
@@ -85,7 +85,12 @@
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
-        
+
+        if (searchValue) {
+            $('#result-search').text("Đang tìm tin tức")
+        } else {
+            $('#result-search').text("Tin tức");
+        }
 
         var urlListNews = appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=3000";
         if (searchValue) {
@@ -93,6 +98,9 @@
         }
         console.log("Search value:" + searchValue);
         $.get(urlListNews, function (data, status) {
+            if (searchValue) {
+                $('#result-search').text("Tìm được " + data.model.length + " tin tức");
+            }
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (data.model[i].Image != "") {
