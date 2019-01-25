@@ -24,14 +24,81 @@
     .k-filter-row th, .k-grid-header th.k-header {
         text-align: center;
     }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Style the search field */
+    div.example input[type=text] {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid grey;
+        float: left;
+        width: 50%;
+        background: #f1f1f1;
+    }
+
+    div.example label {
+        padding: 10px;
+        font-size: 17px;
+        float: left;
+        width: 30%;
+    }
+
+    /* Style the submit button */
+    div.example button {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        background: #2196F3;
+        color: white;
+        font-size: 17px;
+        border: 1px solid grey;
+        border-left: none; /* Prevent double borders */
+        cursor: pointer;
+    }
+
+    div.example button:hover {
+        background: #0b7dda;
+    }
+
+    /* Clear floats */
+    div.example::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
 </style>
 
 <h1 id="result-search" style="padding: 15px;font-size: 20px">Quy phạm pháp luật</h1>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- The form -->
+<div class="example" action=""  style="max-width:360px;margin-bottom:10px;">
+    <label>Từ khóa: </label>
+    <input id="search-vanban-input" type="text" placeholder="Tìm kiếm văn bản.." name="search">
+    <button id="search-vanban-button" type="submit"><i class="fa fa-search"></i></button>
+</div>
 <div id="grid"></div>
 
 @section Scripts {
     <script>
-        
+        if (searchValue) {
+            $("#search-vanban-input").val(searchValue);
+        }
+        $("#search-vanban-input").keyup(function (e) {
+            var code = e.which; // recommended to use e.which, it's normalized across browsers
+            if (code == 13) {
+                window.location.href = "/news/vanban?search=" + $("#search-vanban-input").val();
+            } // missing closing if brace
+        });
+
+        $('#search-vanban-button').click(function (e) {
+            window.location.href = "/news/vanban?search=" + $("#search-vanban-input").val();
+        });
+
         $(document).ready(function () {
 
             dataSource = new kendo.data.DataSource({
@@ -44,7 +111,7 @@
                         dataType: "json"
                     },
                     parameterMap: function (options, operation) {
-                        
+
                         if (operation !== "read" && options) {
                             return {
                                 models: kendo.stringify(options)
@@ -78,7 +145,7 @@
             });
             dataSource.sort({ field: "Id", dir: "asc" });
             console.log(dataSource.total());
-            
+
             window.stt = 0;
             $("#grid").kendoGrid({
                 dataSource: dataSource,
@@ -88,7 +155,7 @@
                     stt = (this.dataSource.page() - 1) * this.dataSource.pageSize();
                 },
                 columns: [
-                    { title: "STT", width: "40px", template: "#= ++stt #" },
+                    { title: "STT", width: "50px", template: "#= ++stt #" },
                     { title: "Số văn bản", width: "200px", template: "#=templateSovanban(sovanban,url)#" },
                     { field: "tenvanban", title: "Tên văn bản", width: "350px" },
                     { field: "ngaybanhanh", title: "Ngày ban hành", format: "{0:MM/dd/yyyy}", width: "120px" },
@@ -97,7 +164,7 @@
                 ]
 
             }).data("kendoGrid");
-            
+
         });
 
         function templateSovanban(sovanban, url) {
