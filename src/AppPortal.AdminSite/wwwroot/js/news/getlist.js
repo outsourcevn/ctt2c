@@ -526,7 +526,7 @@ function updateTrangThai(isStatus) {
 function templateAction(is_status, news_id) {
     //var name = '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Xác minh</button>';
     var name = '';
-    var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Sửa</a>";
+    var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Xem chi tiết</a>";
     var deletebutton = "<a class='btn btn-danger btn-xs' style='color: white' onclick='xoapakn("+ news_id +")'><i class='fa fa-edit'></i>&nbsp;Xóa</a>";
     var tuchoibutton = "<a class='btn btn-danger btn-xs' style='color: white' onclick='tuchoitiepnhan(" + news_id + ")'><i class='fa fa-edit'></i>Từ chối tiếp nhận</a>";
     // label-success label-danger label-info label-warning
@@ -536,7 +536,7 @@ function templateAction(is_status, news_id) {
         name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
         name = name + deletebutton;
         name = name + tuchoibutton;
-
+        name = name + editbutton;
     }
 
     if (GroupId === "ldtcmt") {

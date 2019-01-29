@@ -1,6 +1,12 @@
 ﻿'use strict';
 
 $(document).ready(function () {
+
+    var fileupload = $("#fileUpload").val();
+    var fileuploadSplit = fileupload.split(',');
+    $.each(fileuploadSplit, function (key,value) {
+        $("#fileuploadcontent").append('<br><a target="_blank" href="'+value+'">'+ value + '</a>');
+    });
     $('img#image_preview').attr('src', `${appConfig.apiCdnUrl}${ngNews.Image}`);
     var jwtToken = getCookie("ACCESS-TOKEN");
     const toolMinis = ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor"];
