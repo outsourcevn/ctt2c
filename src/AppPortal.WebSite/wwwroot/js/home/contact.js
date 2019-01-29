@@ -381,13 +381,15 @@ $(function () {
     });
 
     $("#contact_form2 input").focus(function (e) {
-        e.preventDefault();
-        $("#myModal").modal("show");
+       // e.preventDefault();
+        // $("#myModal").modal("show");
+        window.location.href = "/home/contact";
     });
 
     $("#contact_form2").click(function (e) {
-        e.preventDefault();
-        $("#myModal").modal("show");
+        window.location.href = "/home/contact";
+      //  e.preventDefault();
+      //  $("#myModal").modal("show");
     });
 
     createCaptcha();
