@@ -484,7 +484,7 @@
             <section class="block block_business_news">
 
                 <h3 class="block_title_black">VĂN BẢN<a href="/news/vanban" class="view_all"><span><span>Tất cả văn bản</span></span></a></h3>
-                <ul>
+                <ul id="home-vanban">
                     <li class="last" style="margin-top:-5px;padding-bottom: 2px;margin-bottom: 7px;font-size:12px;line-height:16px;text-align:justify;">
                         <a href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3083">
                             1 - Sửa đổi bổ sung thi hành một số điều của Luật thuế bảo vệ môi trường
@@ -686,7 +686,20 @@
             $('.tom-tat-news span').css({ 'font-size': '14px' });
         });
 
-    
+        $.get(appConfig.apiHostUrl + "/api/Media/GetVanban?number=10" , function (data, status) {
+            var content = '';
+            console.log(data);
+            console.log(data[0]);
+            for (var i = 0; i < data.length; i++) {
+                content += '<li class="last" style = "margin-top:-5px;padding-bottom: 2px;margin-bottom: 7px;font-size:12px;line-height:16px;text-align:justify;" >';
+                content += '<a href="' + data[i].url + '"> '+(i+1)+' - ';
+                content += data[i].tenvanban;
+                content += '<span class="glyphicon glyphicon-download-alt"></span>';
+                content += '</a>';
+                content += '</li>';
+            }
+            $('#home-vanban').html(content);
+        });
         //album anhr
         $.get(appConfig.apiHostUrl + "/api/Media/getMedia?type=image&is_publish=1", function (data, status) {
             var preview = '';

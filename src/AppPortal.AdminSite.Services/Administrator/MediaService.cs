@@ -152,15 +152,22 @@ namespace AppPortal.AdminSite.Services.Administrator
             }
         }
 
-        public IList<Vanban> GetVanban(string type,string searchValue = "")
+        public IList<Vanban> GetVanban(string type,string searchValue = "", int number = 0)
         {
+            if (number > 0)
+            {
+                return _vanban.Table.Where(x => x.OnDeleted == null).OrderByDescending(x => x.OnCreated).Take(number).ToList();
+            }
             if (type == "1")
             {
                 if (searchValue != null && searchValue != "")
                 {
                     return _vanban.Table.Where(x => (x.OnDeleted == null && x.IsPublish == true) && (x.sovanban.Contains(searchValue) || x.tenvanban.Contains(searchValue) || x.loaivanban.Contains(searchValue) || x.coquanbanhanh.Contains(searchValue))).OrderByDescending(x => x.OnCreated).ToList();
+                } else
+                {
+                    return _vanban.Table.Where(x => x.OnDeleted == null && x.IsPublish == true).OrderByDescending(x => x.OnCreated).ToList();
                 }
-                return _vanban.Table.Where(x => x.OnDeleted == null && x.IsPublish == true).OrderByDescending(x => x.OnCreated).ToList();
+                
             }
             else
             {
@@ -168,9 +175,14 @@ namespace AppPortal.AdminSite.Services.Administrator
                 {
                     return _vanban.Table.Where(x => (x.OnDeleted == null && x.IsPublish == false) && (x.sovanban.Contains(searchValue) || x.tenvanban.Contains(searchValue) || x.loaivanban.Contains(searchValue) || x.coquanbanhanh.Contains(searchValue))).OrderByDescending(x => x.OnCreated).ToList();
                 }
-                return _vanban.Table.Where(x => x.OnDeleted == null && x.IsPublish == false).OrderByDescending(x => x.OnCreated).ToList();
+                else
+                {
+                    return _vanban.Table.Where(x => x.OnDeleted == null && x.IsPublish == false).OrderByDescending(x => x.OnCreated).ToList();
+                }
+                
             }
 
+ 
         }
 
     }
