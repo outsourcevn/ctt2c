@@ -187,7 +187,6 @@ function onCheck(e) {
                     Id: $("input[id='News_id']").val(),
                     CategoryId: $("input[id='CategoryId']").val(),
                     Name: $("input[id='Name']").val(),
-                    Abstract: $("#Abstract").data("kendoEditor").value(),
                     Content: $("#Content").data("kendoEditor").value(),
                     Image: $("input[id='Image']").val(),
                     Link: $("input[id='Link']").val(),
