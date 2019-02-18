@@ -155,7 +155,7 @@
             $('.tom-tat-news span').css({ 'font-size': '14px' });
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4&xemnhieu=1", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {

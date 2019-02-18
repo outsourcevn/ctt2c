@@ -104,9 +104,9 @@ namespace AppPortal.ApiHost.Controllers
 
         [AllowAnonymous]
         [HttpGet("getHomeNewsByCate")]
-        public IActionResult ListHomeNewsAsyncByCate(int? id = 0 , int? number = 0)
+        public IActionResult ListHomeNewsAsyncByCate(int? id = 0 , int? number = 0, int? xemnhieu=0)
         {
-            var newsHome = _newsService.GetHomeNewsByCate(id , number);
+            var newsHome = _newsService.GetHomeNewsByCate(id , number,xemnhieu);
             return ResponseInterceptor(newsHome);
         }
 
