@@ -103,7 +103,7 @@ function submitForm() {
 }
 
 function onCompleted(event) {
-    event.preventDefault();
+    $("#contactSubmit").attr("disabled", true);
     if (document.getElementById("cpatchaTextBox").value !== code) {
         alert("Mã bảo mật sai. Xin thử lại!");
         createCaptcha();
@@ -111,12 +111,9 @@ function onCompleted(event) {
     }
     var form = document.getElementById(ngNews.formName);
     var $form = $('form#' + ngNews.formName);
-    if ($form.valid() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
+
     form.classList.add('was-validated');
-    event.preventDefault();
+
     if ($form.valid()) {
         var csrfToken = $("input[name='__RequestVerificationToken']").val();
 
@@ -167,9 +164,10 @@ function onCompleted(event) {
                         $("#buttonModel").click();
                     }
                     
-                    $form.clearFormData();
+                    //$form.clearFormData();
                     $("#Content").data("kendoEditor").value('');
                     $("#filebaocao tbody").html("");
+                    $("#contactSubmit").attr("disabled", false);
                 }
             },
             function (xhr, status, error) {
@@ -181,6 +179,7 @@ function onCompleted(event) {
                 } else {
                     console.log('Vui lòng kiểm tra lại kết nối');
                 }
+                $("#contactSubmit").attr("disabled", false);
             },
             function (complete) {
                 $form.children('.form-item').find('button').removeClass('disabled').removeAttr('disabled');

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AppPortal.AdminSite.Services.Interfaces;
 
 using MailKit.Net.Smtp;
@@ -13,15 +14,14 @@ namespace AppPortal.AdminSite.Services
         {
             // Plug in your email service here to send an email.
             var messages = new MimeMessage();
-            messages.From.Add(new MailboxAddress("Portal@Contact-no-reply", userName));
-            messages.To.Add(new MailboxAddress($"Mr/Mrs {fullName}", email));
+            messages.From.Add(new MailboxAddress("", userName));
+            messages.To.Add(new MailboxAddress("", email));
             messages.Subject = subject;
 
             messages.Body = new TextPart(TextFormat.Html)
             {
                 Text = $"" +                
-                $"{message}" +
-                $"<br/><br/><br/><br/> -- no-reply!"
+                $"{message}" 
             };
             try
             {
@@ -39,8 +39,9 @@ namespace AppPortal.AdminSite.Services
                     client.Disconnect(true);
                 }
             }
-            catch
-            {                
+            catch(Exception ex)
+            {
+                Task.FromResult(ex);
             }            
             return Task.FromResult(0);
         }

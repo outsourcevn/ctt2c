@@ -494,7 +494,7 @@ namespace AppPortal.ApiHost.Controllers
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpPost("save-process-new")]
         // save all to process
-        public IActionResult ProcessNews([FromBody] string[] ids)
+        public async Task<IActionResult> ProcessNews([FromBody] string[] ids)
         {
             if (ids == null || ids.Count() == 0)
             {
@@ -504,6 +504,24 @@ namespace AppPortal.ApiHost.Controllers
             try
             {
                 var count = _newsService.Process(ids);
+                var id = ids.FirstOrDefault();
+                if (!string.IsNullOrEmpty(id))
+                {
+                    var dataNews = _newsService.GetNewsById(int.Parse(id));
+                    string subject = "Hệ thống tiếp nhận và trả lời góp ý, phản ánh về môi trường";
+                    string body = "   <p><span style='font-size: 14.0pt; line-height: 115%;'>K&iacute;nh gửi &Ocirc;ng/B&agrave;: " + dataNews.UserFullName + "</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Nội dung G&oacute;p &yacute;, phản &aacute;nh của &Ocirc;ng/B&agrave; đ&atilde; được xử l&yacute; v&agrave; Đăng tải tr&ecirc;n Hệ thống th&ocirc;ng tin. &Ocirc;ng/B&agrave; vui l&ograve;ng <a href='http://thongtinhaichieu.vea.gov.vn/home/tracuu'>Tra cứu kết quả</a> tr&ecirc;n Hệ thống.</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%;'>&nbsp;</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Tr&acirc;n trọng !</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Hệ thống tiếp nhận v&agrave; trả lời g&oacute;p &yacute;, phản &aacute;nh về m&ocirc;i trường</span></p>  "+
+ "  <p><span style='font-size: 14.0pt; line-height: 115%;'>Tổng cục M&ocirc;i trường</span></p>  ";
+                    if (!string.IsNullOrEmpty(dataNews.UserEmail))
+                    {
+                        await _emailSender.SendEmailAsync(dataNews.UserEmail, subject, body, String.Empty,
+                apiSettings.EmailConfig.Email,
+                apiSettings.EmailConfig.Password);
+                    }
+                }
                 message = $"Đang xử lý {count} tin tức.";
             }
             catch (System.Exception ex)
@@ -604,7 +622,24 @@ namespace AppPortal.ApiHost.Controllers
                                 newlogEx.TypeStatus = IsTypeStatus.moitiepnhan;
                                 _newLog.AddOrUpdate(newlogEx);
                             }
-                        }  
+                            if (userFrom.FullName.ToLower().Contains("sở tài nguyên và môi trường") && !string.IsNullOrEmpty(item.UserEmail))
+                            {
+                                string subject = "Hệ thống tiếp nhận và trả lời góp ý, phản ánh về môi trường";
+                                string body = "   <p><span style='font-size: 14.0pt; line-height: 115%;'>K&iacute;nh gửi &Ocirc;ng/B&agrave;: <span style='color: red;'>"+ item.UserFullName +"</span></span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%; color: red;'>Nội dung G&oacute;p &yacute;, phản &aacute;nh của &Ocirc;ng/B&agrave; đ&atilde; được chuyển tới Sở T&agrave;i nguy&ecirc;n v&agrave; M&ocirc;i trường để xử l&yacute; v&agrave; trả lời theo quy định. &Ocirc;ng/B&agrave; vui l&ograve;ng Tra cứu kết quả trả lời tr&ecirc;n Hệ thống.</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%'>&nbsp;</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Lưu &yacute;:</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%;'>- Mọi th&ocirc;ng tin trong email n&agrave;y cần được bảo mật.</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%;'>- Xin vui l&ograve;ng kh&ocirc;ng trả lời lại email n&agrave;y.</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Tr&acirc;n trọng!</span></p>  " +
+ "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Hệ thống tiếp nhận v&agrave; trả lời g&oacute;p &yacute;, phản &aacute;nh về m&ocirc;i trường</span></p>  " +
+ "  <p><span style='font-size: 14.0pt; line-height: 115%;'>Tổng cục M&ocirc;i trường</span></p>  ";
+                                await _emailSender.SendEmailAsync(item.UserEmail, subject, body, String.Empty,
+                                apiSettings.EmailConfig.Email,
+                                apiSettings.EmailConfig.Password);
+                            }
+                        }
+                        
                     }
                 }
                 message = $"Đã phân công!";
@@ -639,13 +674,19 @@ namespace AppPortal.ApiHost.Controllers
                 var newsData = _newsService.GetNewsById(news_id);
                 if (!string.IsNullOrEmpty(newsData.UserEmail)){
                     string subject = "Hệ thống thông tin tiếp nhận góp ý, phản ánh người dân";
-                    string body = "Kính gửi Ông/Bà: "+ newsData.UserFullName +"<div>Nội dung Góp ý, phản ánh của Ông/Bà đã được Tổng cục môi trường từ chối tiếp nhận.</div><br><div>Với lý do: "+ note +"</div><div><br></div><div>Lưu ý:</div><div>- Mọi thông tin trong email này cần được bảo mật.</div><div>- Xin vui lòng không reply lại email này.</div><div>Trân trọng !</div><div>Cổng thông tin phản ánh và kiến nghị.</div><div>Tổng cục Môi trường.</div>";
+                    string body = "   <p><span style='font-size: 14.0pt; line-height: 115%;'>K&iacute;nh gửi &Ocirc;ng/B&agrave;: <span style='color: red;'>"+ newsData.UserFullName + "</span></span></p>  "+
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%; color: red;'>Nội dung G&oacute;p &yacute;, phản &aacute;nh của &Ocirc;ng/B&agrave; kh&ocirc;ng thuộc phạm vi xử l&yacute; của Hệ thống, Hệ thống từ chối tiếp nhận G&oacute;p &yacute;, phản &aacute;nh n&agrave;y. &Ocirc;ng/B&agrave; vui l&ograve;ng đọc kỹ phần <a href='http://thongtinhaichieu.vea.gov.vn/news/guideFeedback'>Hướng dẫn G&oacute;p &yacute;, phản &aacute;nh</a>.</span></p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%;'>&nbsp;</span></p>  " +
+                                 "   <p>&nbsp;</p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Tr&acirc;n trọng !</span></p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%; color: red;'>Hệ thống tiếp nhận v&agrave; trả lời g&oacute;p &yacute;, phản &aacute;nh về m&ocirc;i trường</span></p>  " +
+                                 "  <p><span style='font-size: 14pt;'>Tổng cục M&ocirc;i trường</span></p>  ";
                     await _emailSender.SendEmailAsync(newsData.UserEmail, subject, body, String.Empty,
                     apiSettings.EmailConfig.Email,
                     apiSettings.EmailConfig.Password);
                 }
 
-                _newsService.Delete(newsData.Id);
+                //_newsService.Delete(newsData.Id);
 
                 message = $"Đã từ chối tiếp nhận!";
             }

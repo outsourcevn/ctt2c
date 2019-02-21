@@ -1093,7 +1093,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             try
             {               
                 if (ids == null || ids.Count() == 0) return count;
-                ids.ToList().ForEach(item =>
+                ids.ToList().ForEach( item =>
                 {
                     if (int.TryParse(item, out int Id))
                     {

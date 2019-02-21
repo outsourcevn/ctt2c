@@ -93,6 +93,7 @@
     google.charts.load('current', { packages: ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(drawAxisTickColors);
     google.charts.setOnLoadCallback(drawWQI);
+    var toadoTram = [];
     function drawAxisTickColors() {
         $.ajax({
             method: "GET",
@@ -110,6 +111,7 @@
                             }
                             lstId.push([dulieu[i].station_name, Math.round(dulieu[i].qi), Math.round(dulieu[i].qi), getColor(Math.round(dulieu[i].qi))]);
                             $("#listTram").append("<option value='" + dulieu[i].id + "'>" + dulieu[i].station_name + "</option>");
+                            toadoTram.push(dulieu[i]);
                         }
                     }
                     vechart(idFirst);
