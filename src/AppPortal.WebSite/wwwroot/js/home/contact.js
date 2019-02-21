@@ -102,7 +102,7 @@ function submitForm() {
     $("#frm_contact").submit();
 }
 
-function onCompleted() {
+function onCompleted(event) {
     event.preventDefault();
     if (document.getElementById("cpatchaTextBox").value !== code) {
         alert("Mã bảo mật sai. Xin thử lại!");
