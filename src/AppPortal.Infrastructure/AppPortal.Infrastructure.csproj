@@ -19,4 +19,10 @@
     <ProjectReference Include="..\AppPortal.Core\AppPortal.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Data\Migrations\20190123103010_AddNewTableVanban.Designer.cs">
+      <DependentUpon>20190123103010_AddNewTableVanban.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

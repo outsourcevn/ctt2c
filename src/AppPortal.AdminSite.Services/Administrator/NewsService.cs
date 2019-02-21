@@ -632,7 +632,22 @@ namespace AppPortal.AdminSite.Services.Administrator
 
         public HomeNews GetHomeNewsById(int id)
         {
-            return _homeNews.Table.SingleOrDefault(x => x.Id == id);
+            var newDetail = _homeNews.Table.SingleOrDefault(x => x.Id == id);
+            if (newDetail != null)
+            {
+                if (newDetail.CountView == null)
+                {
+                    newDetail.CountView = 1;
+                } else
+                {
+                    newDetail.CountView++;
+                }
+                
+                _homeNews.Update(newDetail);
+            }
+           
+
+            return newDetail;
         }
 
         public NewsPreview getNewsPreviewById(int id)
@@ -640,17 +655,26 @@ namespace AppPortal.AdminSite.Services.Administrator
             return _newsPreview.Table.SingleOrDefault(x => x.Id == id);
         }
 
-        public IList<HomeNews> GetHomeNewsByCate(int? id = 0 , int? number = 0)
+        public IList<HomeNews> GetHomeNewsByCate(int? id = 0 , int? number = 0,int? xemnhieu = 0)
         {
             var homeNews = _homeNews.Table.Where(x => x.IsStatus != IsStatus.deleted && !x.OnDeleted.HasValue);
          
             homeNews = homeNews.Where(z => z.IsStatus == IsStatus.publish);
-            homeNews = homeNews.OrderByDescending(x => x.OnPublished);
+            
+            
             if (id != 0)
             {
                 homeNews = homeNews.Where(x => x.CategoryId == id);
             }
-            if(number != 0)
+            if (xemnhieu == 1)
+            {
+                homeNews = homeNews.OrderByDescending(x => x.CountView);
+            }
+            else
+            {
+                homeNews = homeNews.OrderByDescending(x => x.OnPublished);
+            }
+            if (number != 0)
             {
                 homeNews = homeNews.Take((int)number);
             }
@@ -662,6 +686,37 @@ namespace AppPortal.AdminSite.Services.Administrator
                 if (!string.IsNullOrEmpty(iem.Image))
                 {
                     iem.Image = "http://103.9.86.36:8081" + iem.Image;
+                    iem.Content = "";
+                }
+            }
+            return homeNewsLst;
+        }
+
+        public IList<HomeNews> GetHomeNewsBySearch(string value)
+        {
+            var homeNews = _homeNews.Table.Where(x => x.IsStatus != IsStatus.deleted && !x.OnDeleted.HasValue);
+
+            homeNews = homeNews.Where(z => z.IsStatus == IsStatus.publish);
+            homeNews = homeNews.Where(z => z.Name.Contains(value) || z.Abstract.Contains(value) || z.Content.Contains(value));
+            homeNews = homeNews.OrderByDescending(x => x.OnPublished);
+
+            //if (id != 0)
+            //{
+            //    homeNews = homeNews.Where(x => x.CategoryId == id);
+            //}
+            //if (number != 0)
+            //{
+            //    homeNews = homeNews.Take((int)number);
+            //}
+
+            var homeNewsLst = homeNews.ToList();
+
+            foreach (var iem in homeNewsLst)
+            {
+                if (!string.IsNullOrEmpty(iem.Image))
+                {
+                    iem.Image = "http://103.9.86.36:8081" + iem.Image;
+                    iem.Content = "";
                 }
             }
             return homeNewsLst;
@@ -719,7 +774,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         {
             try
             {
-                if (isType == IsType.cochehanhchinh || isType == IsType.giaiphapsangkien || !string.IsNullOrEmpty(mapakn))
+                if (isType == IsType.cochehanhchinh || isType == IsType.giaiphapsangkien)
                 {
                     return true;
                 }

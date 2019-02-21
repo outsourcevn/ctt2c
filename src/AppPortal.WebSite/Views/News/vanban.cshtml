@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Văn bản";
 }
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.common-material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.material.mobile.min.css" />
 
 <style>
 
@@ -13,124 +16,160 @@
     td {
         text-align: center;
     }
+
     .left-vanban {
         text-align: left;
     }
+
+    .k-filter-row th, .k-grid-header th.k-header {
+        text-align: center;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Style the search field */
+    div.example input[type=text] {
+        padding: 10px;
+        font-size: 12px;
+        border: 1px solid grey;
+        float: left;
+        width: 55%;
+        background: #f1f1f1;
+    }
+
+    div.example label {
+        padding: 10px;
+        font-size: 13px;
+        float: left;
+        width: 25%;
+    }
+
+    /* Style the submit button */
+    div.example button {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        background: #2196F3;
+        color: white;
+        font-size: 14px;
+        border: 1px solid grey;
+        border-left: none; /* Prevent double borders */
+        cursor: pointer;
+    }
+
+    div.example button:hover {
+        background: #0b7dda;
+    }
+
+    /* Clear floats */
+    div.example::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
 </style>
 
-<div style="margin-top:20px;padding-left:15px;padding-right:15px;">
-    <div class="table-responsive-xl">
-        <table class="table table-bordered table-striped ">
-            <thead class="">
-                <tr>
-                    <th>STT</th>
-                    <th>Số văn bản</th>
-                    <th class="left-vanban">Tên văn bản</th>
-                    <th>Ngày ban hành</th>
-                    <th>Loại văn bản</th>
-                    <th>Cơ quan ban hành</th>
+<h1 id="result-search" style="padding: 15px;font-size: 20px">Quy phạm pháp luật</h1>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>106/2018/TT-BTC<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3083"> <span class="glyphicon glyphicon-download-alt"></span></a></td>
-                    <td class="left-vanban">Sửa đổi bổ sung thi hành một số điều của Luật thuế bảo vệ môi trường</td>
-                    <td>15/11/2018</td>
-                    <td>Thông tư</td>
-                    <td>Bộ Tài chính</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>14/2018/TT-BTNMT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3081"> <span class="glyphicon glyphicon-download-alt"></span></a></td>
-                    <td class="left-vanban">Quy định kỹ thuật về quy trình công tác thông tin, dữ liệu khi tượng thủy văn</td>
-                    <td>18/10/2018</td>
-                    <td>Thông tư</td>
-                    <td>Bộ Tài nguyên và Môi trường</td>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>13/2018/TT-BTTTT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3081"> <span class="glyphicon glyphicon-download-alt"></span></a></td>
-                    <td class="left-vanban">Quy định danh mục sản phẩm an toàn thông tin mạng nhập khẩu theo giấy phép</td>
-                    <td>15/10/2018</td>
-                    <td>Thông tư</td>
-                    <td>Bộ Thông tin và Truyền thông</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>20/2018/QĐ-UBND<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3087"> <span class="glyphicon glyphicon-download-alt"></span></a></td>
-                    <td class="left-vanban">Mức chi sự nghiệp bảo vệ môi trường tren địa bàn tỉnh</td>
-                    <td>05/10/2018</td>
-                    <td>Quyết định</td>
-                    <td>UBND tỉnh Lâm Đồng</td>
-
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>136/2018/NĐ-CP<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3076"> <span class="glyphicon glyphicon-download-alt"></span></a></td>
-                    <td class="left-vanban">Sửa đổi một số điều của các nghị định liên quan đến điều kiện đầu tư kinh doanh...</td>
-                    <td>05/10/2018</td>
-                    <td>Nghị định</td>
-                    <td>Chính phủ</td>
-
-                </tr>
-                <tr>
-                    <td> 6</td>
-                    <td> 20/2018/QĐ-UBND<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3090"> <span class="glyphicon glyphicon-download-alt"></span></a></td>
-                    <td class="left-vanban"> Quy định một số mức chi sự nghiệp bảo vệ môi trường trên địa bàn tỉnh Lâm Đồng</td>
-                    <td> 05/10/2018</td>
-                    <td> Quyết định</td>
-                    <td> UBND tỉnh Lâm Đồng</td>
-
-                </tr>
-                <tr>
-                    <td> 7</td>
-                    <td>579/2018/UBTVQH14<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3084"> <span class="glyphicon glyphicon-download-alt"></span></a> </td>
-                    <td class="left-vanban">Biểu thế bảo vệ môi trường </td>
-                    <td> 26/09/2018</td>
-                    <td> Nghị quyết</td>
-                    <td> Uỷ ban Thường vụ Quốc hội</td>
-
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>09/2018/TT-BTNMT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3072"> <span class="glyphicon glyphicon-download-alt"></span></a> </td>
-                    <td class="left-vanban">Quy chuẩn kỹ thuật quốc gia về môi trường </td>
-                    <td> 14/09/2018</td>
-                    <td> Thông tư</td>
-                    <td> Bộ Tài nguyên và Môi trường</td>
-
-                </tr>
-                <tr>
-                    <td> 9</td>
-                    <td> 08/2018/TT-BTNMT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3073"> <span class="glyphicon glyphicon-download-alt"></span></a></td>
-                    <td class="left-vanban"> Quy chuẩn kỹ thuật quốc gia về môi trường</td>
-                    <td> 14/09/2018</td>
-                    <td> Thông tư</td>
-                    <td> Bộ Tài nguyên và Môi trường</td>
-
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td> 03/2018/TT-BTNMT<a target="_blank" title="Tải tệp đính kèm" href="http://cem.gov.vn/DesktopModules/eKGIS_cms/vb/download.aspx?Id=3074"> <span class="glyphicon glyphicon-download-alt"></span></a></td>
-                    <td class="left-vanban"> Sửa đổi, bãi bổ một số quy đinh về thủ tục hành chính liên quan đến kiểm tra ...</td>
-                    <td> 14/08/2018</td>
-                    <td>Thông tư </td>
-                    <td>Bộ Tài nguyên và Môi trường </td>
-
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
-
-   
+<!-- The form -->
+<div class="example" action=""  style="max-width:360px;margin-bottom:10px;">
+    <label>Từ khóa: </label>
+    <input id="search-vanban-input" type="text" placeholder="Tìm kiếm văn bản.." name="search">
+    <button id="search-vanban-button" type="submit"><i class="fa fa-search"></i></button>
 </div>
-@section Scripts {
+<div id="grid"></div>
 
+@section Scripts {
     <script>
-       
+        if (searchValue) {
+            $("#search-vanban-input").val(searchValue);
+        }
+        $("#search-vanban-input").keyup(function (e) {
+            var code = e.which; // recommended to use e.which, it's normalized across browsers
+            if (code == 13) {
+                window.location.href = "/news/vanban?search=" + $("#search-vanban-input").val();
+            } // missing closing if brace
+        });
+
+        $('#search-vanban-button').click(function (e) {
+            window.location.href = "/news/vanban?search=" + $("#search-vanban-input").val();
+        });
+
+        $(document).ready(function () {
+
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: appConfig.apiHostUrl + "/api/Media/GetVanban?type=1&searchValue=" + searchValue,
+                        beforeSend: function (req) {
+                            //req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                        },
+                        dataType: "json"
+                    },
+                    parameterMap: function (options, operation) {
+
+                        if (operation !== "read" && options) {
+                            return {
+                                models: kendo.stringify(options)
+                            };
+                        }
+                    }
+
+                },
+                requestEnd: function (e) {
+                    if (e.type == "update") {
+                        messagerSuccess("Sửa thành công!");
+                    }
+                },
+                batch: false,
+                pageSize: 10,
+                schema: {
+                    model: {
+                        id: "Id",
+                        fields: {
+                            Id: { editable: false },
+                            url: { editable: false },
+                            sovanban: { type: "string", validation: { required: true } },
+                            tenvanban: { type: "string", validation: { required: true } },
+                            ngaybanhanh: { type: "date", validation: { required: true } },
+                            loaivanban: { type: "string", validation: { required: true } },
+                            coquanbanhanh: { type: "string", validation: { required: true } },
+                            OnCreated: { type: "date", editable: false }
+                        }
+                    }
+                }
+            });
+            dataSource.sort({ field: "Id", dir: "asc" });
+            console.log(dataSource.total());
+
+            window.stt = 0;
+            $("#grid").kendoGrid({
+                dataSource: dataSource,
+                pageable: true,
+                height: 550,
+                dataBinding: function () {
+                    stt = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+                },
+                columns: [
+                    { title: "STT", width: "50px", template: "#= ++stt #" },
+                    { title: "Số văn bản", width: "200px", template: "#=templateSovanban(sovanban,url)#" },
+                    { field: "tenvanban", title: "Tên văn bản", width: "350px" },
+                    { field: "ngaybanhanh", title: "Ngày ban hành", format: "{0:MM/dd/yyyy}", width: "120px" },
+                    { field: "loaivanban", title: "Loại văn bản", width: "200px" },
+                    { field: "coquanbanhanh", title: "Cơ quan ban hành", width: "200px" },
+                ]
+
+            }).data("kendoGrid");
+
+        });
+
+        function templateSovanban(sovanban, url) {
+            return '<a style="color:black;" href="' + url + '" target="_blank">' + sovanban + ' <i class="fa fa-download"></i></a>';
+        }
+
     </script>
 }

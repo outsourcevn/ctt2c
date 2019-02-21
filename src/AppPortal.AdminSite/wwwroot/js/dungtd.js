@@ -1065,7 +1065,99 @@ function congkhai(news_id) {
         function (complete) {
             $(this).removeClass('disabled').removeAttr('disabled');
         }
-    )
+    );
+
+    var element = $("#exampleModalNew_congkhai");
+    var editor = element.find(".noidung").data("kendoEditor");
+    var editor2 = element.find(".noidung-ttdl").data("kendoEditor");
+    var editor3 = element.find(".noidung-ldtcmt").data("kendoEditor");
+    $(".item-from-file-ttdl").html("");
+    element.find(".item-from-file").html("");
+    element.find(".tieude").val("");
+    editor.value("");
+    editor.value("");
+
+    var url = `${appConfig.apiHostUrl}` + '/api/News/xemchitiet?Id=' + news_id;
+    callAjax(
+        url,
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (success) {
+            if (!success.did_error) {
+                var info = success.info;
+                var ldtcmt = success.ldtcmt;
+                var ttdl = success.ttdl;
+
+                element.find(".tieude").html(info.Name);
+                element.find(".UserFullName").html(info.UserFullName);
+                element.find(".UserEmail").html(info.UserEmail);
+
+                editor.value(info.Content);
+
+                if (info.fileUpload) {
+                    var fileuploadSbt = info.fileUpload.split(",");
+                    var htmlAno = "";
+                    if (fileuploadSbt.length > 0) {
+                        for (var k = 0; k < fileuploadSbt.length; k++) {
+                            var fileItemAno = fileuploadSbt[k];
+                            htmlAno += '<a target="_blank" href="' + fileItemAno + '">' + fileItemAno + '</a></br>';
+                        }
+                        $(".item-from-file").html(htmlAno);
+                    }
+                }
+
+                //ttdl
+
+                editor2.value(ttdl.newsLog.Note);
+
+                var htmlTtdl = "";
+                if (ttdl.lstFiles.length > 0) {
+                    for (var i = 0; i < ttdl.lstFiles.length; i++) {
+                        var fileItem = ttdl.lstFiles[i];
+                        htmlTtdl += '<a target="_blank" href="' + fileItem.url + '">' + fileItem.name + '</a></br>';
+                    }
+                    $(".item-from-file-ttdl").html(htmlTtdl);
+                }
+
+                //ldtcmt
+
+                editor3.value(ldtcmt.newsLog.Data);
+                var htmlldtcmt = "";
+                if (ldtcmt.lstFiles.length > 0) {
+                    for (var j = 0; j < ldtcmt.lstFiles.length; j++) {
+                        var fileItem2 = ttdl.lstFiles[j];
+                        htmlldtcmt += '<a target="_blank" href="' + fileItem2.url + '">' + fileItem2.name + '</a></br>';
+                    }
+                    $(".item-from-file-ldtcmt").html(htmlldtcmt);
+                }
+            }
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
+        },
+        function (xhr, status, error) {
+            if (xhr.status === 400) {
+                var err = eval("(" + xhr.responseText + ")");
+                err.forEach(function (item) {
+                    messagerError(item.Code, item.Description);
+                });
+            } else {
+                messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+            }
+            if (grid) {
+                grid.clearSelection();
+                grid.dataSource.read();
+            }
+        },
+        function (complete) {
+            $(this).removeClass('disabled').removeAttr('disabled');
+        }
+    );
 }
 
 

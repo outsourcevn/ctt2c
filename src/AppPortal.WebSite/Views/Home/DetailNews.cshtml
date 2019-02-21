@@ -125,20 +125,7 @@
             return day_name + ' ' + day + ' ' + monthNames[monthIndex] + ' - ' + year + ' ' + (hour >= 10 ? hour : '0' + hour) + ':' + (minute >= 10 ? minute : '0' + minute) + ':' + (second >= 10 ? second : '0' + second);
         }
 
-        var getUrlParameter = function getUrlParameter(sParam) {
-            var sPageURL = window.location.search.substring(1),
-                sURLVariables = sPageURL.split('&'),
-                sParameterName,
-                i;
-
-            for (i = 0; i < sURLVariables.length; i++) {
-                sParameterName = sURLVariables[i].split('=');
-
-                if (sParameterName[0] === sParam) {
-                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-                }
-            }
-        };
+        
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsById?id=" + getUrlParameter('id'), function (data, status) {
             var content = '';
             content += '<h1 style="line-height: 31px;"><font color="black">' + data.model.Name + '</font></h1>'
@@ -157,6 +144,7 @@
 
             $('#detail-news').html(content);
             $('p span span').css({ 'line-height': '20px' });
+            $('p span').css({ 'line-height': '20px' });
         });
 
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
@@ -206,7 +194,7 @@
             $('.tom-tat-news span').css({ 'font-size': '14px' });
         });
 
-        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
+        $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4&xemnhieu=1", function (data, status) {
             var content = '';
             for (var i = 0; i < data.model.length; i++) {
                 if (i != data.model.length - 1) {
