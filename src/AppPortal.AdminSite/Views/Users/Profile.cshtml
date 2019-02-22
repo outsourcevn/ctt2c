@@ -1,6 +1,6 @@
 ﻿@model UserProfileViewModel
 @{
-    ViewData["FeatureTitle"] = "Quản lý Người dùng";
+    ViewData["FeatureTitle"] = "Thông tin người dùng";
     ViewData["Title"] = "Thông tin tài khoản";
     ViewData["Images"] = "/adminLte3";
     ViewData["FormId"] = "frm_update_profile_settings";
@@ -10,28 +10,20 @@
 }
 
 <div class="row">
-    <div class="col-md-3">
+    @*<div class="col-md-3">
         <!-- Profile Image -->
         @await Html.PartialAsync("_ProfileImage", Model)
         <!-- /.card -->
         <!-- About Me Box -->
         @await Html.PartialAsync("_ProfileAboutMe", Model)
-    </div>
+    </div>*@
     <!-- /.col -->
     <div class="col-md-9">
-        <div class="card">
-            <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Cấu hình</a></li>
-                </ul>
-            </div><!-- /.card-header -->
+        <div class="card card-primary">
+   
             <div class="card-body">
                 <div class="tab-content">
-                    <!-- /.tab-pane -->
-                    <div class="tab-pane" id="timeline">
-                        @await Html.PartialAsync("_ProfileTimeline")
-                    </div>
+                   
                     <!-- /.tab-pane -->
                     <div class="active tab-pane" id="settings">
                         @await Html.PartialAsync("_ProfileSettings", Model, ViewData)
