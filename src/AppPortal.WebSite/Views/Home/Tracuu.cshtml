@@ -68,42 +68,35 @@
                                             <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 9px;">Tên tổ chức, cá nhân</label>
                                             <div class="col-sm-9"> <input type="text" class="form-control" id="inputName" placeholder="Nhập tên tổ chức, cá nhân" name="tenNguoiGui" value=""> </div>
                                         </div>
-                                        @*<div class="form-group">
-                                                <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:14px;padding-top: 9px;">Thời gian công khai</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="thoigiancongkhai" id="thoigiancongkhai" required readonly>
-                                                </div>
-                                            </div>*@
-
                                         <div class="form-group">
                                             <div class="col-sm-offset-3 col-sm-9"> <button type="button" onclick="getdata()" class="btn btn-danger"><i class="MR5 fa fa-search" aria-hidden="true"></i>Tìm kiếm</button> <button type="reset" class="btn btn-default">Nhập lại</button> </div>
                                         </div>
                                     </form>
-
                                 </div>
+
                                 <div class="dropdown tracuu-filter">
                                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-
                                         <span id="tracuu-type">Tất cả nội dung</span>
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" style="max-height:250px;overflow:auto;">
-                                        <input class="form-control myInput" type="text" placeholder="Tìm kiếm...">
-                                        <li><a class="tracuu-type" href="#">Ô nhiễm môi trường</a></li>
-                                        <li><a class="tracuu-type" href="#">Cơ chế, chính sách</a></li>
-                                        <li><a class="tracuu-type" href="#">Giải pháp, sáng kiến</a></li>
+                                        <li><a class="tracuu-type-0" href="#">Tất cả nội dung</a></li>
+                                        <li><a class="tracuu-type-6" href="#">Ô nhiễm môi trường</a></li>
+                                        <li><a class="tracuu-type-7" href="#">Cơ chế, chính sách</a></li>
+                                        <li><a class="tracuu-type-8" href="#">Giải pháp, sáng kiến</a></li>
                                     </ul>
                                 </div>
+
                                 <div class="dropdown tracuu-filter">
                                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-
                                         <span id="tracuu-localtion">Tất cả địa phương</span>
                                         <span class="caret"></span>
                                     </button>
                                   
                                     <ul class="dropdown-menu" id="tracuu-all-location" style="max-height:250px;overflow:auto;">
                                         <input class="form-control myInput" type="text" placeholder="Tìm kiếm...">
-                                      
+
+                                        <li><a class="tracuu-localtion" href="#">Tất cả địa phương</a></li>
                                         <li><a class="tracuu-localtion" href="#">Hồ Chí Minh</a></li>
                                         <li><a class="tracuu-localtion" href="#">Hà Nội</a></li>
                                         <li><a class="tracuu-localtion" href="#">Đà Nẵng</a></li>
@@ -165,7 +158,7 @@
                                         <li><a class="tracuu-localtion" href="#">Lai Châu</a></li>
                                         <li><a class="tracuu-localtion" href="#">Lạng Sơn</a></li>
                                         <li><a class="tracuu-localtion" href="#">Hà Giang</a></li>
-                                        <li><a class="tracuu-localtion" href="#">Bắc Kạn</a></li>
+                                        <li><a class="tracuu-localtion" href="#">Bắc Cạn</a></li>
                                         <li><a class="tracuu-localtion" href="#">Cao Bằng</a></li>
                                     </ul>
                                 </div>
@@ -179,8 +172,6 @@
             </div>
         </div>
         <div class="col-md-4">
-          
-            
                 <section class="block block_business_news">
                     <h3 class="block_title_black">TIN MỚI<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
                     <div class="content">
@@ -213,22 +204,56 @@
     <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
     @* Dropdown bộ lọc hiện thị theo cơ chế chính sách và địa phương *@
     <script>
+        var is_type = 0;
+        var khuvuc = "";
         $(document).ready(function () {
+
             $(".myInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
-                $(".dropdown-menu li").filter(function () {
+                $(".dropdown-menu li .tracuu-localtion").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
+            $(".tracuu-type-0").click(function () {
+                $('#tracuu-type').text($(this).text());
+                is_type = 0;
+                console.log(is_type);
+                getdata();
+            });
+            $(".tracuu-type-6").click(function () {
+                $('#tracuu-type').text($(this).text());
+                is_type = 6;
+                console.log(is_type);
+                getdata();
+            });
+            $(".tracuu-type-7").click(function () {
+                $('#tracuu-type').text($(this).text());
+                is_type = 7;
+                console.log(is_type);
+                getdata();
+            });
+            $(".tracuu-type-8").click(function () {
+                $('#tracuu-type').text($(this).text());
+                is_type = 8;
+                console.log(is_type);
+                getdata();
+            });
+
             $(".tracuu-localtion").click(function () {
                 $('#tracuu-localtion').text($(this).text());
                 console.log($(this).text());
+                
+                khuvuc = $(this).text();
+                if (khuvuc == "Tất cả địa phương") {
+                    khuvuc = "";
+                }
+                getdata();
             });
-            $(".tracuu-type").click(function () {
-                $('#tracuu-type').text($(this).text());
-                console.log($(this).text());
-            });
+
+           
+
         });
+
     </script>
     @*<script type="text/javascript">
             $(document).ready(function () {
@@ -250,8 +275,11 @@
                     name: $("#inputName").val(),
                     mapakn: $("#inputEmail").val(),
                     sdt: $("#inputSdt").val(),
+                    is_type: is_type,
+                    khuvuc: khuvuc
                 },
                 success: function (result) {
+                    console.log(result);
                     var dataContainer = $("#lstGopy");
                     $('#lstGopy').pagination({
                         dataSource: result,
@@ -266,8 +294,8 @@
                 }
             });
         }
-        function templateData(data, mapakn) {
 
+        function templateData(data, mapakn) {
             var html = '';
             for (var i = 0; i < data.length; i++) {
                 var noidung = '';
@@ -276,7 +304,6 @@
                 if (mapakn !== "" && mapakn !== undefined) {
                     linkDetail += "&mapakn=" + mapakn;
                 }
-
                 var dateTime = dateFormat(data[i].OnPublished, "dd/mm/yyyy")
                 var content = '<div class="MB20" style="font-size: 14px;">';
                 content += '<div class="media-object-default media-object-default1 boT">';
@@ -287,7 +314,6 @@
                 } else {
                     content += '<p class="text-muted" style="margin-bottom:8px;margin-top: 8px;"><a style="color: blue;" href="' + linkDetail + '">' + data[i].UserFullName + '</a> - <i class="MR5 fa fa-clock-o" aria-hidden="true"></i> ' + dateTime + '</p> <h4 class="media-heading">';
                 }
-
                 content += '<a href="' + linkDetail + '" class="tieu-de-pakn" style="line-height:22px;">Kiến nghị về việc: ' + data[i].Name + '</a></h4>';
                 content += '<p class="text-justify" style="line-height:18px;"><b>Nội dung kiến nghị:</b> ' + noidung + '</p>';
                 content += '</div></div></div></div>';
@@ -295,8 +321,6 @@
             }
             return html;
         }
-
-  
 
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
             var content = '';
@@ -306,14 +330,13 @@
                     content += '<hgroup>';
                     content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date" style="text-align:left;">'
-                    content += '<time datetime="2013-01-21">'
+                    content += '<p class="date" style="text-align:left;">';
+                    content += '<time datetime="2013-01-21">';
                     content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
-                    content += '</time>'
-                    content += '</p>'
+                    content += '</time>';
+                    content += '</p>';
                     if (data.model[i].Image != '') {
-                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">';
                     }
                     content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
@@ -324,21 +347,19 @@
                     content += '<hgroup>';
                     content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date" style="text-align:left;">'
-                    content += '<time datetime="2013-01-21">'
+                    content += '<p class="date" style="text-align:left;">';
+                    content += '<time datetime="2013-01-21">';
                     content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
-                    content += '</time>'
-                    content += '</p>'
+                    content += '</time>';
+                    content += '</p>';
                     if (data.model[i].Image != '') {
-                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">';
                     }
                     content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
                     content += '...</p>';
                     content += '</article>';
                 }
-
             }
             
             $('#tra-cuu-tin-moi-content').html(content);
@@ -353,14 +374,13 @@
                     content += '<hgroup>';
                     content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date" style="text-align:left;">'
-                    content += '<time datetime="2013-01-21">'
+                    content += '<p class="date" style="text-align:left;">';
+                    content += '<time datetime="2013-01-21">';
                     content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
-                    content += '</time>'
-                    content += '</p>'
+                    content += '</time>';
+                    content += '</p>';
                     if (data.model[i].Image != '') {
-                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">';
                     }
                     content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;
@@ -371,14 +391,13 @@
                     content += '<hgroup>';
                     content += '<h4 class="title"><a style="font-size:14px;" href="/home/detailnews?id=' + data.model[i].Id + '">' + data.model[i].Name + '</a></h4>';
                     content += '</hgroup>';
-                    content += '<p class="date" style="text-align:left;">'
-                    content += '<time datetime="2013-01-21">'
+                    content += '<p class="date" style="text-align:left;">';
+                    content += '<time datetime="2013-01-21">';
                     content += new Date(data.model[i].OnPublished).format("dd/mm/yyyy");
-                    content += '</time>'
-                    content += '</p>'
+                    content += '</time>';
+                    content += '</p>';
                     if (data.model[i].Image != '') {
-                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">'
-
+                        content += '<img alt="(Ảnh minh họa)" src="' + data.model[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px">';
                     }
                     content += '<p class="tom-tat-news" style="line-height: 18px; color:#333;text-align:justify;">';
                     content += data.model[i].Abstract;

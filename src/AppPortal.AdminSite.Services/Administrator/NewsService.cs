@@ -786,7 +786,9 @@ namespace AppPortal.AdminSite.Services.Administrator
             return false;
         }
 
-        public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id, string mapakn = "")
+        
+
+        public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id, string mapakn = "",int? is_type = null, string khuvuc = "")
         {
             var query = _news.Table.Select(x => new LstItemNews
             {
@@ -803,6 +805,8 @@ namespace AppPortal.AdminSite.Services.Administrator
                 IsStatus = x.IsStatus,
                 MaPakn = x.MaPakn,
                 fileUpload = x.fileUpload,
+                IsType = x.IsType,
+                Tinhthanhpho = x.tinhthanhpho,
                 newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").GroupJoin(_files.Table, a => a.Id, b => b.NewsLogId, (a, b) => new NewsLogModel
                 {
                     Id = a.Id,
@@ -811,6 +815,16 @@ namespace AppPortal.AdminSite.Services.Administrator
                     files = b.Where(c => c.NewsLogId == a.Id && c.isDelete == 0).ToList()
                 }).FirstOrDefault()
             });
+
+            if (is_type != null && is_type != 0)
+            {
+                query = query.Where(x => x.IsType == (IsType)is_type);
+            }
+
+            //if (khuvuc != null && khuvuc != "")
+            //{
+            //    query = query.Where(x => x.Tinhthanhpho == khuvuc);
+            //}
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -841,6 +855,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             {
                 query = query.Where(x => x.Id == id);
             }
+
             
             return query.ToList();
         }
