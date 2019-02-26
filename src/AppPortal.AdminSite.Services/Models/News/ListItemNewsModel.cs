@@ -77,6 +77,9 @@ namespace AppPortal.AdminSite.Services.Models.News
         public string Content { get; set; }
         public string fileUpload { get; set; }
         public IsType IsType { get; set; }
+      
+        public string Tinhthanhpho { get; set; }
+
         public bool? IsShow { get; set; }
 
         public DateTime? OnCreated { get; set; }
