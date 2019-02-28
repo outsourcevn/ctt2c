@@ -80,7 +80,7 @@ footer { background-color: #ebebeb; border-top: 1px solid #c6c6c6; color: #82818
 .four_sixth { width: 65.3332%; }
 .five_sixth { width: 82.6665%; }
 .last { margin-right: 0 !important; clear: right; }
-.row { clear: both; float: left; overflow: hidden; width: 100%; margin-bottom: 10px; }
+.row { clear: both; overflow: hidden; width: 100%; margin-bottom: 10px; }
 .row_last { background: none !important; margin-bottom: 0 !important; }
 .archive:nth-child(2n) { margin-right: 0 !important; }
 /* Form styles */
