@@ -186,7 +186,11 @@
         {% } %}
     </script>
     <script type="text/javascript">
+        //if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        //    window.location.href = "http://mthongtinhaichieu.vea.gov.vn";
+        //}
         $(document).ready(function () {
+
             $.ajax({
                 type: "GET",
                 url: appConfig.apiHostUrl + "/api/ProcessWorks/city",
