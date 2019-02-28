@@ -117,6 +117,9 @@ function onCompleted(event) {
     form.classList.add('was-validated');
 
     if ($form.valid()) {
+        $("#buttonModel").click();
+        $("#noidungthongbao").html("Góp ý, phản ánh của anh / chị đang được gửi cho hệ thống, xin vui lòng đợi...");
+
         var csrfToken = $("input[name='__RequestVerificationToken']").val();
 
         var fileuploads = $("#filebaocao tr");
@@ -126,8 +129,6 @@ function onCompleted(event) {
             fileupload += $(file).find("td:first a").attr("href") + ",";
         }
 
-        $("#buttonModel").click();
-        $("#noidungthongbao").html("Góp ý, phản ánh của anh / chị đang được gửi cho hệ thống, xin vui lòng đợi...");
         
         var dataJson = {
             Id: 0,
