@@ -188,6 +188,16 @@ namespace AppPortal.AdminSite.Services.Administrator
                         _news.Update(news);
                     }
                 }
+                if (typeStatus == 5) {
+                    var news = _news.Table.Where(x => x.Id == item.NewsId).FirstOrDefault();
+                    if (news != null)
+                    {
+                        news.IsStatus = IsStatus.baocao;
+                        news.OnPublished = DateTime.Now;
+                        _news.Update(news);
+                    }
+                }
+
             }
             return item;
         }

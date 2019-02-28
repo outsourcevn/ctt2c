@@ -821,11 +821,6 @@ namespace AppPortal.AdminSite.Services.Administrator
                 query = query.Where(x => x.IsType == (IsType)is_type);
             }
 
-            //if (khuvuc != null && khuvuc != "")
-            //{
-            //    query = query.Where(x => x.Tinhthanhpho == khuvuc);
-            //}
-
             if (!string.IsNullOrEmpty(name))
             {
                 query = query.Where(x => ConvertToUnSign(x.UserFullName).ToLower().IndexOf(name.ToLower()) > 0 || x.UserFullName.ToLower().Contains(name.ToLower()));
@@ -856,7 +851,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 query = query.Where(x => x.Id == id);
             }
 
-            
+            query = query.OrderByDescending(x => x.OnPublished);
             return query.ToList();
         }
 
@@ -1246,7 +1241,14 @@ namespace AppPortal.AdminSite.Services.Administrator
                     entity.OnPublished = DateTime.Now;
                     entity.OnDeleted = null;
                 }
-                
+
+                if (status == IsStatus.approved)
+                {
+                    entity.OnPublished = DateTime.Now;
+                    entity.IsStatus = IsStatus.approved;
+                    entity.OnDeleted = null;
+                }
+
                 _news.Update(entity);
                 count += 1;
             }
