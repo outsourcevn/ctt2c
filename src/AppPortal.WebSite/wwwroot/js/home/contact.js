@@ -104,9 +104,11 @@ function submitForm() {
 
 function onCompleted(event) {
     $("#contactSubmit").attr("disabled", true);
+    
     if (document.getElementById("cpatchaTextBox").value !== code) {
         alert("Mã bảo mật sai. Xin thử lại!");
         createCaptcha();
+        $("#contactSubmit").attr("disabled", false);
         return;
     }
     var form = document.getElementById(ngNews.formName);
@@ -124,6 +126,9 @@ function onCompleted(event) {
             fileupload += $(file).find("td:first a").attr("href") + ",";
         }
 
+        $("#buttonModel").click();
+        $("#noidungthongbao").html("Góp ý, phản ánh của anh / chị đang được gửi cho hệ thống, xin vui lòng đợi...");
+        
         var dataJson = {
             Id: 0,
             CategoryId: 12,
@@ -159,12 +164,12 @@ function onCompleted(event) {
             },
             function (success) {
                 if (!success.did_error) {
+                    $("#btnoffprocess").click();
                     if (success.MaPakn) {
-                        $("#maPakn").html(success.MaPakn);
-                        $("#buttonModel").click();
+                        $("#noidungthongbao").html('Góp ý, phản ánh của anh/chị đã được gửi thành công và đã được thông báo vào địa chỉ hòm thư <span style="color:red" >' + $("input[id='UserEmail']").val() + '</span>.');
                     }
-                    
-                    //$form.clearFormData();
+                    createCaptcha();
+                    $form.clearFormData();
                     $("#Content").data("kendoEditor").value('');
                     $("#filebaocao tbody").html("");
                     $("#contactSubmit").attr("disabled", false);
@@ -185,6 +190,8 @@ function onCompleted(event) {
                 $form.children('.form-item').find('button').removeClass('disabled').removeAttr('disabled');
             }
         )
+    } else {
+        $("#contactSubmit").attr("disabled", false);
     }
 }
 function submit() {
