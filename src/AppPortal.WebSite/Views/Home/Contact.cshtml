@@ -49,6 +49,25 @@
         .radio input[type=radio] {
             margin-top: -0.3px;
         }
+
+
+        .red, .red2 {
+            width: 100px;
+            height: 2px;
+            position: absolute;
+            background: red;
+        }
+
+        .red {
+            
+            margin-top: 20px;
+        }
+        .red2 {
+            margin-top: 25px;
+            
+        }
+
+
     </style>
 
 }
@@ -200,8 +219,15 @@
                                     </div>
 
                                     <div class="row" style="padding: 0px 0px 0px 35px; display: flex;">
-                                        <div id="captcha">
+                                        <div class="demo">
+                                            <div class="red">
+                                            </div>
+                                            <div class="red2">
+                                            </div>
+                                            <div id="captcha">
+                                            </div>
                                         </div>
+                                        
                                         <span onclick="createCaptcha()" style=" font-size: 30px; font-weight: 900; color: red; padding: 0 10px;cursor: pointer " class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                                         <br />
                                     </div>
