@@ -386,7 +386,7 @@ namespace AppPortal.ApiHost.Controllers
                                 "   <p><span style='font-size: 14.0pt; line-height: 125%;'>Tr&acirc;n trọng!</span></p>  " +
                                 "   <p><span style='font-size: 14.0pt; line-height: 125%;'>Hệ thống tiếp nhận v&agrave; trả lời g&oacute;p &yacute;, phản &aacute;nh về m&ocirc;i trường</span></p>  " +
                                 "  <p><span style='font-size: 14.0pt; line-height: 125%;'>Tổng cục M&ocirc;i trường.</span></p>  ";
-                    await _emailSender.SendEmailAsync(newsData.UserEmail, subject, body , String.Empty ,
+                    var email = _emailSender.SendEmailAsync(newsData.UserEmail, subject, body, String.Empty,
                     apiSettings.EmailConfig.Email,
                     apiSettings.EmailConfig.Password);
                 }
