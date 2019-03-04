@@ -69,6 +69,19 @@ namespace AppPortal.ApiHost.ViewModels.News
         public string MaPakn { get; set; }
         public DateTime ngayxuly { get; set; }
         public string thamquyenxuly { get; set; }
+        public string Noidungbosung { get; set; }
+    }
+
+    public class NewsViewModel3
+    {
+        [Required(ErrorMessage = "{0} không được để trống.")]
+        public int Id { get; set; }
+
+        [StringLength(2000, ErrorMessage = "Nội dung không vượt quá 2000 kí tự, vui lòng kiểm tra lại.")]
+        public string Noidungbosung { get; set; }
+
+        public string fileUpload { get; set; }
+
     }
 
     public class HomeNewsViewModel

@@ -109,6 +109,7 @@ namespace AppPortal.AdminSite.Services.Extensions
             item.MaPakn = model.MaPakn;
             item.ngayxuly = model.ngayxuly;
             item.thamquyenxuly = model.thamquyenxuly;
+            item.Noidungbosung = model.Noidungbosung;
             return item;
         }
 
@@ -312,7 +313,8 @@ namespace AppPortal.AdminSite.Services.Extensions
                 IsType = (int)item.IsType,
                 IsView = (int)item.IsView,
                 fileUpload = item.fileUpload,
-                MaPakn = item.MaPakn
+                MaPakn = item.MaPakn,
+                Noidungbosung = item.Noidungbosung
             };
         }
 

@@ -380,6 +380,9 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(2000);
 
+                    b.Property<string>("Noidungbosung")
+                        .HasColumnType("ntext");
+
                     b.Property<string>("Note")
                         .HasMaxLength(1000);
 

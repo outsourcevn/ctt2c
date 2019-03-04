@@ -53,6 +53,7 @@ namespace AppPortal.AdminSite.Services.Models.News
         public string MaPakn { get; set; }
         public DateTime ngayxuly { get; set; }
         public string thamquyenxuly { get; set; }
+        public string Noidungbosung { get;set; }
     }
 
     public class HomeNewsModel

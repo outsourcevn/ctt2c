@@ -35,6 +35,7 @@ namespace AppPortal.Website.Services.Models.News
         public int? IsView { get; set; }
         public int? IsType { get; set; }
         public int? IsPosition { get; set; }
+        public string Noidungbosung { get; set; }
     }
 
     public class NewsCategoryModel

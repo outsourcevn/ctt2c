@@ -125,7 +125,8 @@ namespace AppPortal.Website.Services.Extensions
                 OnDeleted = item.OnDeleted ?? null,
                 OnPublished = item.OnPublished ?? null,
                 OnUpdated = item.OnUpdated ?? null,
-                IsStatus = (int)item.IsStatus
+                IsStatus = (int)item.IsStatus,
+                Noidungbosung = item.Noidungbosung
             };
         }
 

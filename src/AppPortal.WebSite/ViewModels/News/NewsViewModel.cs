@@ -76,6 +76,13 @@ namespace AppPortal.WebSite.ViewModels.News
         public string TenCaNhanToChuc { get; set; }
     }
 
+    public class NewsViewModel3
+    {
+        public int Id { get; set; }
+        public string Noidungbosung { get; set; }
+    }
+
+
     public class ItemsNewWithCategoryViewModel
     {
         public int CategoryId { get; set; }

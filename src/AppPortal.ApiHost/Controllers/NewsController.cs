@@ -297,7 +297,42 @@ namespace AppPortal.ApiHost.Controllers
                 }));
             }
         }
-        
+
+        // create or update
+        [AllowAnonymous]
+        [HttpPost("BosungTT")]
+        public IActionResult BosungTT(int? Id, [FromBody] NewsViewModel3 model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return ToHttpBadRequest(AddErrors(ModelState));
+            }
+            string message = "Bổ sung tin tức thành công";
+            try
+            {
+                if (model.Id > 0)
+                {
+                    var entityModel = _newsService.GetNewsById(model.Id);
+                    if (!string.IsNullOrEmpty(model.fileUpload))
+                    {
+                        entityModel.fileUpload = entityModel.fileUpload + ',' + model.fileUpload;
+                    }
+                    entityModel.Noidungbosung = model.Noidungbosung;
+                    _newsService.AddOrUpdate(entityModel);
+                }
+              
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
 
         // create or update
         [Authorize(PolicyRole.EDIT_ONLY)]

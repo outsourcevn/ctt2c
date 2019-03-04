@@ -1,8 +1,8 @@
-﻿@model NewsViewModel2
+﻿@model NewsViewModel3
 @{
     ViewData["Title"] = "THÔNG TIN TRAO ĐỔI";
     var formView = "frm_contact";
-    var data = ViewData["data"];
+    var data = ViewData["data"] as AppPortal.Website.Services.Models.News.NewsModel;
 }
 
 @section Styles {
@@ -68,13 +68,6 @@
 
 }
 
-@*@section Breadcrumb {
-        <div id="breadcrumb">
-            <a href="/">Cổng thông tin bộ Tài Nguyên &amp; Môi trường</a>
-        </div>
-
-    }*@
-
 <div class="col-sm-8">
     <div id="page" style="width:100%">
         <!-- content -->
@@ -87,30 +80,29 @@
                         <div id="contact_form" class="box-KN">
                             <form id="@formView" class="needs-validation" method="post">
                                 <div class="row">
-
+                                    <input type="hidden" asp-for="Id" value="@data.Id" />
                                     <p style="font-weight: 600;margin-top: 20px;margin-bottom:10px;">NỘI DUNG BỔ SUNG</p>
-                                        <div class="form-item col-sm-12">
-                                            <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text" required></textarea>
-                                            <span asp-validation-for="Content" class="form-required"></span>
+                                    <div class="form-item col-sm-12">
+                                        <textarea style="width:100%; height:400px" rows="10" value="@data.Noidungbosung" asp-for="Noidungbosung" class="form-text" required></textarea>
+                                        <span asp-validation-for="Noidungbosung" class="form-required"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="padding: 0px 0px 0px 35px; display: flex;">
+                                    <div class="demo">
+                                        <div class="red">
+                                        </div>
+                                        <div id="captcha">
                                         </div>
                                     </div>
 
-                                    <div class="row" style="padding: 0px 0px 0px 35px; display: flex;">
-                                        <div class="demo">
-                                            <div class="red">
-                                            </div>
-                                            <div id="captcha">
-                                            </div>
-                                        </div>
-
-                                        <span onclick="createCaptcha()" style=" font-size: 30px; font-weight: 900; color: red; padding: 0 10px;cursor: pointer " class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                        <br />
-                                    </div>
-                                    <div class="row" style=" padding: 5px 0px 0px 20px; display: flex; ">
-                                        <div class="form-item col-sm-12">
-                                            <label class="control-label">Nhập mã bảo mật <span style="color: red">*</span>:</label>
-                                            <input type="text" style="width: 150px" class="form-control aui-text-placeholder" placeholder="Mã bảo mật" id="cpatchaTextBox" />
-                                        </div>
+                                    <span onclick="createCaptcha()" style=" font-size: 30px; font-weight: 900; color: red; padding: 0 10px;cursor: pointer " class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                    <br />
+                                </div>
+                                <div class="row" style=" padding: 5px 0px 0px 20px; display: flex; ">
+                                    <div class="form-item col-sm-12">
+                                        <label class="control-label">Nhập mã bảo mật <span style="color: red">*</span>:</label>
+                                        <input type="text" style="width: 150px" class="form-control aui-text-placeholder" placeholder="Mã bảo mật" id="cpatchaTextBox" />
                                     </div>
                                 </div>
                                 <div class="form-item">
@@ -159,7 +151,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+
                 </article>
             </div>
         </div>
@@ -291,17 +283,6 @@
 
 
     <script type="text/javascript">
-  
-        var dataNews = @Html.Raw(Json.Serialize(@data));
-        $.each(dataNews, function (item , vlue) {
-            var date = new Date(vlue.OnCreated).toDateString();
-            var time = new Date(vlue.OnCreated).toTimeString()
-            var html = '<li class="last"><article><div class="photo"><a href="#"><img src="/images/homes/_MG_4863 sep Thuc.jpg" alt="Photo" /></a></div>';
-            html += '<div class="details"><h4 class="title"><a href="#">' + vlue.Abstract + '</a></h4><p class="date"><time datetime="2013-01-29">' + date + '</time>';
-            html += '           <span class="comments_count"><a href="#">21</a></span></p></div></article></li>';
-            $("#block_popular").append(html);
-        });
-
         var ngNews = {
             formName: '@formView'
         };
@@ -347,7 +328,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlLvJ9NzDhCd9z-urxEAe83JGCqv1G0TI&libraries=places&callback=googleInput" async defer></script>
     <script src="https://www.google.com/recaptcha/api.js?hl=vi" async defer></script>
 
-    <script src="~/js/home/contact.js" asp-append-version="true"></script>
+    <script src="~/js/home/contact_bosung.js" asp-append-version="true"></script>
 
     <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
     <script src="~/js/vendor/jquery.ui.widget.js"></script>

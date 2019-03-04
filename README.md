@@ -15,8 +15,8 @@ dotnet ef migrations add InitAppPortalModel --context AppDataContext -p ..\AppPo
 
 ### Add migrations
 ```
- Add-Migration "AddNewTableVanban" -c AppDataContext -o Data/Migrations
- Update-Database -Migration AddNewTableNewsPreview -c "AppDataContext" 
+ Add-Migration "AddNewsColumnNoidungbosung" -c AppDataContext -o Data/Migrations
+ Update-Database -Migration AddNewsColumnNoidungbosung -c "AppDataContext" 
  Update-Database -c "AppDataContext" 
 ```
 
