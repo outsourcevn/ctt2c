@@ -94,6 +94,7 @@ namespace AppPortal.Infrastructure.App
             b.Property(c => c.Name).HasMaxLength(2000);
             b.Property(c => c.Abstract).HasMaxLength(2000);
             b.Property(c => c.Content).HasColumnType("ntext");
+            b.Property(c => c.Noidungbosung).HasColumnType("ntext");
             b.Property(c => c.Link).HasMaxLength(500);
             b.Property(c => c.Sename).HasMaxLength(500);
 

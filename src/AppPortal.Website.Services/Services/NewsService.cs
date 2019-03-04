@@ -96,6 +96,11 @@ namespace AppPortal.Website.Services.Websites
             return GetTables().SingleOrDefault(x => x.Id == id).EntityToModel();
         }
 
+        public NewsModel GetNewsByMatin(string matin)
+        {
+            return GetTables().SingleOrDefault(x => x.MaPakn == matin).EntityToModel();
+        }
+
         public IList<NewsModel> GetNewsPaging(out int rows, int? take = 15, int? skip = 0, int? catId = -1)
         {
             var query = GetTables().Where(x => x.IsShow == true && x.IsStatus == IsStatus.publish && !x.OnDeleted.HasValue);

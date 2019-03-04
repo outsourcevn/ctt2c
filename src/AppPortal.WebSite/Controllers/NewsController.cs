@@ -40,6 +40,13 @@ namespace AppPortal.WebSite.Controllers
             return View();
         }
 
+        public IActionResult thongtinbosung(string matin)
+        {
+            var data = _newsService.GetNewsByMatin(matin);
+            ViewData["data"] = data;
+            return View();
+        }
+
         public IActionResult detail()
         {
             return View();

@@ -15,5 +15,6 @@ namespace AppPortal.Website.Services.Interfaces
         IQueryable<News> GetTables(); 
         IList<News> GetNewsList();
         Config GetConfig(string type);
+        NewsModel GetNewsByMatin(string matin);
     }
 }

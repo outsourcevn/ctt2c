@@ -1,0 +1,382 @@
+﻿@model NewsViewModel2
+@{
+    ViewData["Title"] = "THÔNG TIN TRAO ĐỔI";
+    var formView = "frm_contact";
+    var data = ViewData["data"];
+}
+
+@section Styles {
+    <!-- Core CSS  -->
+    <link href="~/lib/kendo-ui/styles/kendo.common.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lib/kendo-ui/styles/kendo.default.min.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- blueimp Gallery styles -->
+    <link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css" crossorigin="anonymous">
+    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+    <link rel="stylesheet" href="~/css/jquery.fileupload.css">
+    <link rel="stylesheet" href="~/css/jquery.fileupload-ui.css">
+
+
+    <style>
+        .k-editor .k-i-insert-video:before {
+            font-family: FontAwesome;
+            content: "\f167";
+            font-size: 16px;
+        }
+
+        .form-group select {
+            height: 30px;
+        }
+
+        .row {
+            margin: 0 !important;
+        }
+
+        #header {
+            height: 204px !important;
+        }
+
+        #block_main_menu li span {
+            height: 30px !important;
+        }
+
+        canvas {
+            /*prevent interaction with the canvas*/
+            pointer-events: none;
+        }
+
+        .radio input[type=radio] {
+            margin-top: -0.3px;
+        }
+
+
+        .red, .red2 {
+            width: 100px;
+            height: 3px;
+            position: absolute;
+            background: red;
+        }
+
+        .red {
+            margin-top: 23px;
+        }
+
+        .red2 {
+            margin-top: 25px;
+        }
+    </style>
+
+}
+
+@*@section Breadcrumb {
+        <div id="breadcrumb">
+            <a href="/">Cổng thông tin bộ Tài Nguyên &amp; Môi trường</a>
+        </div>
+
+    }*@
+
+<div class="col-sm-8">
+    <div id="page" style="width:100%">
+        <!-- content -->
+        <div id="content" style="width: 100%">
+            <div class="region">
+                <article class="node">
+                    <h2 style="margin-bottom: 20px;margin-top:20px;" class="title">@ViewData["Title"]</h2>
+
+                    <div class="content">
+                        <div id="contact_form" class="box-KN">
+                            <form id="@formView" class="needs-validation" method="post">
+                                <div class="row">
+
+                                    <p style="font-weight: 600;margin-top: 20px;margin-bottom:10px;">NỘI DUNG BỔ SUNG</p>
+                                        <div class="form-item col-sm-12">
+                                            <textarea style="width:100%; height:400px" rows="10" asp-for="Content" class="form-text" required></textarea>
+                                            <span asp-validation-for="Content" class="form-required"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="padding: 0px 0px 0px 35px; display: flex;">
+                                        <div class="demo">
+                                            <div class="red">
+                                            </div>
+                                            <div id="captcha">
+                                            </div>
+                                        </div>
+
+                                        <span onclick="createCaptcha()" style=" font-size: 30px; font-weight: 900; color: red; padding: 0 10px;cursor: pointer " class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        <br />
+                                    </div>
+                                    <div class="row" style=" padding: 5px 0px 0px 20px; display: flex; ">
+                                        <div class="form-item col-sm-12">
+                                            <label class="control-label">Nhập mã bảo mật <span style="color: red">*</span>:</label>
+                                            <input type="text" style="width: 150px" class="form-control aui-text-placeholder" placeholder="Mã bảo mật" id="cpatchaTextBox" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <div asp-validation-summary="All" class="form-required"></div>
+                                </div>
+                            </form>
+                            <div class="form-group col-sm-12">
+                                <label style="padding: 10px;" for="recipient-name" class="col-form-label">Tài liệu đình kèm:</label>
+                                <form id="fileupload" method="POST" enctype="multipart/form-data">
+                                    <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                                    <div class="row fileupload-buttonbar">
+                                        <div class="col-lg-6">
+                                            <!-- The fileinput-button span is used to style the file input field as button -->
+                                            <span class="btn btn-success fileinput-button">
+                                                <i class="glyphicon glyphicon-plus"></i>
+                                                <span>Thêm tệp tin...</span>
+                                                <input type="file" name="files" multiple>
+                                            </span>
+
+                                            <!-- The global file processing state -->
+                                            <span class="fileupload-process"></span>
+                                        </div>
+                                        <div class="col-lg-6" style="line-height:16px;">
+                                            Chỉ nhận file mp4, mov, wmv, jpg, png, pdf, doc, docx, xls, xlsx (Tối đa 5 file)
+                                        </div>
+                                        <!-- The global progress state -->
+                                        <div class="col-lg-5 fileupload-progress fade">
+                                            <!-- The global progress bar -->
+                                            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                            </div>
+                                            <!-- The extended global progress state -->
+                                            <div class="progress-extended">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                    <!-- The table listing the files available for upload/download -->
+                                    <table id="filebaocao" role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                                </form>
+                            </div>
+
+                            <div class="form-item ">
+                                <button id="contactSubmit" type="button" onclick="onCompleted(this)" class="btn btn-primary" style="margin:0px 0px 10px 30px;">
+                                    <i class="MR5 fa fa-paper-plane" aria-hidden="true"></i>
+                                    Gửi phản ánh, kiến nghị
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <!-- end content -->
+    </div>
+</div>
+<div class="col-md-4">
+    <div id="" style="width: 100%; margin-top: 65px">
+        <div class="region">
+            <aside id="block_weather" class="block">
+                <h3 class="block_title_black">Lưu ý</h3>
+                <div class="content">
+                    <p style="line-height: 30px;font-size: 15px;"><b> 1. Hệ thống tiếp nhận g&oacute;p &yacute;, phản &aacute;nh về:</b><br />&bull; H&agrave;nh vi g&acirc;y &ocirc; nhiễm m&ocirc;i trường, vi phạm ph&aacute;p luật về bảo vệ m&ocirc;i trường, sự cố, vụ việc m&ocirc;i trường;<br />&bull; C&aacute;c cơ chế, ch&iacute;nh s&aacute;ch về m&ocirc;i trường;<br />&bull; Những giải ph&aacute;p, s&aacute;ng kiến bảo vệ m&ocirc;i trường.<br /><b>2. Hệ thống kh&ocirc;ng tiếp nhận đơn thư khiếu nại, tố c&aacute;o, hướng dẫn v&agrave; giải đ&aacute;p ph&aacute;p luật.</b></p>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+</div>
+
+<!-- right sidebar -->
+<button id="buttonModel" type="button" style="display:none" class="btn btn-primary" data-toggle="modal" data-target="#showMaPakn">
+    Launch demo modal
+</button>
+
+<div class="modal fade" id="showMaPakn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Thông báo</h1>
+            </div>
+            <div class="modal-body">
+                <p id="noidungthongbao" style="font-size: 14px;line-height: 20px">Góp ý, phản ánh của anh/chị đã được gửi thành công và đã được thông báo vào địa chỉ hòm thư <span style="color:red" id="diachihomthu"></span>.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/js/home/Scripts.js" asp-append-version="true"></script>
+    <script src="~/js/kendo.all.min.js"></script>
+    <script src="~/js/jquery-captcha.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        $('input[type=radio][name=phanloai]').change(function () {
+            console.log("radio phan loai change:" + this.value);
+            if (this.value != 6) {
+                $('#form-phan-loai').css('display', 'none');
+            } else {
+                $('#form-phan-loai').css('display', '');
+            }
+        });
+
+    </script>
+    <script id="template-upload" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        <tr class="template-upload fade">
+            <td>
+                <p class="name">{%=file.name%}</p>
+                <strong class="error text-danger"></strong>
+            </td>
+            <td>
+                <p class="size">Processing...</p>
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+            </td>
+            <td>
+                {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Tải lên</span>
+                </button>
+                {% } %}
+                {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Loại bỏ</span>
+                </button>
+                {% } %}
+            </td>
+        </tr>
+        {% } %}
+    </script>
+    <!-- The template to display files available for download -->
+    <script id="template-download" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+        <tr class="template-download fade">
+            <td>
+                <p class="name">
+                    {% if (file.url) { %}
+                    <a href="{%=file.url%}" target="_blank" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                    {% } else { %}
+                    <span>{%=file.name%}</span>
+                    {% } %}
+                </p>
+                {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                {% } %}
+            </td>
+            <td>
+                <span class="size">{%=o.formatFileSize(file.size)%}</span>
+            </td>
+            <td>
+                {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}" {% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}' {% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Xóa</span>
+                </button>
+                {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+                {% } %}
+            </td>
+        </tr>
+        {% } %}
+    </script>
+
+
+    <script type="text/javascript">
+  
+        var dataNews = @Html.Raw(Json.Serialize(@data));
+        $.each(dataNews, function (item , vlue) {
+            var date = new Date(vlue.OnCreated).toDateString();
+            var time = new Date(vlue.OnCreated).toTimeString()
+            var html = '<li class="last"><article><div class="photo"><a href="#"><img src="/images/homes/_MG_4863 sep Thuc.jpg" alt="Photo" /></a></div>';
+            html += '<div class="details"><h4 class="title"><a href="#">' + vlue.Abstract + '</a></h4><p class="date"><time datetime="2013-01-29">' + date + '</time>';
+            html += '           <span class="comments_count"><a href="#">21</a></span></p></div></article></li>';
+            $("#block_popular").append(html);
+        });
+
+        var ngNews = {
+            formName: '@formView'
+        };
+
+        function googleInput() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -33.8688, lng: 151.2195 },
+                zoom: 13,
+                mapTypeId: 'roadmap'
+            });
+
+            var input = document.getElementById('address_map');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+                if (places.length > 0) {
+                    $("#lat").val(places[0].geometry.location.lat());
+                    $("#lng").val(places[0].geometry.location.lng());
+                    var address_map = $("#address_map").val();
+                    var html = ' <div style="width: 100%"><iframe id="mapframe" height="280" src = "https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q='+ encodeURI(address_map) +'&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder = "0" scrolling = "no" marginheight = "0" marginwidth = "0" > <a href="https://www.maps.ie/create-google-map/">Add map to website</a></iframe ></div > <br />';
+                    $("#mapframe").html(html);
+                }
+            });
+        }
+    </script>
+
+    <script type="text/x-kendo-template" id="insertVideo-template">
+        <div>
+            <label for="videoUrl">Nhập link video từ YouTube:</label>
+            <input type="text" id="videoUrl" name="videoUrl" />
+
+            <div class="insertVideo-actions">
+                <button class="k-button insertVideo-insert">Chèn video</button>
+                <button class="k-button insertVideo-cancel">Hủy bỏ</button>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-kendo-template" id="youTube-template">
+        <iframe width="200" height="115" src="http://www.youtube.com/embed/#= source #?wmode=opaque&rel=0" frameborder="0"></iframe>
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlLvJ9NzDhCd9z-urxEAe83JGCqv1G0TI&libraries=places&callback=googleInput" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=vi" async defer></script>
+
+    <script src="~/js/home/contact.js" asp-append-version="true"></script>
+
+    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+    <script src="~/js/vendor/jquery.ui.widget.js"></script>
+    <!-- The Templates plugin is included to render the upload/download listings -->
+    <script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js" integrity="sha384-9RnDvEg3yE0DwTGAY34Gze15jSzmr6XlrL5t/fzE2+qNe93kv6fyr3BOAsJIu8yL" crossorigin="anonymous"></script>
+    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+    <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js" integrity="sha384-klGuZWTnqB7v2Zy+LDefVRiFX90fVhu5XSs58OioYvF7nGVV4VP91dbUr5e5u4np" crossorigin="anonymous"></script>
+    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+    <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js" integrity="sha384-Ruiok12tfp1D6SJw02NyOhoEKZ1oyXvy4/0YfF+K459YJA31h93bS+iOszDHXd8w" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+    <!-- blueimp Gallery script -->
+    <script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js" integrity="sha384-dCF25SRAwEga8+EATJhluXfC+zve4mtBr9kaZ6rlp0xYbi9zR8PzN29hje8I9L9t" crossorigin="anonymous"></script>
+
+
+    <script src="~/js/jquery.iframe-transport.js"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="~/js/jquery.fileupload.js"></script>
+    <!-- The File Upload processing plugin -->
+    <script src="~/js/jquery.fileupload-process.js"></script>
+    <!-- The File Upload image preview & resize plugin -->
+    <script src="~/js/jquery.fileupload-image.js"></script>
+    <!-- The File Upload audio preview plugin -->
+    <script src="~/js/jquery.fileupload-audio.js"></script>
+    <!-- The File Upload video preview plugin -->
+    <script src="~/js/jquery.fileupload-video.js"></script>
+    <!-- The File Upload validation plugin -->
+    <script src="~/js/jquery.fileupload-validate.js"></script>
+    <!-- The File Upload user interface plugin -->
+    <script src="~/js/jquery.fileupload-ui.js"></script>
+    <!-- The main application script -->
+    <script src="~/js/main.js"></script>
+}

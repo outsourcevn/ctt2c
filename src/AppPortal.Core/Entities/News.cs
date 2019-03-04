@@ -15,6 +15,7 @@ namespace AppPortal.Core.Entities
         public string Sename { set; get; }
         public string Abstract { get; set; }
         public string Content { get; set; }
+        public string Noidungbosung { get; set; }
         public string Image { get; set; }
         public string Link { get; set; }
         public bool IsShow { get; set; }
