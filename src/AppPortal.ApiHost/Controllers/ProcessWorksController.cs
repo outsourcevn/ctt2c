@@ -375,10 +375,11 @@ namespace AppPortal.ApiHost.Controllers
 
                 if (!string.IsNullOrEmpty(newsData.UserEmail))
                 {
+                    var linkUpdate = "http://thongtinhaichieu.vea.gov.vn/news/thongtinbosung?matin=" + entityModel.MaPakn;
                     string subject = "Hệ thống tiếp nhận và trả lời góp ý, phản ánh về môi trường";
                     string body = "   <p><span style='font-size: 14.0pt; line-height: 125%;'>K&iacute;nh gửi &Ocirc;ng/B&agrave;: <span>"+ newsData.UserFullName +"</span></span></p>  " +
                                 "   <p><span style='font-size: 14.0pt; line-height: 125%;'>Nội dung G&oacute;p &yacute;, phản &aacute;nh của &Ocirc;ng/B&agrave; đ&atilde; được Tổng cục <span>M&ocirc;i trường </span>tiếp nhận v&agrave; sẽ trả lời theo quy định. <span>&Ocirc;ng/B&agrave; </span>vui l&ograve;ng <a href='http://thongtinhaichieu.vea.gov.vn/home/tracuu'>Tra cứu kết quả</a> trả lời tr&ecirc;n <span>Hệ thống</span>.</span></p>  " +
-                                "   <p><span style='font-size: 14.0pt; line-height: 125%;'>&Ocirc;ng /B&agrave; c&oacute; thể chỉnh sửa, bổ sung th&ocirc;ng tin G&oacute;p &yacute; <strong><u>tại đây.</u></strong>" +
+                                "   <p><span style='font-size: 14.0pt; line-height: 125%;'>&Ocirc;ng /B&agrave; c&oacute; thể chỉnh sửa, bổ sung th&ocirc;ng tin G&oacute;p &yacute; <strong><a href='"+ linkUpdate + "'>tại đây</a></strong>." +
                                 "   <br><br>" +
                                 "   <p><span style='font-size: 14.0pt; line-height: 125%;'>Lưu &yacute;:</span></p>  " +
                                 "   <p><span style='font-size: 14.0pt; line-height: 125%;'>- Mọi th&ocirc;ng tin trong email n&agrave;y cần được bảo mật.</span></p> " +
