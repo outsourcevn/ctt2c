@@ -14,7 +14,7 @@ namespace AppPortal.AdminSite.Services
         {
             // Plug in your email service here to send an email.
             var messages = new MimeMessage();
-            messages.From.Add(new MailboxAddress("", userName));
+            messages.From.Add(new MailboxAddress("TỔNG CỤC MÔI TRƯỜNG", userName));
             messages.To.Add(new MailboxAddress("", email));
             messages.Subject = subject;
 

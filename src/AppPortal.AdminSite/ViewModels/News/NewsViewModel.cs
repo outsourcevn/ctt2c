@@ -55,6 +55,9 @@ namespace AppPortal.AdminSite.ViewModels.News
         public int? IsPosition { get; set; }
         public string MaPakn { get; set; }
         public string fileUpload { get; set; }
+
+        [Display(Name = "Nội dung bổ sung")]
+        public string Noidungbosung { get; set; }
     }
 
     public class HomeNewsViewModel

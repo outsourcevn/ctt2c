@@ -59,6 +59,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label asp-for="Noidungbosung" class="control-label"></label>
+                                <textarea rows="20" cols="30" asp-for="Noidungbosung" class="form-control" style="width:100%; height:600px"></textarea>
+                                <span asp-validation-for="Content" class="invalid-feedback"></span>
+                            </div>
+
+                            <div class="form-group">
                                 <label>File Upload:</label>
                                 <span id="fileuploadcontent"></span>
                             </div>

@@ -28,7 +28,7 @@ namespace AppPortal.ApiHost.Controllers
         private readonly INewsLog _newLog;
         private readonly UserManager<ApplicationUser> _userManager;
         public NewsController(
-            IConfiguration configuration, 
+            IConfiguration configuration,
             IAppLogger<NewsController> logger,
              IEmailSender emailSender,
             UserManager<ApplicationUser> userManager,
@@ -46,10 +46,10 @@ namespace AppPortal.ApiHost.Controllers
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("getNews")]
         public IActionResult ListNewsAsync(int? skip = 0, int? page = 1, int? take = 15000, string keyword = "",
-            int? categoryId = -1, int? status = -1, int? type = -1 , string username = "" ,string GroupId = "",
+            int? categoryId = -1, int? status = -1, int? type = -1, string username = "", string GroupId = "",
             int? newlogStatus = -1, string mapakn = "")
         {
-            var query = _newsService.GetLstNewsPaging(out int rows, skip, take, keyword, categoryId, status, type , username , GroupId, newlogStatus, mapakn);
+            var query = _newsService.GetLstNewsPaging(out int rows, skip, take, keyword, categoryId, status, type, username, GroupId, newlogStatus, mapakn);
             var vm = query.Select(n => Mapper.Map<ListItemNewsModel, ListItemNewsViewModel>(n));
             return ResponseInterceptor(vm, rows, new Paging()
             {
@@ -63,9 +63,9 @@ namespace AppPortal.ApiHost.Controllers
 
         [AllowAnonymous]
         [HttpGet("getNewsAno")]
-        public IActionResult ListNewsAno(string name = "" , string email= "" , string sdt = "" , int id = 0, string mapakn = "", int? is_type = null, string khuvuc = "")
+        public IActionResult ListNewsAno(string name = "", string email = "", string sdt = "", int id = 0, string mapakn = "", int? is_type = null, string khuvuc = "")
         {
-            var query = _newsService.GetLstNewsAno(name , email, sdt, id, mapakn, is_type, khuvuc);
+            var query = _newsService.GetLstNewsAno(name, email, sdt, id, mapakn, is_type, khuvuc);
             return Ok(query);
         }
 
@@ -104,9 +104,9 @@ namespace AppPortal.ApiHost.Controllers
 
         [AllowAnonymous]
         [HttpGet("getHomeNewsByCate")]
-        public IActionResult ListHomeNewsAsyncByCate(int? id = 0 , int? number = 0, int? xemnhieu=0)
+        public IActionResult ListHomeNewsAsyncByCate(int? id = 0, int? number = 0, int? xemnhieu = 0)
         {
-            var newsHome = _newsService.GetHomeNewsByCate(id , number,xemnhieu);
+            var newsHome = _newsService.GetHomeNewsByCate(id, number, xemnhieu);
             return ResponseInterceptor(newsHome);
         }
 
@@ -145,7 +145,7 @@ namespace AppPortal.ApiHost.Controllers
             {
 
                 var entityModel = _newsService.GetHomeNewsById(Int32.Parse(ids));
-                if(entityModel != null)
+                if (entityModel != null)
                 {
                     entityModel.Note = note;
                     message = "Cập nhật tin tức thành công";
@@ -178,7 +178,7 @@ namespace AppPortal.ApiHost.Controllers
                     if (Status > 0)
                     {
                         IsStatus converStatus = IsStatus.pending;
-                        if(Status == 1)
+                        if (Status == 1)
                         {
                             converStatus = IsStatus.publish;
                         }
@@ -203,7 +203,7 @@ namespace AppPortal.ApiHost.Controllers
             }
             return ResponseInterceptor(message);
         }
-        
+
 
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("UpdateStatus")]
@@ -215,7 +215,7 @@ namespace AppPortal.ApiHost.Controllers
                 if (Id > 0)
                 {
                     var entityModel = _newsService.GetNewsById(Id);
-                    if(Status > 0)
+                    if (Status > 0)
                     {
                         entityModel.IsStatus = Status;
                     }
@@ -225,7 +225,7 @@ namespace AppPortal.ApiHost.Controllers
                     // Update log file
 
                 }
-               
+
             }
             catch (System.Exception ex)
             {
@@ -239,7 +239,7 @@ namespace AppPortal.ApiHost.Controllers
             return ResponseInterceptor(message);
         }
 
-        
+
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpPost("HomeNewsCreateOrUpdate")]
         public IActionResult HomeNewsCreateOrUpdate(int? Id, [FromBody] HomeNewsViewModel model)
@@ -320,7 +320,7 @@ namespace AppPortal.ApiHost.Controllers
                     entityModel.Noidungbosung = model.Noidungbosung;
                     _newsService.AddOrUpdate(entityModel);
                 }
-              
+
             }
             catch (System.Exception ex)
             {
@@ -501,7 +501,7 @@ namespace AppPortal.ApiHost.Controllers
 
         // delete all
         [Authorize(PolicyRole.EDIT_ONLY)]
-        [HttpPost("delete-all-new")]        
+        [HttpPost("delete-all-new")]
         public IActionResult DeleteAllNew([FromBody] string[] ids)
         {
             if (ids == null || ids.Count() == 0)
@@ -545,11 +545,11 @@ namespace AppPortal.ApiHost.Controllers
                     var dataNews = _newsService.GetNewsById(int.Parse(id));
                     string subject = "Hệ thống tiếp nhận và trả lời góp ý, phản ánh về môi trường";
                     string body = "   <p><span style='font-size: 14.0pt; line-height: 115%;'>K&iacute;nh gửi &Ocirc;ng/B&agrave;: " + dataNews.UserFullName + "</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Nội dung G&oacute;p &yacute;, phản &aacute;nh của &Ocirc;ng/B&agrave; đ&atilde; được xử l&yacute; v&agrave; Đăng tải tr&ecirc;n Hệ thống th&ocirc;ng tin. &Ocirc;ng/B&agrave; vui l&ograve;ng <a href='http://thongtinhaichieu.vea.gov.vn/home/tracuu'>Tra cứu kết quả</a> tr&ecirc;n Hệ thống.</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>&nbsp;</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Tr&acirc;n trọng !</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Hệ thống tiếp nhận v&agrave; trả lời g&oacute;p &yacute;, phản &aacute;nh về m&ocirc;i trường</span></p>  "+
- "  <p><span style='font-size: 14.0pt; line-height: 115%;'>Tổng cục M&ocirc;i trường</span></p>  ";
+                     "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Nội dung G&oacute;p &yacute;, phản &aacute;nh của &Ocirc;ng/B&agrave; đ&atilde; được xử l&yacute; v&agrave; Đăng tải tr&ecirc;n Hệ thống th&ocirc;ng tin. &Ocirc;ng/B&agrave; vui l&ograve;ng <a href='http://thongtinhaichieu.vea.gov.vn/home/tracuu'>Tra cứu kết quả</a> tr&ecirc;n Hệ thống.</span></p>  " +
+                     "   <p><span style='font-size: 14.0pt; line-height: 115%;'>&nbsp;</span></p>  " +
+                     "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Tr&acirc;n trọng !</span></p>  " +
+                     "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Hệ thống tiếp nhận v&agrave; trả lời g&oacute;p &yacute;, phản &aacute;nh về m&ocirc;i trường</span></p>  " +
+                     "  <p><span style='font-size: 14.0pt; line-height: 115%;'>Tổng cục M&ocirc;i trường</span></p>  ";
                     if (!string.IsNullOrEmpty(dataNews.UserEmail))
                     {
                         await _emailSender.SendEmailAsync(dataNews.UserEmail, subject, body, String.Empty,
@@ -607,7 +607,7 @@ namespace AppPortal.ApiHost.Controllers
             var queryUser = _userManager.Users;
             var username = newView.username;
             var note = newView.note;
-            var userid = await  _userManager.GetUserAsync(User);
+            var userid = await _userManager.GetUserAsync(User);
             if (ids == null || ids.Count() == 0)
             {
                 return ToHttpBadRequest("The ids is required.");
@@ -615,8 +615,8 @@ namespace AppPortal.ApiHost.Controllers
             string message = "";
             try
             {
-                _newsService.UpdateStatus(ids , IsStatus.phancong);
-                
+                _newsService.UpdateStatus(ids, IsStatus.phancong);
+
                 var item = _newsService.GetNewsById(Int32.Parse(ids));
                 if (item != null)
                 {
@@ -633,7 +633,8 @@ namespace AppPortal.ApiHost.Controllers
                         if (userFrom != null)
                         {
                             var newlogEx = _newLog.GetNewLogPhanCong(item.Id);
-                            if (newlogEx == null) {
+                            if (newlogEx == null)
+                            {
                                 var logs = new NewsLog();
                                 logs.NewsId = item.Id;
                                 logs.UserName = username;
@@ -657,24 +658,24 @@ namespace AppPortal.ApiHost.Controllers
                                 newlogEx.TypeStatus = IsTypeStatus.moitiepnhan;
                                 _newLog.AddOrUpdate(newlogEx);
                             }
-                            if (userFrom.FullName.ToLower().Contains("sở tài nguyên và môi trường") && !string.IsNullOrEmpty(item.UserEmail))
+                            if (!string.IsNullOrEmpty(item.UserEmail))
                             {
                                 string subject = "Hệ thống tiếp nhận và trả lời góp ý, phản ánh về môi trường";
-                                string body = "   <p><span style='font-size: 14.0pt; line-height: 115%;'>K&iacute;nh gửi &Ocirc;ng/B&agrave;: <span>"+ item.UserFullName +"</span></span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Nội dung G&oacute;p &yacute;, phản &aacute;nh của &Ocirc;ng/B&agrave; đ&atilde; được chuyển tới Sở T&agrave;i nguy&ecirc;n v&agrave; M&ocirc;i trường để xử l&yacute; v&agrave; trả lời theo quy định. &Ocirc;ng/B&agrave; vui l&ograve;ng Tra cứu kết quả trả lời tr&ecirc;n Hệ thống.</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%'>&nbsp;</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Lưu &yacute;:</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>- Mọi th&ocirc;ng tin trong email n&agrave;y cần được bảo mật.</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>- Xin vui l&ograve;ng kh&ocirc;ng trả lời lại email n&agrave;y.</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Tr&acirc;n trọng!</span></p>  " +
- "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Hệ thống tiếp nhận v&agrave; trả lời g&oacute;p &yacute;, phản &aacute;nh về m&ocirc;i trường</span></p>  " +
- "  <p><span style='font-size: 14.0pt; line-height: 115%;'>Tổng cục M&ocirc;i trường</span></p>  ";
+                                string body = "   <p><span style='font-size: 14.0pt; line-height: 115%;'>K&iacute;nh gửi &Ocirc;ng/B&agrave;: <span>" + item.UserFullName + "</span></span></p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Nội dung G&oacute;p &yacute;, phản &aacute;nh của &Ocirc;ng/B&agrave; đ&atilde; được chuyển tới Sở T&agrave;i nguy&ecirc;n v&agrave; M&ocirc;i trường để xử l&yacute; v&agrave; trả lời theo quy định. &Ocirc;ng/B&agrave; vui l&ograve;ng Tra cứu kết quả trả lời tr&ecirc;n Hệ thống.</span></p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%'>&nbsp;</span></p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Lưu &yacute;:</span></p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%;'>- Mọi th&ocirc;ng tin trong email n&agrave;y cần được bảo mật.</span></p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%;'>- Xin vui l&ograve;ng kh&ocirc;ng trả lời lại email n&agrave;y.</span></p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Tr&acirc;n trọng!</span></p>  " +
+                                 "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Hệ thống tiếp nhận v&agrave; trả lời g&oacute;p &yacute;, phản &aacute;nh về m&ocirc;i trường</span></p>  " +
+                                 "  <p><span style='font-size: 14.0pt; line-height: 115%;'>Tổng cục M&ocirc;i trường</span></p>  ";
                                 await _emailSender.SendEmailAsync(item.UserEmail, subject, body, String.Empty,
                                 apiSettings.EmailConfig.Email,
                                 apiSettings.EmailConfig.Password);
                             }
                         }
-                        
+
                     }
                 }
                 message = $"Đã phân công!";
@@ -698,7 +699,7 @@ namespace AppPortal.ApiHost.Controllers
         {
             var news_id = newView.news_id;
             var note = newView.note;
-          
+
             if (news_id == 0 || note == null)
             {
                 return ToHttpBadRequest("The news_id is required.");
@@ -707,9 +708,10 @@ namespace AppPortal.ApiHost.Controllers
             try
             {
                 var newsData = _newsService.GetNewsById(news_id);
-                if (!string.IsNullOrEmpty(newsData.UserEmail)){
+                if (!string.IsNullOrEmpty(newsData.UserEmail))
+                {
                     string subject = "Hệ thống thông tin tiếp nhận góp ý, phản ánh người dân";
-                    string body = "   <p><span style='font-size: 14.0pt; line-height: 115%;'>K&iacute;nh gửi &Ocirc;ng/B&agrave;: <span>"+ newsData.UserFullName + "</span></span></p>  "+
+                    string body = "   <p><span style='font-size: 14.0pt; line-height: 115%;'>K&iacute;nh gửi &Ocirc;ng/B&agrave;: <span>" + newsData.UserFullName + "</span></span></p>  " +
                                  "   <p><span style='font-size: 14.0pt; line-height: 115%;'>Nội dung G&oacute;p &yacute;, phản &aacute;nh của &Ocirc;ng/B&agrave; kh&ocirc;ng thuộc phạm vi xử l&yacute; của Hệ thống, Hệ thống từ chối tiếp nhận G&oacute;p &yacute;, phản &aacute;nh n&agrave;y. &Ocirc;ng/B&agrave; vui l&ograve;ng đọc kỹ phần <a href='http://thongtinhaichieu.vea.gov.vn/news/guideFeedback'>Hướng dẫn G&oacute;p &yacute;, phản &aacute;nh</a>.</span></p>  " +
                                  "   <p><span style='font-size: 14.0pt; line-height: 115%;'>&nbsp;</span></p>  " +
                                  "   <p>&nbsp;</p>  " +
@@ -756,7 +758,7 @@ namespace AppPortal.ApiHost.Controllers
 
                 // 
                 var item = _newsService.GetNewsById(Int32.Parse(ids));
-                if(item != null)
+                if (item != null)
                 {
                     var logs = new NewsLog();
                     logs.NewsId = item.Id;
@@ -767,7 +769,7 @@ namespace AppPortal.ApiHost.Controllers
                     logs.OnCreated = DateTime.Now;
                     _newLog.AddOrUpdate(logs);
                 }
-                
+
 
                 message = $"Đã chuyển lên lãnh đạo tổng cục thành công!";
             }
@@ -831,7 +833,7 @@ namespace AppPortal.ApiHost.Controllers
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("GetDataPhanCong")]
         // save all to Publishs
-        public NewsLog GetDataPhanCong(int id , string username)
+        public NewsLog GetDataPhanCong(int id, string username)
         {
             return _newLog.GetNewsLogByNewsIdUser(id, username);
         }
@@ -899,7 +901,7 @@ namespace AppPortal.ApiHost.Controllers
         [Authorize(PolicyRole.EDIT_ONLY)]
         [HttpGet("phanloai")]
         // AddNewRelated
-        public IActionResult PhanLoai(int? Id ,int? istype)
+        public IActionResult PhanLoai(int? Id, int? istype)
         {
             string message = "";
             try
@@ -941,12 +943,12 @@ namespace AppPortal.ApiHost.Controllers
                     var entityModel = _newsService.GetNewsById((int)Id);
                     if (Id.HasValue && Id > 0)
                     {
-                        if(doituong >= 0)
+                        if (doituong >= 0)
                         {
                             entityModel.doituong = doituong;
                             entityModel.OnUpdated = DateTime.Now;
                         }
-                        
+
                     }
                     _newsService.AddOrUpdate(entityModel);
                     message = "Phân loại đối tượng thành công.";

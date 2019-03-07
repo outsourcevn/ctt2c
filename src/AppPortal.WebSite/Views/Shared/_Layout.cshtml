@@ -52,18 +52,18 @@
     <link rel="stylesheet" href="~/css/tracuu.css">
 
     <script>
-        //if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        //    window.location.href = "http://mthongtinhaichieu.vea.gov.vn";
-        //}
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            window.location.href = "http://mthongtinhaichieu.vea.gov.vn";
+        }
         const appConfig = {};
 
-        appConfig.apiCdnUrl = "http://localhost:54155";
-        appConfig.apiHostUrl = "http://localhost:50642";
-        appConfig.current = "http://localhost:54167";
+        //appConfig.apiCdnUrl = "http://localhost:54155";
+        //appConfig.apiHostUrl = "http://localhost:50642";
+        //appConfig.current = "http://localhost:54167";
 
-        //appConfig.apiCdnUrl = "http://103.9.86.36:8081";
-        //appConfig.apiHostUrl = "http://103.9.86.36:8080";
-        //appConfig.current = "http://mthongtinhaichieu.vea.gov.vn";
+        appConfig.apiCdnUrl = "http://103.9.86.36:8081";
+        appConfig.apiHostUrl = "http://103.9.86.36:8080";
+        appConfig.current = "http://mthongtinhaichieu.vea.gov.vn";
         appConfig.current = "http://thongtinhaichieu.vea.gov.vn";
     </script>
 </head>
