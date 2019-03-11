@@ -118,7 +118,7 @@ function onCompleted(event) {
 
     if ($form.valid()) {
         $("#buttonModel").click();
-        $("#noidungthongbao").html("Góp ý, phản ánh của anh / chị đang được gửi cho hệ thống, xin vui lòng đợi...");
+        $("#noidungthongbao").html("Phản ánh kiến nghị của Ông/Bà đã được gửi thành công, thông tin chi tiết Ông/Bà vui lòng kiểm tra theo địa chỉ thư điện tử " + $("input[id='UserEmail']").val());
 
         var csrfToken = $("input[name='__RequestVerificationToken']").val();
 
