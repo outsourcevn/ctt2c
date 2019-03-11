@@ -20,11 +20,11 @@ namespace AppPortal.AdminSite.Services.Administrator
         private readonly IRepository<NewsRelated, int> _newsRelated;
         private readonly IRepository<Category, int> _category;
         private readonly IAppLogger<NewsService> _appLogger;
-        private readonly IRepository<ReportNews , int> _rptNews;
-        private readonly IRepository<Notifications , int> _notifi;
-        private readonly IRepository<NewsLog , int> _newLog;
-        private readonly IRepository<HomeNews , int> _homeNews;
-        private readonly IRepository<NewsPreview , int> _newsPreview;
+        private readonly IRepository<ReportNews, int> _rptNews;
+        private readonly IRepository<Notifications, int> _notifi;
+        private readonly IRepository<NewsLog, int> _newLog;
+        private readonly IRepository<HomeNews, int> _homeNews;
+        private readonly IRepository<NewsPreview, int> _newsPreview;
         private readonly IRepository<Files, int> _files;
 
         public NewsService(
@@ -151,7 +151,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 nguoidan = nguoidan.Where(x => x.OnCreated >= DateTime.Parse(startdate));
                 doanhnghiep = doanhnghiep.Where(x => x.OnCreated >= DateTime.Parse(startdate));
             }
-            
+
             if (!string.IsNullOrEmpty(enddate))
             {
                 nguoidan = nguoidan.Where(x => x.OnCreated <= DateTime.Parse(enddate));
@@ -233,7 +233,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         }
 
         //Quy trình mới
-        public void ChuyenLenLanhDao(string id ,string note)
+        public void ChuyenLenLanhDao(string id, string note)
         {
             if (!String.IsNullOrEmpty(id))
             {
@@ -254,12 +254,12 @@ namespace AppPortal.AdminSite.Services.Administrator
             return _notifi.Table.Where(x => x.UserName == username).ToList();
         }
 
-        public void UpdateNote(string id , string note)
+        public void UpdateNote(string id, string note)
         {
             if (!String.IsNullOrEmpty(id))
             {
                 var item = _news.GetById(Int32.Parse(id));
-                if(item != null)
+                if (item != null)
                 {
                     item.Note = note;
                     _news.Update(item);
@@ -269,7 +269,7 @@ namespace AppPortal.AdminSite.Services.Administrator
 
         public void AddOrUpdateNotification(Notifications model)
         {
-            if(model.Id != 0)
+            if (model.Id != 0)
             {
                 // la update
                 var item = _notifi.GetById(model.Id);
@@ -329,14 +329,14 @@ namespace AppPortal.AdminSite.Services.Administrator
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.Write(ex.Message);
             }
-            
+
             return dataReturn;
         }
-        
+
         public IQueryable<ReportNews> GetTablesRpt()
         {
             return _rptNews.Table;
@@ -379,7 +379,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 item = model.ModelToEntity(item);
                 _newsRelated.Update(item);
             }
-            else 
+            else
                 _newsRelated.Add(model.ModelToEntity());
         }
 
@@ -393,7 +393,7 @@ namespace AppPortal.AdminSite.Services.Administrator
 
                 entity.IsStatus = model.IsStatus != null ? (IsStatus)model.IsStatus : IsStatus.tiepnhan;
                 entity.OnUpdated = DateTime.Now;
-                _news.Update(entity);               
+                _news.Update(entity);
             }
             else
             {
@@ -484,7 +484,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                     entity.CategoryId = 12;
                 }
                 entity.OnUpdated = DateTime.Now;
-                _news.Update(entity);               
+                _news.Update(entity);
             }
             else
             {
@@ -518,7 +518,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         public void Delete(int id)
         {
             var entity = _news.GetById(id);
-            if(entity != null)
+            if (entity != null)
             {
                 _news.Delete(entity);
             }
@@ -565,7 +565,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 if (ids == null || ids.Count() == 0) return count;
                 ids.ToList().ForEach(item =>
                 {
-                    if(int.TryParse(item, out int Id))
+                    if (int.TryParse(item, out int Id))
                     {
                         count += UpdateNews(Id, false, IsStatus.deleted, true);
                     }
@@ -583,7 +583,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         {
             int count = 0;
             try
-            {               
+            {
                 if (ids == null || ids.Count() == 0) return count;
                 ids.ToList().ForEach(item =>
                 {
@@ -642,10 +642,10 @@ namespace AppPortal.AdminSite.Services.Administrator
                 {
                     newDetail.CountView++;
                 }
-                
+
                 _homeNews.Update(newDetail);
             }
-           
+
 
             return newDetail;
         }
@@ -655,13 +655,13 @@ namespace AppPortal.AdminSite.Services.Administrator
             return _newsPreview.Table.SingleOrDefault(x => x.Id == id);
         }
 
-        public IList<HomeNews> GetHomeNewsByCate(int? id = 0 , int? number = 0,int? xemnhieu = 0)
+        public IList<HomeNews> GetHomeNewsByCate(int? id = 0, int? number = 0, int? xemnhieu = 0)
         {
             var homeNews = _homeNews.Table.Where(x => x.IsStatus != IsStatus.deleted && !x.OnDeleted.HasValue);
-         
+
             homeNews = homeNews.Where(z => z.IsStatus == IsStatus.publish);
-            
-            
+
+
             if (id != 0)
             {
                 homeNews = homeNews.Where(x => x.CategoryId == id);
@@ -725,7 +725,7 @@ namespace AppPortal.AdminSite.Services.Administrator
         public void UpdateStatus(string id, IsStatus status)
         {
             var data = _news.GetById(Int32.Parse(id));
-            if(data != null)
+            if (data != null)
             {
                 data.IsStatus = status;
                 _news.Update(data);
@@ -755,6 +755,9 @@ namespace AppPortal.AdminSite.Services.Administrator
 
         private string ConvertToUnSign(string input)
         {
+            if (string.IsNullOrEmpty(input)){
+                return null;
+            }
             input = input.Trim();
             for (int i = 0x20; i < 0x30; i++)
             {
@@ -768,6 +771,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 str2 = str2.Remove(str2.IndexOf("?"), 1);
             }
             return str2;
+
         }
 
         private bool infoUser(IsType isType = 0, string mapakn = "")
@@ -823,12 +827,14 @@ namespace AppPortal.AdminSite.Services.Administrator
 
             if (!string.IsNullOrEmpty(khuvuc))
             {
-                query = query.Where(x => ConvertToUnSign(x.Tinhthanhpho).ToLower().IndexOf(khuvuc.ToLower()) > 0 || x.Tinhthanhpho.ToLower().Contains(khuvuc.ToLower()));
+                query = query.Where(x => x.Tinhthanhpho != null);
+                query = query.Where(x => ConvertToUnSign(x.Tinhthanhpho).ToLower().IndexOf(khuvuc.ToLower()) >= 0 || x.Tinhthanhpho.ToLower().Contains(khuvuc.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(name))
             {
-                query = query.Where(x => ConvertToUnSign(x.UserFullName).ToLower().IndexOf(name.ToLower()) > 0 || x.UserFullName.ToLower().Contains(name.ToLower()));
+                query = query.Where(x => x.Tinhthanhpho != null);
+                query = query.Where(x => ConvertToUnSign(x.UserFullName).ToLower().IndexOf(name.ToLower()) >= 0 || x.UserFullName.ToLower().Contains(name.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(sdt))

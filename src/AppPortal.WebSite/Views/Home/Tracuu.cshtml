@@ -84,7 +84,9 @@
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <select class="form-control" id="thanhpho"></select>
+                                        <select class="form-control" id="thanhpho">
+
+                                        </select>
                                     </div>
                                 </div>
                                 
@@ -140,8 +142,9 @@
                 url: appConfig.apiHostUrl + "/api/ProcessWorks/city",
                 success: function (response) {
                     $("#thanhpho").empty();
+                    $("#thanhpho").append("<option value=''>Tất cả địa phương</option>")
                     for (var i = 0; i < response.length; i++) {
-                        $("#thanhpho").append("<option id = '" + i + "' value='" + response[i].id + "'>" + response[i].name + "</option>")
+                        $("#thanhpho").append("<option value='" + response[i].name + "'>" + response[i].name + "</option>")
                     }
 
                 }, error: function (er) {
@@ -149,36 +152,25 @@
                 }
             });
 
+            $("#thanhpho").change(function () {
+                is_type = $("#linhvuc").val();
+                khuvuc = $(this).val();
+                getdata();
+            })
+
+            $("#linhvuc").change(function () {
+                khuvuc = $("#thanhpho").val();
+                is_type = $(this).val();
+                getdata();
+            })
+
             $(".myInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
                 $(".dropdown-menu li .tracuu-localtion").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
-            $(".tracuu-type-0").click(function () {
-                $('#tracuu-type').text($(this).text());
-                is_type = 0;
-                console.log(is_type);
-                getdata();
-            });
-            $(".tracuu-type-6").click(function () {
-                $('#tracuu-type').text($(this).text());
-                is_type = 6;
-                console.log(is_type);
-                getdata();
-            });
-            $(".tracuu-type-7").click(function () {
-                $('#tracuu-type').text($(this).text());
-                is_type = 7;
-                console.log(is_type);
-                getdata();
-            });
-            $(".tracuu-type-8").click(function () {
-                $('#tracuu-type').text($(this).text());
-                is_type = 8;
-                console.log(is_type);
-                getdata();
-            });
+         
 
             $(".tracuu-localtion").click(function () {
                 $('#tracuu-localtion').text($(this).text());
