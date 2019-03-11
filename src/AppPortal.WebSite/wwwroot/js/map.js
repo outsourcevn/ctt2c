@@ -15,7 +15,7 @@ function(Map, Point, SimpleMarkerSymbol, TextSymbol, Font, Graphic, GraphicsLaye
   map.on("load", DisplayStationsOnMap);
   map.on("zoom-end", TurnOnOffGraphicLayerOnMap);
   map.on("mouse-move", showCoordinates);
-  map.on("mouse-out", hideCoordinates);
+    map.on("mouse-out", hideCoordinates);
   
 function DisplayStationsOnMap()
 {
@@ -42,8 +42,10 @@ function DisplayStationsOnMap()
 						var station_name = dulieu[i].station_name;
 						var station_id = dulieu[i].id;
 						var station = new Point();								
-						station.x = dulieu[i].latitude;
-						station.y = dulieu[i].longitude;
+						//station.x = dulieu[i].latitude;
+						//station.y = dulieu[i].longitude;
+                        station.x = dulieu[i].longitude;
+                        station.y = dulieu[i].latitude;
 						if (station_name == "Hoàng Mai")
 						{
 							station.x = 105.87;
@@ -173,8 +175,10 @@ function ZoomToSelectedStation(station_name)
 		{
 			var dulieu = data.stations[0];
 			var station = new Point();							
-			station.x = dulieu.latitude;
-			station.y = dulieu.longitude;
+			//station.x = dulieu.latitude;
+   //         station.y = dulieu.longitude;
+            station.x = dulieu.longitude;
+            station.y = dulieu.latitude;
 			if (station_name == "Hoàng Mai")
 			{
 				station.x = 105.87;
@@ -237,4 +241,4 @@ function hideCoordinates(evt)
 	//hide mouse coordinates
 	dom.byId("info").innerHTML = "";
 }
-});	
+});

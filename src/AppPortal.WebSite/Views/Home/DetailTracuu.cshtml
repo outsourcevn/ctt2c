@@ -127,7 +127,7 @@
             content += '</p>'
             content += '</div>'
 
-            var ketqua = '<br><div class="MB20"> <div class="alert alert-info" role="alert"> <h4 class="text-TT">Trả lời kiến nghị:</h4> <p class="text-justify"></p><hr> <p> </p><p><i class="MR5 fa fa-file-text-o" aria-hidden="true"></i> File đính kèm: '
+            var ketqua = '<br><div class="MB20"> <div class="alert alert-info" role="alert"> <h4 class="text-TT">Trả lời kiến nghị:</h4> <p class="text-justify">' + data[0].newslog.Data +'</p><hr> <p> </p><p><i class="MR5 fa fa-file-text-o" aria-hidden="true"></i> File đính kèm: '
             if (data[0].newslog.files.length > 0) {
                 for (var i = 0; i < data[0].newslog.files.length; i++) {
                     ketqua += '<a href = "https://nguoidan.chinhphu.vn/documents/10701/0/14784CNQ12-%C4%90K_137241218140304.pdf" target="_blank" >' + data[0].newslog.files[i].name + '</a>';

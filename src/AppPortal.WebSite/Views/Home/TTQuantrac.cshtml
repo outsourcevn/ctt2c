@@ -9,8 +9,17 @@
 
 <script src="https://js.arcgis.com/3.27/"></script>
 <script type="text/javascript" src="~/js/map.js"></script>
+<script type="text/javascript" src="~/js/map2.js"></script>
 <style>
     #esrimap {
+        height: 640px;
+        width: 620px;
+        margin: 0;
+        padding: 0;
+        border: 0px solid #73AD21;
+    }
+
+    #esrimap2 {
         height: 640px;
         width: 620px;
         margin: 0;
@@ -75,7 +84,9 @@
                         </div>
 
                         <div class="col-md-7">
-                            <iframe src="//arcgisportal.ceid.gov.vn/portal/apps/Embed/index.html?webmap=5d2bfa67ff5c4719acf1dcc760ff0d2e&extent=101.0548,17.0821,113.9967,23.4069&home=true&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light" width="640" height="800"></iframe>
+                            <div id="esrimap2">
+                                <span id="info" style="position:absolute; left:20px; bottom:10px; color:#000; z-index:50;"></span>
+                            </div>
                         </div>
                     </div>
 
@@ -180,17 +191,34 @@
             url: "http://202.60.104.121/eos/services/call/json/qi_detail?station_id=" + id,
             success: function (data, status) {
                 if (data.success == true) {
-                    var colorCo = getColor(data.res.CO.max);
-                    var colorno = getColor(data.res.NOx.max);
-                    var coloro3 = getColor(data.res.O3.max);
-                    var colorso2 = getColor(data.res.SO2.max);
                     var dataColumn = [
                         ['Khí', 'Giá trị', { role: 'annotation' }, { role: 'style' }],
-                        ['CO', data.res.CO.max, data.res.CO.max, colorCo],
-                        ['NOx', data.res.NOx.max, data.res.NOx.max, colorno],
-                        ['O3', data.res.O3.max, data.res.O3.max, coloro3],
-                        ['SO2', data.res.SO2.max, data.res.SO2.max, colorso2],
                     ];
+
+                    if (data.res && data.res.CO) {
+                        var colorCo = getColor(data.res.CO.max);
+                        dataColumn.push(['CO', data.res.CO.max, data.res.CO.max, colorCo]);
+                    }
+
+                    if (data.res && data.res.NOx) {
+                        var colorCo = getColor(data.res.NOx.max);
+                        dataColumn.push(['NOx', data.res.NOx.max, data.res.NOx.max, colorCo]);
+                    }
+
+                    if (data.res && data.res.O3) {
+                        var colorCo = getColor(data.res.O3.max);
+                        dataColumn.push(['O3', data.res.O3.max, data.res.O3.max, colorCo]);
+                    }
+
+                    if (data.res && data.res.SO2) {
+                        var colorCo = getColor(data.res.SO2.max);
+                        dataColumn.push(['SO2', data.res.SO2.max, data.res.SO2.max, colorCo]);
+                    }
+
+                    if (data.res && data.res.TSP) {
+                        var colorCo = getColor(data.res.TSP.max);
+                        dataColumn.push(['TSP', data.res.TSP.max, data.res.TSP.max, colorCo]);
+                    }
 
                     var dataGoogle = google.visualization.arrayToDataTable(dataColumn);
                     var options = {

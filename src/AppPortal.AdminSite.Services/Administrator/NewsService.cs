@@ -821,6 +821,11 @@ namespace AppPortal.AdminSite.Services.Administrator
                 query = query.Where(x => x.IsType == (IsType)is_type);
             }
 
+            if (!string.IsNullOrEmpty(khuvuc))
+            {
+                query = query.Where(x => ConvertToUnSign(x.Tinhthanhpho).ToLower().IndexOf(khuvuc.ToLower()) > 0 || x.Tinhthanhpho.ToLower().Contains(khuvuc.ToLower()));
+            }
+
             if (!string.IsNullOrEmpty(name))
             {
                 query = query.Where(x => ConvertToUnSign(x.UserFullName).ToLower().IndexOf(name.ToLower()) > 0 || x.UserFullName.ToLower().Contains(name.ToLower()));
