@@ -118,7 +118,7 @@ function onCompleted(event) {
 
     if ($form.valid()) {
         $("#buttonModel").click();
-        $("#noidungthongbao").html("Góp ý, phản ánh của anh / chị đang được gửi cho hệ thống, xin vui lòng đợi...");
+        $("#noidungthongbao").html('Góp ý, phản ánh của anh/chị đã được bổ sung thành công.');
 
         var csrfToken = $("input[name='__RequestVerificationToken']").val();
 
@@ -145,11 +145,6 @@ function onCompleted(event) {
             },
             function (success) {
                 if (!success.did_error) {
-                    $("#btnoffprocess").click();
-                    if (success.MaPakn) {
-                        $("#noidungthongbao").html('Góp ý, phản ánh của anh/chị đã được gửi thành công và đã được thông báo vào địa chỉ hòm thư <span style="color:red" >' + $("input[id='UserEmail']").val() + '</span>.');
-                    }
-
                 }
             },
             function (xhr, status, error) {

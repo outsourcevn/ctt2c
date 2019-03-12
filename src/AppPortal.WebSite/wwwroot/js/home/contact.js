@@ -118,7 +118,7 @@ function onCompleted(event) {
 
     if ($form.valid()) {
         $("#buttonModel").click();
-        $("#noidungthongbao").html("Phản ánh kiến nghị của Ông/Bà đã được gửi thành công, thông tin chi tiết Ông/Bà vui lòng kiểm tra theo địa chỉ thư điện tử " + $("input[id='UserEmail']").val());
+        $("#noidungthongbao").html("Phản ánh kiến nghị của Ông/Bà đã được gửi thành công, thông tin chi tiết Ông/Bà vui lòng kiểm tra theo địa chỉ thư điện tử <span style='color: red' >" + $("input[id = 'UserEmail']").val() + "</span>.");
 
         var csrfToken = $("input[name='__RequestVerificationToken']").val();
 
@@ -165,10 +165,6 @@ function onCompleted(event) {
             },
             function (success) {
                 if (!success.did_error) {
-                    $("#btnoffprocess").click();
-                    if (success.MaPakn) {
-                        $("#noidungthongbao").html('Góp ý, phản ánh của anh/chị đã được gửi thành công và đã được thông báo vào địa chỉ hòm thư <span style="color:red" >' + $("input[id='UserEmail']").val() + '</span>.');
-                    }
                     createCaptcha();
                     $form.clearFormData();
                     $("#Content").data("kendoEditor").value('');
