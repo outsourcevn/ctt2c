@@ -54,29 +54,30 @@
 <link href="~/css/news.css" rel="stylesheet" />
 
 <div class="">
+    
     <div id="detail-news" class="col-md-8">
-       
+
     </div>
     <div class="col-md-4" style="margin-top:20px;">
-       
-            <section class="block block_business_news">
-                <h3 class="block_title_black">TIN MỚI<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div class="right">
-                        <ul id="tin-moi-content"></ul>
-                    </div>
+
+        <section class="block block_business_news">
+            <h3 class="block_title_black">TIN MỚI<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+            <div class="content">
+                <div class="right">
+                    <ul id="tin-moi-content"></ul>
                 </div>
-            </section>
-        
-            <section class="block block_business_news">
-                <h3 class="block_title_black">TIN XEM NHIỀU<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
-                <div class="content">
-                    <div class="right">
-                        <ul id="tin-xem-nhieu-content"></ul>
-                    </div>
+            </div>
+        </section>
+
+        <section class="block block_business_news">
+            <h3 class="block_title_black">TIN XEM NHIỀU<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
+            <div class="content">
+                <div class="right">
+                    <ul id="tin-xem-nhieu-content"></ul>
                 </div>
-            </section>
-      
+            </div>
+        </section>
+
     </div>
 
 </div>
@@ -140,7 +141,11 @@
             content += data.model.Content;
             content += '<br />';
             content += '<br />';
-            content += '<p  style="text-align:right;font-size:17px;font-family: Arial, Helvetica, sans-serif;"><b>' + data.model.SourceNews + '/' + data.model.UserFullName + '</b></p >';
+            content += '<p  style="text-align:right;font-size:17px;font-family: Arial, Helvetica, sans-serif;"><b>' + data.model.SourceNews + '/' + data.model.UserFullName + '</b><br>';
+            content += '<a style="text-align:right;" href="mailto:?subject= Bài viết hay về môi trường &amp;body= ' + location.href + '"  title = "Share by Email" >';
+
+            content += '<img height = "30px"  src="http://png-2.findicons.com/files/icons/573/must_have/48/mail.png">';
+            content += '</a></p >';
 
             $('#detail-news').html(content);
             $('p span span').css({ 'line-height': '20px' });
