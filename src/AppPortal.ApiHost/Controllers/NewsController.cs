@@ -75,6 +75,14 @@ namespace AppPortal.ApiHost.Controllers
             int? categoryId = -1, int? status = -1, int? type = -1, string username = "", string GroupId = "")
         {
             var query = _newsService.GetLstHomeNewsPaging(out int rows, skip, take, keyword, categoryId, status, type, username, GroupId);
+            foreach (var item in query)
+            {
+                var user = _userManager.Users.Where(x => x.Id == item.UserId).SingleOrDefault();
+                if (user != null)
+                {
+                    item.UserFullName = user.FullName;
+                }
+            }
             var vm = query.Select(n => Mapper.Map<ListItemNewsModel, ListItemNewsViewModel>(n));
             return ResponseInterceptor(vm, rows, new Paging()
             {

@@ -70,6 +70,11 @@ var grid = $("#dataGrid").data("kendoGrid");
         };
 
         $("#dataGrid").kendoGrid({
+            toolbar: ["excel"],
+            excel: {
+                allPages: true,
+                fileName: "Tổng hợp tất cả tin tức.xlsx"
+            },
             dataSource: dataSource,
             pageable: {
                 refresh: true,
@@ -102,7 +107,7 @@ var grid = $("#dataGrid").data("kendoGrid");
                     field: "category_id", title: "Chuyên đề", template: "#=templateCate(category_id)#", width: "90px"
                 },  
                 {
-                    field: "user_id", title: "Người tạo", template: "#=templateNguoitao(user_id)#", width: "50px"
+                    field: "user_full_name", title: "Người tạo",  width: "50px"
                 },
                 {
                     field: "on_created", title: "Ngày tạo", template: "#=templateDate(on_created)#", width: "50px"
@@ -111,7 +116,19 @@ var grid = $("#dataGrid").data("kendoGrid");
                     field: "id", title: "Hành động", width: "100px",
                     template: "#=templateAction(id , is_status)#"
                 }
-            ]
+            ],
+            excelExport: function (e) {
+                var sheet = e.workbook.sheets[0];
+
+                sheet.rows[0].cells[6] = "";
+                for (var i = 1; i < sheet.rows.length; i++) {
+                    var row = sheet.rows[i];
+                    row.cells[6].value = "";
+
+                    row.cells[2].value = templateStatusExport(row.cells[2].value);
+                    row.cells[3].value = templateCateExport(row.cells[3].value);
+                }
+            }
         }).addClass("table table-responsive");
 
         $('#txtName').keypress(function (e) {
@@ -603,6 +620,19 @@ var html = '';
     return html;
 }
 
+function templateCateExport(cate) {
+    var html = '';
+    switch (cate) {
+        case 1: html ='Văn bản chính sách'; break;
+        case 3: html = 'Văn bản chính sách'; break;
+        case 4: html = 'Phản ánh môi trường'; break;
+        case 13: html = 'Tin truyền thông'; break;
+        case 14: html = 'Giải pháp sáng kiến'; break;
+    }
+
+    return html;
+}
+
 //name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="baocaoketqua(' + news_id + ')">Tổng hợp kết quả xử lý</button>';
 // core function
 function onChange(arg) {
@@ -714,6 +744,19 @@ function templateStatus(status) {
     }
     return name;
 }
+
+function templateStatusExport(status) {
+    var name = '';
+    // label-success label-danger label-info label-warning
+    switch (status) {
+        case 0:name = "Đang chờ duyệt"; break;
+        case 1: name =  "Đã duyệt"; break;
+        case 4: name = "Đã xóa"; break;
+    }
+    return name;
+}
+
+
 
 function templateSpecial(status, news_id) {
     var name = '';

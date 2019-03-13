@@ -31,6 +31,8 @@ namespace AppPortal.AdminSite.Services.Models.News
         public string MaPakn { get; set; }
         public string UserId { get; set; }
 
+        public string UserFullName { get; set; }
+
         public NewsLog newsLog { get; set; }
     }
 

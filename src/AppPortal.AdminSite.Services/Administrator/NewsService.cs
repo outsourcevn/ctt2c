@@ -1040,7 +1040,8 @@ namespace AppPortal.AdminSite.Services.Administrator
                 fileUpload = x.fileUpload,
                 IsType = x.IsType,
                 Category_Id = x.CategoryId,
-                UserId = x.UserId 
+                UserId = x.UserId,
+                UserFullName = x.UserFullName
             }).ToList();
             return dataRetun;
         }

@@ -48,5 +48,7 @@ namespace AppPortal.ApiHost.ViewModels.News
         public NewsLog newsLog { get; set; }
         [JsonProperty("user_id")]
         public string UserId { get; set; }
+        [JsonProperty("user_full_name")]
+        public string UserFullName { get; set; }
     }
 }

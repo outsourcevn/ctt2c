@@ -5,7 +5,7 @@
 
 <div id="example">
     <button type="button" style="margin: 10px 0px" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Thêm @ViewData["Title"]
+        Thêm quy chuẩn, tiêu chuẩn
     </button>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -72,6 +72,7 @@
     </script>
 
     @section Scripts{
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
         <script>
             var jwtToken = getCookie("ACCESS-TOKEN");
             var windowTemplate = kendo.template($("#windowTemplate").html());
@@ -173,9 +174,15 @@
                 }).data("kendoWindow");
 
                 var grid = $("#grid").kendoGrid({
+                    toolbar: ["excel"],
+                    excel: {
+                        allPages:true,
+                        fileName: "Tổng hợp văn bản quy chuẩn, tiêu chuẩn.xlsx"
+                    },
                     dataSource: dataSource,
                     pageable: true,
-                    height: 550,
+                    reorderable: true,
+                    height: 650,
                     columns: [
                         { field: "Id", title: "ID", width: "50px" },
                         { field: "url", title: "Tải xuống", width: "100px", template: "#=templateimage(url)#" },
@@ -250,7 +257,7 @@
             });
 
             function templateimage(url) {
-                return '<a href="' + url +'" target="_blank"><i class="fa fa-download"></i></a>';
+                return '<a href="' + url + '" target="_blank"><i class="fa fa-download"></i></a>';
             }
 
             function templateIsPublish(OnPublish) {
