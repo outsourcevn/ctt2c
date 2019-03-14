@@ -169,7 +169,7 @@ namespace AppPortal.ApiHost.Controllers
                 var fileName = ((int)ts.TotalSeconds).ToString() + ' '+ formFile.FileName;
                 if (fileType.IndexOf("image") != -1 || fileType.IndexOf("video") != -1)
                 {
-                    if (fileSize < 50000000)
+                    if (fileSize < 4000000000)
                     {
                         if (formFile.Length > 0)
                         {
@@ -207,7 +207,7 @@ namespace AppPortal.ApiHost.Controllers
                     var fileName1 = ((int)ts1.TotalSeconds).ToString() + ' ' + formFileImg.FileName;
                     if (fileTypeImg.IndexOf("image") != -1 || fileTypeImg.IndexOf("video") != -1)
                     {
-                        if (fileSizeImg < 50000000)
+                        if (fileSizeImg < 4000000000)
                         {
                             if (formFileImg.Length > 0)
                             {
