@@ -165,11 +165,6 @@ function onCompleted(event) {
             },
             function (success) {
                 if (!success.did_error) {
-                    createCaptcha();
-                    $form.clearFormData();
-                    $("#Content").data("kendoEditor").value('');
-                    $("#filebaocao tbody").html("");
-                    $("#contactSubmit").attr("disabled", false);
                 }
             },
             function (xhr, status, error) {
@@ -187,6 +182,12 @@ function onCompleted(event) {
                 $form.children('.form-item').find('button').removeClass('disabled').removeAttr('disabled');
             }
         )
+        // create new captch and clear form
+        createCaptcha();
+        $form.clearFormData();
+        $("#Content").data("kendoEditor").value('');
+        $("#filebaocao tbody").html("");
+        $("#contactSubmit").attr("disabled", false);
     } else {
         $("#contactSubmit").attr("disabled", false);
     }
