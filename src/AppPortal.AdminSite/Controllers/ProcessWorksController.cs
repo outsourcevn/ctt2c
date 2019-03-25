@@ -63,7 +63,7 @@ namespace AppPortal.AdminSite.Controllers
             List<SelectListItem> statusNews = new List<SelectListItem>() {
                 new SelectListItem() { Value =  ((int)IsStatus.pending).ToString(), Text = "Đang chờ xử lý", Selected = true },
                 new SelectListItem() { Value =  ((int)IsStatus.publish).ToString(), Text = "Công bố" },
-                new SelectListItem() { Value =  ((int)IsStatus.draft).ToString(), Text = "Tiếp nhận & Phân công" },
+                new SelectListItem() { Value =  ((int)IsStatus.draft).ToString(), Text = "Tiếp nhận & chuyển" },
                 new SelectListItem() { Value =  ((int)IsStatus.approved).ToString(), Text = "Xác nhận duyệt yêu cầu" },
                 new SelectListItem() { Value =  ((int)IsStatus.deleted).ToString(), Text = "Yêu cầu không hợp lệ." },
             };
@@ -90,7 +90,7 @@ namespace AppPortal.AdminSite.Controllers
             List<SelectListItem> statusNews = new List<SelectListItem>() {
                 new SelectListItem() { Value =  ((int)IsStatus.pending).ToString(), Text = "Đang chờ xử lý", Selected = true },
                 new SelectListItem() { Value =  ((int)IsStatus.publish).ToString(), Text = "Công bố" },
-                new SelectListItem() { Value =  ((int)IsStatus.draft).ToString(), Text = "Tiếp nhận & Phân công" },
+                new SelectListItem() { Value =  ((int)IsStatus.draft).ToString(), Text = "Tiếp nhận & chuyển" },
                 new SelectListItem() { Value =  ((int)IsStatus.approved).ToString(), Text = "Xác nhận duyệt yêu cầu" },
                 new SelectListItem() { Value =  ((int)IsStatus.deleted).ToString(), Text = "Yêu cầu không hợp lệ." },
             };

@@ -164,7 +164,7 @@ $(document).ready(function () {
                 ids: ngNews.lstNewsId
             }
 
-            kendo.confirm("Xác nhận phân công?")
+            kendo.confirm("Xác nhận chuyển?")
                 .done(function () {
                     callAjax(
                         `${appConfig.apiHostUrl}/${NEWS_API.SAVE_PUBLISH_NEW_USERNAME}`,

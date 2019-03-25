@@ -768,7 +768,7 @@ function templateSpecial(status, news_id) {
         case 3: name = '<label class="label label-success">Đã xác nhận đăng tin</label>'; break;
         case 4: name = '<label class="label label-danger">Đã xóa</label>'; break;
         case 5:
-            name = '<label class="label label-danger">Đã phân công</label> <br> <span id="phancong' + news_id + '"><span>';
+            name = '<label class="label label-danger">Đã chuyển</label> <br> <span id="phancong' + news_id + '"><span>';
 
             getDataPhanCong(news_id, GroupId);
             break;

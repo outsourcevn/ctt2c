@@ -44,6 +44,7 @@ $(document).ready(function () {
     if (GroupId === 'dvct') {
         $("#HomeNews").hide();
         $("#AnhVideo").hide();
+        $("#Vanban").hide();
         $('.sysconfig').hide();
     }
 
@@ -165,7 +166,7 @@ $(document).ready(function () {
                 type: 3
             }
 
-            kendo.confirm("Xác nhận phân công?")
+            kendo.confirm("Xác nhận chuyển?")
                 .done(function () {
                     callAjax(
                         `${appConfig.apiHostUrl}/${NEWS_API.SAVE_PUBLISH_NEW_USERNAME}`,
