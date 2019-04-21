@@ -867,7 +867,8 @@ namespace AppPortal.AdminSite.Services.Administrator
         }
 
         public IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15000, string keyword = "",
-            int? categoryId = -1, int? status = -1, int? type = -1 , string username = "", string GroupId = "", int? newlogStatus = -1, string mapakn = "")
+            int? categoryId = -1, int? status = -1, int? type = -1 , string username = "",
+            string GroupId = "", int? newlogStatus = -1, string mapakn = "", int? doituong = -1)
         {
             //var query = GetTables().Where(x => x.IsType == IsType.noType && x.IsType != IsType.topic);
             var query = GetTables();
@@ -904,6 +905,7 @@ namespace AppPortal.AdminSite.Services.Administrator
             if (categoryId > 0) query = query.Where(x => x.CategoryId == categoryId);
             if (status >= 0) query = query.Where(x => x.IsStatus == (IsStatus)status);
             if (type > 0) query = query.Where(x => x.IsType == (IsType)type);
+            if (doituong >= 0) query = query.Where(x => x.doituong == doituong);
             query = query.Where(x => x.OnDeleted.HasValue == false);
             rows = query.Count();
 

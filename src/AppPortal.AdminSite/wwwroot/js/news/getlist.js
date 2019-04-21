@@ -2,7 +2,8 @@
 var jwtToken = getCookie("ACCESS-TOKEN");
 var grid = $("#dataGrid").data("kendoGrid");
 var currentStatus = -1;
-var newlogStatus = -1;
+var newlogStatus = -1; newLogType = -1; newDoituong = -1;
+
 (function ($) {
     'use strict';
     $(document).ready(function () {
@@ -46,7 +47,8 @@ var newlogStatus = -1;
                         categoryId: ngNews.categoryId,
                         status: currentStatus,
                         newlogStatus: newlogStatus,
-                        type: ngNews.type,
+                        type: newLogType,
+                        doituong: newDoituong,
                         username: username,
                         GroupId: GroupId
                     }
@@ -186,6 +188,27 @@ var newlogStatus = -1;
                 newlogStatus: newlogStatus
             });
         });
+
+        $('#fillter_phanloai').change(function (e) {
+            var grid = $('#dataGrid').data('kendoGrid');
+            var filter = $(this).val();
+            newLogType = filter;
+            grid.dataSource.page(1);
+            grid.dataSource.read({
+                type: newLogType
+            });
+        });
+
+        $('#fillter_doituong').change(function (e) {
+            var grid = $('#dataGrid').data('kendoGrid');
+            var filter = $(this).val();
+            newDoituong = filter;
+            grid.dataSource.page(1);
+            grid.dataSource.read({
+                doituong: filter
+            });
+        });
+
         $("#dataGrid tbody").on("click", "tr", function (e) {
 
             var rowElement = this;

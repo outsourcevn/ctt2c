@@ -116,7 +116,8 @@
                     var idFirst = 0;
                     var lstId = [['Trạm', 'Giá trị AQI', { role: 'annotation' }, { role: 'style' }]];
                     for (var i = 0; i < dulieu.length; i++) {
-                        if (dulieu[i].qi > 0) {
+                        var tentram = dulieu[i].station_name;
+                        if (dulieu[i].qi > 0 && tentram.indexOf("Formosa") == -1) {
                             if (idFirst == 0) {
                                 idFirst = dulieu[i].id;
                             }
