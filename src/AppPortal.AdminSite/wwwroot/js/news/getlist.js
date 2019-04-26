@@ -608,6 +608,10 @@ function xemchitietNoiDung(news_id) {
                 var ttdl = success.ttdl;
                
                 element.find(".tieude").val(info.Name);
+                element.find(".UserFullName").html(info.UserFullName);
+                element.find(".UserEmail").html(info.UserEmail);
+                element.find(".UserPhone").html(info.UserPhone);
+                element.find(".UserAddress").html(info.AddressString + " " + info.phuongxa + " " + info.quanhuyen + " " + info.tinhthanhpho);
                
                 editor.value(info.Content);
 
@@ -846,7 +850,7 @@ function templatePhanloai3(istype, id) {
     var html = '';
     switch (istype) {
         case 5: html = ' <span class="label label-success">Hoàn thành xử lý</span>'; break;
-        case 6: html = ' <span class="label label-success">Mới tiếp nhận</span>'; break;
+        case 6: html = ' <span class="label label-danger">Mới tiếp nhận</span>'; break;
         case 7: html = ' <span class="label label-success">Chuyển trả lại</span>'; break;
     }
 

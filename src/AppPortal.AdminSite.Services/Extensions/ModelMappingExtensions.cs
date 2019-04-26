@@ -314,7 +314,14 @@ namespace AppPortal.AdminSite.Services.Extensions
                 IsView = (int)item.IsView,
                 fileUpload = item.fileUpload,
                 MaPakn = item.MaPakn,
-                Noidungbosung = item.Noidungbosung
+                Noidungbosung = item.Noidungbosung,
+                UserPhone = item.UserPhone,
+                tinhthanhpho = item.tinhthanhpho,
+                quanhuyen = item.quanhuyen,
+                phuongxa = item.phuongxa,
+                TenCaNhanToChuc = item.TenCaNhanToChuc,
+                Thoigianxayra = item.Thoigianxayra,
+                AddressString = item.AddressString
             };
         }
 

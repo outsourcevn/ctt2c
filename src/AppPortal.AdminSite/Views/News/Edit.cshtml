@@ -5,7 +5,7 @@
     var title = "Sửa góp ý, phản ánh";
 
     var formView = "frm_edit_news";
-
+    var address = @Model.UserAddress + " " + @Model.phuongxa + " " + @Model.quanhuyen + " " + Model.tinhthanhpho;
     var StatusMessage = (string)TempData["StatusMessage"];
 
     if (Model != null)
@@ -13,6 +13,7 @@
       
     }
     ViewData["Title"] = title;
+
 }
 
 @section Styles {
@@ -52,15 +53,28 @@
                                 <span asp-validation-for="Name" class="invalid-feedback"></span>
                             </div>
 
+                            @if (!String.IsNullOrEmpty(Model.TenCaNhanToChuc))
+                            {
+                                <div class="form-group">
+                                    <label asp-for="TenCaNhanToChuc" class="control-label">Tên tổ chức, cá nhân gây ô nhiễm:</label>
+                                    <input asp-for="TenCaNhanToChuc" class="form-control" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Thoigianxayra" class="control-label">Thời gian xảy ra hoặc phát hiện ô nhiễm:</label>
+                                    <input type="text" value="@Model.Thoigianxayra.ToString().Substring(0 , @Model.Thoigianxayra.ToString().IndexOf(" "))" class="form-control" />
+                                </div>
+                            }
+
                             <div class="form-group">
                                 <label asp-for="Content" class="control-label"></label>
-                                <textarea rows="20" cols="30" asp-for="Content" class="form-control" style="width:100%; height:600px"></textarea>
+                                <textarea rows="20" cols="30" asp-for="Content" class="form-control" style="width:100%; height:450px"></textarea>
                                 <span asp-validation-for="Content" class="invalid-feedback"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="Noidungbosung" class="control-label"></label>
-                                <textarea rows="20" cols="30" asp-for="Noidungbosung" class="form-control" style="width:100%; height:600px"></textarea>
+                                <textarea rows="10" cols="30" asp-for="Noidungbosung" class="form-control" style="width:100%; height:350px"></textarea>
                                 <span asp-validation-for="Content" class="invalid-feedback"></span>
                             </div>
 
@@ -72,12 +86,30 @@
                         </div>
                         <div class="col-md-3" style="border-left: 1px solid #dfdfdf">
                             <div class="form-group">
+                                <label asp-for="UserEmail" class="control-label">Email:</label>
+                                <input asp-for="UserEmail" class="form-control" disabled="disabled" />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="UserFullName" class="control-label">Tên tổ chức, cá nhân:</label>
+                                <input asp-for="UserFullName" class="form-control" disabled="disabled" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Điện thoại:</label>
+                                <input asp-for="UserPhone" class="form-control" disabled="disabled" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Địa chỉ:</label>
+                                <input value="@address" class="form-control" disabled="disabled" />
+                            </div>
+
+                            <div class="form-group">
                                 <label asp-for="Note" class="control-label">Ghi chú</label>
                                 <textarea rows="5" asp-for="Note" class="form-control" mav></textarea>
                                 <span asp-validation-for="Note" class="invalid-feedback"></span>
                             </div>
-                            <input type="hidden" id="fileUpload"  asp-for="fileUpload"  />
-                            
+                            <input type="hidden" id="fileUpload" asp-for="fileUpload" />
+
                         </div>
                     </div>
 

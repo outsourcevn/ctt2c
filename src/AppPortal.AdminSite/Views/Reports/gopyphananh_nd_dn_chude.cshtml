@@ -20,34 +20,7 @@
                     enddate: enddate
                 },
                 success: function (result) {
-                    //var data = google.visualization.arrayToDataTable([
-                    //    ["Loại", "Số lượng", { role: "style" }],
-                    //    ["Tiếp nhận", result[0].count, "#b87333"],
-                    //    ["Phân công", result[1].count, "silver"],
-                    //    ["Đang xử lý", result[3].count, "gold"],
-                    //    ["Công bố", result[2].count, "color: #e5e4e2"]
-                    //]);
-
-                    //var view = new google.visualization.DataView(data);
-                    //view.setColumns([0, 1,
-                    //    {
-                    //        calc: "stringify",
-                    //        sourceColumn: 1,
-                    //        type: "string",
-                    //        role: "annotation"
-                    //    },
-                    //    2]);
-
-                    //var options = {
-                    //    title: "Thống kê số lượng câu hỏi của người dân và doanh nghiệp theo chủ đề",
-                    //    width: 800,
-                    //    height: 500,
-                    //    bar: { groupWidth: "80%" },
-                    //    legend: { position: "none" },
-                    //};
-                    //var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-                    //chart.draw(view, options);
-
+                   
                     $("#grid").kendoGrid({
                         toolbar: ["excel"],
                         excel: {
