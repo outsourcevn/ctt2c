@@ -285,6 +285,29 @@ namespace AppPortal.Infrastructure.Data.Migrations
                     b.ToTable("HomeNews","AppPortal");
                 });
 
+            modelBuilder.Entity("AppPortal.Core.Entities.Logs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("created_at");
+
+                    b.Property<string>("events");
+
+                    b.Property<string>("fullname");
+
+                    b.Property<string>("ip_address");
+
+                    b.Property<string>("type");
+
+                    b.Property<long>("user_id");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs","AppPortal");
+                });
+
             modelBuilder.Entity("AppPortal.Core.Entities.Media", b =>
                 {
                     b.Property<int>("Id")
