@@ -29,6 +29,7 @@ namespace AppPortal.Infrastructure.App
             modelBuilder.Entity<Media>(ConfigureMedia);
             modelBuilder.Entity<Config>(ConfigureConfig);
             modelBuilder.Entity<Vanban>(ConfigureVanban);
+            modelBuilder.Entity<Logs>(ConfigureLogs);
         }
 
         #region Mapping
@@ -226,6 +227,11 @@ namespace AppPortal.Infrastructure.App
         private void ConfigureVanban(EntityTypeBuilder<Vanban> b)
         {
             b.ToTable("Vanban", "AppPortal");
+        }
+
+        private void ConfigureLogs(EntityTypeBuilder<Logs> b)
+        {
+            b.ToTable("Logs", "AppPortal");
         }
 
         #endregion
