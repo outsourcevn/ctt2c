@@ -14,7 +14,7 @@ namespace AppPortal.AdminSite.Services
         {
             // Plug in your email service here to send an email.
             var messages = new MimeMessage();
-            messages.From.Add(new MailboxAddress("TỔNG CỤC MÔI TRƯỜNG", userName));
+            messages.From.Add(new MailboxAddress("TỔNG CỤC MÔI TRƯỜNG", userName+ "@vea.gov.vn"));
             messages.To.Add(new MailboxAddress("", email));
             messages.Subject = subject;
 
@@ -30,7 +30,7 @@ namespace AppPortal.AdminSite.Services
                     // For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
                     client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Connect("mail.vea.gov.vn", 587, false);
 
                     // Note: only needed if the SMTP server requires authentication
                     client.Authenticate(userName, passWord);

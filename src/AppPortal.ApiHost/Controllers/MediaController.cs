@@ -13,6 +13,7 @@ using AppPortal.Core.Entities;
 using AppPortal.Core.Interfaces;
 using AppPortal.Infrastructure.Identity;
 using AutoMapper;
+using MailKit.Net.Imap;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,9 +31,11 @@ namespace AppPortal.ApiHost.Controllers
         private readonly IMediaService _mediaService;
         private readonly ICategoryService _categoryService;
         private IHostingEnvironment _hostingEnvironment;
+        private readonly IEmailSender _emailSender;
         public MediaController(
            IConfiguration configuration,
            IAppLogger<MediaController> logger,
+           IEmailSender emailSender,
            IMediaService mediaService,
            IHostingEnvironment environment,
            ICategoryService categoryService) : base(configuration, logger)
@@ -40,6 +43,7 @@ namespace AppPortal.ApiHost.Controllers
             _categoryService = categoryService;
             _mediaService = mediaService;
             _hostingEnvironment = environment;
+            _emailSender = emailSender;
         }
 
         [AllowAnonymous]
@@ -70,6 +74,14 @@ namespace AppPortal.ApiHost.Controllers
         public IActionResult getVanban(string type, string searchValue = "", int number = 0)
         {
             return Ok(_mediaService.GetVanban(type, searchValue,number));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("mailAsync")]
+        public async Task<IActionResult> mailAsync()
+        {
+            await _emailSender.SendEmailAsync("dungtd1308@gmail.com", "subject", "body", "", "thongtinhaichieu", "ttmta314");
+            return Ok();
         }
 
         [AllowAnonymous]
