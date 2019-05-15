@@ -264,7 +264,25 @@
                             </ul>
                         </li>
                     </secure-content>
-
+                    <secure-content asp-controller="Media">
+                        <li id="AnhVideo" class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-angle-double-right"></i>
+                                <p>
+                                    Quản trị hệ thống
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/media/Logs" class="nav-link">
+                                        <i class="fa fa-list-ul nav-icon"></i>
+                                        <p>Nhật ký truy cập</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </secure-content>
                     <secure-content asp-controller="Reports">
                         <li class="nav-header sysadmin tonghopbaocao">Tổng hợp báo cáo</li>
                         <li class="nav-item sysadmin tonghopbaocao">

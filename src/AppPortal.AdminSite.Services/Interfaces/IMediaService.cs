@@ -17,5 +17,7 @@ namespace AppPortal.AdminSite.Services.Interfaces
         Vanban AddOrEditVanban(Vanban model);
         IList<Vanban> GetVanban(string type, string searchValue = "", int number = 0);
         void deleteVanban(int id);
+
+        IList<Logs> GetLogs();
     }
 }

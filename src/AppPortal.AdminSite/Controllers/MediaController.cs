@@ -17,5 +17,10 @@ namespace AppPortal.AdminSite.Controllers
         {
             return View();
         }
+
+        public IActionResult Logs()
+        {
+            return View();
+        }
     }
 }

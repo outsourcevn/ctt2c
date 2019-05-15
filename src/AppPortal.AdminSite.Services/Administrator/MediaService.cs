@@ -15,14 +15,17 @@ namespace AppPortal.AdminSite.Services.Administrator
         private readonly IRepository<Media, int> _media;
         private readonly IRepository<Config, int> _config;
         private readonly IRepository<Vanban, int> _vanban;
+        private readonly IRepository<Logs, int> _logs;
         public MediaService(
             IRepository<Config, int> config,
             IRepository<Vanban, int> vanban,
+            IRepository<Logs, int> logs,
             IRepository<Media, int> medias)
         {
             _media = medias;
             _config = config;
             _vanban = vanban;
+            _logs = logs;
         }
         public Config AddOrEditConfig(string type, string url)
         {
@@ -181,8 +184,10 @@ namespace AppPortal.AdminSite.Services.Administrator
                 }
                 
             }
-
- 
+        }
+        public IList<Logs> GetLogs()
+        {
+            return _logs.Table.OrderByDescending(x => x.created_at).ToList();
         }
 
     }

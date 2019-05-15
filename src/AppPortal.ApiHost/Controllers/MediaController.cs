@@ -73,6 +73,13 @@ namespace AppPortal.ApiHost.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("getLog")]
+        public IActionResult getLog()
+        {
+            return Ok(_mediaService.GetLogs());
+        }
+
+        [AllowAnonymous]
         [HttpPost("AddOrEdit")]
         public IActionResult AddOrEdit(Media models)
         {

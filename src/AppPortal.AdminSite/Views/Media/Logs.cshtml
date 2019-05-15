@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewData["Title"] = "Nhật ký hệ thống";
+}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+
+<div id="example">
+    <div id="grid"></div>
+
+    <div id="window"></div>
+
+    <script type="text/x-kendo-template" id="windowTemplate">
+        <strong>#= description # ?</strong>
+        <div style="margin-top: 70px;text-align: center;">
+            <button class="k-button" id="yesButton">Xóa</button>
+            <button class="k-button" id="noButton"> Không</button>
+        </div>
+
+    </script>
+
+    @section Scripts{
+        <script>
+            var jwtToken = getCookie("ACCESS-TOKEN");
+            var windowTemplate = kendo.template($("#windowTemplate").html());
+            function submit() {
+                $("#uploadFileData").submit();
+            }
+            $(document).ready(function () {
+                $("#uploadFileData").attr("action", `${appConfig.apiHostUrl}` + '/api/Media/upLoadFile');
+                $("#files").kendoUpload({
+                    multiple: false,
+                    validation: {
+                        allowedExtensions: [".mp4", ".mpeg", ".flv", ".mkv", ".avi", ".webm"]
+                    }
+                });
+
+                $("#filesImage").kendoUpload({
+                    multiple: false,
+                    validation: {
+                        allowedExtensions: [".gif", ".jpg", ".png", "jpeg"]
+                    }
+                });
+
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: appConfig.apiHostUrl + "/api/Media/getLog",
+                            beforeSend: function (req) {
+                                req.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                            },
+                            dataType: "json"
+                        },
+                        parameterMap: function (options, operation) {
+                            if (operation !== "read" && options) {
+                                return {
+                                    models: kendo.stringify(options)
+                                };
+                            }
+                        }
+
+                    },
+                    batch: false,
+                    pageSize: 20
+                });
+
+                var grid = $("#grid").kendoGrid({
+                    dataSource: dataSource,
+                    toolbar: ["excel"],
+                    excel: {
+                        fileName: "Log hệ thống.xlsx"
+                    },
+                    pageable: true,
+                    height: 550,
+                    columns: [
+                        { field: "Id", title: "ID", width: "30px" },
+                        { field: "fullname", title: "Tên người dùng", width: "200px" },
+                        { field: "events", title: "Hành động", width: "150px" },
+                        { field: "ip_address", title: "Địa chỉ ip", width: "100px" },
+                        { field: "created_at", title: "Ngày truy cập", format: "{0:MM/dd/yyyy h:mm tt}", width: "100px" },
+                    ],
+                    editable: "inline"
+
+                }).data("kendoGrid");;
+
+                $("form#uploadFileData").submit(function (e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        type: 'POST',
+                        data: formData,
+                        success: function (data) {
+                            messagerSuccess('Thông báo', data.success);
+                            $("#grid").data("kendoGrid").dataSource.read();
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });
+
+                });
+            });
+
+            function templateimage(url) {
+                return '<a href="' + url + '" target="_blank"><video src="' + url + '" alt="Smiley face" height="auto" width="200px"></video></a>';
+            }
+
+            function templateIsPublish(OnPublish) {
+                if (OnPublish == false) {
+                    return '<input type="checkbox" disabled>';
+                } else {
+                    return '<input type="checkbox" checked disabled>';
+                }
+            }
+
+
+            function customBoolEditor(container, options) {
+                var guid = kendo.guid();
+                $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="IsPublish" data-type="boolean" data-bind="checked:IsPublish">').appendTo(container);
+                $('<label class="k-checkbox-label" for="' + guid + '">&#8203;</label>').appendTo(container);
+            }
+
+            function formatDate(date) {
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var ampm = hours >= 12 ? 'pm' : 'am';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                var strTime = hours + ':' + minutes;
+                return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+            }
+
+
+        </script>
+    }
+</div>
+
+
