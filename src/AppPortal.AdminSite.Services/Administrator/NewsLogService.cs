@@ -116,6 +116,11 @@ namespace AppPortal.AdminSite.Services.Administrator
 
         public IList<NewsLog> GetNewsLogByNewsIdNameFrom(int NewsId, string UserName)
         {
+            if(UserName == "is_ano")
+            {
+                var data = _newslog.Table.Where(x => x.NewsId == NewsId).Where(x => x.GroupNameTo == "dvct").FirstOrDefault();
+                UserName = data.UserName;
+            }
             return _newslog.Table.Where(x => x.NewsId == NewsId)
                 .Where(z => z.UserName == UserName)
                 .ToList();

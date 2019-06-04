@@ -478,13 +478,75 @@ namespace AppPortal.ApiHost.Controllers
             var entity = _newsService.GetNewsById(Id.Value);
             if (entity == null)
             {
-                return ToHttpBadRequest("Tin tức không tồn tại.");
+                return ToHttpBadRequest("Góp ý/ Phản ánh không tồn tại.");
             }
             string message = "";
             try
             {
                 _newsService.Delete(Id.Value);
-                message = "Tin tức đã được xóa.";
+                message = "Góp ý/ Phản ánh đã được xóa.";
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
+
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpPost("Restore")]
+        public IActionResult Restore(int? Id)
+        {
+            if (!Id.HasValue)
+            {
+                return ToHttpBadRequest("The Id is request");
+            }
+            var entity = _newsService.GetNewsById(Id.Value);
+            if (entity == null)
+            {
+                return ToHttpBadRequest("Góp ý/ Phản ánh không tồn tại.");
+            }
+            string message = "";
+            try
+            {
+                _newsService.Restore(Id.Value);
+                message = "Góp ý/ Phản ánh đã được khôi phục.";
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogInformation(ex.ToString());
+                return ToHttpBadRequest(AddErrors(new IdentityError
+                {
+                    Code = "Exceptions",
+                    Description = ex.ToString(),
+                }));
+            }
+            return ResponseInterceptor(message);
+        }
+
+        [Authorize(PolicyRole.EDIT_ONLY)]
+        [HttpPost("ShiftDelete")]
+        public IActionResult ShiftDelete(int? Id)
+        {
+            if (!Id.HasValue)
+            {
+                return ToHttpBadRequest("The Id is request");
+            }
+            var entity = _newsService.GetNewsById(Id.Value);
+            if (entity == null)
+            {
+                return ToHttpBadRequest("Tin tức không tồn tại.");
+            }
+            string message = "";
+            try
+            {
+                _newsService.ShiftDelete(Id.Value);
+                message = "Tin tức đã được xóa vĩnh viễn.";
             }
             catch (System.Exception ex)
             {

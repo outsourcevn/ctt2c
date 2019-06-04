@@ -9,7 +9,7 @@ var nameAlias = {
 }
 $(document).ready(function () {
     var jwtToken = getCookie("ACCESS-TOKEN");
-    if (GroupId !== 'sysadmin' && GroupId !== 'huynv') {
+    if (GroupId !== 'sysadmin') {
         $(".sysadmin").hide();
     } else {
         $(".sysadmin").show();
@@ -19,14 +19,7 @@ $(document).ready(function () {
         $("#btn-phan-cong").hide();
         $("#btn-bao-cao").hide();
         $(".tonghopbaocao").show();
-    }
-
-    if (GroupId !== 'cbtddn') {
-        $("#addNews").hide();
-        $(".createnews").hide();
-    } else {
-        $("#addNews").show();
-        $(".createnews").show();
+        $(".ttdl").show();
     }
 
     if (GroupId === 'ldtcmt') {
@@ -36,16 +29,12 @@ $(document).ready(function () {
         $(".tonghopbaocao").show();
     }
 
-    if (GroupId === 'btnmt' || GroupId === 'bnk') {
-        $(".newdata").hide();
-        $("#btn-bao-cao").show();
-    }
-
     if (GroupId === 'dvct') {
         $("#HomeNews").hide();
         $("#AnhVideo").hide();
         $("#Vanban").hide();
         $('.sysconfig').hide();
+        $(".ttdl").hide();
     }
 
 
@@ -1014,7 +1003,7 @@ function congkhai(news_id) {
     $("#exampleModalNew_congkhai .IdReport").val("0");
     $("#exampleModalNew_congkhai .NewsId").val(news_id);
     callAjax(
-        `${appConfig.apiHostUrl}` + '/api/NewsLog/GetNewsLogByNewsIdNameFrom?NewsId=' + news_id + "&UserName=anonymous",
+        `${appConfig.apiHostUrl}` + '/api/NewsLog/GetNewsLogByNewsIdNameFrom?NewsId=' + news_id + "&UserName=is_ano",
         null,
         AjaxConst.GetRequest,
         function (xhr) {

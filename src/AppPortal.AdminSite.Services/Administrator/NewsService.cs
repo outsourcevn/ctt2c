@@ -520,6 +520,27 @@ namespace AppPortal.AdminSite.Services.Administrator
             var entity = _news.GetById(id);
             if (entity != null)
             {
+                entity.OnDeleted = DateTime.Now;
+                entity.IsStatus = IsStatus.deleted;
+                _news.Update(entity);
+            }
+        }
+        public void Restore(int id)
+        {
+            var entity = _news.GetById(id);
+            if (entity != null)
+            {
+                entity.OnDeleted = null;
+                entity.IsStatus = IsStatus.tiepnhan;
+                _news.Update(entity);
+            }
+        }
+
+        public void ShiftDelete(int id)
+        {
+            var entity = _news.GetById(id);
+            if (entity != null)
+            {
                 _news.Delete(entity);
             }
         }
@@ -872,11 +893,6 @@ namespace AppPortal.AdminSite.Services.Administrator
         {
             //var query = GetTables().Where(x => x.IsType == IsType.noType && x.IsType != IsType.topic);
             var query = GetTables();
-            if (status == -1)
-            {
-                //query = query.Where(x => !x.OnDeleted.HasValue && !x.IsShow);
-            }
-
             if (!string.IsNullOrEmpty(username))
             {
                 if (GroupId == "ldtcmt" || GroupId == "ttdl")
@@ -906,7 +922,15 @@ namespace AppPortal.AdminSite.Services.Administrator
             if (status >= 0) query = query.Where(x => x.IsStatus == (IsStatus)status);
             if (type > 0) query = query.Where(x => x.IsType == (IsType)type);
             if (doituong >= 0) query = query.Where(x => x.doituong == doituong);
-            query = query.Where(x => x.OnDeleted.HasValue == false);
+            if(status == 4)
+            {
+                query = query.Where(x => x.OnDeleted.HasValue == true);
+            }
+            else
+            {
+                query = query.Where(x => x.OnDeleted.HasValue == false);
+            }
+            
             rows = query.Count();
 
             if (skip > rows)

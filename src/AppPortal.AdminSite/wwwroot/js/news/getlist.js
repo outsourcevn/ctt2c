@@ -1,7 +1,11 @@
 ﻿var currentData = [];
 var jwtToken = getCookie("ACCESS-TOKEN");
 var grid = $("#dataGrid").data("kendoGrid");
-var currentStatus = -1;
+var urlHref = new URL(window.location.href);
+var currentStatus = urlHref.searchParams.get("status");
+if (currentStatus === null) {
+    currentStatus = -1;
+}
 var newlogStatus = -1; newLogType = -1; newDoituong = -1;
 
 (function ($) {
@@ -451,6 +455,88 @@ function xoapakn(news_id) {
     }
 }
 
+function xoapaknvv(news_id) {
+    var grid = $('#dataGrid').data('kendoGrid');
+    if (news_id !== "") {
+        kendo.confirm("Bạn có xác nhận muốn xóa vĩnh viễn?")
+            .done(function () {
+                callAjax(
+                    `${appConfig.apiHostUrl}/api/News/ShiftDelete` + '?Id=' + news_id,
+                    null,
+                    AjaxConst.PostRequest,
+                    function (xhr) {
+                        xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                    },
+                    function (success) {
+                        if (!success.did_error) {
+                            messagerSuccess('Thông báo', success.model);
+                        }
+                        if (grid) {
+                            grid.clearSelection();
+                            grid.dataSource.read();
+                        }
+                    },
+                    function (xhr, status, error) {
+                        if (xhr.status === 400) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            err.forEach(function (item) {
+                                messagerError(item.Code, item.Description);
+                            });
+                        } else {
+                            messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                        }
+                    },
+                    function (complete) {
+                        $('#btn-delete-all').removeClass('disabled').removeAttr('disabled');
+                    }
+                )
+            })
+    } else {
+        messagerWarn('Thông báo', 'Vui lòng chọn tin.');
+    }
+}
+
+function restore(news_id) {
+    var grid = $('#dataGrid').data('kendoGrid');
+    if (news_id !== "") {
+        kendo.confirm("Bạn có xác nhận muốn hoàn tác góp ý phản ánh này?")
+            .done(function () {
+                callAjax(
+                    `${appConfig.apiHostUrl}/api/News/Restore` + '?Id=' + news_id,
+                    null,
+                    AjaxConst.PostRequest,
+                    function (xhr) {
+                        xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+                    },
+                    function (success) {
+                        if (!success.did_error) {
+                            messagerSuccess('Thông báo', success.model);
+                        }
+                        if (grid) {
+                            grid.clearSelection();
+                            grid.dataSource.read();
+                        }
+                    },
+                    function (xhr, status, error) {
+                        if (xhr.status === 400) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            err.forEach(function (item) {
+                                messagerError(item.Code, item.Description);
+                            });
+                        } else {
+                            messagerError(MESSAGES.ERR_CONNECTION.key, MESSAGES.ERR_CONNECTION.value);
+                        }
+                    },
+                    function (complete) {
+                        $('#btn-delete-all').removeClass('disabled').removeAttr('disabled');
+                    }
+                )
+            })
+    } else {
+        messagerWarn('Thông báo', 'Vui lòng chọn tin.');
+    }
+}
+
 function baocaolanhdao(news_id) {
     $("#IdNotes").val(news_id);
     $("#exampleModalNew4").modal('show');
@@ -547,37 +633,42 @@ function updateTrangThai(isStatus) {
 }
 
 function templateAction(is_status, news_id) {
-    //var name = '<button type="button" class="btn btn-primary btn-xs" onclick="xacminhthongtin(' + news_id + ')">Xác minh</button>';
     var name = '';
-    var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Xem chi tiết</a>";
-    var deletebutton = "<a class='btn btn-danger btn-xs' style='color: white' onclick='xoapakn("+ news_id +")'><i class='fa fa-edit'></i>&nbsp;Xóa</a>";
-    var tuchoibutton = "<a class='btn btn-danger btn-xs' style='color: white' onclick='tuchoitiepnhan(" + news_id + ")'><i class='fa fa-edit'></i>Từ chối tiếp nhận</a>";
-    // label-success label-danger label-info label-warning
-    if (GroupId === "ttdl") {
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Chuyển</button>';
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Đăng tin</button>';
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
-        name = name + deletebutton;
-        name = name + tuchoibutton;
-        name = name + editbutton;
-    }
+    if (is_status !== 4) {
+        var editbutton = "<a class='btn btn-primary btn-xs' href='/News/Edit?id=" + news_id + "'><i class='fa fa-edit'></i>&nbsp;Xem chi tiết</a>";
+        var deletebutton = "<a class='btn btn-danger btn-xs' style='color: white' onclick='xoapakn(" + news_id + ")'><i class='fa fa-edit'></i>&nbsp;Xóa</a>";
+        var tuchoibutton = "<a class='btn btn-danger btn-xs' style='color: white' onclick='tuchoitiepnhan(" + news_id + ")'><i class='fa fa-edit'></i>Từ chối tiếp nhận</a>";
+        // label-success label-danger label-info label-warning
+        if (GroupId === "ttdl") {
+            name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="phancong(' + news_id + ')">Chuyển</button>';
+            name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="congkhai(' + news_id + ')">Đăng tin</button>';
+            name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
+            name = name + deletebutton;
+            name = name + tuchoibutton;
+            name = name + editbutton;
+        }
 
-    if (GroupId === "ldtcmt") {
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
-        //name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem nội dung</button>';
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="gopychidao(' + news_id + ')">Góp ý chỉ đạo</button>';
-    }
+        if (GroupId === "ldtcmt") {
+            name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitiet(' + news_id + ')">Xem báo cáo</button>';
+            //name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem nội dung</button>';
+            name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="gopychidao(' + news_id + ')">Góp ý chỉ đạo</button>';
+        }
 
-    if (GroupId === "dvct") {
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Báo cáo kết quả xử lý</button>';
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem chi tiết</button>';
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketquatralai(' + news_id + ')">Chuyển trả lại</button>';
-    }
+        if (GroupId === "dvct") {
+            name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Báo cáo kết quả xử lý</button>';
+            name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="xemchitietNoiDung(' + news_id + ')">Xem chi tiết</button>';
+            name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketquatralai(' + news_id + ')">Chuyển trả lại</button>';
+        }
 
-    if (GroupId === "dvct_dp") {  
-        name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Nhập kết quả xử lý</button>';
+        if (GroupId === "dvct_dp") {
+            name = name + '<button type="button" class="btn btn-primary btn-xs" onclick="nhapketqua(' + news_id + ')">Nhập kết quả xử lý</button>';
+        }
+    } else {
+        var editbutton2 = "<a class='btn btn-primary btn-xs'  style='color: white' onclick='restore(" + news_id + ")'><i class='fa fa-edit'></i>Khôi phục</a>";
+        var deletebutton2 = "<a class='btn btn-danger btn-xs' style='color: white' onclick='xoapaknvv(" + news_id + ")'><i class='fa fa-edit'></i>Xóa vĩnh viễn</a>";
+        name = editbutton2 + deletebutton2;
     }
-
+    
     return name;
 }
 

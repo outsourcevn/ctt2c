@@ -14,6 +14,8 @@ namespace AppPortal.AdminSite.Services.Interfaces
         void AddOrUpdateHomeNews(HomeNews model);
         int AddOrUpdateNewsPreview(NewsPreview model);
         void Delete(int id);
+        void Restore(int id);
+        void ShiftDelete(int id);
         void DeleteHome(int id);
         void ShiftDeleteHome(int id);
         NewsModel GetNewsById(int id);
