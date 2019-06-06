@@ -162,7 +162,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 //khong phai la bao cao
                 if (typeStatus > 0) item.TypeStatus = (IsTypeStatus)typeStatus;
 
-                if (typeStatus == 0) item.OnXuly = DateTime.Now;
+                if (typeStatus == 5) item.OnXuly = DateTime.Now;
                 // = 0 la bao cao
                 _newslog.Update(item);
                 if (typeStatus == 0)

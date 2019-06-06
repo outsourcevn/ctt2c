@@ -135,11 +135,11 @@ var newlogStatus = -1; newLogType = -1; newDoituong = -1;
 
         if (GroupId !== "dvct") {
             columnsData.push({
-                field: "on_created", title: "Ngày tiếp nhận", template: "#=templateDateTiepnhan(on_created)#", width: "90px"
+                field: "on_created", title: "Ngày tiếp nhận/Ngày gửi báo cáo", template: "#= (news_log != null) ? templateDateTiepnhan(on_created,  news_log.OnXuly) : templateDateTiepnhan(on_created)#", width: "90px"
             });
         } else {
             columnsData.push({
-                field: "news_log.OnCreated", title: "Ngày chuyển/Hoành thành xử lý", template: "#=templateDate(news_log.OnCreated , news_log.OnXuly)#", width: "90px"
+                field: "news_log.OnCreated", title: "Ngày chuyển/Hoành thành xử lý", template: "#=templateDate(news_log.OnCreated , news_log.OnXuly, on_published)#", width: "90px"
             });
         }
         
@@ -957,7 +957,7 @@ function templateContent(content) {
 }
 
 
-function templateDate(date , dateXuly) {
+function templateDate(date, dateXuly, on_published) {
     var html = "";
     if (date) {
         html += "- Ngày chuyển: ";
@@ -968,13 +968,24 @@ function templateDate(date , dateXuly) {
         html += "<br>- Ngày hoàn thành xử lý: ";
         html += new Date(dateXuly).toLocaleString();
     }
+
+    if (on_published) {
+        html += "<br>- Ngày đăng tin: ";
+        html += new Date(on_published).toLocaleString();
+    }
     return html;
 }
 
-function templateDateTiepnhan(date) {
+function templateDateTiepnhan(date, dateXuly) {
     var html = '';
     if (date) {
+        html += "<br>- Ngày tiếp nhận: ";
         html += new Date(date).toLocaleString();
+    }
+
+    if (dateXuly) {
+        html += "<br>- Ngày gửi báo cáo: ";
+        html += new Date(dateXuly).toLocaleString();
     }
     return html;
 }

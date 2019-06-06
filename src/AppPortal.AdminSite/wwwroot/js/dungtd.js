@@ -791,7 +791,41 @@ function nhapketquatralai(news_id) {
         function (complete) {
             $(this).removeClass('disabled').removeAttr('disabled');
         }
-    )
+    );
+
+    var url = `${appConfig.apiHostUrl}` + '/api/News/xemchitiet?Id=' + news_id;
+    callAjax(
+        url,
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (success) {
+            if (!success.did_error) {
+                var info = success.info;
+                var element = $("#thongtinbody_nhapketquatralai");
+                element.find(".tieude").html(info.Name);
+                element.find(".UserFullName").html(info.UserFullName);
+                element.find(".UserEmail").html(info.UserEmail);
+
+                element.find(".noidung").val(info.Content);
+
+                if (info.fileUpload) {
+                    var fileuploadSbt = info.fileUpload.split(",");
+                    var htmlAno = "";
+                    if (fileuploadSbt.length > 0) {
+                        for (var k = 0; k < fileuploadSbt.length; k++) {
+                            var fileItemAno = fileuploadSbt[k];
+                            htmlAno += '<a target="_blank" href="' + fileItemAno + '">' + fileItemAno + '</a></br>';
+                        }
+                        $("#thongtinbody_nhapketquatralai .item-from-file").html(htmlAno);
+                    }
+                }
+            }  
+        }
+    );
 }
 
 function nhapketqua(news_id) {
@@ -849,6 +883,40 @@ function nhapketqua(news_id) {
             $(this).removeClass('disabled').removeAttr('disabled');
         }
     )
+
+    var url = `${appConfig.apiHostUrl}` + '/api/News/xemchitiet?Id=' + news_id;
+    callAjax(
+        url,
+        null,
+        AjaxConst.GetRequest,
+        function (xhr) {
+            $(this).addClass('disabled').attr('disabled', true);
+            xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`);
+        },
+        function (success) {
+            if (!success.did_error) {
+                var info = success.info;
+                var element = $("#thongtinbody_nhapketqua");
+                element.find(".tieude").html(info.Name);
+                element.find(".UserFullName").html(info.UserFullName);
+                element.find(".UserEmail").html(info.UserEmail);
+
+                element.find(".noidung").val(info.Content);
+
+                if (info.fileUpload) {
+                    var fileuploadSbt = info.fileUpload.split(",");
+                    var htmlAno = "";
+                    if (fileuploadSbt.length > 0) {
+                        for (var k = 0; k < fileuploadSbt.length; k++) {
+                            var fileItemAno = fileuploadSbt[k];
+                            htmlAno += '<a target="_blank" href="' + fileItemAno + '">' + fileItemAno + '</a></br>';
+                        }
+                        $("#thongtinbody_nhapketqua .item-from-file").html(htmlAno);
+                    }
+                }
+            }
+        }
+    );
 }
 
 function gopychidao(news_id) {

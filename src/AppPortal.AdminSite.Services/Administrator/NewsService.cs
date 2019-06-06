@@ -815,6 +815,9 @@ namespace AppPortal.AdminSite.Services.Administrator
 
         public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id, string mapakn = "",int? is_type = null, string khuvuc = "")
         {
+            var data = _newLog.Table.Where(x => x.NewsId == id).Where(x => x.GroupNameTo == "dvct").FirstOrDefault();
+            var UserName = data.UserName;
+
             var query = _news.Table.Select(x => new LstItemNews
             {
                 Id = x.Id,
@@ -832,7 +835,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 fileUpload = x.fileUpload,
                 IsType = x.IsType,
                 Tinhthanhpho = x.tinhthanhpho,
-                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == "anonymous").GroupJoin(_files.Table, a => a.Id, b => b.NewsLogId, (a, b) => new NewsLogModel
+                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == UserName).GroupJoin(_files.Table, a => a.Id, b => b.NewsLogId, (a, b) => new NewsLogModel
                 {
                     Id = a.Id,
                     Note = a.Note,
@@ -891,7 +894,6 @@ namespace AppPortal.AdminSite.Services.Administrator
             int? categoryId = -1, int? status = -1, int? type = -1 , string username = "",
             string GroupId = "", int? newlogStatus = -1, string mapakn = "", int? doituong = -1)
         {
-            //var query = GetTables().Where(x => x.IsType == IsType.noType && x.IsType != IsType.topic);
             var query = GetTables();
             if (!string.IsNullOrEmpty(username))
             {
@@ -962,7 +964,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 IsType = x.IsType,
                 doituong = x.doituong,
                 MaPakn = x.MaPakn,
-                newsLog = b.Where(z => z.UserName == username).FirstOrDefault()
+                newsLog = b.Where(z => z.GroupNameTo == "dvct").Where(w => w.NewsId == x.Id).FirstOrDefault()
             });
             if (newlogStatus >= 0) query2 = query2.Where(z => z.newsLog.TypeStatus == (IsTypeStatus)newlogStatus);
             var dataRetun = query2.Select(x => new ListItemNewsModel
