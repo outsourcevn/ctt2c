@@ -45,7 +45,7 @@ function vechart2(lstId) {
 function drawAxisTickColors() {
     $.ajax({
         method: "GET",
-        url: "http://202.60.104.121/eos/services/call/json/get_stations?qi_type=aqi",
+        url: "http://envisoft.gov.vn/eos/services/call/json/get_stations?qi_type=aqi",
         success: function (data, status) {
             if (data.success == true) {
                 var dulieu = data.stations;

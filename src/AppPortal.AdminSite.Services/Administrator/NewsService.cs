@@ -815,9 +815,6 @@ namespace AppPortal.AdminSite.Services.Administrator
 
         public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id, string mapakn = "",int? is_type = null, string khuvuc = "")
         {
-            var data = _newLog.Table.Where(x => x.NewsId == id).Where(x => x.GroupNameTo == "dvct").FirstOrDefault();
-            var UserName = data.UserName;
-
             var query = _news.Table.Select(x => new LstItemNews
             {
                 Id = x.Id,
@@ -835,7 +832,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 fileUpload = x.fileUpload,
                 IsType = x.IsType,
                 Tinhthanhpho = x.tinhthanhpho,
-                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.UserName == UserName).GroupJoin(_files.Table, a => a.Id, b => b.NewsLogId, (a, b) => new NewsLogModel
+                newslog = _newLog.Table.Where(z => z.NewsId == x.Id && z.GroupNameTo == "dvct").GroupJoin(_files.Table, a => a.Id, b => b.NewsLogId, (a, b) => new NewsLogModel
                 {
                     Id = a.Id,
                     Note = a.Note,

@@ -31,7 +31,7 @@ function DisplayStationsOnMap()
 	
 	$.ajax({
 		method: "GET",
-		url: "http://202.60.104.121/eos/services/call/json/get_stations?qi_type=aqi",
+        url: "http://envisoft.gov.vn/eos/services/call/json/get_stations?qi_type=aqi",
 		success: function (data, status) {
 			if (data.success == true) {
 				var dulieu = data.stations;
@@ -169,7 +169,7 @@ function ZoomToSelectedStation(station_name)
 	gl_selected_station.clear();
 	$.ajax({
 		method: "GET",
-		url: "http://202.60.104.121/eos/services/call/json/get_stations?station_name=" + station_name + "&is_qi=True",
+        url: "http://envisoft.gov.vn/eos/services/call/json/get_stations?station_name=" + station_name + "&is_qi=True",
 		success: function (data, status) {
 		if (data.success == true) 
 		{

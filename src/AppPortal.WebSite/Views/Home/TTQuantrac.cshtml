@@ -108,7 +108,7 @@
     function drawAxisTickColors() {
         $.ajax({
             method: "GET",
-            url: "http://202.60.104.121/eos/services/call/json/get_stations?qi_type=aqi",
+            url: "http://envisoft.gov.vn/eos/services/call/json/get_stations?qi_type=aqi",
             success: function (data, status) {
                 if (data.success == true) {
                     var dulieu = data.stations;
@@ -142,7 +142,7 @@
     function vechart3() {
         $.ajax({
             method: "GET",
-            url: "http://202.60.104.121/eos/services/call/json/get_common_settings",
+            url: "http://envisoft.gov.vn/eos/services/call/json/get_common_settings",
             success: function (data, status) {
                 if (data.success == true) {
                     var qi_colors = data.aqi_colors;
@@ -189,7 +189,7 @@
     function vechart(id) {
         $.ajax({
             method: "GET",
-            url: "http://202.60.104.121/eos/services/call/json/qi_detail?station_id=" + id,
+            url: "http://envisoft.gov.vn/eos/services/call/json/qi_detail?station_id=" + id,
             success: function (data, status) {
                 if (data.success == true) {
                     var dataColumn = [
@@ -265,7 +265,7 @@
     function vechartWQI(id) {
         $.ajax({
             method: "GET",
-            url: "http://202.60.104.121/eos/services/call/json/qi_detail?station_id=" + id,
+            url: "http://envisoft.gov.vn/eos/services/call/json/qi_detail?station_id=" + id,
             success: function (data, status) {
                 if (data.success == true) {
                     //var dataColumn = [
@@ -342,7 +342,7 @@
     function drawWQI() {
         $.ajax({
             method: "GET",
-            url: "http://202.60.104.121/eos/services/call/json/get_stations?qi_type=wqi&station_type=1",
+            url: "http://envisoft.gov.vn/eos/services/call/json/get_stations?qi_type=wqi&station_type=1",
             success: function (data, status) {
                 if (data.success == true) {
                     var dulieu = data.stations;
