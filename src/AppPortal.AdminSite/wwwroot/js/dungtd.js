@@ -995,7 +995,7 @@ function xemchitiet(news_id) {
                 }
                 html = '<label for="recipient-name" class="col-form-label">' + value.FullUserName + '</label><p>' + value.Data + '</p>';
                 for (var i = 0; i < value.files.length; i++) {
-                    html += '<a href="' + value.files[0].url +'" target="_blank">' + value.files[0].name + '</a><br>';
+                    html += '<a href="' + value.files[i].url +'" target="_blank">' + value.files[i].name + '</a><br>';
                 }
                     
                 $("#thongtinbody").append(html);

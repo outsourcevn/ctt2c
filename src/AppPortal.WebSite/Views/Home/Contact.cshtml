@@ -414,6 +414,11 @@
 
 
     <script type="text/javascript">
+    $("#UserPhone").keydown(function (e) {
+        if (e.keyCode == 69) {
+            e.preventDefault();
+        }
+    });
         var tinhs = null;
 
             function loadHuyen() {

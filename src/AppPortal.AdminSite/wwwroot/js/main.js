@@ -16,6 +16,7 @@ $(function () {
 
     // Initialize the jQuery File Upload widget:
     $('#fileupload').fileupload({
+        autoUpload: true,
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
         url: `${appConfig.apiHostUrl}` + '/api/NewsLog/upload',
