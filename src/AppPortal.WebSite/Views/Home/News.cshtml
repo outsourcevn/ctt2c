@@ -6,7 +6,9 @@
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+<link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.default.min.css" />
+<link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.default.mobile.min.css" />
 <style>
 
     .firstNewsetItem {
@@ -58,6 +60,19 @@
 
 <div class="">
     <h1 id="result-search" style="padding: 15px;">@ViewData["Title"]</h1>
+    <div id="example" class="row">
+        <div class="demo-section k-content col-md-4">
+            <h4>Tìm kiếm theo ngày tháng:</h4>
+            <input id="datepicker" title="datepicker" style="width: 80%" />
+        </div>
+        <div class="k-content col-md-4" style="display: none;">
+            <h4>Theo cụm từ:</h4>
+            <span class="k-textbox k-space-right" style="width: 100%">
+                <input type="text" id="search-input2"/>
+                <a href="#" class="k-icon k-i-search">&nbsp;</a>
+            </span>
+        </div>
+    </div>
     <div class="col-md-8">
         <div id="dataContainer">
 
@@ -68,7 +83,6 @@
 
     </div>
     <div class="col-md-4" style="margin-top:8px;">
-
         <section class="block block_business_news">
             <h3 class="block_title_black">TIN MỚI<a href="/home/news" class="view_all"><span><span>Tất cả tin</span></span></a></h3>
             <div class="content">
@@ -92,7 +106,17 @@
 @section Scripts {
     <script src="~/js/date.format.js"></script>
     <script>
+        var dataNews = [];
+        var datepicker = $("#datepicker").kendoDatePicker({
+            change: function () {
+                console.log(kendo.toString(this.value(), 'd'));
+                getNewsData(kendo.toString(this.value(), 'd'), $("#search-input2").val());
+            }
+        });
 
+        $("#search-input2").keyup(function () {
+             getNewsData(kendo.toString($(datepicker).val(), 'd'), $("#search-input2").val());
+        });
         if (searchValue) {
             $('#result-search').text("Đang tìm tin tức")
         } else {
@@ -103,8 +127,9 @@
         if (searchValue) {
             urlListNews = appConfig.apiHostUrl + '/api/News/getHomeNewsBySearch?value=' + searchValue;
         }
-        console.log("Search value:" + searchValue);
+
         $.get(urlListNews, function (data, status) {
+            dataNews = data.model;
             if (searchValue) {
                 $('#result-search').text("Tìm được " + data.model.length + " tin tức");
             }
@@ -159,20 +184,14 @@
                         }
                         result.push(content);
                     }
-                    console.log(result);
+
                     return result;
                 },
                 callback: function (data, pagination) {
                     $("#dataContainer").html(data);
                 }
             })
-
-            // $('#tat-ca-tin').html(content);
-
-
         });
-
-
 
         $.get(appConfig.apiHostUrl + "/api/News/getHomeNewsByCate?number=4", function (data, status) {
             var content = '';
@@ -265,6 +284,86 @@
             $('#tin-xem-nhieu-content').html(content);
             $('.tom-tat-news span').css({ 'font-size': '14px' });
         });
+
+        function getNewsData(date, keysearch) {
+            kendo.ui.progress($('#wrapper'), true);
+            var dataNews2 = [];
+            if (date || keysearch != "") {
+                for (var i = 0; i < dataNews.length; i++) {
+                    var title = dataNews[i].Name;
+                    if (date !== null && date !== "" && date !== undefined) {
+                        var date1 = new Date(dataNews[i].OnPublished).format("dd/mm/yyyy");
+                        var date2 = new Date(date).format("dd/mm/yyyy");
+                        if (date1 == date2) {
+                            dataNews2.push(dataNews[i]);
+                        }
+                    } else if (title.toLowerCase().includes(keysearch.trim())) {
+                        dataNews2.push(dataNews[i]);
+                    }
+                }
+            } else {
+                dataNews2 = dataNews;
+            }
+            
+            $('#tat-ca-tin').pagination({
+                dataSource: dataNews2,
+                pageSize: 20,
+                formatResult: function (data) {
+                    var result = [];
+                    for (var i = 0; i < data.length; i++) {
+                        var content = "";
+                        if (data[i].Image != "") {
+                            content += '<div class="newestItem firstNewsetItem">'
+                            content += '<div class="newestItemTitle-Detail">'
+                            content += '<a title="' + data[i].Name + '" href="/home/detailnews?id=' + data[i].Id + '" >'
+                            content += data[i].Name
+                            content += '</a>'
+                            content += '</div>'
+
+                            content += '<div class="content">'
+
+
+                            content += '<img alt="(Ảnh minh họa)" src="' + data[i].Image + '" style="BORDER: 0px solid; width:120px; height:80px; float:left; margin-right:5px;margin-top: 7px;">'
+
+                            content += '<span style="">' + data[i].Abstract + '</span>'
+
+                            content += '<p style="text-align:right;">'
+                            content += '<time datetime="2013-01-21">'
+                            content += new Date(data[i].OnPublished).format("dd/mm/yyyy");
+                            content += '</time>'
+                            content += '</p>'
+                            content += '</div>'
+                            content += '</div>'
+                        } else {
+                            content += '<div class="newestItem firstNewsetItem">'
+                            content += '<div class="newestItemTitle-Detail">'
+                            content += '<a title="' + data[i].Name + '" href="/home/detailnews?id=' + data[i].Id + '">'
+                            content += data[i].Name
+                            content += '</a>'
+                            content += '</div>'
+
+                            content += '<div class="content">'
+                            content += '<p>'
+                            content += '<span style="position:relative; top:5px;">' + data[i].Abstract + '</span>'
+                            content += '</p>'
+                            content += '<p style="text-align:right;">'
+                            content += '<time datetime="2013-01-21">'
+                            content += new Date(data[i].OnPublished).format("dd/mm/yyyy");
+                            content += '</time>'
+                            content += '</p>'
+                            content += '</div>'
+                            content += '</div>'
+                        }        
+                        result.push(content);
+                    }
+                    return result;
+                },
+                callback: function (data, pagination) {
+                    $("#dataContainer").html(data);
+                    kendo.ui.progress($('#wrapper'), false);
+                }
+            })
+    }
     </script>
 
 }
