@@ -841,6 +841,8 @@ namespace AppPortal.AdminSite.Services.Administrator
                 }).FirstOrDefault()
             });
 
+            query = query.Where(x => x.IsShow == true);
+
             if (is_type != null && is_type != 0)
             {
                 query = query.Where(x => x.IsType == (IsType)is_type);

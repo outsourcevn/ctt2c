@@ -36,6 +36,7 @@ namespace AppPortal.Infrastructure.Identity
         {
             b.ToTable("Users", "AppPortal");
             b.HasMany(x => x.Roles).WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+            b.Property(c => c.EmailAuth).HasColumnType("ntext");
         }
 
         private void ConfigureUserRole(EntityTypeBuilder<Microsoft.AspNetCore.Identity.IdentityUserRole<string>> b)
