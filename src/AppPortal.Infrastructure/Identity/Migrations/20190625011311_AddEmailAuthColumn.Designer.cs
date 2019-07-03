@@ -11,8 +11,8 @@ using static AppPortal.Infrastructure.Identity.AppIdentityDbContext;
 namespace AppPortal.Infrastructure.Identity.Migrations
 {
     [DbContext(typeof(ApplicationContextDbFactory))]
-    [Migration("20181016142911_AddNewColumnInTableUser")]
-    partial class AddNewColumnInTableUser
+    [Migration("20190625011311_AddEmailAuthColumn")]
+    partial class AddEmailAuthColumn
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,6 +63,9 @@ namespace AppPortal.Infrastructure.Identity.Migrations
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
+
+                    b.Property<string>("EmailAuth")
+                        .HasColumnType("ntext");
 
                     b.Property<bool>("EmailConfirmed");
 

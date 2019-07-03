@@ -30,6 +30,7 @@ namespace AppPortal.ApiHost.ViewModels.Users
         [Display(Name = "Mã nhóm")]
         public string GroupId { get; set; }
         [Display(Name = "Nhóm")]
-        public string GroupName { get; set; }
-    }
+		public string GroupName { get; set; }
+		public string EmailAuth { get; set; }
+	}
 }
