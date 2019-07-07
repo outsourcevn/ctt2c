@@ -9,6 +9,7 @@ namespace AppPortal.Infrastructure.Identity
         public string TypeUser { get; set; }
         public string GroupName { get; set; }
         public string GroupId { get; set; }
+        public string EmailAuth { get; set; }
         public virtual ICollection<IdentityUserRole<string>> Roles { get; } = new List<IdentityUserRole<string>>();
     }
 }

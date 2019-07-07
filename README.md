@@ -18,6 +18,10 @@ dotnet ef migrations add InitAppPortalModel --context AppDataContext -p ..\AppPo
  Add-Migration "AddNewTableLogs" -c AppDataContext -o Data/Migrations
  Update-Database -Migration AddNewTableLogs -c "AppDataContext" 
  Update-Database -c "AppDataContext" 
+
+ Add-Migration "AddEmailAuthColumn" -c AppIdentityDbContext -o Identity/Migrations
+ Update-Database -Migration AddEmailAuthColumn -c "AppIdentityDbContext" 
+ Update-Database -c "AppIdentityDbContext" 
 ```
 
 

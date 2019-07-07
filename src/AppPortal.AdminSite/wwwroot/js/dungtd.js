@@ -37,6 +37,14 @@ $(document).ready(function () {
         $(".ttdl").hide();
     }
 
+    if (GroupId === 'cbtddn') {
+        $("#HomeNews").show();
+        $("#AnhVideo").show();
+        $("#Vanban").show();
+        $('.sysconfig').hide();
+        $("#News").hide();
+       // $(".ttdl").hide();
+    }
 
     function templateDate(date) {
         if (date) {

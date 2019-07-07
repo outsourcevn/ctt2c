@@ -148,7 +148,8 @@ namespace AppPortal.ApiHost.Controllers
                     FullName = model.FullName,
                     TypeUser = model.TypeAccount,
                     GroupId = model.GroupId,
-                    GroupName = model.GroupName
+                    GroupName = model.GroupName,
+					EmailAuth = model.EmailAuth
                 };
                 var identityResult = await _userManager.CreateAsync(account, model.Password);
                 if (!identityResult.Succeeded)
@@ -179,6 +180,7 @@ namespace AppPortal.ApiHost.Controllers
                 user.UserName = model.UserName;
                 user.GroupId = model.GroupId;
                 user.GroupName = model.GroupName;
+				user.EmailAuth = model.EmailAuth;
                 var updateResult = await _userManager.UpdateAsync(user);
                 if(!updateResult.Succeeded)
                 {

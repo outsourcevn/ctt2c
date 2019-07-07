@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using static AppPortal.Infrastructure.Identity.AppIdentityDbContext;
 
 namespace AppPortal.Infrastructure.Identity.Migrations
 {
-    [DbContext(typeof(AppIdentityDbContext))]
+    [DbContext(typeof(ApplicationContextDbFactory))]
     partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -60,6 +61,9 @@ namespace AppPortal.Infrastructure.Identity.Migrations
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
+
+                    b.Property<string>("EmailAuth")
+                        .HasColumnType("ntext");
 
                     b.Property<bool>("EmailConfirmed");
 

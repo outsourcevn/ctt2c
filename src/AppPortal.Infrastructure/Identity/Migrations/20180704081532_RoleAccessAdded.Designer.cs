@@ -7,10 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
+using static AppPortal.Infrastructure.Identity.AppIdentityDbContext;
 
 namespace AppPortal.Infrastructure.Identity.Migrations
 {
-    [DbContext(typeof(AppIdentityDbContext))]
+    [DbContext(typeof(ApplicationContextDbFactory))]
     [Migration("20180704081532_RoleAccessAdded")]
     partial class RoleAccessAdded
     {

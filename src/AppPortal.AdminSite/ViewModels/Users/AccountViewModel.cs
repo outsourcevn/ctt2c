@@ -19,7 +19,11 @@ namespace AppPortal.AdminSite.ViewModels.Users
         [EmailAddress(ErrorMessage = "{0} chưa đúng định dạng.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        [Display(Name = "Số điện thoại")]
+
+		[Display(Name = "Email Đăng Nhập")]
+		public string EmailAuth { get; set; }
+
+		[Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
         [Display(Name = "Loại tài khoản")]
         public string TypeAccount { get; set; }

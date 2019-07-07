@@ -11,22 +11,25 @@
 
     var buttonData = string.IsNullOrEmpty(Model.AccountId) ? "Tạo tài khoản" : "Cập nhật thông tin";
 }
+<link rel="stylesheet" href="~/css/bootstrap-tagsinput.css" />
 
-<div class="row">
-    <div class="col col-md-6 col-sm-12">
-        <div id="result_message"></div>
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                <h3 class="card-title">@ViewData["Title"]</h3>
+<form id="@formView" class="needs-validation" method="post">
+    <div class="row">
 
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fa fa-minus"></i>
-                    </button>
+        <div class="col col-md-6 col-sm-12">
+            <div id="result_message"></div>
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <form id="@formView" class="needs-validation" method="post">
+
                 <input type="hidden" asp-for="AccountId" />
                 <div class="card-body">
                     <div class="form-group">
@@ -53,31 +56,31 @@
                     </div>
                     @if (string.IsNullOrEmpty(Model.AccountId))
                     {
-                        <div class="form-group">
-                            <label asp-for="Password"></label>
-                            <input asp-for="Password" class="form-control" placeholder="Mật khẩu" required />
-                            <span asp-validation-for="Password" class="invalid-feedback"></span>
-                        </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" placeholder="Mật khẩu" required />
+                        <span asp-validation-for="Password" class="invalid-feedback"></span>
+                    </div>
 
-                        <div class="form-group">
-                            <label asp-for="ConfirmPassword"></label>
-                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu mới" required />
-                            <span asp-validation-for="ConfirmPassword" class="invalid-feedback"></span>
-                        </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu mới" required />
+                        <span asp-validation-for="ConfirmPassword" class="invalid-feedback"></span>
+                    </div>
                     }
                     else
                     {
-                        <div class="form-group">
-                            <label asp-for="Password"></label>
-                            <input asp-for="Password" class="form-control" placeholder="Mật khẩu" />
-                            <span asp-validation-for="Password" class="invalid-feedback"></span>
-                        </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" placeholder="Mật khẩu" />
+                        <span asp-validation-for="Password" class="invalid-feedback"></span>
+                    </div>
 
-                        <div class="form-group">
-                            <label asp-for="ConfirmPassword"></label>
-                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu mới" />
-                            <span asp-validation-for="ConfirmPassword" class="invalid-feedback"></span>
-                        </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu mới" />
+                        <span asp-validation-for="ConfirmPassword" class="invalid-feedback"></span>
+                    </div>
                     }
 
                     <div class="form-group">
@@ -99,21 +102,50 @@
                         <div asp-validation-summary="All" class="text-danger"></div>
                     </div>
                 </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="Email" required />
+                        <span asp-validation-for="Email" class="invalid-feedback"></span>
+                    </div>
+                </div>
                 <div class="card-footer">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">@buttonData</button>
                     </div>
                 </div>
-            </form>
-
+            </div>
         </div>
+        <div class="col col-md-6 col-sm-12">
+            <div id="result_message"></div>
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">Email đăng nhập</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="EmailAuth"></label><br />
+                        <input asp-for="EmailAuth" class="form-control" data-role="tagsinput" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
-</div>
+</form>
 
 @section Scripts {
-    <script src="~/js/users/Scripts.js"></script>
+<script src="~/js/bootstrap-tagsinput.js"></script>
+<script src="~/js/users/Scripts.js"></script>
     @await Html.PartialAsync("_ValidationScriptsPartial")
-    <script>
+<script>
         (function () {
             'use strict';
             window.addEventListener('load', function () {
@@ -149,6 +181,7 @@
                             Roles: dict,
                             GroupName: $("#GroupUser option:selected").text(),
                             GroupId: $("#GroupUser").val(),
+                            EmailAuth: $("#EmailAuth").val()
                         };
                         //console.log(dataJson);
                         callAjax(
@@ -191,6 +224,12 @@
                 }, false);
             }, false);
         })();
-
-    </script>
+        $('form#@formView').on('keyup keypress', function(e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode === 13) {
+                e.preventDefault();
+               return false;
+            }
+        });
+</script>
 }

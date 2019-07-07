@@ -63,6 +63,7 @@ namespace AppPortal.AdminSite.Controllers
                 model.FullName = user.FullName;
                 model.UserName = user.UserName;
                 model.PhoneNumber = user.PhoneNumber;
+				model.EmailAuth = user.EmailAuth;
                 var userRoles = await _userManager.GetRolesAsync(user);
                 foreach (var item in userRoles)
                 {
