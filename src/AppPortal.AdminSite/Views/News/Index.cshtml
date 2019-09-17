@@ -39,14 +39,10 @@
         color: red;
     }
 
-    #actionPanel {
-        margin-left: 285px;
-        margin-top: 200px;
-    }
 
-    #actionPanel div.input-group {
-        margin-bottom: 0 !important;
-    }
+        #actionPanel div.input-group {
+            margin-bottom: 0 !important;
+        }
 
     .select2-selection__choice {
         color: blue !important;
@@ -85,7 +81,6 @@
         padding-right: 12px;
         padding-left: 34px;
     }
-
 </style>
 <link rel="stylesheet" href="~/css/style.css">
 <!-- blueimp Gallery styles -->
@@ -109,32 +104,6 @@
             <!-- /.card-header -->
             <div>
                 <div class="card-body" style="display: block;    margin-top: 30px;">
-                    <div id="actionPanel" class="form-inline fixed-top" style="display: none;">
-                        <div class="input-group mb-2 mr-sm-2 newdata" id="addNews">
-                            <a asp-controller="News" asp-action="Create" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tạo mới</a>
-                        </div>
-                        <div id="btn-delete" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-danger btn-flat" id="btn-delete-all"><i class="fa fa-close"></i> Xóa tin tức</button>
-                        </div>
-                        <div id="btn-save-publish" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-info btn-flat" id="btn-save-publish-new"><i class="fa fa-plus"></i>Xác nhận và chuyển lên lãnh đạo</button>
-                        </div>
-                        <div id="btn-save-process" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-primary btn-flat" id="btn-save-process-new"><i class="fa fa-plus"></i> Xác nhận đăng tin</button>
-                        </div>
-                        <div id="btn-save-dafts" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-dark btn-flat" id="btn-save-dafts-new"><i class="fa fa-plus"></i> Tin nháp</button>
-                        </div>
-                        <div id="btn-phan-cong" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-dark btn-flat" id="btn-phan-cong-new">Chuyển</button>
-                        </div>
-                        <div id="btn-bao-cao" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-primary btn-flat" id="btn-bao-cao-new">Báo cáo xử lý</button>
-                        </div>
-                        <div id="btn-xem-bao-cao" class="input-group mb-2 mr-sm-2 newdata">
-                            <button type="button" class="btn btn-dark btn-flat" id="btn-xem-bao-cao-new"><i class="fa fa-plus"></i> Xem báo cáo</button>
-                        </div>
-                    </div>
                     <div class="input-group mb-2 mr-sm-2 row">
                         <div class="col-md-2">
                             <div class="form-group">
@@ -192,6 +161,9 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="input-group mb-2 mr-sm-2 newdata">
+                        <a style="color: white" onclick="exportExcel()" class="btn btn-primary btn-flat">Export Excel</a>
                     </div>
                     <div id="dataGrid" class="mt-2"></div>
                 </div>
@@ -855,7 +827,7 @@
 <script id="template-download" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-download fade">
-       
+
         <td>
             <p class="name">
                 {% if (file.url) { %}
@@ -941,7 +913,7 @@
                 console.error(error);
             });
     </script>
-
+    <script src="~/js/excelexportjs.js"></script>
     <script src="~/js/news/getlist.js" asp-append-version="true"></script>
     <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
     <script src="~/js/vendor/jquery.ui.widget.js"></script>

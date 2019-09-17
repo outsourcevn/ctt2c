@@ -811,9 +811,16 @@ namespace AppPortal.AdminSite.Services.Administrator
             return false;
         }
 
-        
+		public IList<News> GetLstNewsAll(string name, string email, string sdt, int id, string mapakn = "", 
+			int? is_type = null, string khuvuc = "")
+		{
+			var query = _news.Table.ToList();
 
-        public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id, string mapakn = "",int? is_type = null, string khuvuc = "")
+			
+			return query.ToList();
+		}
+
+		public IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id, string mapakn = "",int? is_type = null, string khuvuc = "")
         {
             var query = _news.Table.Select(x => new LstItemNews
             {
@@ -841,7 +848,7 @@ namespace AppPortal.AdminSite.Services.Administrator
                 }).FirstOrDefault()
             });
 
-            query = query.Where(x => x.IsShow == true);
+            //query = query.Where(x => x.IsShow == true);
 
             if (is_type != null && is_type != 0)
             {
@@ -884,8 +891,8 @@ namespace AppPortal.AdminSite.Services.Administrator
             {
                 query = query.Where(x => x.Id == id);
             }
-
-            query = query.OrderByDescending(x => x.OnPublished);
+			query = query.Where(x => x.IsShow == true);
+			query = query.OrderByDescending(x => x.OnPublished);
             return query.ToList();
         }
 

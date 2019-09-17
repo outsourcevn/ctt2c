@@ -197,29 +197,45 @@
                     ];
 
                     if (data.res && data.res.CO) {
-                        var colorCo = getColor(data.res.CO.max);
-                        dataColumn.push(['CO', data.res.CO.max, data.res.CO.max, colorCo]);
+                        var colorCo = getColor(data.res.CO.current);
+                        dataColumn.push(['CO', data.res.CO.current, data.res.CO.current, colorCo]);
                     }
 
                     if (data.res && data.res.NOx) {
-                        var colorCo = getColor(data.res.NOx.max);
-                        dataColumn.push(['NOx', data.res.NOx.max, data.res.NOx.max, colorCo]);
+                        var colorCo = getColor(data.res.NOx.current);
+                        dataColumn.push(['NOx', data.res.NOx.current, data.res.NOx.current, colorCo]);
                     }
 
                     if (data.res && data.res.O3) {
-                        var colorCo = getColor(data.res.O3.max);
-                        dataColumn.push(['O3', data.res.O3.max, data.res.O3.max, colorCo]);
+                        var colorCo = getColor(data.res.O3.current);
+                        dataColumn.push(['O3', data.res.O3.current, data.res.O3.current, colorCo]);
                     }
 
                     if (data.res && data.res.SO2) {
-                        var colorCo = getColor(data.res.SO2.max);
-                        dataColumn.push(['SO2', data.res.SO2.max, data.res.SO2.max, colorCo]);
+                        var colorCo = getColor(data.res.SO2.current);
+                        dataColumn.push(['SO2', data.res.SO2.current, data.res.SO2.current, colorCo]);
                     }
 
                     if (data.res && data.res.TSP) {
-                        var colorCo = getColor(data.res.TSP.max);
-                        dataColumn.push(['TSP', data.res.TSP.max, data.res.TSP.max, colorCo]);
+                        var colorCo = getColor(data.res.TSP.current);
+                        dataColumn.push(['TSP', data.res.TSP.current, data.res.TSP.current, colorCo]);
                     }
+
+                    if (data.res && data.res['PM-2-5']) {
+                        var colorCo = getColor(data.res['PM-2-5'].current);
+                        dataColumn.push(['PM-2-5', data.res['PM-2-5'].current, data.res['PM-2-5'].current, colorCo]);
+                    }
+
+                    if (data.res && data.res['PM-10']) {
+                        var colorCo = getColor(data.res['PM-10'].current);
+                        dataColumn.push(['PM-10', data.res['PM-10'].current, data.res['PM-10'].current, colorCo]);
+                    }
+
+                    if (data.res && data.res.NO2) {
+                        var colorCo = getColor(data.res.NO2.current);
+                        dataColumn.push(['NO2', data.res.NO2.current, data.res.NO2.current, colorCo]);
+                    }
+                   
 
                     var dataGoogle = google.visualization.arrayToDataTable(dataColumn);
                     var options = {
@@ -268,38 +284,57 @@
             url: "http://envisoft.gov.vn/eos/services/call/json/qi_detail?station_id=" + id,
             success: function (data, status) {
                 if (data.success == true) {
-                    //var dataColumn = [
-                    //    ['Khí', 'Giá trị min', { role: 'annotation' }, 'Giá trị max', { role: 'annotation' }],
-                    //    ['CO', data.res.CO.min, data.res.CO.min, data.res.CO.max, data.res.CO.max],
-                    //    ['NOx', data.res.NOx.min, data.res.NOx.min, data.res.NOx.max, data.res.NOx.max],
-                    //    ['O3', data.res.O3.min, data.res.O3.min, data.res.O3.max, data.res.O3.max],
-                    //    ['SO2', data.res.SO2.min, data.res.SO2.min, data.res.SO2.max, data.res.SO2.max],
-                    //];
+                    var dataColumn = [
+                        ['Nước', 'Giá trị', { role: 'annotation' }, { role: 'style' }],
+                    ];
 
-                    //var dataGoogle = google.visualization.arrayToDataTable(dataColumn);
-                    //var options = {
-                    //    title: data.station_name,
-                    //    height: 350,
-                    //    bar: { groupWidth: '55%' },
-                    //    legend: {
-                    //        position: 'top',
-                    //        alignment: 'start'
-                    //    },
-                    //    annotations: {
-                    //        textStyle: {
-                    //            fontSize: 15,
-                    //        },
-                    //        alwaysOutside: true
-                    //    }
-                    //};
+                    if (data.res && data.res.DO) {
+                        var colorCo = getColor(data.res.DO.current);
+                        dataColumn.push(['DO', data.res.DO.current, data.res.DO.current, colorCo]);
+                    }
 
-                    //var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-                    //chart.draw(dataGoogle, options);
+                    if (data.res && data.res.pH) {
+                        var colorCo = getColor(data.res.pH.current);
+                        dataColumn.push(['pH', data.res.pH.current, data.res.pH.current, colorCo]);
+                    }
 
-                    ////
+                    if (data.res && data.res.TSS) {
+                        var colorCo = getColor(data.res.TSS.current);
+                        dataColumn.push(['TSS', data.res.TSS.current, data.res.TSS.current, colorCo]);
+                    }
+
+                    if (data.res && data.res.TURBIDITY) {
+                        var colorCo = getColor(data.res.TURBIDITY.current);
+                        dataColumn.push(['TURBIDITY', data.res.TURBIDITY.current, data.res.TURBIDITY.current, colorCo]);
+                    }
+
+                    if (data.res && data.res.COD) {
+                        var colorCo = getColor(data.res.COD.current);
+                        dataColumn.push(['COD', data.res.COD.current, data.res.COD.current, colorCo]);
+                    }
+
+                    var dataGoogle = google.visualization.arrayToDataTable(dataColumn);
+                    var options = {
+                        title: data.station_name,
+                        height: 350,
+                        bar: { groupWidth: '55%' },
+                        legend: {
+                            position: 'top',
+                            alignment: 'start'
+                        },
+                        annotations: {
+                            textStyle: {
+                                fontSize: 15,
+                            },
+                            alwaysOutside: true
+                        }
+                    };
+
+                    var chart = new google.visualization.BarChart(document.getElementById('chart_div_wqi'));
+                    chart.draw(dataGoogle, options);
 
                     var html = '   <tr>  ' +
-                        '  <td class="aqiwgt-table-aqicell" style="padding-right:5px;"><div class="aqivalue" id="aqiwgtvalue" style="font-size: 60px; background-color:#ff9933; color: ' + data.qi_detail_info.color + ';opacity: 0.8;text-align: center;" title="Unhealthy for Sensitive Groups">---</div></td>  ' +
+                        '  <td class="aqiwgt-table-aqicell" style="padding-right:5px;"><div class="aqivalue" id="aqiwgtvalue" style="font-size: 60px; background-color:' + data.qi_detail_info.bgColor + '; color: ' + data.qi_detail_info.color + ';opacity: 0.8;text-align: center;" title="">' + data.qi_value + '</div></td>  ' +
                         ' <td style="width:50%;vertical-align: middle" nowrap="true" class="aqiwgt-table-aqiinfo">  ' +
                         '  <div id="aqiwgtinfo" style="text-shadow: rgb(0, 0, 0) 1px 0px 1px; color: rgb(255, 153, 51);"><span style="font-size:16px;white-space: pre-wrap;line-height: 25px;"></span></div><div style="font-size:16px;font-weight:light;;">  ' +
                         ' </div><div style="font-size:12px;"></div><div style="font-size: 12px; padding-top: 5px; display: block;" id="aqiwgtxtrainfo">Thời gian: <span>' + data.qi_time_2 + '</span></div>  ' +
@@ -350,11 +385,14 @@
                     var idFirst = 0;
                     var lstId = [['Trạm', 'Giá trị WQI', { role: 'annotation' }]];
                     for (var i = 0; i < dulieu.length; i++) {
-                        if (idFirst == 0) {
-                            idFirst = dulieu[i].id;
+                        if (dulieu[i].qi > 0) {
+                            if (idFirst == 0) {
+                                idFirst = dulieu[i].id;
+                            }
+                            lstId.push([dulieu[i].station_name, Math.round(dulieu[i].qi), Math.round(dulieu[i].qi)]);
+                            $("#listTramWQI").append("<option value='" + dulieu[i].id + "'>" + dulieu[i].station_name + "</option>");
                         }
-                        lstId.push([dulieu[i].station_name, Math.round(dulieu[i].qi), Math.round(dulieu[i].qi)]);
-                        $("#listTramWQI").append("<option value='" + dulieu[i].id + "'>" + dulieu[i].station_name + "</option>");
+                        
                     }
                     vechartWQI(idFirst);
 

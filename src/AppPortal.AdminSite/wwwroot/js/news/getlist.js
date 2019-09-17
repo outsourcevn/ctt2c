@@ -135,7 +135,7 @@ var newlogStatus = -1; newLogType = -1; newDoituong = -1;
 
         if (GroupId !== "dvct") {
             columnsData.push({
-                field: "on_created", title: "Ngày tiếp nhận/Ngày gửi báo cáo", template: "#= (news_log != null) ? templateDateTiepnhan(on_created,  news_log.OnXuly) : templateDateTiepnhan(on_created)#", width: "90px"
+                field: "on_created", title: "Ngày tiếp nhận/Ngày đăng tin", template: "#= (news_log != null) ? templateDateTiepnhan(on_created,  news_log.OnXuly, on_published) : templateDateTiepnhan(on_created)#", width: "90px"
             });
         } else {
             columnsData.push({
@@ -997,7 +997,23 @@ function templateDate(date, dateXuly, on_published) {
     return html;
 }
 
-function templateDateTiepnhan(date, dateXuly) {
+function exportExcel() {
+    var grid = $('#dataGrid').data('kendoGrid');
+    var data = grid.dataSource.data();
+    var dataRe = [];
+    for (var i = 0; i < data.length; i++) {
+        var obj = {
+            'Tiêu đề': data[i].name,
+            'Nội dung': data[i].content,
+
+        };
+        dataRe.push(obj);
+    }
+    console.log(data);
+    console.log(dataRe);
+}
+
+function templateDateTiepnhan(date, dateXuly, on_published) {
     var html = '';
     if (date) {
         html += "<br>- Ngày tiếp nhận: ";
@@ -1007,6 +1023,11 @@ function templateDateTiepnhan(date, dateXuly) {
     if (dateXuly) {
         html += "<br>- Ngày gửi báo cáo: ";
         html += new Date(dateXuly).toLocaleString();
+    }
+
+    if (on_published) {
+        html += "<br>- Ngày đăng tin: ";
+        html += new Date(on_published).toLocaleString();
     }
     return html;
 }

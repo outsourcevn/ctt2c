@@ -31,7 +31,8 @@ namespace AppPortal.AdminSite.Services.Interfaces
         IList<ListItemNewsModel> GetLstNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "", int? categoryId = -1, int? status = -1, 
             int? type = -1 , string username = "" , string GroupId = "", int? newlogStatus = -1, string mapakn = "", int? doituong = -1);
         IList<LstItemNews> GetLstNewsAno(string name, string email, string sdt, int id, string mapakn = "", int? is_type = null, string khuvuc = "");
-        IList<ListItemNewsModel> GetLstHomeNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "", int? categoryId = -1, int? status = -1,
+		IList<News> GetLstNewsAll(string name, string email, string sdt, int id, string mapakn = "", int? is_type = null, string khuvuc = "");
+		IList<ListItemNewsModel> GetLstHomeNewsPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "", int? categoryId = -1, int? status = -1,
             int? type = -1, string username = "", string GroupId = "");
 
         IList<ListItemNewsModel> GetLstTopicPaging(out int rows, int? skip = 0, int? take = 15, string keyword = "", int? categoryId = -1, int? status = -1, int? type = -1);

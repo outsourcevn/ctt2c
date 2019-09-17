@@ -13,6 +13,7 @@ $(document).ready(function () {
         $(".sysadmin").hide();
     } else {
         $(".sysadmin").show();
+        $("#HomeNews").show();
     }
 
     if (GroupId === 'ttdl') {
